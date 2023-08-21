@@ -1,0 +1,3 @@
+httpListenPort: 8100
+sbomPath: /tools/sbom
+graphQLAddr: http://graphql-server:8080/query

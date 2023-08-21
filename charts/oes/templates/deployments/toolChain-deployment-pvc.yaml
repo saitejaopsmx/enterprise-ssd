@@ -1,18 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: ssd
+    component: carina-instance
+{{ include "oes.standard-labels" . | indent 4 }}
   name: tool-chain
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: tool-chain
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: tool-chain
+{{ include "oes.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.toolchain.annotations -}}
+        {{ toYaml .Values.toolchain.annotations | nindent 8 }}
+{{- end }}
     spec:
       volumes:
         - name: docker-sock
@@ -30,8 +39,9 @@ spec:
                 path: tool-chain.yaml
             defaultMode: 420
       containers:
+        imagePullPolicy: IfNotPresent
         - name: tool-chain
-          image: ${image}
+          image: {{ template "toolchain.image" . }}
           ports:
             - containerPort: 8100
               protocol: TCP
@@ -43,3 +53,14 @@ spec:
               subPath: tool-chain.yaml
             - name: docker-sock
               mountPath: /var/run
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

@@ -199,6 +199,16 @@ Return the proper Tool Chain Image
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
+{{/*
+193 Return the proper Supplychain-prepocessor Image
+194 */}}
+195 {{- define "supplychain.image" -}}
+196 {{- $registryName := .Values.imageCredentials.registry -}}
+197 {{- $repositoryName := .Values.createcontroller.image.repository -}}
+198 {{- $tag := .Values.supplychain.image.tag | toString -}}
+199 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+200 {{- end -}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Renders a value that contains template.

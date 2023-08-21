@@ -7,5 +7,4 @@ metadata:
 {{ include "oes.standard-labels" . | indent 4 }}
     component: ssd-toolchain
 data:
-  tool-chain.yaml: |
-    {{- tpl (.Files.Get "config/tool-chain/tool-chain.yaml") . | indent 4 }}
+{{ (tpl (.Files.Glob "config/tool-chain/tool-chain.yaml").AsConfig . ) | indent 2 }}

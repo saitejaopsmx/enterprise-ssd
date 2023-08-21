@@ -189,6 +189,16 @@ Return the proper Create Controller Image
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}} 
 {{- end -}}
 
+{{/*
+Return the proper Tool Chain Image
+*/}}
+{{- define "toolchain.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.createcontroller.image.repository -}}
+{{- $tag := .Values.toolchain.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Renders a value that contains template.

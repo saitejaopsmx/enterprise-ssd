@@ -21,13 +21,13 @@ spec:
         component: supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 8 }}
       annotations:
-{{- if .Values.supplychainprepocessor.annotations -}}
-        {{ toYaml .Values.supplychainprepocessor.annotations | nindent 8 }}
+{{- if .Values.supplychainpreprocessor.annotations -}}
+        {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
 {{- end }}
     spec:
       containers:
       - name: supplychain-preprocessor
-        image: {{ template "toolchain.image" . }}
+        image: {{ template "supplychainpreprocessor.image" . }}
         ## Add liveness and readiness 
         resources: {}
         volumeMounts:

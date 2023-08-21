@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-opa
+  labels:
+    app: ssd
+    component: ssd-opa
+{{ include "oes.standard-labels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: ssd-opa
+  template:
+    metadata:
+      labels:
+        app: oes
+        component: ssd-opa
+{{ include "oes.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.ssdopa.annotations -}}
+        {{ toYaml .Values.ssdopa.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      volumes:
+        - name: ssd-opa-volume
+          configMap:
+            name: ssd-opa
+            items:
+              - key: ssd-opa.yaml
+                path: ssd-opa.yaml
+            defaultMode: 420
+      containers:
+        - name: ssd-opa
+          image: {{ template "ssdopa.image" . }} 
+          ports:
+            - containerPort: 8200
+              protocol: TCP
+          volumeMounts:
+            - name: ssd-opa-volume
+              mountPath: /app/config/ssd-opa.yaml
+              subPath: ssd-opa.yaml 
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}

@@ -210,14 +210,24 @@ Return the proper Supplychain-api Image
 {{- end -}}
 
 {{/*
-193 Return the proper Supplychain-prepocessor Image
-194 */}}
-195 {{- define "supplychain.image" -}}
-196 {{- $registryName := .Values.imageCredentials.registry -}}
-197 {{- $repositoryName := .Values.createcontroller.image.repository -}}
-198 {{- $tag := .Values.supplychain.image.tag | toString -}}
-199 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-200 {{- end -}}
+ Return the proper Supplychain-preprocessor Image
+*/}}
+ {{- define "supplychainpreprocessor.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.createcontroller.image.repository -}}
+ {{- $tag := .Values.supplychainpreprocessor.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+ Return the proper ssd-opa Image
+*/}}
+ {{- define "ssdopa.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.createcontroller.image.repository -}}
+ {{- $tag := .Values.ssdopa.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
 
 {{/* vim: set filetype=mustache: */}}
 {{/*

@@ -447,10 +447,23 @@ toolchain:
   serviceAnnotations: {}
 
 ####################################################
-supplychainprepocessor:
+supplychainpreprocessor:
   ## Image specific details
   image:
-    repository: ubi8-oes-supplychainprepocessor
+    repository: ubi8-oes-supplychainpreprocessor
+    tag: v4.0.4-rc4
+    pullPolicy: IfNotPresent
+
+  annotations:
+    moniker.spinnaker.io/application: isd
+
+  serviceAnnotations: {}
+  
+####################################################
+ssdopa:
+  ## Image specific details
+  image:
+    repository: ubi8-oes-ssdopa
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
 

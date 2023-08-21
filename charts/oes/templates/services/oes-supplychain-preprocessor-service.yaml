@@ -6,9 +6,9 @@ metadata:
     app: oes
     component: supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 4 }}
-{{- if .Values.supplychainprepocessor.serviceAnnotations }}
+{{- if .Values.supplychainpreprocessor.serviceAnnotations }}
   annotations:
-{{ toYaml .Values.supplychainprepocessor.serviceAnnotations | indent 4 }}
+{{ toYaml .Values.supplychainpreprocessor.serviceAnnotations | indent 4 }}
 {{- end }}
 spec:
   ports:
@@ -17,7 +17,7 @@ spec:
     protocol: TCP
     targetPort: 8058
       {{- if eq .Values.k8sServiceType "NodePort" }}
-      nodePort: 8098
+      nodePort: 8058
       {{- end }}    
   selector:
     app: oes

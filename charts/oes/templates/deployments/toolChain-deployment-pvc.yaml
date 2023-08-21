@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tool-chain
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: tool-chain
+  template:
+    metadata:
+      labels:
+        app: oes
+        component: tool-chain
+    spec:
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run
+            type: ''
+        - name: sbom
+          persistentVolumeClaim:
+            claimName: tool-chain
+        - name: tool-chain-volume
+          configMap:
+            name: tool-chain
+            items:
+              - key: tool-chain.yaml
+                path: tool-chain.yaml
+            defaultMode: 420
+      containers:
+        - name: tool-chain
+          image: ${image}
+          ports:
+            - containerPort: 8100
+              protocol: TCP
+          volumeMounts:
+            - name: sbom
+              mountPath: /tools/sbom
+            - name: tool-chain-volume
+              mountPath: /tools/config/tool-chain.yaml
+              subPath: tool-chain.yaml
+            - name: docker-sock
+              mountPath: /var/run

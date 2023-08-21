@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tool-chain
+data:
+  tool-chain.yaml: |
+    httpListenPort: 8100
+    sbomPath: /tools/sbom
+    graphQLAddr: http://graphql-server:8080/query

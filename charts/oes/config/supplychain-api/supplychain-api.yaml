@@ -1,0 +1,9 @@
+graphqlsvc:
+    host: http://graphql-server
+    port: 8080
+postgresql:
+    ssd:
+    connectString: host=oes-db user=postgres  password=Postgres database=ssddb
+toolchain:
+    host: http://tool-chain
+    port: 8100

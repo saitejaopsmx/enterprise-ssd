@@ -200,6 +200,16 @@ Return the proper Tool Chain Image
 {{- end -}}
 
 {{/*
+Return the proper Supplychain-api Image
+*/}}
+{{- define "supplychainapi.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.createcontroller.image.repository -}}
+{{- $tag := .Values.supplychainapi.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
 193 Return the proper Supplychain-prepocessor Image
 194 */}}
 195 {{- define "supplychain.image" -}}

@@ -459,6 +459,19 @@ supplychainprepocessor:
 
   serviceAnnotations: {}
 
+####################################################
+supplychainapi:
+  ## Image specific details
+  image:
+    repository: ubi8-oes-supplychainapi
+    tag: v4.0.4-rc4
+    pullPolicy: IfNotPresent
+
+  annotations:
+    moniker.spinnaker.io/application: isd
+
+  serviceAnnotations: {}
+
 #####################################################
 # AP supports an agent based deployments to remote clusters
 # This should NOT be set to false, and only externalName needs to be changed in most cases

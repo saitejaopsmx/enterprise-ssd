@@ -1,0 +1,10 @@
+{{- if .Values.global.stormdriver }}
+apiVersion: v1
+data:
+  stormdriver.yaml: |
+    controller:
+      url: https://opsmx-controller-controller1:9003
+kind: ConfigMap
+metadata:
+  name: stormdriver-config
+{{- end }}

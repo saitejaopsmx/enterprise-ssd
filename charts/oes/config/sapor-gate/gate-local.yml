@@ -1,0 +1,18 @@
+server:
+  tomcat:
+    httpsServerPort: X-Forwarded-Port
+    internalProxies: .*
+    protocolHeader: X-Forwarded-Proto
+    remoteIpHeader: X-Forwarded-For
+security:
+  basicform:
+    enabled: true
+  user:
+    name: {{ .Values.global.saporgate.config.username }}
+    password: {{ .Values.global.saporgate.config.password }}
+    roles: {{ .Values.global.saporgate.config.adminGroups }}
+{{- if not .Values.installRedis }}
+redis:
+  configuration:
+    secure: true
+{{- end }}

@@ -1,0 +1,24 @@
+{{- if or (eq .Values.installationMode "OES-AP")  (eq .Values.installationMode "EASY") -}}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: oes
+    component: platform
+{{ include "oes.standard-labels" . | indent 4 }}
+{{- if .Values.platform.serviceAnnotations }}
+  annotations:
+{{ toYaml .Values.platform.serviceAnnotations | indent 4 }}
+{{- end }}
+  name: oes-platform
+spec:
+  type: ClusterIP
+  ports:
+  - name: oes-platform
+    protocol: TCP
+    port: 8095
+    targetPort: 8095
+  selector:
+    app: oes
+    component: platform
+{{- end -}}

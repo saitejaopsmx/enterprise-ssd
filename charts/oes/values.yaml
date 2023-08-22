@@ -388,11 +388,7 @@ createcontroller:
     tag: v4.0.4
     pullPolicy: IfNotPresent
 ###############################################################################
-##
-
-
 ## Values of OES Gate
-##
 gate:
   ## Image specific details
   image:

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oes-ssd-opa
+  labels:
+    app: ssd
+{{ include "oes.standard-labels" . | indent 4 }}
+    component: oes-ssd-opa
+data:
+{{ (tpl (.Files.Glob "config/oes-ssd-opa/ssd-opa.yaml").AsConfig . ) | indent 2 }}

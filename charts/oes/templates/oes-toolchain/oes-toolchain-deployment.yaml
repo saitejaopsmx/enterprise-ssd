@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ssd
-    component: carina-instance
+    app: oes
+    component: oes-toolchain
 {{ include "oes.standard-labels" . | indent 4 }}
   name: tool-chain
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ssd
-      component: tool-chain
+      app: oes
+      component: oes-toolchain
   template:
     metadata:
       labels:
-        app: ssd
-        component: tool-chain
+        app: oes
+        component: oes-toolchain
 {{ include "oes.standard-labels" . | indent 8 }}
       annotations:
 {{- if .Values.toolchain.annotations -}}

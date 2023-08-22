@@ -4,10 +4,11 @@ metadata:
   name: ssd-opa
   labels: 
     app: oes
+    component: oes-toolchain
 spec:
   selector:
     app: oes
-    component: ssd-opa
+    component: oes-ssd-opa
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.ssdopa.serviceAnnotations }}
   annotations:

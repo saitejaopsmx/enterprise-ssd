@@ -4,7 +4,7 @@ metadata:
   name: supplychain-preprocessor
   labels:
     app: oes
-    component: supplychain-preprocessor
+    component: oes-supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.supplychainpreprocessor.serviceAnnotations }}
   annotations:
@@ -21,4 +21,4 @@ spec:
       {{- end }}    
   selector:
     app: oes
-    component: supplychain-preprocessor
+    component: oes-supplychain-preprocessor

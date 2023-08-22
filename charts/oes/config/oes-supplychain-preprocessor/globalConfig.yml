@@ -1,0 +1,4 @@
+plugins:
+  - jenkins
+  - spinnaker
+loglevel: info

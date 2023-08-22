@@ -1,0 +1,5 @@
+{
+    "endPointUrl": "/gate/",
+    "setApplicationInterval": {{ .Values.ui.config.setApplicationRefreshInterval }},
+    "triggerPipeline": false
+}

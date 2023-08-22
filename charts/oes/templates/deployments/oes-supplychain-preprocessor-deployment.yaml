@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supplychain-preprocessor
+  labels:
+    app: oes
+    component: supplychain-preprocessor
+{{ include "oes.standard-labels" . | indent 4 }}    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: supplychain-preprocessor
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: oes
+        component: supplychain-preprocessor
+{{ include "oes.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.supplychainpreprocessor.annotations -}}
+        {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+      - name: supplychain-preprocessor
+        image: {{ template "supplychainpreprocessor.image" . }}
+        ## Add liveness and readiness 
+        resources: {}
+        volumeMounts:
+        - mountPath: /etc/config
+          name: preprocessor-volume
+      imagePullSecrets:
+        - name: opsmx11-secret
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: preprocessor-volume
+        configMap:
+          name: supplychain-preprocessor-cm
+      securityContext:
+        runAsNonRoot: true
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+

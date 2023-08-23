@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: supplychain-api
   labels:
-    app: ssd
-    component: supplychain-api
+    app: oes
+    component: oes-supplychain-api
 {{ include "oes.standard-labels" . | indent 4 }}
   name: supplychain-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ssd
-      component: supplychain-api
+      app: oes
+      component: oes-supplychain-api
   template:
     metadata:
       labels:
-        app: ssd
-        component: supplychain-api
+        app: oes
+        component: oes-supplychain-api
 {{ include "oes.standard-labels" . | indent 8 }}
       annotations:
 {{- if .Values.supplychainapi.annotations -}}

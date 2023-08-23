@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: ssd-opa
   labels:
-    app: ssd
-    component: ssd-opa
+    app: oes
+    component: oes-ssd-opa
 {{ include "oes.standard-labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: oes
-      component: ssd-opa
+      component: oes-ssd-opa
   template:
     metadata:
       labels:
         app: oes
-        component: ssd-opa
+        component: oes-ssd-opa
 {{ include "oes.standard-labels" . | indent 8 }}
       annotations:
 {{- if .Values.ssdopa.annotations -}}

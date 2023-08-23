@@ -303,135 +303,6 @@ db:
 
   ## storageClass for DB persistent volume claim (PVC)
   #storageClassName: default
-###############################################################################
-##
-## Values of OES Autopilot
-##
-autopilot:
-  ## Image specific details
-  image:
-    repository: ubi8-oes-autopilot
-    tag: v4.0.4-rc5
-    pullPolicy: IfNotPresent
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8090"
-    prometheus.io/scrape: "true"
-
-  serviceAnnotations: {}
-  resources: {}
-  #  requests:
-  #    memory: 2Gi
-  #    cpu: 1
-  #  limits:
-  #    memory: 8Gi
-  #    cpu: 2
-
-  config:
-    ## Build Analysis
-    ##
-    buildAnalysis:
-      enabled: false
-
-###############################################################################
-##
-## Values of OES auditservice
-##
-audit:
-  ## Image specific details
-  ##
-  image:
-    repository: ubi8-oes-audit-service
-    tag: v4.0.4-rc4
-    pullPolicy: IfNotPresent
-
-  serviceAnnotations: {}
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8097"
-    prometheus.io/scrape: "false"
-  resources: {}
-  config: {}
-
-###############################################################################
-##
-## Values of OES auditclient
-##
-auditClient:
-  ## Image specific details
-  ##
-  image:
-    repository: ubi8-oes-audit-client
-    tag: v4.0.4-rc4
-    pullPolicy: IfNotPresent
-
-  serviceAnnotations: {}
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8098"
-    prometheus.io/scrape: "true"
-  resources: {}
-  config: {}
-
-###############################################################################
-##
-## Values of OES datascience
-##
-datascience:
-  ## Image specific details
-  ##
-  image:
-    repository: ubi8-oes-datascience
-    tag: v4.0.4-rc4
-    pullPolicy: IfNotPresent
-
-  serviceAnnotations: {}
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "5005"
-    prometheus.io/scrape: "false"
-  resources: {}
-  config: {}
-
-###############################################################################
-## Values of OES Dashboard
-dashboard:
-  ## Image specific details
-  image:
-    repository: ubi8-oes-dashboard
-    tag: v4.0.4-rc4
-    pullPolicy: IfNotPresent
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8094"
-    prometheus.io/scrape: "true"
-
-  serviceAnnotations: {}
-  resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1000Mi
-  #    cpu: 1500m
-
-  config:
-    app:
-      sync:
-        enabled: true
-    ## By default spinnakerLink is {{ .Values.global.spinDeck.protocol }}://{{ .Values.global.spinDeck.host }}
-    ## If spinnaker is exposed on Load balancer instead of ingress, set this value to external IP of spinnaker UI
-    #spinnakerLink: http://spinnaker.domain.com
 
 ####################################################
 toolchain:
@@ -517,11 +388,7 @@ createcontroller:
     tag: v4.0.4
     pullPolicy: IfNotPresent
 ###############################################################################
-##
-
-
 ## Values of OES Gate
-##
 gate:
   ## Image specific details
   image:
@@ -596,72 +463,6 @@ gate:
         lastName: name
         username: login
       provider: GITHUB
-
-###############################################################################
-## Values of OES Platform
-platform:
-  ## Image specific details
-  image:
-    repository: ubi8-oes-platform
-    tag: v4.0.4-rc6
-    pullPolicy: IfNotPresent
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8095"
-    prometheus.io/scrape: "true"
-  serviceAnnotations: {}
-  resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
-
-  config:
-    ##  groups defined here will have superAdmin priviledges in AP
-    #adminGroups: admin
-
-    ## Source of groups for authorization
-    ## Supported sources:- ldap, file, gate. In general, use "gate" for SAML
-    userSource: ldap
-
-    ## List of features to be supported by OES, please do not change
-    supportedFeatures:
-      - deployment_verification
-      - sapor
-      - visibility
-
-    app:
-      dashboard:
-        adminuser: admin # mandatory to provide admin user name to run admin jobs that compute dashboard counts
-
-###############################################################################
-## Details of rabbitmq message bus image for OES
-##
-rabbitmq:
-  ## rabbitmq  endpoint that is used by oes-gate and oes-platform for caching;
-  ## Change this to custom URL if installRedis is set to false
-  ## url: rabbitmq-service
-  ## url: default port 5672
-  url: rabbitmq-service
-  port: 5672
-  username: rabbitmq
-  password: Networks123
-  image:
-    registry: quay.io/opsmxpublic/rabbitmq
-    repository: 3-management
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-
-  serviceAnnotations: {}
-
-  #Blow block is for only for K8S
-  securityContext:
-    fsGroup: 1000
 
 ###############################################################################
 ## Values of OES Sapor (Security Audit Policy Onboarding & Release)
@@ -774,37 +575,6 @@ ui:
     setApplicationRefreshInterval: 300000
 
 ###################################################################################
-## Values of OES Visibility
-visibility:
-  ## Image specific details
-  image:
-    repository: ubi8-oes-visibility
-    tag: v4.0.4-rc6
-    pullPolicy: IfNotPresent
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8096"
-    prometheus.io/scrape: "true"
-
-  serviceAnnotations: {}
-  resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1000Mi
-  #    cpu: 1500m
-
-  config:
-    ## Autopilot integration options
-    configuredConnectors: JIRA,GIT,AUTOPILOT,SONARQUBE,JENKINS,AQUAWAVE
-
-    ## Logger level
-    logLevel: ERROR
-
-###############################################################################
 ## Details of redis-master image for OES
 redis:
   ## Redis endpoint that is used by oes-gate and oes-platform for caching;

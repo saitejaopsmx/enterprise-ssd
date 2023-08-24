@@ -7,7 +7,6 @@ metadata:
 {{ include "oes.standard-labels" . | indent 4 }}
     component: oes-supplychain-preprocessor
 data:
-{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/globalConfig.yaml").AsConfig . ) | indent 2 }}
-{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/jenkinsConfig.yaml").AsConfig . ) | indent 2 }}
-{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/spinnakerConfig.yaml").AsConfig . ) | indent 2 }}
-
+{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/globalConfig.yml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/jenkinsConfig.yml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/oes-supplychain-preprocessor/spinnakerConfig.yml").AsConfig . ) | indent 2 }}

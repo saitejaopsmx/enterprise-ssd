@@ -1,0 +1,123 @@
+# Copyright Kusari, Inc. and contributors
+# Licensed under the MIT license. See LICENSE file in the project root for details.
+{{- if .Values.guac.sampleData.ingest }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ingest-guac-data
+  labels:
+    {{- include "guac.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.guac.sampleData.jobName }}
+  annotations:
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "10"
+spec:
+  backoffLimit: 5
+  template:
+    metadata:
+      labels:
+        {{- include "guac.labels" . | nindent 8 }}
+        app.kubernetes.io/name: {{ .Values.guac.sampleData.jobName }}
+    spec:
+      containers:
+      - name: data-ingestor
+        # Use same image as oci-collector for now
+        {{- if .Values.guac.ociCollector.image.digest }}
+        image: "{{ .Values.guac.ociCollector.image.repository }}@{{ .Values.guac.ociCollector.image.digest }}"
+        {{- else }}
+        image: "{{ .Values.guac.ociCollector.image.repository }}:{{ .Values.guac.ociCollector.image.tag | default .Chart.AppVersion}}"
+        {{- end }}
+        imagePullPolicy: "{{ .Values.guac.ociCollector.image.pullPolicy }}"
+        command: ['sh', '-c', '/tmp/guac/ingest-guac-data.sh ingest-data']
+        workingDir: {{ .Values.guac.workingDir }}
+        volumeMounts:
+          - name: guac-config
+            mountPath: {{ .Values.guac.workingDir }}
+            readOnly: true
+          - name: ingest-guac-data
+            mountPath: /tmp/guac
+          - name: shared-data
+            mountPath: /shared-data
+      - name: data-preper
+        image: "ubuntu:22.04"
+        command: ['sh', '-c', '/tmp/guac/ingest-guac-data.sh prep-data']
+        workingDir: {{ .Values.guac.workingDir }}
+        volumeMounts:
+          - name: guac-config
+            mountPath: {{ .Values.guac.workingDir }}
+            readOnly: true
+          - name: ingest-guac-data
+            mountPath: /tmp/guac
+          - name: shared-data
+            mountPath: /shared-data
+      restartPolicy: OnFailure
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
+      volumes:
+        - name: guac-config
+          configMap:
+            name: guac-cm
+        - name: ingest-guac-data
+          configMap:
+            name: ingest-guac-data
+            defaultMode: 0755
+        - name: shared-data
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.guac.sampleData.jobName }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.guac.sampleData.jobName }}
+    app.kubernetes.io/component: {{ .Values.guac.sampleData.jobName }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/part-of: "guac"
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+data:
+  ingest-guac-data.sh: |
+    #!/usr/bin/env bash
+    set -e
+
+    SHARED_DATA=/shared-data
+    INDICATOR_FILE=${SHARED_DATA}/done_loading_data
+    GUAC_DATA_REPO=https://github.com/guacsec/guac-data.git
+
+    case "$1" in
+
+    prep-data)  echo  "Preparing sample data"
+        apt-get update && apt-get install -y git
+        git clone ${GUAC_DATA_REPO} ${SHARED_DATA}/guac-data
+        touch ${INDICATOR_FILE}
+        ;;
+
+    ingest-data)  echo "Ingesting sample data"
+        export GUACSEC_HOME="/workspace"
+        export GUAC_BIN="/cnb/process"
+
+        while [ ! -f ${INDICATOR_FILE} ]
+        do
+            sleep 3
+        done
+
+        cd ${GUACSEC_HOME}
+        for d in guac-data/some-sboms
+        # guac-data/top-dh-sboms guac-data/docs
+        do 
+            ${GUAC_BIN}/guacone files ${SHARED_DATA}/${d}
+        done
+
+        rm ${INDICATOR_FILE}
+        ;;
+
+    *) echo "$1 is not supported"
+        ;;
+    esac
+
+{{- end }}

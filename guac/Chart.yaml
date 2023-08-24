@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: v0.1.0
+dependencies:
+- name: nats
+  repository: https://nats-io.github.io/k8s/helm/charts/
+  version: ~0.19.12
+description: A Helm chart for deploying GUAC to Kubernetes
+maintainers:
+- email: guac-info@kusari.dev
+  name: kusaridev
+  url: https://github.com/kusaridev/guac-helm-charts
+name: guac
+type: application
+version: 0.1.5

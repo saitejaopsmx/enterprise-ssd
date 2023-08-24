@@ -3,11 +3,7 @@ graphqlsvc:
     port: 8080
 postgresql:
     ssd:
-    connectString: 
-      host: oes-db
-      user: '{{ .Values.db.username }}'
-      password: '{{ .Values.db.password }}'
-      database: ssddb
+    connectString: host=oes-db user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb
 toolchain:
     host: http://tool-chain
     port: 8100

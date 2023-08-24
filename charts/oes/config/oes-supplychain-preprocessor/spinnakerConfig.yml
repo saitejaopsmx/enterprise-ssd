@@ -8,11 +8,8 @@ rabbitmq:
   bindingKey: preview-saas-ssd
 postgresql:
   ssddb:
-    connectString:
-      host: oes-db
-      user: '{{ .Values.db.username }}'
-      password: '{{ .Values.db.password }}'
-      database: ssddb 
+    connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432
+
 guacsvc:
   host: http://tool-chain
   port: 8100  

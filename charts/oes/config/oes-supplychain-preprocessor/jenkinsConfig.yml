@@ -1,17 +1,12 @@
 rabbitmq:
-    username: '{{ .Values.rabbitmq.username }}'
-    password: '{{ .Values.rabbitmq.password }}'
-    host: rabbitmq-service
-    port: 5672
-    queue: jenkins-ssd
-    exchange: jenkins.events
-    bindingKey: jenkins-ssd
+  username: '{{ .Values.rabbitmq.username }}'
+  password: '{{ .Values.rabbitmq.password }}'
+  host: rabbitmq-service
+  port: 5672
+  queue: jenkins-ssd
+  exchange: jenkins.events
+  bindingKey: jenkins-ssd
 
 postgresql:
   ssddb:
-    connectString:
-      host: oes-db
-      user: '{{ .Values.db.username }}'
-      password: '{{ .Values.db.password }}'
-      database: ssddb
-      port: 5432
+    connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432

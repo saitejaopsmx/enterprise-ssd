@@ -17,7 +17,7 @@ spec:
       port: 8100
       targetPort: 8100
       {{- if eq .Values.k8sServiceType "NodePort" }}
-      nodePort: 8098
+      nodePort: 8100
       {{- end }}
   selector:
     app: oes

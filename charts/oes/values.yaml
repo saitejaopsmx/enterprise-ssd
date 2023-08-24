@@ -463,7 +463,31 @@ gate:
         lastName: name
         username: login
       provider: GITHUB
+###############################################################################
+## Details of rabbitmq message bus image for OES
+##
+rabbitmq:
+  ## rabbitmq  endpoint that is used by oes-gate and oes-platform for caching;
+  ## Change this to custom URL if installRedis is set to false
+  ## url: rabbitmq-service
+  ## url: default port 5672
+  url: rabbitmq-service
+  port: 5672
+  username: rabbitmq
+  password: Networks123
+  image:
+    registry: quay.io/opsmxpublic/rabbitmq
+    repository: 3-management
 
+  annotations:
+    moniker.spinnaker.io/application: isd
+
+  serviceAnnotations: {}
+
+  #Blow block is for only for K8S
+  securityContext:
+    fsGroup: 1000
+    
 ###############################################################################
 ## Values of OES Sapor (Security Audit Policy Onboarding & Release)
 sapor:

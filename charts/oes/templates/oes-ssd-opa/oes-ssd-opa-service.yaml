@@ -4,7 +4,7 @@ metadata:
   name: ssd-opa
   labels: 
     app: oes
-    component: oes-toolchain
+    component: oes-ssd-opa
 spec:
   selector:
     app: oes

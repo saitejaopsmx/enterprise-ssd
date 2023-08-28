@@ -61,9 +61,11 @@ The command removes all the Kubernetes components associated with the chart and 
 
 1. Create an empty-repo (called the "gitops-repo" in the document), "main" branch should be the default, and clone it locally
 2. Clone https://github.com/OpsMx/enterprise-ssd, selecting the appropriate branch:
--`git clone https://github.com/OpsMx/standard-isd-gitops  -b main`
+
+`git clone https://github.com/OpsMx/standard-isd-gitops  -b main`
 
 3. Copy contents of the standard-isd-repo to the gitops-repo created above using:
+
 `cp -r standard-isd-gitops/* gitops-repo` # Replace "gitops-repo" with your repo-name
 
 and cd to the gitops-repo e.g. `cd gitops-repo`

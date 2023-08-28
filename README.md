@@ -1,6 +1,3 @@
-<p align="center">
-	<img src="img/opsmx.png" width="20%" align="center" alt="OpsMx">
-</p>
 
 # OpsMx Secure Software Delivery
 

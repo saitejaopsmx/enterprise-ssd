@@ -17,44 +17,10 @@ For more information, visit https://www.opsmx.com
   ```
   If helm is not setup, follow <https://helm.sh/docs/intro/install/> to install helm.
 
-- Your Kubernetes cluster shall support persistent volumes
-
-- It is assumed that an nginx ingress controller is installed on the cluster, by default ingress resources are created for oes-ui, oes-gate, spin-deck and spin-gate services. Customize the hosts for OES using the options in the values.yaml under oesUI, oesGate, spinDeck, spinGate. If any other ingress controller is installed, set createIngress flag to false and configure your ingress.
-
-- To enable mutual TLS for Spinnaker Services and SSL features provided by Spinnaker Life Cycle Management (LCM), it is required to install nginx ingress from kubernetes community and cert-manager before installing OES. Please refer the table below for options to be enabled for LCM
-  Instructions to install nginx ingress
-  https://kubernetes.github.io/ingress-nginx/deploy/
-
-  Instructions to install cert-manager
-  https://cert-manager.io/docs/installation/kubernetes/
-
-- Helm v3 expects the namespace to be present before helm install command is run. If it does not exists,
 
   ```console
   $ kubectl create namespace mynamespace
   ```
-
-- To install the chart with the release name `my-release`:
-
-	Helm v3.x
-  ```console
-  $ helm install my-release opsmx/oes [--namespace mynamespace] --timeout 15m
-  ```
-
-The command deploys OES on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
-
-> **Tip**: List all releases using `helm list`
-
-### Uninstalling the Chart
-
-To uninstall/delete the `my-release` deployment:
-
-Helm v3.x
-  ```console
-  $ helm uninstall my-release [--namespace mynamespace]
-  ```
-
-The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Create your git-repo
 *ISD stores all the configuration in a repo, typically a 'git repo', though bitbucket, S3 and others are supported.*
@@ -62,11 +28,11 @@ The command removes all the Kubernetes components associated with the chart and 
 1. Create an empty-repo (called the "gitops-repo" in the document), "main" branch should be the default, and clone it locally
 2. Clone https://github.com/OpsMx/enterprise-ssd, selecting the appropriate branch:
 
-`git clone https://github.com/OpsMx/standard-isd-gitops  -b main`
+`git clone https://github.com/OpsMx/enterprise-ssd  -b main`
 
-3. Copy contents of the standard-isd-repo to the gitops-repo created above using:
+3. Copy contents of the enterprise-ssd to the gitops-repo created above using:
 
-`cp -r standard-isd-gitops/* gitops-repo` # Replace "gitops-repo" with your repo-name
+`cp -r enterprise-ssd/* gitops-repo` # Replace "gitops-repo" with your repo-name
 
 and cd to the gitops-repo e.g. `cd gitops-repo`
 

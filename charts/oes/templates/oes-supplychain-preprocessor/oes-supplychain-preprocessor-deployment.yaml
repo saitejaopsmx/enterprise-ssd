@@ -39,8 +39,8 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
       - name: preprocessor-volume
-        configMap:
-          name: supplychain-preprocessor
+        secret:
+          secretName: supplychain-preprocessor
       securityContext:
         runAsNonRoot: true
       {{- if .Values.imagePullSecret }}

@@ -1,0 +1,21 @@
+########################################################################################
+## Info related to registry where SSD images are stored
+imageCredentials:
+  repoUrl: https://quay.io/
+  # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
+  registry: quay.io/opsmxpublic
+#####################################################
+gate:
+  image:
+    repository: ubi8-gate
+    tag: v4.1.2-rc13
+##################################################
+sapor:
+  image:
+    repository: ubi8-oes-sapor
+    tag: v4.1.2-rc13
+###################################################
+ui:
+  image:
+    repository: ubi8-oes-ui
+    tag: v4.1.2-rc13

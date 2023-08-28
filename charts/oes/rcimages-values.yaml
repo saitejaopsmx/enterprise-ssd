@@ -18,4 +18,34 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: v4.1.2-rc13
+    tag: v4.1.2-rc1
+################################################
+ociCollector:
+  image:
+    repository: ghcr.io/guacsec
+    tag: v4.1.2-rc1
+#############################################
+depsDevCollector:
+  image:
+    repository: ghcr.io/guacsec
+    tag: v4.1.2-rc1
+###############################################
+osvCertifier:
+  image:
+    repository: ghcr.io/guacsec
+    tag: v4.1.2-rc1
+########################################
+ingestor:
+  image:
+    repository: ghcr.io/guacsec
+      tag: v4.1.2-rc1
+###############################################
+collectSub:
+  image:
+    repository: ghcr.io/guacsec
+    tag: v4.1.2-rc1
+################################################
+graphqlServer:
+  image:
+    repository: ghcr.io/guacsec
+    tag: v4.1.2-rc1

@@ -23,9 +23,9 @@ For more information, visit https://www.opsmx.com
 *ISD stores all the configuration in a repo, typically a 'git repo', though bitbucket, S3 and others are supported.*
 
 1. Create an empty-repo (called the "gitops-repo" in the document), "main" branch should be the default, and clone it locally
-2. Clone https://github.com/OpsMx/enterprise-ssd, selecting the appropriate branch:
+2. Clone https://github.com/OpsMx/enterprise-ssd:
 
-`git clone https://github.com/OpsMx/enterprise-ssd  -b main`
+`git clone https://github.com/OpsMx/enterprise-ssd`
 
 3. Copy contents of the enterprise-ssd to the gitops-repo created above using:
 
@@ -41,7 +41,7 @@ and cd to the gitops-repo e.g. `cd gitops-repo`
 ## Start the installation
 *The installation is done through helm.*
 
-5. Installa ISD by executing this command:
+5. Install ISD by executing this command:
 
 `helm install <release-name> charts/oes -f <values.yaml> -n <Namespace> --timeout=20m`
 

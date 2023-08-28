@@ -44,19 +44,14 @@ and cd to the gitops-repo e.g. `cd gitops-repo`
 ## Start the installation
 *The installation is done through helm.*
 
-5. Installation ISD by executing this command:
+5. Installa ISD by executing this command:
 
 `helm install <release-name> charts/oes -f <values.yaml> -n <Namespace> --timeout=20m`
 
 ## Monitor the installation process
 6. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:
 
-- `kubectl -n opsmx-isd get po -w`
-
-**NOTE-1**: If the pod starting with isd-install-* errors out, please check the logs as follows, replacing the pod-name correctly:
-- `kubectl -n opsmx-isd logs isd-install-tjzlx -c get-secrets`
-- `kubectl -n opsmx-isd logs isd-install-tjzlx -c git-clone`
-- `kubectl -n opsmx-isd logs isd-install-tjzlx -c apply-yamls`
+- `kubectl -n <Namespace> get po -w`
 
   ## Check the installation
 7. Access ISD using the URL specified in the values.yaml in step 5 in a browser such as Chrome.

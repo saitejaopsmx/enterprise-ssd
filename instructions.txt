@@ -34,7 +34,7 @@ For more information, visit https://www.opsmx.com
 
 3. Install SSD by executing this command:
 
-`helm install <release-name> charts/oes -f values.yaml -n opsmx-ssd --timeout=20m`
+`helm install ssd charts/oes -f values.yaml -n opsmx-ssd --timeout=20m`
 
 ## Monitor the installation process
 4. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:

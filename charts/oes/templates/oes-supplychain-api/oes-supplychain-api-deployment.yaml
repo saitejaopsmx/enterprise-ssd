@@ -33,8 +33,8 @@ spec:
           persistentVolumeClaim:
             claimName: supplychain-api
         - name: supplychain-api-volume
-          configMap:
-            name: supplychain-api
+          secret:
+            secretName: supplychain-api
             items:
               - key: supplychain-api.yaml
                 path: supplychain-api.yaml

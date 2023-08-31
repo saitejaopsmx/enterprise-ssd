@@ -25,8 +25,8 @@ spec:
     spec:
       volumes:
         - name: ssd-opa-volume
-          configMap:
-            name: ssd-opa
+          secret:
+            secretName: ssd-opa
             items:
               - key: ssd-opa.yaml
                 path: ssd-opa.yaml

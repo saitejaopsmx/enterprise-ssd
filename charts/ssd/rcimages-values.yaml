@@ -4,6 +4,24 @@ imageCredentials:
   repoUrl: https://quay.io/
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: quay.io/opsmxpublic
+
+global:
+  ssl:
+    # Set to true so that UI will be accessible over http instead of https
+    enabled: false
+
+  # Common gate for both spin and ssd services. Change ONLY if required
+  commonGate:
+    spinnakerRBAC: false  # Set to true if RBAC is enabled in Spinnaker
+
+  gitea:
+    enabled: false
+
+  oesUI:
+    # Set to https if global.certManager and global.ssl is true
+    protocol: http
+    host: oes.example.ops.com # Update the SSD Url
+
 #####################################################
 gate:
   image:
@@ -71,24 +89,33 @@ spinnaker:
   gitopsHalyard:
     repo:
       type: git
-      configArgs: "http.sslVerify=false"
       baseUrlHostName: github.com
-      organization: xxxxxxxxxxx
-      repository: xxxxxx
-      halConfigBranch: xxxxxxx
-      dynamicAccRepository: ssd-repo # Please provide the repo name of the GitOps Dynamic Accounts Directory. Can be same as Hal repo.
+      organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
+      repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
       username: xxxxxxxxx  # Username to authenticate with git/stash repo
-      token: xxxxxxxxxxxxx 
+      dynamicAccRepository: SAME_AS_REPOSITORY_ABOVE # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
+      token: gittoken  # Token corresponding to spinnaker.gitopsHalyard.repo.username
       usermailid: saiteja.katabhatina@opsmx.io # Enter a valid email address for the above repo
+
+      ########################################################################################
+      ## Additional git-repo parameters, typically no need to be change
+      ########################################################################################
+
+      configArgs: "http.sslVerify=false"  # Extra arguments to the git clone command
+      ## Configure below fields only if repo type is git/stash.
+      baseUrlHostName: github.com    # Change only if using enterprise git or another repo-type
+      projectName: ""                # Specify project name only if repo is under a project
+      halConfigBranch: main        # Branch for the "repository", recommend to keep "main"
+      halConfigPath: /               #relative path from repository root folder
+      dynAccntConfigPath: /          #relative path from repository root folder
     pipelinePromotion:  # GitHub only,  Not supportd on S3 or Stash
       enabled: false
-      type: git  # git, s3, stash
-      gitConfig: "git config --global http.sslVerify false"
-      organization: project_name  # Also called "project" in some repos
-      repository: repo_name  # bucket name in case of S3
+      type: git 
+      organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
+      repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
       rootFolder: pipeline/
       baseUrl: example.repo.com  #  "git_url"
-      username: username
-      token: token
+      username: xxxxxxxxx  # Username to authenticate with git/stash repo
+      token: gittoken  # Token corresponding to spinnaker.gitopsHalyard.repo.username
       branch: samplerepo
       usermail: krish@company.com

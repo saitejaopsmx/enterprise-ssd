@@ -24,10 +24,6 @@ spec:
 {{- end }}
     spec:
       volumes:
-        - name: docker-sock
-          hostPath:
-            path: /var/run
-            type: 'adfsdf'
         - name: sbom
           persistentVolumeClaim:
             claimName: tool-chain
@@ -50,8 +46,6 @@ spec:
             - name: tool-chain-volume
               mountPath: /tools/config/tool-chain.yaml
               subPath: tool-chain.yaml
-            - name: docker-sock
-              mountPath: /var/run
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

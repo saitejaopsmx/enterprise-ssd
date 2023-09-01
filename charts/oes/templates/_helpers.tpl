@@ -194,7 +194,7 @@ Return the proper Tool Chain Image
 */}}
 {{- define "toolchain.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.createcontroller.image.repository -}}
+{{- $repositoryName := .Values.toolchain.image.repository -}}
 {{- $tag := .Values.toolchain.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
@@ -204,7 +204,7 @@ Return the proper Supplychain-api Image
 */}}
 {{- define "supplychainapi.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.createcontroller.image.repository -}}
+{{- $repositoryName := .Values.supplychainapi.image.repository -}}
 {{- $tag := .Values.supplychainapi.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
@@ -214,7 +214,7 @@ Return the proper Supplychain-api Image
 */}}
  {{- define "supplychainpreprocessor.image" -}}
  {{- $registryName := .Values.imageCredentials.registry -}}
- {{- $repositoryName := .Values.createcontroller.image.repository -}}
+ {{- $repositoryName := .Values.supplychainpreprocessor.image.repository -}}
  {{- $tag := .Values.supplychainpreprocessor.image.tag | toString -}}
  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
  {{- end -}}
@@ -224,7 +224,7 @@ Return the proper Supplychain-api Image
 */}}
  {{- define "ssdopa.image" -}}
  {{- $registryName := .Values.imageCredentials.registry -}}
- {{- $repositoryName := .Values.createcontroller.image.repository -}}
+ {{- $repositoryName := .Values.ssdopa.image.repository -}}
  {{- $tag := .Values.ssdopa.image.tag | toString -}}
  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
  {{- end -}}

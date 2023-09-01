@@ -25,13 +25,6 @@ spec:
 {{- end }}
     spec:
       volumes:
-        - name: docker-sock
-          hostPath:
-            path: /var/run
-            type: 'adfsdf'
-        - name: sbom
-          persistentVolumeClaim:
-            claimName: supplychain-api
         - name: supplychain-api-volume
           secret:
             secretName: supplychain-api
@@ -46,13 +39,9 @@ spec:
             - containerPort: 8099
               protocol: TCP
           volumeMounts:
-            - name: sbom
-              mountPath: /tools/sbom
             - name: supplychain-api-volume
               mountPath: /tools/config/supplychain-api.yaml
               subPath: supplychain-api.yaml
-            - name: docker-sock
-              mountPath: /var/run
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

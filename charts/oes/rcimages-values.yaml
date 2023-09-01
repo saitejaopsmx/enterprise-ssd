@@ -73,12 +73,12 @@ spinnaker:
       type: git
       configArgs: "http.sslVerify=false"
       baseUrlHostName: github.com
-      organization: saitejaopsmx
-      repository: ssd-repo
-      halConfigBranch: main
+      organization: xxxxxxxxxxx
+      repository: xxxxxx
+      halConfigBranch: xxxxxxx
       dynamicAccRepository: ssd-repo # Please provide the repo name of the GitOps Dynamic Accounts Directory. Can be same as Hal repo.
-      username: saitejaopsmx  # Username to authenticate with git/stash repo
-      token: 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  # Token corresponding to above username
+      username: xxxxxxxxx  # Username to authenticate with git/stash repo
+      token: xxxxxxxxxxxxx 
       usermailid: saiteja.katabhatina@opsmx.io # Enter a valid email address for the above repo
     pipelinePromotion:  # GitHub only,  Not supportd on S3 or Stash
       enabled: false

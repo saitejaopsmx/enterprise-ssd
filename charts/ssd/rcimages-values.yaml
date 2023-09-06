@@ -19,6 +19,9 @@ global:
 
   createIngress: true
 
+  certManager:
+    installed: false
+
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: http

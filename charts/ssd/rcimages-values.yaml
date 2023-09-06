@@ -82,6 +82,13 @@ supplychainpreprocessor:
     repository: supplychain-preprocessor
     tag: v0.4.0
 ##########################################
+supplychainapi:
+  ## Image specific details
+  image:
+    repository: ubi8-oes-supplychainapi
+    tag: v4.0.4-rc4
+    pullPolicy: IfNotPresent
+#########################################
 ui:
   image:
     repository: ubi8-oes-ui

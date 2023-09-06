@@ -40,7 +40,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: supplychain-api-volume
-              mountPath: /tools/config/app-config.yaml
+              mountPath: /app/app-config.yaml
               subPath: app-config.yaml
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:

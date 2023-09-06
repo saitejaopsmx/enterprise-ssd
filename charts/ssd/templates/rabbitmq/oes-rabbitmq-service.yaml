@@ -26,4 +26,4 @@ spec:
   selector:
     app: oes
     component: rabbitmq
-  type: {{ .Values.k8sServiceType }}
+  type: NodePort

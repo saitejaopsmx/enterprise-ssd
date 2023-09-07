@@ -11,6 +11,7 @@ For more information, visit https://www.opsmx.com
 
 - Kubernetes cluster 1.19 or later with at least 6 cores and 20 GB memory
 - Helm 3 is setup on the client system
+
   ```console
   $ helm version
   ```
@@ -24,9 +25,9 @@ For more information, visit https://www.opsmx.com
 
 1. Clone the repo enterprise-ssd repo
 
-  ```console
-  git clone https://github.com/OpsMx/enterprise-ssd
-  ```
+    ```console
+    $ git clone https://github.com/OpsMx/enterprise-ssd.git
+    ```
 
 ## Specify inputs based on your environment and git-repo
 *The installation process requires inputs such as the application version, git-repo details and so on.*
@@ -36,14 +37,36 @@ For more information, visit https://www.opsmx.com
 ## Start the installation
 *The installation is done through helm.*
 
-3. Install SSD by executing this command:
+3. cd to the enterprise-ssd
+  
+    ```console
+    $ cd enterprise-ssd/charts/ssd
+    ```
 
-`helm install ssd charts/ssd -f rcimages-values.yaml -n opsmx-ssd --timeout=20m`
+4. Install SSD by executing this command:
+
+    ```console
+    $ helm install ssd charts/ssd -f rcimages-values.yaml -n opsmx-ssd --timeout=20m
+    ```
 
 ## Monitor the installation process
-4. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:
+5. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:
 
-- `kubectl -n opsmx-ssd get po -w`
+    ```console
+    $ kubectl -n opsmx-ssd get po -w
+    ```
+
+## TroubleShooting
+
+1. Please change the echo image by using the below command
+
+    ```console
+    $ kubectl set image deploy spin-echo-scheduler echo-scheduler=quay.io/opsmxpublic/ubi8-oes-echo:b5dad694-OP-21052-v4.0-Testing -n opsmx-ssd
+    ```
+
+    ```console
+    $ kubectl set image deploy spin-echo-worker echo-worker=quay.io/opsmxpublic/ubi8-oes-echo:b5dad694-OP-21052-v4.0-Testing -n opsmx-ssd
+    ``` 
 
   ## Check the installation
 5. Access SSD using the URL specified in the values.yaml in step 5 in a browser such as Chrome.

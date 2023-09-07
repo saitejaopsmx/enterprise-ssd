@@ -29,8 +29,8 @@ spec:
           secret:
             secretName: supplychain-api
             items:
-              - key: supplychain-api.yaml
-                path: supplychain-api.yaml
+              - key: app-config.yaml
+                path: app-config.yaml
             defaultMode: 420
       containers:
         - name: supplychain-api
@@ -40,8 +40,8 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: supplychain-api-volume
-              mountPath: /tools/config/supplychain-api.yaml
-              subPath: supplychain-api.yaml
+              mountPath: /app/app-config.yaml
+              subPath: app-config.yaml
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

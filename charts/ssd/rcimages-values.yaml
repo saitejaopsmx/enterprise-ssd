@@ -19,6 +19,9 @@ global:
 
   createIngress: true
 
+  certManager:
+    installed: false
+
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: http
@@ -28,8 +31,13 @@ global:
 gate:
   image:
     repository: ubi8-gate
-    tag: c43a1277-2721-ssd
+    tag: dd22f773-2745-ssd
 ##################################################
+db:
+  image:
+    repository: ubi8-oes-db
+    tag: v3.0.0-ssd
+#################################################
 sapor:
   image:
     repository: ubi8-oes-sapor
@@ -38,7 +46,7 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202308281629-ssd
+    tag: 202309051959-ssd
 #############################################
 guac:
   guac:
@@ -75,18 +83,19 @@ toolchain:
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.0.0
+    tag: v1.0.1
 ###########################################
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v0.4.0
+    tag: v1.68
 ##########################################
-ui:
+supplychainapi:
+  ## Image specific details
   image:
-    repository: ubi8-oes-ui
-    tag: 202308281629-ssd
-########################################
+    repository: supplychain-api
+    tag: v0.0.2
+#########################################
 spinnaker:
   gitopsHalyard:
     repo:

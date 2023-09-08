@@ -1,3 +1,4 @@
+opaIngress: {{ .Values.ssdopa.ingress.host }}
 httpListenPort: 8200
 graphQLAddr: http://graphql-server:8080/query
 reScheduleDays: 20

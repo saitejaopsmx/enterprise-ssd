@@ -25,7 +25,28 @@ global:
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: http
-    host: oes.example.ops.com # Update the SSD Url
+    host: oes.example.ops.com # Update the OES Url
+
+  jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
+  dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
+  repocreds:
+    docker:
+      url: "https://docker.io/"
+      username: "xxxx"
+      password: "xxxxxxx" 
+  #    TOKEN is an optional field
+  #    token: "token"
+  opsmxcreds:
+    userName: admin
+    password: opsmxadmin123
+    url: "PROTOCOL://SSD.URL.COMPANY.COM"
+  sourcecode:
+    github:
+      rest_api_url: "https://api.github.com"
+      token: "xxxxxxxxxxxx" # Update the github token id
+    slack:
+      channel: "xxxxx"    # Update the slack channel name
+      token: "xxxxxxxxxx" # Update the slack token id
 
 #####################################################
 gate:
@@ -84,6 +105,9 @@ ssdopa:
   image:
     repository: ssd-opa
     tag: v1.0.1
+  ingress:
+    protocol: http
+    host: SSD.DNS.COMPANY.COM
 ###########################################
 supplychainpreprocessor:
   image:

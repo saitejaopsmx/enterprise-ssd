@@ -40,15 +40,6 @@ dbcleanup:
   daysinterval: 180
 
 ####################################################
-
-#####################################################
-## Set to true if user want to clean up the ISD Data;default is false
-dbcleanup:
-  enabled: false
-  ## Change the days interval value if user wants to delete older than 180days data
-  daysinterval: 180
-
-####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
   # Custom Images registry where all the OSS and customized images used in the helm chart are stored
@@ -60,7 +51,6 @@ global:
   ssl:
     enabled: false
 
-  stormdriver: false
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   # Else, the TLS secrets will need to created manually
   certManager:
@@ -76,6 +66,27 @@ global:
     spinnakerRBAC: false  # Set to true if RBAC is enabled in Spinnaker
     spinnakerpipelineRBAC: false
     spinnakerKayanta: false
+
+  jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
+  dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
+  repocreds:
+    docker:
+      url: "https://docker.io/"
+      username: "xxxx"
+      password: "xxxxxxx"
+  #    TOKEN is an optional field
+  #    token: "token"
+  opsmxcreds:
+    userName: admin
+    password: opsmxadmin123
+    url: "PROTOCOL://SSD.URL.COMPANY.COM"
+  sourcecode:
+    github:
+      rest_api_url: "https://api.github.com"
+      token: "xxxxxxxxxxxx" # Update the github token id
+    slack:
+      channel: "xxxxx"    # Update the slack channel name
+      token: "xxxxxxxxxx" # Update the slack token id
 
   # Set to true if user need to access Spinnaker seperately
   spinnakerUrl: false
@@ -343,6 +354,19 @@ ssdopa:
 
   serviceAnnotations: {}
 
+  persistence:
+    size: 5Gi
+    storageClass: standard
+    accessMode: ReadWriteOnce
+
+  ingress:
+    protocol: http
+    host: SSD.DNS.COMPANY.COM
+
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    tls:
+      secretName: ssd-opa-ingress
 ####################################################
 supplychainapi:
   ## Image specific details

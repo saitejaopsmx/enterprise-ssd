@@ -24,6 +24,10 @@ spec:
 {{- end }}
     spec:
       volumes:
+        - name: logs
+        - name: docker-sock
+          hostPath:
+            path: /var/run
         - name: sbom
           persistentVolumeClaim:
             claimName: tool-chain
@@ -41,6 +45,8 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
+            - name: logs
+              mountPath: /tools/logs
             - name: sbom
               mountPath: /tools/sbom
             - name: tool-chain-volume

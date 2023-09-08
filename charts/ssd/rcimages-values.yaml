@@ -25,9 +25,9 @@ global:
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: https
-    host: oes.example.ops.com # Update the OES Url
+    host: OES.URL.COMPANY.COM # Update the OES Url
 
-  jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
+  jenkinsurl: JENKINS.COMPANY.COM
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
   repocreds:
     docker:
@@ -35,11 +35,11 @@ global:
       username: "xxxx"
       password: "xxxxxxx" 
   #    TOKEN is an optional field
-  #    token: "token"
+      token: "token"
   opsmxcreds:
-    userName: admin
-    password: opsmxadmin123
-    url: "https://SSD.URL.COMPANY.COM"
+    userName: admin  # LDAP Username
+    password: opsmxadmin123 # LDAP Password
+    url: "https://OES.URL.COMPANY.COM" # Update the OES Url mentioned above
   sourcecode:
     github:
       rest_api_url: "https://api.github.com"

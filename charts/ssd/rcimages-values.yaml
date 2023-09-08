@@ -52,7 +52,7 @@ global:
 gate:
   image:
     repository: ubi8-gate
-    tag: dd22f773-2745-ssd
+    tag: 1c149f40-2748-ssd
 ##################################################
 db:
   image:
@@ -118,7 +118,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.0.2
+    tag: v0.1.1
 #########################################
 spinnaker:
   gitopsHalyard:

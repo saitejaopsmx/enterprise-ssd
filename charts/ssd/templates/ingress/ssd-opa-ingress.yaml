@@ -29,6 +29,6 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ssdopa.ingress.host }}
-{{ toYaml .Values.ssdopa.ingress.ingress.tls | indent 4 }}
+{{ toYaml .Values.ssdopa.ingress.tls | indent 4 }}
 {{- end }}
 {{- end }}

@@ -31,10 +31,9 @@ global:
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
   repocreds:
     docker:
-      url: "https://docker.io/"
+      url: "xxxxxxx"
       username: "xxxx"
       password: "xxxxxxx" 
-  #    TOKEN is an optional field
       token: "token"
   opsmxcreds:
     userName: admin  # LDAP Username

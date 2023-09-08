@@ -8,7 +8,7 @@ imageCredentials:
 global:
   ssl:
     # Set to true so that UI will be accessible over http instead of https
-    enabled: false
+    enabled: true
 
   # Common gate for both spin and ssd services. Change ONLY if required
   commonGate:
@@ -20,11 +20,11 @@ global:
   createIngress: true
 
   certManager:
-    installed: false
+    installed: true
 
   oesUI:
     # Set to https if global.certManager and global.ssl is true
-    protocol: http
+    protocol: https
     host: oes.example.ops.com # Update the OES Url
 
   jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
@@ -39,7 +39,7 @@ global:
   opsmxcreds:
     userName: admin
     password: opsmxadmin123
-    url: "PROTOCOL://SSD.URL.COMPANY.COM"
+    url: "https://SSD.URL.COMPANY.COM"
   sourcecode:
     github:
       rest_api_url: "https://api.github.com"
@@ -106,7 +106,7 @@ ssdopa:
     repository: ssd-opa
     tag: v1.0.1
   ingress:
-    protocol: http
+    protocol: https
     host: SSD.DNS.COMPANY.COM
 ###########################################
 supplychainpreprocessor:

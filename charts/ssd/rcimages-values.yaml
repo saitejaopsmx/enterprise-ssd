@@ -107,7 +107,7 @@ ssdopa:
     tag: v1.0.1
   ingress:
     protocol: https
-    host: SSD.DNS.COMPANY.COM
+    host: SSD.DNS.COMPANY.COM  # Update the URL for OPA SSD
 ###########################################
 supplychainpreprocessor:
   image:

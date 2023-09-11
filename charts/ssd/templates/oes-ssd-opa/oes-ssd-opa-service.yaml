@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ssd-opa
-  labels: 
+  labels:
     app: oes
     component: oes-ssd-opa
 spec:
@@ -13,7 +13,7 @@ spec:
 {{- if .Values.ssdopa.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdopa.serviceAnnotations | indent 4 }}
-{{- end }}    
+{{- end }}
   ports:
     - name: ssd-opa
       protocol: TCP
@@ -22,4 +22,4 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 8200
       {{- end }}
-    
+

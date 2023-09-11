@@ -36,7 +36,7 @@ spec:
             defaultMode: 420
       containers:
         - name: ssd-opa
-          image: {{ template "ssdopa.image" . }} 
+          image: {{ template "ssdopa.image" . }}
           ports:
             - containerPort: 8200
               protocol: TCP
@@ -45,7 +45,7 @@ spec:
               mountPath: /app/OpenSSF
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
-              subPath: ssd-opa.yaml 
+              subPath: ssd-opa.yaml
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

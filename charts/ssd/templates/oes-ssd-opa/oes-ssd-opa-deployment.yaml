@@ -24,6 +24,9 @@ spec:
 {{- end }}
     spec:
       volumes:
+        - name: openssf
+          persistentVolumeClaim:
+            claimName: ssd-opa
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa
@@ -33,14 +36,16 @@ spec:
             defaultMode: 420
       containers:
         - name: ssd-opa
-          image: {{ template "ssdopa.image" . }} 
+          image: {{ template "ssdopa.image" . }}
           ports:
             - containerPort: 8200
               protocol: TCP
           volumeMounts:
+            - name: openssf
+              mountPath: /app/OpenSSF
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
-              subPath: ssd-opa.yaml 
+              subPath: ssd-opa.yaml
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

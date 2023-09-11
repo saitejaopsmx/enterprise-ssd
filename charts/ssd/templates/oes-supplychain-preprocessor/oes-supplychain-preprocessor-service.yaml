@@ -18,7 +18,7 @@ spec:
     targetPort: 8058
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 8058
-      {{- end }}    
+      {{- end }}
   selector:
     app: oes
     component: oes-supplychain-preprocessor

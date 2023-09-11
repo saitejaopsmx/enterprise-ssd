@@ -8,7 +8,7 @@ imageCredentials:
 global:
   ssl:
     # Set to true so that UI will be accessible over http instead of https
-    enabled: false
+    enabled: true
 
   # Common gate for both spin and ssd services. Change ONLY if required
   commonGate:
@@ -20,18 +20,38 @@ global:
   createIngress: true
 
   certManager:
-    installed: false
+    installed: true
 
   oesUI:
     # Set to https if global.certManager and global.ssl is true
-    protocol: http
-    host: oes.example.ops.com # Update the SSD Url
+    protocol: https
+    host: OES.URL.COMPANY.COM # Update the OES Url
+
+  jenkinsurl: JENKINS.COMPANY.COM
+  dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
+  repocreds:
+    docker:
+      url: "xxxxxxx"
+      username: "xxxx"
+      password: "xxxxxxx" 
+      token: "token"
+  opsmxcreds:
+    userName: admin  # LDAP Username
+    password: opsmxadmin123 # LDAP Password
+    url: "https://OES.URL.COMPANY.COM" # Update the OES Url mentioned above
+  sourcecode:
+    github:
+      rest_api_url: "https://api.github.com"
+      token: "xxxxxxxxxxxx" # Update the github token id
+    slack:
+      channel: "xxxxx"    # Update the slack channel name
+      token: "xxxxxxxxxx" # Update the slack token id
 
 #####################################################
 gate:
   image:
     repository: ubi8-gate
-    tag: dd22f773-2745-ssd
+    tag: 1c149f40-2748-ssd
 ##################################################
 db:
   image:
@@ -84,6 +104,9 @@ ssdopa:
   image:
     repository: ssd-opa
     tag: v1.0.1
+  ingress:
+    protocol: https
+    host: SSD.DNS.COMPANY.COM  # Update the URL for OPA SSD
 ###########################################
 supplychainpreprocessor:
   image:
@@ -94,7 +117,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.0.2
+    tag: v0.1.1
 #########################################
 spinnaker:
   gitopsHalyard:

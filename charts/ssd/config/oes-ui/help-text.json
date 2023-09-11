@@ -148,7 +148,7 @@
       "DYNAMIC_ACCOUNT": {
         "TOOLTIP": "If Enabled, this account will be added to the spinnaker using External Account Configuration, which allows you to load the configurations dynamically without requiring redeployment of Clouddriver.",
         "VALIDATION_MESSAGE": {}
-        },         
+        },
       "ACCESS_KEY": {
         "TOOLTIP": "The default access key used to communicate with AWS",
         "VALIDATION_MESSAGE": {
@@ -1069,7 +1069,7 @@
     "HEADER": "No Users found",
     "BODY": ""
   },
-    
+
   "APPLICATION_DEPLOYMENT": {
     "DEPLOYMENT_GRID_SYNC": {
       "TOOLTIP": "When the cluster deployment matches with the latest pipeline execution it is 'In Sync'; if not, it is 'Out of Sync'"
@@ -1137,25 +1137,25 @@
       "startingFromNumber": "Account Name cannot start with numbers"
     }
   },
-  "ENDPOINT":{ 
+  "ENDPOINT":{
     "TOOLTIP":"The base URL of your Artifactory search is reachable at",
     "VALIDATION_MESSAGE":{
       "required":"Endpoint cannot be empty",
       "invalidUrl": "Endpoint URL is invalid"
     }
   },
-  "REPO":{ 
+  "REPO":{
     "TOOLTIP":"The repo in your artifactory to be searched",
     "VALIDATION_MESSAGE":{
       "required":"Repo cannot be empty"
     }
   },
-  "REPOTYPE":{ 
+  "REPOTYPE":{
     "TOOLTIP":"The package type of repo in your Artifactory is to be searched. Default is Maven.",
     "VALIDATION_MESSAGE":{
     }
   },
-  "GROUPID":{ 
+  "GROUPID":{
     "TOOLTIP":"The group id in your Artifactory is to be searched.",
     "VALIDATION_MESSAGE":{
     }
@@ -1631,7 +1631,7 @@
   "DEPLOYMENT":{
     "TOOLTIP":"This Halyard deployment will be used for Account creation / update",
     "VALIDATION_MESSAGE":{
-    
+
     }
   },
   "AUTHENTICATIONTYPE":{
@@ -2187,7 +2187,7 @@
       "TOOLTIP":"Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
       "VALIDATION_MESSAGE":{}
     }
-    
+
   },
   "SERVICENOW":{
     "HEADER": "Service Now",
@@ -2287,7 +2287,7 @@
       "required":"Account Name cannot be empty",
       "startingFromNumber": "Account Name cannot start with numbers"
     }
-    
+
     },
     "API_KEY":{
       "TOOLTIP":"DATADOG Api Key",
@@ -2600,7 +2600,7 @@
     }
       }
     },
-    
+
     "VMWARETANZU":{
       "HEADER": "VMWare Tanzu Observability",
       "BODY":"<span><ul><li><strong>Account Name</strong>: User-defined account name for your VMWare Tanzu access</li><li><strong>Endpoint</strong>: VMWare Tanzu host address, from which you access the VMWare Tanzu</li><li><strong>Email</strong>: Provide the user's registered and authorized email</li><li><strong>API token</strong>: The user's API token. To generate an API token, log in to your instance  as user with the API Tokens permission. Click the gear icon  at the top right of the toolbar and select your user name. On the API Access tab, click Generate. </li></ul></span>",

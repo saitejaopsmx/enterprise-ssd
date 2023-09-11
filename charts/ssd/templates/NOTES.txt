@@ -10,7 +10,7 @@ Thank you for installing Intelligent Software Delivery (ISD) platform from OpsMx
       kubectl -n opsmx-isd  port-forward svc/oes-ui 8080
 
   and navigate to http://localhost:8080
-  
+
 {{- end }}
     You can login with admin/opsmxadmin123
 

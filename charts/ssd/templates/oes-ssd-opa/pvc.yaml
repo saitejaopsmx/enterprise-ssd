@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ssd-opa
+spec:
+  accessModes:
+    - {{ .Values.ssdopa.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.ssdopa.persistence.size | quote }}
+{{- if .Values.ssdopa.persistence.storageClass }}
+{{- if (eq "-" .Values.ssdopa.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.ssdopa.persistence.storageClass }}"
+{{- end }}
+{{- end }}

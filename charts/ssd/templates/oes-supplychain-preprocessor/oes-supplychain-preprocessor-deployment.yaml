@@ -5,7 +5,7 @@ metadata:
   labels:
     app: oes
     component: oes-supplychain-preprocessor
-{{ include "oes.standard-labels" . | indent 4 }}    
+{{ include "oes.standard-labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
@@ -28,7 +28,7 @@ spec:
       containers:
       - name: oes-supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
-        ## Add liveness and readiness 
+        ## Add liveness and readiness
         resources: {}
         volumeMounts:
         - mountPath: /etc/config

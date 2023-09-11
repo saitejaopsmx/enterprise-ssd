@@ -186,7 +186,7 @@ Return the proper Create Controller Image
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.createcontroller.image.repository -}}
 {{- $tag := .Values.createcontroller.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}} 
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
 {{/*

@@ -47,11 +47,15 @@ global:
       channel: "xxxxx"    # Update the slack channel name
       token: "xxxxxxxxxx" # Update the slack token id
 
+  sonarqubecreds: "xxxxx"  # Update the value eg: username:password
+  openaicreds: "xxxxxxxx" # Update the value eg: openAIApiToken:token
+  semgrepwebApitoken: "xxxxxx" # Update the semgrepwebApitoken value
+
 #####################################################
 gate:
   image:
     repository: ubi8-gate
-    tag: 1c149f40-2748-ssd
+    tag: 742976ca-2787-ssd
 ##################################################
 db:
   image:
@@ -66,7 +70,7 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202309051959-ssd
+    tag: 202309291958-ssd
 #############################################
 guac:
   guac:
@@ -103,7 +107,7 @@ toolchain:
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.0.1
+    tag: v1.1.0
   ingress:
     protocol: https
     host: SSD.DNS.COMPANY.COM  # Update the URL for OPA SSD
@@ -111,13 +115,13 @@ ssdopa:
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v1.68
+    tag: v0.6.0
 ##########################################
 supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.1.1
+    tag: v0.2.0
 #########################################
 spinnaker:
   gitopsHalyard:

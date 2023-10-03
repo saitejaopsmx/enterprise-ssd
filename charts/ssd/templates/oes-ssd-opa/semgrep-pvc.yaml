@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: openssf-pvc
+  name: semgrep-pvc
 spec:
   accessModes:
     - {{ .Values.ssdopa.persistence.accessMode }}

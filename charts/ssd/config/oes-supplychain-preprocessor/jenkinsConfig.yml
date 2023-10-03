@@ -10,3 +10,7 @@ rabbitmq:
 postgresql:
   ssddb:
     connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432
+
+ssdopasvc:
+  host: http://ssd-opa
+  port: 8200

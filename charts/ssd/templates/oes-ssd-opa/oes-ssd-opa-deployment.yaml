@@ -24,9 +24,12 @@ spec:
 {{- end }}
     spec:
       volumes:
+        - name: semgrep
+          persistentVolumeClaim:
+            claimName: semgrep-pvc
         - name: openssf
           persistentVolumeClaim:
-            claimName: ssd-opa
+            claimName: openssf-pvc
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa
@@ -41,6 +44,8 @@ spec:
             - containerPort: 8200
               protocol: TCP
           volumeMounts:
+            - name: semgrep
+              mountPath: /app/semgrep
             - name: openssf
               mountPath: /app/OpenSSF
             - name: ssd-opa-volume

@@ -88,6 +88,10 @@ global:
       channel: "xxxxx"    # Update the slack channel name
       token: "xxxxxxxxxx" # Update the slack token id
 
+  sonarqubecreds: "xxxxx"  # Update the value eg: username:password
+  openaicreds: "xxxxxxxx" # Update the value eg: openAIApiToken:token
+  semgrepwebApitoken: "xxxxxx" # Update the semgrepwebApitoken value
+
   # Set to true if user need to access Spinnaker seperately
   spinnakerUrl: false
 
@@ -383,10 +387,10 @@ supplychainapi:
 #####################################################
 # AP supports an agent based deployments to remote clusters
 # This should NOT be set to false, and only externalName needs to be changed in most cases
-forwarder:
+forwarder: 
   externalName: controller.exampleopsmx.net    # This hostname should reach agent-grpc service from the agent
-  enabled: true
-  agent:
+  enabled: true 
+  agent: 
     image: quay.io/opsmxpublic/forwarder-agent:v3.5.7
     serviceType: LoadBalancer
     # Value is also used in sapor configuration for kubernetes.agent.serverHostName
@@ -398,12 +402,8 @@ forwarder:
   annotations:
     moniker.spinnaker.io/application: isd
   serviceAnnotations: {}
-stormdriver:
-  image:
-    repository: quay.io/opsmxpublic/stormdriver
-    tag: v1.2.6
 
-####################################################
+######################################################
 # Create Controller Secret Image
 createcontroller:
   ## Image specific details

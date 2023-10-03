@@ -2,7 +2,7 @@
     "endPointUrl": "/gate/",
     "policyUrl": "http://oes-sapor:8085/",
     "setApplicationInterval": {{ .Values.ui.config.setApplicationRefreshInterval }},
-    "triggerPipeline": false
+    "triggerPipeline": false,
     "cdTool": "",
     "ssd": true,
     "stageSecurityThresholdMinScore": 50,

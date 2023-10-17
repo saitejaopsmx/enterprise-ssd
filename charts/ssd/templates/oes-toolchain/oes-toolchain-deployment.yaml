@@ -45,6 +45,8 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
+            - mountPath: /var/run
+              name: docker-sock
             - name: logs
               mountPath: /tools/logs
             - name: sbom

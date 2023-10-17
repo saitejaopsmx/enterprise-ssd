@@ -70,7 +70,7 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202309291958-ssd
+    tag: 202310041716-ssd
 #############################################
 guac:
   guac:
@@ -107,7 +107,7 @@ toolchain:
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.1.0
+    tag: v1.1.3
   ingress:
     protocol: https
     host: SSD.DNS.COMPANY.COM  # Update the URL for OPA SSD
@@ -115,13 +115,13 @@ ssdopa:
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v0.6.0
+    tag: v0.6.1
 ##########################################
 supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.2.1
+    tag: v0.2.3
 #########################################
 spinnaker:
   gitopsHalyard:

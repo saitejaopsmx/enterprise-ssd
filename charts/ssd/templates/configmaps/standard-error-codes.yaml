@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 data:
   standard-error-codes.csv: |-
@@ -68,3 +69,4 @@ metadata:
   labels:
     app: oes
   name: standard-error-codes-config
+{{- end -}}

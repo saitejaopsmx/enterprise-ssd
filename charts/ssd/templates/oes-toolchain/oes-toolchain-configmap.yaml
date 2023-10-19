@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,3 +9,4 @@ metadata:
     component: oes-toolchain
 data:
 {{ (tpl (.Files.Glob "config/oes-toolchain/tool-chain.yaml").AsConfig . ) | indent 2 }}
+{{- end -}}

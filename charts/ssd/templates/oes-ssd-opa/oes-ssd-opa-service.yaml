@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -22,4 +23,4 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 8200
       {{- end }}
-
+{{- end -}}

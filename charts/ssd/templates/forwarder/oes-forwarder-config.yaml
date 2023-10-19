@@ -1,4 +1,5 @@
-{{- if and (or (eq .Values.installationMode "OES-AP")  (eq .Values.installationMode "EASY")) (.Values.forwarder.enabled) -}}
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
+{{- if (.Values.forwarder.enabled) -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -36,5 +37,5 @@ data:
           useHTTP: true
           destination: opsmx-agent
           destinationService: agent-clouddriver
-
+{{- end -}}
 {{- end -}}

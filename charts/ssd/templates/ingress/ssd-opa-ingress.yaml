@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 {{- if .Values.global.createIngress -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -30,5 +31,6 @@ spec:
   - hosts:
     - {{ .Values.ssdopa.ingress.host }}
 {{ toYaml .Values.ssdopa.ingress.tls | indent 4 }}
+{{- end }}
 {{- end }}
 {{- end }}

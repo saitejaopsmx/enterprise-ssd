@@ -1,4 +1,4 @@
-{{ if or (eq .Values.installationMode "OES-AP")  (eq .Values.installationMode "EASY") }}
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 data:
 {{- if and (.Values.installSpinnaker) (not .Values.global.gitea.enabled)  }}
@@ -18,4 +18,4 @@ metadata:
     app: oes
     component: ui
 {{ include "oes.standard-labels" . | indent 4 }}
-{{ end }}
+{{- end -}}

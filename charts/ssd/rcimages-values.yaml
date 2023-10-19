@@ -5,6 +5,8 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: quay.io/opsmxpublic
 
+installSpinnaker: true
+installationMode: SSD-SPIN
 global:
   ssl:
     # Set to true so that UI will be accessible over http instead of https
@@ -25,7 +27,7 @@ global:
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: https
-    host: OES.URL.COMPANY.COM # Update the OES Url
+    host: ssdonly.isd-qa.opsmx.net # Update the OES Url
 
   jenkinsurl: JENKINS.COMPANY.COM
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
@@ -128,11 +130,11 @@ spinnaker:
     repo:
       type: git
       baseUrlHostName: github.com
-      organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
-      repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
-      username: xxxxxxxxx  # Username to authenticate with git/stash repo
-      dynamicAccRepository: SAME_AS_REPOSITORY_ABOVE # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
-      token: gittoken  # Token corresponding to spinnaker.gitopsHalyard.repo.username
+      organization: saitejaopsmx
+      repository: saitest-helmssd # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
+      username: saitejaopsmx  # Username to authenticate with git/stash repo
+      dynamicAccRepository: saitest-helmssd # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
+      token: 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 # Token corresponding to spinnaker.gitopsHalyard.repo.username
       usermailid: saiteja.katabhatina@opsmx.io # Enter a valid email address for the above repo
 
       ########################################################################################

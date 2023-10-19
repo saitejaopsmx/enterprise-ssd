@@ -1,4 +1,4 @@
-{{- if and (or (eq .Values.installationMode "OES-AP")  (eq .Values.installationMode "EASY")) (.Values.forwarder.enabled) -}}
+{{- if and (or (eq .Values.installationMode "SSD-SPIN")) (.Values.forwarder.enabled) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

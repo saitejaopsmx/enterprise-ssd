@@ -1,4 +1,4 @@
-{{- if and (or (eq .Values.installationMode "SSD-SPIN")) (.Values.forwarder.enabled) -}}
+{{- if .Values.forwarder.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -86,4 +86,3 @@ spec:
           - key: "configFile"
             path: "config.yaml"
 {{- end -}}
-

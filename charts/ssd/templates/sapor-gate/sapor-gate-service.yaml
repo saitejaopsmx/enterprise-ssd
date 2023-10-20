@@ -1,5 +1,4 @@
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
-{{- if .Values.saporgate.enabled -}}
+{{- if or (eq .Values.installationMode "SSD-SPIN") .Values.saporgate.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -18,5 +17,4 @@ spec:
   selector:
     app: oes
     component: sapor-gate
-{{- end -}}
 {{- end -}}

@@ -1,4 +1,3 @@
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 {{- if (.Values.forwarder.enabled) -}}
 apiVersion: v1
 kind: ConfigMap
@@ -37,5 +36,4 @@ data:
           useHTTP: true
           destination: opsmx-agent
           destinationService: agent-clouddriver
-{{- end -}}
 {{- end -}}

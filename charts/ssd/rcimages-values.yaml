@@ -1,3 +1,6 @@
+########################################################
+####### Set to true if Spinnaker needs to be installed ##########
+installSpinnaker: false
 ########################################################################################
 ## Info related to registry where SSD images are stored
 imageCredentials:
@@ -5,8 +8,6 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: quay.io/opsmxpublic
 
-installSpinnaker: false
-installationMode: SSD-SPIN
 global:
   ssl:
     # Set to true so that UI will be accessible over http instead of https
@@ -27,7 +28,7 @@ global:
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: https
-    host: ssdonly.isd-qa.opsmx.net # Update the OES Url
+    host: SSDURL.COMPANY.COM # Update the OES Url
 
   jenkinsurl: JENKINS.COMPANY.COM
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
@@ -35,7 +36,7 @@ global:
     docker:
       url: "xxxxxxx"
       username: "xxxx"
-      password: "xxxxxxx" 
+      password: "xxxxxxx"
       token: "token"
   opsmxcreds:
     userName: admin  # LDAP Username
@@ -112,7 +113,7 @@ ssdopa:
     tag: v1.1.3
   ingress:
     protocol: https
-    host: ssdopaonly.isd-qa.opsmx.net  # Update the URL for OPA SSD
+    host: SSD.COMPANY.COM  # Update the URL for OPA SSD
 ###########################################
 supplychainpreprocessor:
   image:
@@ -130,12 +131,12 @@ spinnaker:
     repo:
       type: git
       baseUrlHostName: github.com
-      organization: saitejaopsmx
-      repository: saitest-helmssd # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
-      username: saitejaopsmx  # Username to authenticate with git/stash repo
-      dynamicAccRepository: saitest-helmssd # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
-      token: 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 # Token corresponding to spinnaker.gitopsHalyard.repo.username
-      usermailid: saiteja.katabhatina@opsmx.io # Enter a valid email address for the above repo
+      organization: xxxxxxxxxxxxxx
+      repository: xxxxxxxxxxx # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
+      username: xxxxxxxxxx  # Username to authenticate with git/stash repo
+      dynamicAccRepository: xxxxxxxxxx # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
+      token: xxxxxxxxxxxxxxxxxxxx # Token corresponding to spinnaker.gitopsHalyard.repo.username
+      usermailid: xxxxxxxxxxxxxx # Enter a valid email address for the above repo
 
       ########################################################################################
       ## Additional git-repo parameters, typically no need to be change
@@ -150,7 +151,7 @@ spinnaker:
       dynAccntConfigPath: /          #relative path from repository root folder
     pipelinePromotion:  # GitHub only,  Not supportd on S3 or Stash
       enabled: false
-      type: git 
+      type: git
       organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
       repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
       rootFolder: pipeline/

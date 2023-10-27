@@ -73,7 +73,7 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202310041716-ssd
+    tag: 202310271734-ssd
 #############################################
 guac:
   guac:

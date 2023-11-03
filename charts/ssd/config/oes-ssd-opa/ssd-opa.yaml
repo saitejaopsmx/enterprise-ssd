@@ -1,7 +1,12 @@
 opaIngress: {{ .Values.ssdopa.ingress.host }}
 httpListenPort: 8200
-graphQLAddr: http://graphql-server:8080/query
-reScheduleDays: 20
+kubescapeFilePath: /app/kubescapeDir
+toolChainAddr: http://tool-chain:8100/ #default value & optional
+graphQLAddr: http://dgraph-public:8080/graphql #default value & optional
+openSSFFilePath: /app/OpenSSF #default value & optional
+semgrepFilePath: /app/semgrep #default value & optional
+sonarQubeAddr: https://sonar.opsmx.com/
+reScheduleDays: 1
 reScheduleTime: 00:00
 databases:
   ssd:

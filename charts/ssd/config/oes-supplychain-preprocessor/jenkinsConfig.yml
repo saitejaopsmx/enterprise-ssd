@@ -6,6 +6,7 @@ rabbitmq:
   queue: jenkins-ssd
   exchange: jenkins.events
   bindingKey: jenkins-ssd
+  prefetchCount: 20
 
 postgresql:
   ssddb:

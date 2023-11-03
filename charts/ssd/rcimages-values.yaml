@@ -37,6 +37,8 @@ global:
     host: ssdsai.isd-qa.opsmx.net # Update the OES Url
 
   jenkinsurl: JENKINS.COMPANY.COM
+  aesencryptionkey: "xxxxxxxx"
+  sbomtool: "xxxxxx"
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
   repocreds:
     docker:
@@ -64,7 +66,7 @@ global:
 gate:
   image:
     repository: ubi8-gate
-    tag: 742976ca-2787-ssd
+    tag: 1019c4de-2870-ssd
 ##################################################
 db:
   image:
@@ -79,18 +81,18 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202310271734-ssd
+    tag: 202310312019-ssd
 #############################################
 ##############################################
 toolchain:
   image:
     repository: tool-chain
-    tag: v1.1.4
+    tag: v1.1.6
 #############################################
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.1.3
+    tag: v1.1.5
   ingress:
     protocol: https
     host: ssdsaiopa.isd-qa.opsmx.net  # Update the URL for OPA SSD
@@ -98,13 +100,13 @@ ssdopa:
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v0.6.1
+    tag: v0.7.0
 ##########################################
 supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.2.3
+    tag: v0.2.8
 #########################################
 spinnaker:
   gitopsHalyard:

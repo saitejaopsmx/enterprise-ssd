@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -13,5 +14,6 @@ spec:
   storageClassName: ""
 {{- else }}
   storageClassName: "{{ .Values.ssdopa.persistence.storageClass }}"
+{{- end }}
 {{- end }}
 {{- end }}

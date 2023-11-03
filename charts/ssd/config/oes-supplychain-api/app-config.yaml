@@ -1,6 +1,6 @@
 ssdOpa: http://ssd-opa:8200
 graphqlsvc:
-    host: http://graphql-server
+    host: http://dgraph-public
     port: 8080
 postgresql:
     ssd:

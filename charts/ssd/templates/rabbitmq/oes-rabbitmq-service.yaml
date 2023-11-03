@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,3 +28,4 @@ spec:
     app: oes
     component: rabbitmq
   type: LoadBalancer
+{{- end -}}

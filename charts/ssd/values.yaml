@@ -384,33 +384,6 @@ supplychainapi:
 
   serviceAnnotations: {}
 
-#####################################################
-# AP supports an agent based deployments to remote clusters
-# This should NOT be set to false, and only externalName needs to be changed in most cases
-forwarder: 
-  externalName: controller.exampleopsmx.net    # This hostname should reach agent-grpc service from the agent
-  enabled: true 
-  agent: 
-    image: quay.io/opsmxpublic/forwarder-agent:v3.5.7
-    serviceType: LoadBalancer
-    # Value is also used in sapor configuration for kubernetes.agent.serverHostName
-    host: opsmx-controller-controller1
-  image:
-    repository: quay.io/opsmxpublic/forwarder-controller
-    tag: v3.5.7
-    pullPolicy: IfNotPresent
-  annotations:
-    moniker.spinnaker.io/application: isd
-  serviceAnnotations: {}
-
-######################################################
-# Create Controller Secret Image
-createcontroller:
-  ## Image specific details
-  image:
-    repository: create-secret
-    tag: v4.0.4
-    pullPolicy: IfNotPresent
 ###############################################################################
 ## Values of OES Gate
 gate:
@@ -512,67 +485,6 @@ rabbitmq:
   securityContext:
     fsGroup: 1000
     
-###############################################################################
-## Values of OES Sapor (Security Audit Policy Onboarding & Release)
-sapor:
-  ## Image specific details
-  image:
-    repository: ubi8-oes-sapor
-    tag: v4.0.4-rc6
-    pullPolicy: IfNotPresent
-
-  annotations:
-    moniker.spinnaker.io/application: isd
-    prometheus_io_path: /mgmt/prometheus
-    prometheus_io_port: "8085"
-    prometheus.io/scrape: "true"
-  serviceAnnotations: {}
-  resources: {}
-  #  requests:
-  #    memory: 100Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 2000Mi
-  #    cpu: 1500m
-
-  config:
-    ## Use OSS if sapor needs to be connected to Open Source Spinnaker
-    ## If sapor needs to be connected to ubi8 based Spinnaker Images, use OPSMX
-    spinnakerImages: OPSMX
-    spinnaker:
-      ## Spinnaker configuration
-      ## Necessary details needed by Sapor tointegrate with Spinnaker
-      ## Set it to true if authentication is enabled in Spinnaker
-      authnEnabled: true  # This mandatory, un-authenicated Spinnaker is not supported
-
-      ## LDAP
-      #ldap:
-      #  ldapEnabled: true
-      #  ldapUsername: admin
-      #  ldapPassword: opsmxadmin123
-      #  ldapAdminLoginEnabled: false
-      #  ldapAdminUsername: admin
-      #  ldapAdminPassword: admin
-
-      ## X509
-      x509:
-        enabled: false
-        client:
-          password: changeit
-
-    #encryption key needed for sapor to startup from 3.9 and its moved to global.sapor.config.encrypt.enabled
-    #encrypt:
-    #  enabled: false
-      # This key should match the encryption key specified in .hal/default/profiles/spinnakerConfig.yaml
-      # encryption key needed for sapor to startup from 3.9 and its moved to global.sapor.config.encrypt.key
-      #key: Q7udUkHPuA3VnNlOtksSgQ
-    # Set the below field to true if datasource configurations from platform, please don't change
-    datasources:
-      platform: true
-    sync:
-      permission:
-        enabled: true
-
 ###############################################################################
 ## Use this SAPOR GATE Configuration to Enable Basic Authentication for OES SAPOR to communitcate
 ## with spinnaker instead of x509
@@ -1056,7 +968,7 @@ spinnaker:
 imagePullSecret: ""
 
 ## Installation mode, available modes OES-AP, None (do not install AP (previously called OES)
-installationMode: OES-AP
+installationMode: SSD-SPIN
 oesAutoConfiguration: true # Attempt to configure OES with some basic integrations based on best guess
 
 secretStore: db # Valid values: db, Vault: Used for storing account and integration secrets. Vault, if used, needs to be installed and configured separately
@@ -1238,102 +1150,6 @@ kibana:
             curl https://raw.githubusercontent.com/OpsMx/enterprise-spinnaker/master/scripts/kibana/kibana_objects.ndjson > /tmp/kibana_objects.ndjson;
             curl -X POST "localhost:5601/api/saved_objects/_import?overwrite=true" -H "kbn-xsrf: true" --form file=@/tmp/kibana_objects.ndjson 2>&1 1> /tmp/postStart.out;
 # Default values for guac.
-
-guac:
-  guac:
-    workingDir: /workspace
-
-    ociCollector:
-      name: oci-collector
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-
-    depsDevCollector:
-      name: depsdev-collector
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-
-    osvCertifier:
-      name: osv-certifier
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-
-    ingestor:
-      name: ingestor
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-
-    collectSub:
-      name: collectsub
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-      ports:
-        - protocol: TCP
-          port: 2782
-          targetPort: 2782
-
-    graphqlServer:
-      name: graphql-server
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/guacsec/keer
-        # if not set appVersion field from Chart.yaml is used
-        tag: "keer"
-      ports:
-        - protocol: TCP
-          port: 8080
-          targetPort: 8080
-      backend: inmem
-      debug: true
-
-    visualizer:
-      enabled: false
-      name: visualizer
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 1
-      image:
-        repository: ghcr.io/kusaridev/guac-visualizer
-        # if not set appVersion field from Chart.yaml is used
-        tag: ""
-      ports:
-        - protocol: TCP
-          port: 3000
-          targetPort: 3000
-
-    observability:
-      deployServiceMonitor: false
-
-    sampleData:
-      ingest: false
-      jobName: ingest-guac-data
 
 nats:
   nats:

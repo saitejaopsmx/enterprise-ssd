@@ -1,3 +1,6 @@
+########################################################
+####### Set to true if Spinnaker needs to be installed ##########
+installSpinnaker: false
 ########################################################################################
 ## Info related to registry where SSD images are stored
 imageCredentials:
@@ -22,18 +25,26 @@ global:
   certManager:
     installed: true
 
+  githubcreationHook: false
+
+  # Set to true only if installSpinnaker is true
+  minio:
+    enabled: false
+
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: https
-    host: OES.URL.COMPANY.COM # Update the OES Url
+    host: ssdsai.isd-qa.opsmx.net # Update the OES Url
 
   jenkinsurl: JENKINS.COMPANY.COM
+  aesencryptionkey: "xxxxxxxx"
+  sbomtool: "xxxxxx"
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
   repocreds:
     docker:
       url: "xxxxxxx"
       username: "xxxx"
-      password: "xxxxxxx" 
+      password: "xxxxxxx"
       token: "token"
   opsmxcreds:
     userName: admin  # LDAP Username
@@ -55,7 +66,7 @@ global:
 gate:
   image:
     repository: ubi8-gate
-    tag: 742976ca-2787-ssd
+    tag: 1019c4de-2870-ssd
 ##################################################
 db:
   image:
@@ -70,70 +81,44 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202310041716-ssd
+    tag: 202310312019-ssd
 #############################################
-guac:
-  guac:
-    depsDevCollector:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    osvCertifier:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    ingestor:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    collectSub:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    graphqlServer:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    ociCollector:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
 ##############################################
 toolchain:
   image:
     repository: tool-chain
-    tag: v1.1.4
+    tag: v1.1.6
 #############################################
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.1.3
+    tag: v1.1.5
   ingress:
     protocol: https
-    host: SSD.DNS.COMPANY.COM  # Update the URL for OPA SSD
+    host: ssdsaiopa.isd-qa.opsmx.net  # Update the URL for OPA SSD
 ###########################################
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v0.6.1
+    tag: v0.7.0
 ##########################################
 supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.2.3
+    tag: v0.2.8
 #########################################
 spinnaker:
   gitopsHalyard:
     repo:
       type: git
       baseUrlHostName: github.com
-      organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
-      repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
-      username: xxxxxxxxx  # Username to authenticate with git/stash repo
-      dynamicAccRepository: SAME_AS_REPOSITORY_ABOVE # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
-      token: gittoken  # Token corresponding to spinnaker.gitopsHalyard.repo.username
-      usermailid: saiteja.katabhatina@opsmx.io # Enter a valid email address for the above repo
+      organization: xxxxxxxxxxxxxx
+      repository: xxxxxxxxxxx # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
+      username: xxxxxxxxxx  # Username to authenticate with git/stash repo
+      dynamicAccRepository: xxxxxxxxxx # Repo name of the GitOps Dynamic Accounts Directory, Can be same as "repository"
+      token: xxxxxxxxxxxxxxxxxxxx # Token corresponding to spinnaker.gitopsHalyard.repo.username
+      usermailid: xxxxxxxxxxxxxx # Enter a valid email address for the above repo
 
       ########################################################################################
       ## Additional git-repo parameters, typically no need to be change
@@ -148,7 +133,7 @@ spinnaker:
       dynAccntConfigPath: /          #relative path from repository root folder
     pipelinePromotion:  # GitHub only,  Not supportd on S3 or Stash
       enabled: false
-      type: git 
+      type: git
       organization: YOUR_ORG_NAME_OR_YOUR_USER_NAME_IF_NO_ORG
       repository: YOUR_REPO_NAME # repo name for GitOps Halyard, will be created if "githubcreationHook" is set to true
       rootFolder: pipeline/

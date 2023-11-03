@@ -97,4 +97,6 @@ Wait until the halyard pod restarts.
 6. Login to the SSD instance with user/password as admin and opsmxadmin123, if using the defaults for build-in LDAP.
 
       
+## TroubleShooting 
 
+1. If any of the Spinnaker pods are unable to start . Please comment the volumes section in the service-settings of each service. 

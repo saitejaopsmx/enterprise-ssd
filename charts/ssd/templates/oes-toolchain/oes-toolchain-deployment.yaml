@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -60,3 +61,4 @@ spec:
       {{- end }}
       restartPolicy: Always
       securityContext: {}
+{{- end -}}

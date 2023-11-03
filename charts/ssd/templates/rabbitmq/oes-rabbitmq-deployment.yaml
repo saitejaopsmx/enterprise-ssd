@@ -1,3 +1,4 @@
+{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,3 +51,4 @@ spec:
       tolerations:
 {{ toYaml .Values.global.tolerations | indent 8 }}
       {{- end }}
+{{- end -}}

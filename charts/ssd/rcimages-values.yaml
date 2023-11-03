@@ -81,32 +81,6 @@ ui:
     repository: ubi8-oes-ui
     tag: 202310271734-ssd
 #############################################
-guac:
-  guac:
-    depsDevCollector:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    osvCertifier:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    ingestor:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    collectSub:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    graphqlServer:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
-    ociCollector:
-      image:
-        repository: quay.io/opsmxpublic/guac
-        tag: v0.0.2
 ##############################################
 toolchain:
   image:

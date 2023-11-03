@@ -25,6 +25,7 @@ spec:
 {{- end }}
     spec:
       volumes:
+        - name: kubescapedir
         - name: semgrep
           persistentVolumeClaim:
             claimName: semgrep-pvc
@@ -45,6 +46,8 @@ spec:
             - containerPort: 8200
               protocol: TCP
           volumeMounts:
+            - name: kubescapedir
+              mountPath: /app/kubescapeDir
             - name: semgrep
               mountPath: /app/semgrep
             - name: openssf

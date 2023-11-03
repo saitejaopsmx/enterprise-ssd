@@ -6,6 +6,7 @@ rabbitmq:
   queue: preview-saas-ssd
   exchange: echo.events
   bindingKey: preview-saas-ssd
+  prefetchCount: 20
 postgresql:
   ssddb:
     connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432

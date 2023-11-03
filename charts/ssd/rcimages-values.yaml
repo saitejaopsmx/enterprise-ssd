@@ -25,10 +25,16 @@ global:
   certManager:
     installed: true
 
+  githubcreationHook: false
+
+  # Set to true only if installSpinnaker is true
+  minio:
+    enabled: false
+
   oesUI:
     # Set to https if global.certManager and global.ssl is true
     protocol: https
-    host: SSDURL.COMPANY.COM # Update the OES Url
+    host: ssdsai.isd-qa.opsmx.net # Update the OES Url
 
   jenkinsurl: JENKINS.COMPANY.COM
   dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic
@@ -113,7 +119,7 @@ ssdopa:
     tag: v1.1.3
   ingress:
     protocol: https
-    host: SSD.COMPANY.COM  # Update the URL for OPA SSD
+    host: ssdsaiopa.isd-qa.opsmx.net  # Update the URL for OPA SSD
 ###########################################
 supplychainpreprocessor:
   image:

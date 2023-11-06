@@ -38,20 +38,20 @@ data:
                 if [ "$gitusername" == "$org" ]
                 then
                      curl -H "Authorization: token $gitpassword" --data "$object" https://api.github.com/user/repos
-                     git clone https://github.com/OpsMx/standard-gitops-repo.git -b {{ .Values.global.gitea.standardrepoBranch }}
+                     git clone https://github.com/OpsMx/standard-ssd-repo.git -b {{ .Values.global.gitea.standardrepoBranch }}
                      git clone https://$gitusername:$gitpassword@{{ .Values.spinnaker.gitopsHalyard.repo.baseUrlHostName }}/$gitusername/$repo_name.git
                 else
                      curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $gitpassword" https://api.github.com/orgs/$org/repos -d '{"name":"'$repo_name'","private":"true"}'
-                     git clone https://github.com/OpsMx/standard-gitops-repo.git -b {{ .Values.global.gitea.standardrepoBranch }}
+                     git clone https://github.com/OpsMx/standard-ssd-repo.git -b {{ .Values.global.gitea.standardrepoBranch }}
                      git clone https://$gitusername:$gitpassword@{{ .Values.spinnaker.gitopsHalyard.repo.baseUrlHostName }}/$org/$repo_name.git
                 fi
 
-                cp -pr standard-gitops-repo/* $repo_name/
+                cp -pr standard-ssd-repo.git/* $repo_name/
                 cd $repo_name/
                 git checkout -b {{ .Values.spinnaker.gitopsHalyard.repo.halConfigBranch }}
                 git status
                 git add .
-                git commit -m "cloned standard-gitops-repo content"
+                git commit -m "cloned standard-ssd-repo content"
                 git push origin {{ .Values.spinnaker.gitopsHalyard.repo.halConfigBranch }}
         fi
 {{- end }}

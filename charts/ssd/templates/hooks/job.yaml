@@ -61,5 +61,5 @@ spec:
       volumes:
       - configMap:
           defaultMode: 420
-          name: dgraph-schema-configure
+          name: {{ .Release.Namespace }}-dgraph-schema-creation
         name: schemaconfigure

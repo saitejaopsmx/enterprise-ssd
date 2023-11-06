@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "oes.fullname" . }}-datasource-creation
+  name: {{ .Release.Namespace }}-dgraph-schema-creation
   labels:
 {{ include "oes.standard-labels" . | indent 4 }}
 data:

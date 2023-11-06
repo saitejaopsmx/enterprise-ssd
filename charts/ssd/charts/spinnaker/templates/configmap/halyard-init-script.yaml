@@ -87,19 +87,19 @@ data:
         then
                 echo "Creating a New Local Gitea Repo gitea-standard-repo......."
                 curl -k -X POST "http://{{ .Release.Name }}-gitea-http.$SPINNAKER_NAMESPACE:3000/api/v1/user/repos" -H "content-type: application/json" -H "Authorization: Basic $basic_auth" --data '{"name":"'gitea-standard-repo'"}'
-                git clone https://github.com/OpsMx/standard-gitops-repo.git -b {{ .Values.global.gitea.standardrepoBranch }} /tmp/spinnaker/test/standard-gitops-repo/
+                git clone https://github.com/OpsMx/standard-ssd-repo.git -b {{ .Values.global.gitea.standardrepoBranch }} /tmp/spinnaker/test/standard-ssd-repo/
                 git clone http://$gitea_user:$gitea_pass@{{ .Release.Name }}-gitea-http.$SPINNAKER_NAMESPACE:3000/$gitea_user/gitea-standard-repo.git /tmp/spinnaker/test/gitea-standard-repo/
-                cp -pr /tmp/spinnaker/test/standard-gitops-repo/* /tmp/spinnaker/test/gitea-standard-repo/
+                cp -pr /tmp/spinnaker/test/standard-ssd-repo/* /tmp/spinnaker/test/gitea-standard-repo/
                 cd /tmp/spinnaker/test/gitea-standard-repo/
                 git status
                 git add .
                 git config user.email {{ .Values.global.gitea.admin.email }}
                 git config user.name $gitea_user
-                git commit -m "cloned standard-gitops-repo content"
+                git commit -m "cloned standard-ssd-repo content"
                 git push
                 cd
                 rm -rf /tmp/spinnaker/test/gitea-standard-repo
-                rm -rf /tmp/spinnaker/test/standard-gitops-repo
+                rm -rf /tmp/spinnaker/test/standard-ssd-repo
                 rm -rf /tmp/spinnaker/test
                 git clone http://$gitea_user:$gitea_pass@{{ .Release.Name }}-gitea-http.$SPINNAKER_NAMESPACE:3000/$gitea_user/gitea-standard-repo.git /tmp/spinnaker/test/
 

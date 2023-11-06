@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    "helm.sh/hook": "post-install"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
+    "helm.sh/hook-weight": "5"
+  labels:
+    app: oes
+    autoconfig: oes
+{{ include "oes.standard-labels" . | indent 4 }}
+  name: oes-autoconfigure
+spec:
+  template:
+    metadata:
+      labels:
+        app: oes
+{{ include "oes.standard-labels" . | indent 8 }}
+    spec:
+      containers:
+      - args:
+          - |-
+            echo "Waiting for DGraph Pod to come-up"
+            wait_period=0
+            while true
+            do
+            kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > /tmp/inst.status
+            DGRAPH=$(grep dgraph /tmp/inst.status | awk '{print $2}')
+            wait_period=$(($wait_period+10))
+            if [ "$DGRAPH" == "true" ];
+            then
+            echo "DGRAPH Pod is ready"
+            # Copying the Schema to the Pod
+            kubectl cp /tmp/schema.graphql dgraph-0:/tmp/schema.graphql -c alpha
+            kubectl exec -it dgraph-0 -c alpha /bin/sh
+            server_endpoint=http://localhost:8080/admin/schema
+            curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema.graphql)" $server_endpoint > status.txt
+            cat status.txt
+            break
+            else
+            if [ $wait_period -gt 1800 ];
+            then
+              echo "Script is timed out the Dgraph pods is not ready in 30 min......."
+            break
+            else
+            echo "Waiting for DGraph to be ready"
+            sleep 1m
+            fi
+            fi
+            done
+        name: dgraph-schema-configure
+        image: {{ .Values.global.customImages.registry }}/awsgit:v2-openssh-javalibs
+        volumeMounts:
+        - mountPath: /tmp/config
+          name: schemaconfigure
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      restartPolicy: OnFailure
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: dgraph-schema-configure
+        name: schemaconfigure

@@ -14,7 +14,7 @@ data:
   github-create.sh: |-
         #!/bin/sh
 
-        #set -x
+        set -x
 
         gitusermailid={{ .Values.spinnaker.gitopsHalyard.repo.usermailid }}
         gitusername={{ .Values.spinnaker.gitopsHalyard.repo.username }}

@@ -26,7 +26,6 @@ data:
         git config --global user.email "$gitusermailid"
         git config --global user.name "$gitusername"
         object='{"name":"'"$repo_name"'","private":"true"}'
-        sleep 1d
         curlResp=$(curl -s -X GET -H "Authorization: token $gitpassword" https://api.github.com/repos/$org/$repo_name)
         message=$(echo $curlResp | jq -r '.name')
 

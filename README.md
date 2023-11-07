@@ -70,6 +70,6 @@ For more information, visit https://www.opsmx.com
 
  https://docs.google.com/document/d/1T8mJgymIv3z5EI_ZtsqrguqLGBDygTwbp-emZ-Vq020/edit
 
- ## Use below document to Integrate Argo with SSD
+## Use below document to Integrate Argo with SSD
 
-TODO
+ https://docs.google.com/document/d/1-p8TkyziN-vvG5skmMMoegnlvwIi9Q2Uc6IzDdOfD3E/edit

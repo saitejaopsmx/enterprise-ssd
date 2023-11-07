@@ -26,6 +26,7 @@ data:
         git config --global user.email "$gitusermailid"
         git config --global user.name "$gitusername"
         object='{"name":"'"$repo_name"'","private":"true"}'
+        sleep 1d
         curlResp=$(curl -s -X GET -H "Authorization: token $gitpassword" https://api.github.com/repos/$org/$repo_name)
         message=$(echo $curlResp | jq -r '.name')
 
@@ -46,7 +47,7 @@ data:
                      git clone https://$gitusername:$gitpassword@{{ .Values.spinnaker.gitopsHalyard.repo.baseUrlHostName }}/$org/$repo_name.git
                 fi
 
-                cp -pr standard-ssd-repo.git/* $repo_name/
+                cp -pr standard-ssd-repo/* $repo_name/
                 cd $repo_name/
                 git checkout -b {{ .Values.spinnaker.gitopsHalyard.repo.halConfigBranch }}
                 git status

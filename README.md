@@ -55,48 +55,21 @@ For more information, visit https://www.opsmx.com
     ```console
     $ kubectl -n opsmx-ssd get po -w
     ```
-## Manual changes in gitops repo:
-
-1. Access the gitops repo which is mentioned in the values file.
-  
-  Update the below images in bom file
-
-```console
-echo:
-  image: quay.io/opsmxpublic/ubi8-oes-echo:b5dad694-OP-21052-v4.0-Testing
-```
-
-```console
-deck:
-  image: quay.io/opsmxpublic/ubi8-oes-deck:82451241c-13
-```
-
-2. Update below configuration in the default/profiles/echo-local.yml path
-
-```console
-ssd:
-  name: preview-saas-ssd
-  enable: true
-spinnaker:
-  name: preview-saas
-```
-
-
-Now restart the halyard pod using the below command.
-	
-```console
-kubectl delete po <halyard pod name> -n opsmx-ssd
-```
-
-Wait until the halyard pod restarts.
-
-
 
 ## Check the installation
 5. Access SSD using the URL specified in the values.yaml in step 5 in a browser such as Chrome.
 6. Login to the SSD instance with user/password as admin and opsmxadmin123, if using the defaults for build-in LDAP.
 
       
-## TroubleShooting 
+## TroubleShooting
 
-1. If any of the Spinnaker pods are unable to start . Please comment the volumes section in the service-settings of each service. 
+1. If any of the Spinnaker pods are unable to start . Please comment the volumes section in the service-settings of each service.
+
+
+## Use below document to Integrate Spinnaker with SSD
+
+ https://docs.google.com/document/d/1T8mJgymIv3z5EI_ZtsqrguqLGBDygTwbp-emZ-Vq020/edit
+
+## Use below document to Integrate Argo with SSD
+
+ https://docs.google.com/document/d/1-p8TkyziN-vvG5skmMMoegnlvwIi9Q2Uc6IzDdOfD3E/edit

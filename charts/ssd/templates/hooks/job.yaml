@@ -48,6 +48,10 @@ spec:
             fi
             fi
             done
+        command:
+          - /bin/sh
+          - +x
+          - '-c'
         name: dgraph-schema-configure
         image: {{ .Values.global.customImages.registry }}/awsgit:v2-openssh-javalibs
         volumeMounts:

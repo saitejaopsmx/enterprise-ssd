@@ -1,4 +1,4 @@
-{{- if .Values.global.githubcreationHook }}
+{{- if and (.Values.global.githubcreationHook) (.Values.installSpinnaker) }}
 {{- if and (not .Values.global.gitea.enabled) .Release.IsInstall -}}
 apiVersion: batch/v1
 kind: Job

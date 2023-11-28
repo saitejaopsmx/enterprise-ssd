@@ -49,6 +49,24 @@ For more information, visit https://www.opsmx.com
     $ helm install ssd charts/ssd -f rcimages-values.yaml -n opsmx-ssd --timeout=20m
     ```
 
+5. Adding the DGraph Schema
+   
+   Run the below commands one by one
+
+   ```console
+   curl -o schema.graphql https://raw.githubusercontent.com/OpsMx/argocd-ssd/main/schema.graphql
+
+   curl -o script.sh https://raw.githubusercontent.com/OpsMx/argocd-ssd/main/script.sh
+
+   chmod +x script.sh
+
+   kubectl -n opsmx-ssd cp script.sh dgraph-0:/tmp/ -c alpha
+
+   kubectl -n opsmx-ssd cp schema.graphql dgraph-0:/tmp/ -c alpha
+
+   kubectl exec -n opsmx-ssd dgraph-0 -c alpha -- /bin/sh -c "`cat script.sh`"
+   ```
+
 ## Monitor the installation process
 5. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:
 

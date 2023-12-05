@@ -66,7 +66,7 @@ global:
 gate:
   image:
     repository: ubi8-gate
-    tag: f47751ee-2874-ssd
+    tag: d647661f-2896-ssd
 ##################################################
 db:
   image:
@@ -81,18 +81,18 @@ sapor:
 ui:
   image:
     repository: ubi8-oes-ui
-    tag: 202311071821-ssd
+    tag: 202312041355-ssd
 #############################################
 ##############################################
 toolchain:
   image:
     repository: tool-chain
-    tag: v1.1.7
+    tag: v1.1.8
 #############################################
 ssdopa:
   image:
     repository: ssd-opa
-    tag: v1.1.8
+    tag: v1.2.0
   ingress:
     protocol: https
     host: OPA.URL.COMPANY.COM  # Update the URL for OPA SSD
@@ -100,13 +100,13 @@ ssdopa:
 supplychainpreprocessor:
   image:
     repository: supplychain-preprocessor
-    tag: v0.7.1
+    tag: v0.7.2
 ##########################################
 supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v0.2.8
+    tag: v0.2.12
 #########################################
 spinnaker:
   gitopsHalyard:

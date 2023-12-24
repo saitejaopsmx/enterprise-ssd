@@ -1,0 +1,78 @@
+# https://github.com/dexidp/dex/blob/master/config.yaml.dist
+issuer: http://ssd-gate:8084/dex
+
+storage:
+  type: memory
+web:
+  http: ssd-gate:8084/dex
+
+oauth2:
+  skipApprovalScreen: true
+
+# Static clients registered in Dex by default.
+staticClients:
+  - id: ssd-gate
+    redirectURIs:
+      - 'http://ssd-gate:8084/oidccallbackendpoint'
+      #- 'http://127.0.0.1:5555/callback'
+    name: 'ssd gate'
+    secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+
+# Connectors are used to authenticate users against upstream identity providers.
+#
+# See the documentation (https://dexidp.io/docs/connectors/) for further information.
+connectors: []
+#connectors:
+#- type: saml
+#  id: okta
+#  name: Okta
+#  config:
+#    ssoURL: https://dev-14704582.okta.com/app/dev-14704582_dex_1/exkdkpy0xoMNPZ8AX5d7/sso/saml
+#    ca: /okta/dex-okta.pem
+#    redirectURI: https://dex.ryzon7-isd40.opsmx.org/dex/callback
+#    usernameAttr: name
+#    emailAttr: email
+#    groupsAttr: groups
+#- type: ldap
+#  name: ssd-openldap
+#  id: ldap
+#  config:
+#    host: "ssd-openldap:389"
+#    insecureNoSSL: true
+#    insecureSkipVerify: true
+#     # Variable name stores ldap bindDN in argocd-secret
+#    bindDN: "cn=admin,dc=example,dc=org"
+#    # Variable name stores ldap bind password in argocd-secret
+#    bindPW: "opsmxadmin123"
+#    usernamePrompt: Username
+#    # Ldap user serch attributes
+#    userSearch:
+#      baseDN: "dc=example,dc=org"
+#      filter: "(objectClass=simpleSecurityObject)"
+#      username: cn
+#      idAttr: cn
+#      emailAttr: cn
+#      nameAttr: cn
+#    # Ldap group serch attributes
+#    groupSearch:
+#      baseDN: "dc=example,dc=org"
+#      filter: "(objectClass=simpleSecurityObject)"
+#      userAttr: cn
+#      groupAttr: cn
+#      nameAttr: cn
+
+# Enable the password database.
+#
+# It's a "virtual" connector (identity provider) that stores
+# login credentials in Dex's store.
+enablePasswordDB: true
+
+# If this option isn't chosen users may be added through the gRPC API.
+# A static list of passwords for the password connector.
+#
+# Alternatively, passwords my be added/updated through the gRPC API.
+staticPasswords: 
+- email: "admin@opsmx.io"
+  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
+  username: "admin"
+  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"

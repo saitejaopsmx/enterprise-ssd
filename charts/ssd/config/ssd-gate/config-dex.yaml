@@ -1,0 +1,10 @@
+ssd_baseurl: http://localhost:8001
+
+auth_type: "dex_oidc"  # This is need to tell the "type" of authentication
+auth2_oidc:
+  client_id: ssd-gate
+  client_secret: "encrypted:gate-dex-client-secret:client-secret"
+  well_known_url: "http://ssd-dex:5556/dex/.well-known/openid-configuration"
+  entity_map:
+    user_name: email
+

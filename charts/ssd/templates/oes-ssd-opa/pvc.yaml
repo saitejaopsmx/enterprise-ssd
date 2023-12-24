@@ -9,11 +9,11 @@ spec:
   resources:
     requests:
       storage: {{ .Values.ssdopa.persistence.size | quote }}
-{{- if .Values.ssdopa.persistence.storageClass }}
-{{- if (eq "-" .Values.ssdopa.persistence.storageClass) }}
+{{- if .Values.storageClass }}
+{{- if (eq "-" .Values.storageClass) }}
   storageClassName: ""
 {{- else }}
-  storageClassName: "{{ .Values.ssdopa.persistence.storageClass }}"
+  storageClassName: "{{ .Values.storageClass }}"
 {{- end }}
 {{- end }}
 {{- end }}

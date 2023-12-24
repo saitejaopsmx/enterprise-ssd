@@ -1,0 +1,30 @@
+# https://github.com/dexidp/dex/blob/master/config.yaml.dist
+issuer: http://ssd-dex:5556/dex
+
+storage:
+  type: memory
+web:
+  http: ssd-dex:5556/dex
+
+oauth2:
+  skipApprovalScreen: true
+
+# Static clients registered in Dex by default.
+staticClients:
+  - id: ssd-gate
+    redirectURIs:
+      - 'http://ssd-gate:8084/oidccallbackendpoint'
+      #- 'http://127.0.0.1:5555/callback'
+    name: 'ssd gate'
+    secret: ${GATE_CLIENT_SECRET}
+
+# Connectors are used to authenticate users against upstream identity providers.
+# Enable the password database.
+enablePasswordDB: true
+
+# A static list of passwords for the password connector.
+staticPasswords: 
+- email: "admin@opsmx.io"
+  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
+  username: "admin"
+  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"

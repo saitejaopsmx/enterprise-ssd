@@ -40,12 +40,12 @@ global:
     secretName: oes-cacerts # Please do not change this
 
   ## Set to true to expose oes-ui, oes-gate services over ingress
-  createIngress: false
+  createIngress: true
 
   ## OES-UI url configuration
   oesUI:
     protocol: http
-    host: oes.example.ops.com
+    host: test-ssd.ryzon7-isd40.opsmx.org
     # Use below port when hostname above is an external IP instead of a hostname
     #port: 31466
 
@@ -53,7 +53,7 @@ global:
       annotations:
         kubernetes.io/ingress.class: nginx
       tls:
-        secretName: oes-ui-ingress
+        secretName: ssd-ui-ingress
 
   sourcecode:
     github:

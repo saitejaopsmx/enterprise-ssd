@@ -1,4 +1,3 @@
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,15 +28,33 @@ spec:
       containers:
       - name: oes-supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
-        ## Add liveness and readiness
-        resources: {}
         volumeMounts:
         - mountPath: /etc/config
           name: preprocessor-volume
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /healthz
+            port: 8058
+            scheme: HTTP
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
       imagePullSecrets:
         - name: opsmx11-secret
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
       - name: preprocessor-volume
         secret:
@@ -48,4 +65,3 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
-{{- end -}}

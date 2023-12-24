@@ -1,5 +1,4 @@
 {{- if .Values.global.certManager.installed }}
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -15,5 +14,4 @@ spec:
     - http01:
         ingress:
           class: nginx
-{{- end }}
 {{- end }}

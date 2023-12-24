@@ -1,4 +1,3 @@
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,21 +23,6 @@ spec:
         {{ toYaml .Values.ssdopa.annotations | nindent 8 }}
 {{- end }}
     spec:
-      volumes:
-        - name: kubescapedir
-        - name: semgrep
-          persistentVolumeClaim:
-            claimName: semgrep-pvc
-        - name: openssf
-          persistentVolumeClaim:
-            claimName: openssf-pvc
-        - name: ssd-opa-volume
-          secret:
-            secretName: ssd-opa
-            items:
-              - key: ssd-opa.yaml
-                path: ssd-opa.yaml
-            defaultMode: 420
       containers:
         - name: ssd-opa
           image: {{ template "ssdopa.image" . }}
@@ -55,8 +39,42 @@ spec:
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /health
+              port: 8200
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
-{{- end -}}
+      volumes:
+        - name: kubescapedir
+        - name: semgrep
+          persistentVolumeClaim:
+            claimName: semgrep-pvc
+        - name: openssf
+          persistentVolumeClaim:
+            claimName: openssf-pvc
+        - name: ssd-opa-volume
+          secret:
+            secretName: ssd-opa
+            items:
+              - key: ssd-opa.yaml
+                path: ssd-opa.yaml
+            defaultMode: 420

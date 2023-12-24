@@ -29,14 +29,17 @@ spec:
         - containerPort: 8001
           protocol: TCP
         readinessProbe:
-          failureThreshold: 3
+          failureThreshold: 6
           httpGet:
             path: /healthz
             port: 8001
             scheme: HTTP
-          periodSeconds: 10
+          periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+        envFrom:
+        - secretRef:
+            name: poc-passwords 
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
@@ -119,3 +122,8 @@ spec:
             path: metadata.xml        #e.g. Specify /app/saml/metadata.xml ssd-gate-config.yaml
           optional: true             
           secretName: saml-files
+      - name: poc-passwords         # Can be deleted after Authentication has been configured, this is for POC/start up only
+        secret:
+          defaultMode: 420
+          optional: true             
+          secretName: poc-passwords

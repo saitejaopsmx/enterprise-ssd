@@ -1,4 +1,3 @@
-{{- if (eq .Values.installationMode "SSD-SPIN") -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -32,4 +31,3 @@ spec:
   selector:
     app: oes
     component: ui
-{{- end -}}

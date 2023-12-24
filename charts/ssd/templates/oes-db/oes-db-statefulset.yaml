@@ -1,4 +1,4 @@
-{{- if and (.Values.db.enabled) (or (eq .Values.installationMode "SSD-SPIN")) -}}
+{{- if .Values.db.enabled -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:

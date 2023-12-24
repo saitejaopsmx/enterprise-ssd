@@ -1,6 +1,7 @@
 ssd_baseurl: http://localhost:8001
 
-auth_type: "dex_oidc"  # This is need to tell the "type" of authentication
+auth_type: "poclogin"  # Defaulting so Dex config is not required
+#auth_type: "dex_oidc"  # This is need to tell the "type" of authentication
 auth2_oidc:
   client_id: ssd-gate
   client_secret: "encrypted:gate-dex-client-secret:client-secret"

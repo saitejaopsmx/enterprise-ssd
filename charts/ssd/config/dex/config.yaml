@@ -4,7 +4,8 @@ issuer: http://ssd-dex:5556/dex
 storage:
   type: memory
 web:
-  http: ssd-dex:5556/dex
+  http: /dex
+  #http: ssd-dex:5556/dex
 
 oauth2:
   skipApprovalScreen: true
@@ -14,9 +15,10 @@ staticClients:
   - id: ssd-gate
     redirectURIs:
       - 'http://ssd-gate:8084/oidccallbackendpoint'
+      - 'http://localhost:8080/oidccallbackendpoint'
       #- 'http://127.0.0.1:5555/callback'
     name: 'ssd gate'
-    secret: ${GATE_CLIENT_SECRET}
+    secret: WEpPtf4YlwNsB2fM
 
 # Connectors are used to authenticate users against upstream identity providers.
 # Enable the password database.

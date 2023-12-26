@@ -22,12 +22,10 @@ global:
   ## Set to true to expose oes-ui, oes-gate services over ingress
   createIngress: true
 
-  ## OES-UI url configuration, defaults to http://localhost:8080
+  ## SSD/OES-UI url configuration
   oesUI:
     protocol: http
-    host: test-ssd.ryzon7-isd40.opsmx.org #localhost
-    # Use below port when hostname above is an external IP instead of a hostname
-    #port: 8080
+    host: poc-ssd.ryzon7-isd40.opsmx.org #localhost
 
     ingress:
       annotations:
@@ -40,5 +38,6 @@ ssdgate:
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   saml:
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    #entity_id: HTTPS://YOUR-SSD-URL is the default. Define if here if you need to change it
     saml_initiated_login: true
 

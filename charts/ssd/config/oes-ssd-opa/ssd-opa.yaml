@@ -1,4 +1,8 @@
-opaIngress: https://{{ .Values.ssdopa.ingress.host }}
+{{- if .Values.global.oesUI.port }}
+opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}
+{{- else }}
+opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}
+{{- end }}
 httpListenPort: 8200
 kubescapeFilePath: /app/kubescapeDir
 toolChainAddr: http://tool-chain:8100/ #default value & optional

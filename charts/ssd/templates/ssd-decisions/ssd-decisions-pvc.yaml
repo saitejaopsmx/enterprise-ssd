@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: openssf-pvc
+spec:
+  accessModes:
+    - {{ .Values.ssdopa.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.ssdopa.persistence.size | quote }}
+{{- if .Values.storageClass }}
+{{- if (eq "-" .Values.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.storageClass }}"
+{{- end }}
+{{- end }}

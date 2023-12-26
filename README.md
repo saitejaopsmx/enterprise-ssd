@@ -4,7 +4,7 @@ For more information, visit https://www.opsmx.com
 ## Installation Instructions
 SSD can be installed in the following ways, depending on your requirements.
 
-### Look and See
+### Look and See (in testing)
 We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
 The instructions for doing this as are follows:
 - ```kubectl create ns try-ssd```

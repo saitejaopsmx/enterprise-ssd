@@ -8,7 +8,7 @@ SSD can be installed in the following ways, depending on your requirements.
 We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
 The instructions for doing this as are follows:
 - ```kubectl create ns try-ssd```
-- ```kubectl -n try-ssd apply -f <URL to be filled"```
+- ```kubectl -n try-ssd apply -f [<URL to be filled"](https://raw.githubusercontent.com/ksrinimba/enterprise-ssd/main/try-ssd.yaml```
 - ```kubectl -n try-ssd port-forward svc/oes-ui 8080```
 - Go to your browser, http://localhost:8080
 - Get the user/password for logging in: user: admin, the password is in the secret **poc-passwords** in the try-ssd namespace

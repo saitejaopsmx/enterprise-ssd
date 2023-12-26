@@ -1,11 +1,35 @@
 # enterprise-ssd
 This repo is used for installing the SSD
-
-
 # OpsMx Secure Software Delivery
 For more information, visit https://www.opsmx.com
 
-## Spinnaker + OpsMx Secure Software Delivery (SSD) Setup Instructions
+## OpsMx Secure Software Delivery (SSD) Setup Instructions
+SSD can be installed in the following ways, depending on your requirements
+
+### Look and See
+We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
+The instructions for doing this as are follows:
+- kubectl apply -f <URL to be filled"
+- Get the user/password for logging in: user: admin, the password is in the secret poc-passwords in the try-ssd namespace
+- kubectl -n try-ssd port-forward svc/oes-ui 8080
+- Go to your browser, http://localhost:8080
+- if you have argocd installed locally, configure it using instructions here.
+
+### Poc install
+The same instructios above can be used for POC as well. However, we need to integrate with an SSO, we will need URLs, so access to a DNS and ingress/LB is required.
+- This is a helm based installation where we start with a minimal*values.yaml based on your requirements
+- If integration with an SSO is not required, choose minimal-poc-values.yaml
+- If integrating with SAML, choose minimal-saml-values.yaml
+- For all other SSOs, choose minimal-dex-values.yaml. We will need to configure the [dex connector](https://dexidp.io/docs/connectors/) based on your backend (e.g. google auth, AWS, etc.)
+- Edit as required w.r.t. the URL, ingress, etc. Comments are in the file.
+- execute:
+  ```helm install <chart-name> ssd -f minimal-saml-values-modifled.yaml -n poc-ssd
+- Navigate to <your base URL>/diagnostics to fix any issues
+
+### Production install
+In addition to the Poc Install instructions, this requires that we install the product in HA, have external storage and redis.
+-
+
 
 ### Prerequisites
 

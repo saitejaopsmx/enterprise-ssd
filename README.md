@@ -23,7 +23,7 @@ The same instructios above can be used for POC as well. However, we need to inte
 - For all other SSOs, choose minimal-dex-values.yaml. We will need to configure the [dex connector](https://dexidp.io/docs/connectors/) based on your backend (e.g. google auth, AWS, etc.)
 - Edit as required w.r.t. the URL, ingress, etc. Comments are in the file.
 - execute:
-  ```helm install <chart-name> ssd -f minimal-saml-values-modifled.yaml -n poc-ssd
+  ```helm install <chart-name> ssd -f minimal-saml-values-modifled.yaml -n poc-ssd```
 - Navigate to <your base URL>/diagnostics to fix any issues
 
 ### Production install

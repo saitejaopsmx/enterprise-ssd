@@ -4,7 +4,12 @@ issuer: http://ssd-dex:5556/dex
 storage:
   type: memory
 web:
-  http: /dex
+{{- if eq .Values.global.oesUI.host "localhost" }}
+  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
+{{- else }}
+  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
+{{- end }}
+  #http: /dex
   #http: ssd-dex:5556/dex
 
 oauth2:
@@ -15,18 +20,61 @@ staticClients:
   - id: ssd-gate
     redirectURIs:
       - 'http://ssd-gate:8084/oidccallbackendpoint'
-      - 'http://localhost:8080/oidccallbackendpoint'
-      #- 'http://127.0.0.1:5555/callback'
+{{- if eq .Values.global.oesUI.host "localhost" }}
+      - {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/oidccallbackendpoint
+{{- else }}
+      - {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/oidccallbackendpoint
+{{- end }}
     name: 'ssd gate'
-    secret: WEpPtf4YlwNsB2fM
+    secretEnv: GATE_CLIENT_SECRET
+
+
+connectors: []
+#connectors:
+#- type: saml
+#  id: okta
+#  name: Okta
+#  config:
+#    ssoURL: https://dev-14704582.okta.com/app/dev-14704582_dex_1/exkdkpy0xoMNPZ8AX5d7/sso/saml
+#    ca: /okta/dex-okta.pem
+#    #ca: /etc/dex/saml-ca.pem
+#    #redirectURI: https://ssd.ryzon7-isd40.opsmx.org/oidccallbackendpoint
+#    redirectURI: https://dex.ryzon7-isd40.opsmx.org/dex/callback
+#    #redirectURI: http://127.0.0.1:5556/dex/callback
+#    usernameAttr: name
+#    emailAttr: email
+#    groupsAttr: groups
+#- type: ldap
+#  name: OpsmxLDAP
+#  id: ad
+#  config:
+#    host: 10.155.4.95:389
+#    insecureNoSSL: true
+#    insecureSkipVerify: true
+#    # Variable name stores ldap bindDN, bindPW in argocd-secret
+#    bindDN: "$dex.ldap.bindDN"
+#    bindPW: "$dex.ldap.bindPW"
+#    usernamePrompt: Username
+#    userSearch:
+#      baseDN: DC=Userx,DC=opsmx,DC=com,DC=vn
+#      filter: ""
+#      username: sAMAccountName
+#      idAttr: sAMAccountName
+#      emailAttr: sAMAccountName
+#      nameAttr: sAMAccountName
+#    groupSearch:
+#      baseDN: DC=Userx,DC=opsmx,DC=com,DC=vn
+#      filter: ""
+#      userAttr: distinguishedName
+#      groupAttr: memberOf
+#      nameAttr: name
 
 # Connectors are used to authenticate users against upstream identity providers.
 # Enable the password database.
-enablePasswordDB: true
-
+enablePasswordDB: false
 # A static list of passwords for the password connector.
-staticPasswords: 
-- email: "admin@opsmx.io"
-  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
-  username: "admin"
-  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+#staticPasswords: 
+#- email: "admin@opsmx.io"
+#  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
+#  username: "admin"
+#  userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"

@@ -3,7 +3,9 @@
 # This file contains configurations for AP as well as Spinnaker
 #####################################################
 
-installationMode: SSD-SPIN
+#This should not be required
+#installationMode: SSD-SPIN
+
 ## Info related to registry where OES images are stored
 imageCredentials:
   repoUrl: https://quay.io/
@@ -42,12 +44,12 @@ global:
   ## Set to true to expose oes-ui, oes-gate services over ingress
   createIngress: true
 
-  ## OES-UI url configuration
+  ## OES-UI url configuration, defaults to http://localhost:8080
   oesUI:
     protocol: http
-    host: test-ssd.ryzon7-isd40.opsmx.org
+    host: test-ssd.ryzon7-isd40.opsmx.org #localhost
     # Use below port when hostname above is an external IP instead of a hostname
-    #port: 31466
+    #port: 8080
 
     ingress:
       annotations:
@@ -55,16 +57,16 @@ global:
       tls:
         secretName: ssd-ui-ingress
 
+  # Need to check why we need this, but it fails if this null
   sourcecode:
-    github:
+    gprotocolithub:
       rest_api_url: "https://api.github.com"
       token: "xxxxxxxxxxxx" # Update the github token id
     slack:
       channel: "xxxxx"    # Update the slack channel name
       token: "xxxxxxxxxx" # Update the slack token id
 
-  # Minio access/secret keys for the in-cluster S3 usage
-  # Minio is not exposed publically
+  # Minio is needed for dGraph (till its need is removed)
   minio:
     enabled: true
     image:
@@ -101,12 +103,46 @@ global:
       enabled: true
       size: 10Gi
 ###############################################################################
-# Initial passwords for users to login
-#pocpasswords:
-#  admin:
-#    password: {{ randAlphaNum 16 | quote }}
-#  user1:
-#    password: {{ randAlphaNum 16 | quote }}
+ssdgate:
+  #home_page: "/ui/index.html" # OPTIONAL default redirect page
+  #session_timeout: 7200   # OPTIONAL login session timeout, it should match the authenticator timeout
+  #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
+  #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
+
+  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
+  auth2_oidc:
+    client_id: ssd-gate
+    # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET
+    #client_secret: "encrypted:gate-dex-client-secret:client-secret" # Create a secret called gate-dex-client-secret with key client-secret
+    entity_map:        # DEPENDS on the provider
+      user_name: email #  Required for Dex
+    #  roles: groups
+    #well_known_url: http://my-well-known
+    #redirect_url: "https//ssd-gate:8084/oidccallbackendpoint"       # OPTIONAL
+    #userinfo_url: "https://dev-80355908.okta.com/oauth2/v1/userinfo"  # OPTIONAL
+    # We need to "which field contains the username and roles"
+    #endpoint:       # OPTIONAL Not required of well-known url is provided, else required
+    #  auth_url: "https://dev-80355908.okta.com/oauth2/v1/authorize"
+    #  token_url: "https://dev-80355908.okta.com/oauth2/v1/token"
+    #scopes:         # OPTIONAL Not required of well-known url is provided, else required
+    #  - openid      # openid MUST be specified, if used. 
+    #  - offline_access # It is best to leave offline_access in
+    #  - email
+    #  - roles
+  saml:
+    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    saml_initiated_login: true
+    #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
+    #sign_request: false # DEPENDS Default is false, make it match the SAML setting
+    ## Optional files, create saml-files secret as follows, "saml-files" secret name should not be changed
+    ## k create secret generic saml-files --from-file metadata.xml --from-file certificate.crt --from-file private.key
+    #metadata_File: /app/saml/metadata.xml  # OPTIONAL One of metadata url or file required, url preferred
+    #session_crt_file: /app/saml/certificate.crt # OPTIONAL
+    #session_key_file: /app/saml/private.key #  OPTIONAL
+    #entity_map: # OPTIONAL
+    #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
+    #  roles: groups  # groups is default
+###############################################################################
 db:
   ## Set it to false if any external database is to be used
   enabled: true
@@ -172,23 +208,10 @@ ssdopa:
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
 
-  annotations:
-    moniker.spinnaker.io/application: isd
-
-  serviceAnnotations: {}
-
   persistence:
     size: 5Gi
     accessMode: ReadWriteOnce
 
-  ingress:
-    protocol: http
-    host: SSD.DNS.COMPANY.COM
-
-    annotations:
-      kubernetes.io/ingress.class: nginx
-    tls:
-      secretName: ssd-opa-ingress
 ####################################################
 supplychainapi:
   ## Image specific details
@@ -221,7 +244,7 @@ rabbitmq:
 
   serviceAnnotations: {}
 
-  #Blow block is for only for K8S
+  #Below block is for only for K8S
   securityContext:
     fsGroup: 1000
     
@@ -243,6 +266,9 @@ ui:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
 
+###############################################################################################
+#### The values below this line are best not changed except in rare situations
+###############################################################################################
 # Leave it as true, even if not using OPA
 opa:
   enabled: true
@@ -253,9 +279,6 @@ opa:
   annotations:
     moniker.spinnaker.io/application: isd
 
-###############################################################################################
-#### The values below this line are best not changed except in rare situations
-###############################################################################################
 dex:
   configSecret:
     create: false
@@ -265,6 +288,7 @@ dex:
       secret:
         defaultMode: 420
         secretName: gate-dex-client-secret
+  # This is not working
   env:
     - name: GATE_CLIENT_SECRET
       valueFrom:

@@ -33,16 +33,15 @@ In addition to the Poc Install instructions, this requires that we install the p
 
 
 ## Monitor the installation process
-5. Wait for all pods to stabilize (about 10-20 min, depending on your cluster load). The "oes-config" in Completed status indicates completion of the installation process. Check status using:
+- Wait for all pods to stabilize (about 2- min, depending on your cluster load). Check status using:
 
     ```console
     $ kubectl -n try-ssd get po -w
     ```
 
 ## Check the installation
-5. Access SSD using the URL specified in the values.yaml in step 5 in a browser such as Chrome.
-6. Navigate to the the <SSD-URL>/diagnostics
-
+1. Access SSD using the URL specified during the installation (or localhost:8080) in a browser such as Chrome.
+2. Navigate to the the **SSD-URL**/diagnostics
 
 ## Use below document to Integrate Spinnaker with SSD
 

@@ -7,4 +7,4 @@ Instructions updating the try-ssd.yaml
 - push to the repo
 - Test it once EXACTLY following the instructions in the README
 
-  DO NOT change anything as Srini is working on it. If there are any config changes, please let Srini known.
+  **DO NOT change anything as Srini is working on it. If there are any config changes, please let Srini known.**

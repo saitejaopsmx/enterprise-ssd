@@ -7,7 +7,8 @@ SSD can be installed in the following ways, depending on your requirements.
 ### Look and See
 We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
 The instructions for doing this as are follows:
-- ```kubectl apply -f <URL to be filled"```
+- ```kubectl create ns try-ssd```
+- ```kubectl -n try-ssd apply -f <URL to be filled"```
 - ```kubectl -n try-ssd port-forward svc/oes-ui 8080```
 - Go to your browser, http://localhost:8080
 - Get the user/password for logging in: user: admin, the password is in the secret **poc-passwords** in the try-ssd namespace
@@ -21,7 +22,10 @@ The same instructios above can be used for POC as well. If we need to integrate 
 - For all other SSOs, choose minimal-dex-values.yaml. We will need to configure the [dex connector](https://dexidp.io/docs/connectors/) based on your backend (e.g. google auth, AWS, etc.)
 - Edit as required w.r.t. the URL, ingress, etc. Comments are in the file.
 - execute:
-  ```helm install <chart-name> ssd -f modified-minimal-*-values.yaml -n poc-ssd```
+  ```
+  kubectl create ns poc-ssd
+  helm install <chart-name> ssd -f modified-minimal-*-values.yaml -n poc-ssd
+  ```
 - Navigate to <your base URL>/diagnostics to see the configuration, status and resolve any issues
 
 ### Production install

@@ -59,7 +59,7 @@ global:
 
   # Need to check why we need this, but it fails if this null
   sourcecode:
-    gprotocolithub:
+    github:
       rest_api_url: "https://api.github.com"
       token: "xxxxxxxxxxxx" # Update the github token id
     slack:
@@ -109,7 +109,7 @@ ssdgate:
   #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
-  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
+  auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
   auth2_oidc:
     client_id: ssd-gate
     # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET
@@ -288,7 +288,6 @@ dex:
       secret:
         defaultMode: 420
         secretName: gate-dex-client-secret
-  # This is not working
   env:
     - name: GATE_CLIENT_SECRET
       valueFrom:

@@ -1,17 +1,17 @@
 # https://github.com/dexidp/dex/blob/master/config.yaml.dist
-issuer: http://ssd-dex:5556/dex
+
+{{- if eq .Values.global.oesUI.host "localhost" }}
+issuer: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
+web:
+  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
+{{- else }}
+issuer: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
+web:
+  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
+{{- end }}
 
 storage:
   type: memory
-web:
-{{- if eq .Values.global.oesUI.host "localhost" }}
-  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
-{{- else }}
-  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
-{{- end }}
-  #http: /dex
-  #http: ssd-dex:5556/dex
-
 oauth2:
   skipApprovalScreen: true
 
@@ -28,8 +28,14 @@ staticClients:
     name: 'ssd gate'
     secretEnv: GATE_CLIENT_SECRET
 
-
+{{- if .Values.ssdgate.auth2_oidc.connectors }}
+{{- with .Values.ssdgate.auth2_oidc.connectors }}
+connectors: 
+{{- toYaml . | nindent 2 }}
+{{- end }}
+{{- else }}
 connectors: []
+{{- end }}
 #connectors:
 #- type: saml
 #  id: okta

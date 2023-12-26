@@ -47,7 +47,7 @@ global:
   ## OES-UI url configuration, defaults to http://localhost:8080
   oesUI:
     protocol: http
-    host: test-ssd.ryzon7-isd40.opsmx.org #localhost
+    host: localhost
     # Use below port when hostname above is an external IP instead of a hostname
     #port: 8080
 

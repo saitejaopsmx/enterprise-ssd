@@ -1,0 +1,14 @@
+#####################################################
+# This is a minimal configuration needed for SSD Installation
+# Using builtin poc login
+#####################################################
+
+global:
+  createIngress: false
+  oesUI:
+    protocol: http
+    host: localhost
+    port: 8080
+###############################################################################
+ssdgate:
+  auth_type: poclogin

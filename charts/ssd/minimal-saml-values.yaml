@@ -35,6 +35,8 @@ global:
 
 ###############################################################################
 ssdgate:
+  installDex: false
+  createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   saml:
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata

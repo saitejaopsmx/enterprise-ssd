@@ -42,11 +42,19 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroup: 1000
-      {{- if .Values.global.affinity }}
-      affinity:
-{{ toYaml .Values.global.affinity | indent 8 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.global.tolerations }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml .Values.global.tolerations | indent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}

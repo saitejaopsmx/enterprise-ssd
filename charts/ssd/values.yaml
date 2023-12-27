@@ -104,6 +104,8 @@ global:
       size: 10Gi
 ###############################################################################
 ssdgate:
+  installDex: true
+  createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
   #session_timeout: 7200   # OPTIONAL login session timeout, it should match the authenticator timeout
   #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
@@ -265,6 +267,21 @@ ui:
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+topologySpreadConstraints: []
+dex:
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  topologySpreadConstraints: []
+minio:
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  topologySpreadConstraints: []
 
 ###############################################################################################
 #### The values below this line are best not changed except in rare situations

@@ -90,6 +90,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- if .Values.noPvc }}
+      volumes:
+      - name: oes-db-postgresql
+        emptyDir: {}
+{{- else }}
   volumeClaimTemplates:
   - metadata:
       creationTimestamp: null
@@ -107,4 +112,5 @@ spec:
       {{- if .Values.db.storageClassName }}
       storageClassName: {{ .Values.db.storageClassName }}
       {{- end -}}
+{{- end -}}
 {{- end -}}

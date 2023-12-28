@@ -66,11 +66,19 @@ spec:
       volumes:
         - name: kubescapedir
         - name: semgrep
+      {{- if .Values.noPvc }}
+          emptyDir: {}
+      {{- else }}
           persistentVolumeClaim:
             claimName: semgrep-pvc
+      {{- end }}
         - name: openssf
+      {{- if .Values.noPvc }}
+          emptyDir: {}
+      {{- else }}
           persistentVolumeClaim:
             claimName: openssf-pvc
+      {{- end }}
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa

@@ -72,8 +72,12 @@ spec:
           hostPath:
             path: /var/run
         - name: sbom
+      {{- if .Values.noPvc }}
+          emptyDir: {}
+      {{- else }}
           persistentVolumeClaim:
             claimName: tool-chain
+      {{- end }}
         - name: tool-chain-volume
           configMap:
             name: tool-chain

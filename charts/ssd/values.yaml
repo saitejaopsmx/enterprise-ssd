@@ -13,6 +13,8 @@ imageCredentials:
   registry: quay.io/opsmxpublic
 
 #storageClass: standard
+# noPvc is true, no PVCs will be created, suitable for minikube
+noPvc: false
 ####################################################
 # kubernetes services can be exposed to a web-UI based 3 modes
 # ClusterIP (will required Ingress or some other mechanism)

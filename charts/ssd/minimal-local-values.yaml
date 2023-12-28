@@ -9,17 +9,14 @@ global:
     protocol: http
     host: localhost
     port: 8080
-nodeSelector:
-  node-role.kubernetes.io/master: ""
-dex:
-  nodeSelector:
-    node-role.kubernetes.io/master: ""
+
+noPvc: true
 minio:
-  nodeSelector:
-    node-role.kubernetes.io/master: ""
-###############################################################################
+  mode: standalone
+  persistence:
+    enabled: false
 ssdgate:
-  installDex: true
+  installDex: false
   createGateDexSecret: false
   auth_type: poclogin
 

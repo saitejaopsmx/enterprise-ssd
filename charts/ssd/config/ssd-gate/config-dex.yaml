@@ -43,4 +43,31 @@ auth2_oidc:
   {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }}
+services:   # OPTIONAL default backends are programmed in. If specified ALL backends including these MUST be included
+  - name: supplychain-api  # Name
+    path_prefixes:
+    - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend
+    baseUrl: supplychain-api:8099
+    enabled: true          # Default false, set this to use it.
+    scheme: http           # Default http. If the Backend is httpS, please set it
+    streaming: false # Default is false. set this if we have a streaming backend e.g. a service that returns results of a DB-query
+    auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
+    strip_prefix: true  # Default false. If true, the path_prefix is removed before sending to backend. Best is to use only ONE path_prefix
+    health_endpoint: /healthz # Default, change only if required
+  - name: rabbitmq
+    path_prefixes:
+    - "/rabbit"
+    baseUrl: rabbitmq-service:15672
+    scheme: http
+    enabled: true
+    strip_prefix: true
+    health_endpoint: / # Need to Fix
+  - name: ssd-opa
+    path_prefixes:
+    - "/ssd-opa"
+    baseUrl: ssd-opa:8200
+    scheme: http
+    enabled: true
+    health_endpoint: /health
+    strip_prefix: true
 

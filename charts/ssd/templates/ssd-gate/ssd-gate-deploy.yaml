@@ -21,7 +21,7 @@ spec:
       - args:
         - /app/ssdgate
         - -configFile=/app/config/ssd-gate-config.yaml
-        - -unsafe=true                                 # Remove this after login is configured correctly
+        - -unsafe=false                                 # set to true during initial configuration, not required in production
         image: ksrinimba/ssdgate:latest   # Replace with quay.io image
         #imagePullPolicy: Always
         name: ssd-gate
@@ -57,6 +57,8 @@ spec:
         volumeMounts:
         - mountPath: /app/config # This is the emptyDir where the processed configs are placed
           name: config-home
+        - mountPath: /app/services # this is where we expect to find the default services-config.yaml
+          name: services-config
         - mountPath: /app/saml   # Any saml-authenticator specific files go here. this is option
           name: saml-files
         - mountPath: /usr/local/share/ca-certificates
@@ -92,6 +94,11 @@ spec:
           name: ssd-gate-config
           optional: true
         name: ssd-gate-config
+      - configMap:                # Mounted on /tmp/config, that has secrets replaced and placed in /app/config
+          defaultMode: 420
+          name: services-config
+          optional: true
+        name: services-config
       - configMap:                # Script for secret replacement, use "encrypted:SECRETE-NAME:KEY" for value, key should be same as the secret-name
           defaultMode: 420
           name: secret-decoder

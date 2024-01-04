@@ -1,8 +1,4 @@
-{{- if .Values.global.oesUI.port }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/ssd-opa
-{{- else }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/ssd-opa
-{{- end }}
+opaIngress: {{ .Values.ssd_baseurl }}
 httpListenPort: 8200
 kubescapeFilePath: /app/kubescapeDir
 toolChainAddr: http://tool-chain:8100/ #default value & optional
@@ -14,4 +10,4 @@ reScheduleDays: 1
 reScheduleTime: 00:00
 databases:
   ssd:
-    connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432
+    connectString: host=oes-db user='{{ .Values.db.username}}' password='{{ .Values.db.password}}' database=ssddb port=5432

@@ -25,7 +25,7 @@ spec:
               number: 8080
         path: /
         pathType: ImplementationSpecific
-{{- if .Values.global.ssl.enabled }}
+{{- if eq .Values.global.oesUI.protocol "https" }}
   tls:
   - hosts:
     - {{ .Values.global.oesUI.host }}

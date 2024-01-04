@@ -6,12 +6,13 @@
   path_prefixes:
   - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend
   baseUrl: supplychain-api:8099
-  disabled: false          # Default false, set this to true to temporarily disable a service
-  scheme: http           # Default http. If the Backend is httpS, please set it
-  streaming: false # Default is false. set this if we have a streaming backend e.g. a service that returns results of a DB-query
-  auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
-  strip_prefix: false  # Default false. If true, the path_prefix is removed before sending to backend. Best is to use only ONE path_prefix
+  #disabled: false          # Default false, set this to true to temporarily disable a service
+  #scheme: http           # Default http. If the Backend is httpS, please set it
+  #streaming: false # Default is false. set this if we have a streaming backend e.g. a service that returns results of a DB-query
+  #auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
+  #strip_prefix: false  # Default false. If true, the path_prefix is removed before sending to backend. Best is to use only ONE path_prefix
   health_endpoint: /healthz # Default, change only if required
+  log_traffic: true
 - name: rabbitmq
   path_prefixes:
   - "/rabbit"
@@ -24,6 +25,7 @@
   baseUrl: ssd-opa:8200
   health_endpoint: /health
   strip_prefix: true
+  log_traffic: true
 - name: supplychain-api
   baseUrl: tool-chain:8100
   health_endpoint: /health

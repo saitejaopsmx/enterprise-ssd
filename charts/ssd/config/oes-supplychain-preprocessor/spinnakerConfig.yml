@@ -3,7 +3,7 @@ rabbitmq:
   password: '{{ .Values.rabbitmq.password }}'
   host: rabbitmq-service
   port: 5672
-  queue: preview-saas-ssd
+  queue: isd-to-preview-saas
   exchange: echo.events
   bindingKey: preview-saas-ssd
   prefetchCount: 20

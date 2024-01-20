@@ -21,6 +21,7 @@ noPvc: false
 # or LoadBalancer or NodePort
 # OES UI, OES Gate, Spinnaker Deck and Spinnaker Gate service type
 k8sServiceType: ClusterIP
+RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
 
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts

@@ -42,7 +42,18 @@ data:
   accesskey: "c3Bpbm5ha2VyYWRtaW4="
   secretkey: "c3Bpbm5ha2VyYWRtaW4="
 ---
-# Source: SSD/templates/ssd-decisions/ssd-decisions-secret.yaml
+# Source: SSD/templates/ssd-gate/poc-passwords.yaml
+# Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: poc-passwords
+type: Opaque
+data:
+  ADMIN_PASSWORD: "OW0wTzhUN2xpTGFaa0czcw=="
+  USER1_PASSWORD: "T1RNT2ExT3FRTzl4dmVZUQ=="
+---
+# Source: SSD/templates/ssd-opa/ssd-opa-secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -69,17 +80,6 @@ stringData:
       ssd:
         connectString: host=oes-db user='postgres' password='networks123' database=ssddb port=5432
 ---
-# Source: SSD/templates/ssd-gate/poc-passwords.yaml
-# Secret
-apiVersion: v1
-kind: Secret
-metadata:
-  name: poc-passwords
-type: Opaque
-data:
-  ADMIN_PASSWORD: "UnFXQ0htSjRJWjlXQWltSg=="
-  USER1_PASSWORD: "RUdVTEZObkhkZ092ZWF0Zg=="
----
 # Source: SSD/templates/supplychain-api/ssd-supplychain-api-secret.yaml
 apiVersion: v1
 kind: Secret
@@ -103,6 +103,15 @@ stringData:
     toolchain:
         host: http://tool-chain
         port: 8100
+    spinnaker:
+        rabbitmq:
+          username: 'rabbitmq'
+          password: 'Networks123'
+          host: rabbitmq-service
+          port: 5672
+          queue: isd-to-preview-saas
+          exchange: echo.events
+          bindingKey: preview-saas-ssd
 ---
 # Source: SSD/templates/supplychain-preprocessor/ssd-preprocessor-secret.yaml
 apiVersion: v1
@@ -141,7 +150,7 @@ stringData:
       password: 'Networks123'
       host: rabbitmq-service
       port: 5672
-      queue: preview-saas-ssd
+      queue: isd-to-preview-saas
       exchange: echo.events
       bindingKey: preview-saas-ssd
       prefetchCount: 20
@@ -176,13 +185,13 @@ apiVersion: v1
 data:
   AESEncryptionKey: bnVsbA==
   approved_build_server: bnVsbA==
-  authorized_artifact_repo: bnVsbA==
-  image_containers: bnVsbA==
-  openAI_creds: bnVsbA==
-  opsmx_creds: bnVsbA==
+  authorized_artifact_repo: ZG9ja2VyLmlvL29wc214MTEsIGRvY2tlci5pby9vcHNteHB1YmxpYyxxdWF5LmlvL29wc214cHVibGljLGRvY2tlci5pby9rc3JpbmltYmE=
+  image_containers: ZG9ja2VyOgogIHBhc3N3b3JkOiBLYW1iaDEyIwogIHVybDogaHR0cHM6Ly9kb2NrZXIuaW8vCiAgdXNlcm5hbWU6IGtzcmluaW1iYQ==
+  openAI_creds: eHh4eHh4eHg=
+  opsmx_creds: cGFzc3dvcmQ6IG9wc214YWRtaW4xMjMKdXJsOiBodHRwczovL3BvYy1zc2Qucnl6b243LWlzZDQwLm9wc214Lm9yZwp1c2VyTmFtZTogYWRtaW4=
   sbom_tool: bnVsbA==
   semgrep_webApi_token: bnVsbA==
-  sonarQube_creds: bnVsbA==
+  sonarQube_creds: eHh4eHg=
   source_code: Z2l0aHViOgogIHJlc3RfYXBpX3VybDogaHR0cHM6Ly9hcGkuZ2l0aHViLmNvbQogIHRva2VuOiB4eHh4eHh4eHh4eHgKc2xhY2s6CiAgY2hhbm5lbDogeHh4eHgKICB0b2tlbjogeHh4eHh4eHh4eA==
 kind: Secret
 metadata:
@@ -3986,7 +3995,7 @@ spec:
     requests:
       storage: "10Gi"
 ---
-# Source: SSD/templates/ssd-decisions/semgrep-pvc.yaml
+# Source: SSD/templates/ssd-opa/semgrep-pvc.yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -3998,7 +4007,7 @@ spec:
     requests:
       storage: "5Gi"
 ---
-# Source: SSD/templates/ssd-decisions/ssd-decisions-pvc.yaml
+# Source: SSD/templates/ssd-opa/ssd-opa-pvc.yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -4247,6 +4256,7 @@ metadata:
     chart: "SSD-4.0.9"
   name: rabbitmq-service
 spec:
+  type: LoadBalancer
   ports:
   - name: rabbitmq
     port: 5672
@@ -4259,28 +4269,6 @@ spec:
   selector:
     app: oes
     component: rabbitmq
-  type: ClusterIP
----
-# Source: SSD/templates/ssd-decisions/ssd-decisions-service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: ssd-opa
-  labels:
-    app: oes
-    component: oes-ssd-opa
-spec:
-  selector:
-    app: oes
-    component: oes-ssd-opa
-    heritage: "Helm"
-    release: "ssd"
-    chart: "SSD-4.0.9"
-  ports:
-    - name: ssd-opa
-      protocol: TCP
-      port: 8200
-      targetPort: 8200
 ---
 # Source: SSD/templates/ssd-gate/ssd-gate-svc.yaml
 apiVersion: v1
@@ -4301,6 +4289,27 @@ spec:
     component: ssd-gate
   sessionAffinity: None
   type: ClusterIP
+---
+# Source: SSD/templates/ssd-opa/ssd-opa-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssd-opa
+  labels:
+    app: oes
+    component: oes-ssd-opa
+spec:
+  selector:
+    app: oes
+    component: oes-ssd-opa
+    heritage: "Helm"
+    release: "ssd"
+    chart: "SSD-4.0.9"
+  ports:
+    - name: ssd-opa
+      protocol: TCP
+      port: 8200
+      targetPort: 8200
 ---
 # Source: SSD/templates/supplychain-api/ssd-supplychain-api-service.yaml
 apiVersion: v1
@@ -4546,85 +4555,6 @@ spec:
       securityContext:
         fsGroup: 1000
 ---
-# Source: SSD/templates/ssd-decisions/ssd-decisions-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ssd-opa
-  labels:
-    app: oes
-    component: oes-ssd-opa
-    heritage: "Helm"
-    release: "ssd"
-    chart: "SSD-4.0.9"
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: oes
-      component: oes-ssd-opa
-  template:
-    metadata:
-      labels:
-        app: oes
-        component: oes-ssd-opa
-        heritage: "Helm"
-        release: "ssd"
-        chart: "SSD-4.0.9"
-      annotations:
-    spec:
-      containers:
-        - name: ssd-opa
-          image: quay.io/opsmxpublic/ssd-opa:v1.2.3
-          ports:
-            - containerPort: 8200
-              protocol: TCP
-          volumeMounts:
-            - name: kubescapedir
-              mountPath: /app/kubescapeDir
-            - name: semgrep
-              mountPath: /app/semgrep
-            - name: openssf
-              mountPath: /app/OpenSSF
-            - name: ssd-opa-volume
-              mountPath: /app/config/ssd-opa.yaml
-              subPath: ssd-opa.yaml
-          readinessProbe:
-            failureThreshold: 6
-            httpGet:
-              path: /health
-              port: 8200
-              scheme: HTTP
-            periodSeconds: 20
-            successThreshold: 1
-            timeoutSeconds: 1
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            seccompProfile:
-              type: RuntimeDefault
-      volumes:
-        - name: kubescapedir
-        - name: semgrep
-          persistentVolumeClaim:
-            claimName: semgrep-pvc
-        - name: openssf
-          persistentVolumeClaim:
-            claimName: openssf-pvc
-        - name: ssd-opa-volume
-          secret:
-            secretName: ssd-opa
-            items:
-              - key: ssd-opa.yaml
-                path: ssd-opa.yaml
-            defaultMode: 420
----
 # Source: SSD/templates/ssd-gate/ssd-gate-deploy.yaml
 # Deployment YAML for ssd-gate
 apiVersion: apps/v1
@@ -4762,6 +4692,85 @@ spec:
           defaultMode: 420
           optional: true             
           secretName: poc-passwords
+---
+# Source: SSD/templates/ssd-opa/ssd-opa-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-opa
+  labels:
+    app: oes
+    component: oes-ssd-opa
+    heritage: "Helm"
+    release: "ssd"
+    chart: "SSD-4.0.9"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: oes-ssd-opa
+  template:
+    metadata:
+      labels:
+        app: oes
+        component: oes-ssd-opa
+        heritage: "Helm"
+        release: "ssd"
+        chart: "SSD-4.0.9"
+      annotations:
+    spec:
+      containers:
+        - name: ssd-opa
+          image: quay.io/opsmxpublic/ssd-opa:v1.2.3
+          ports:
+            - containerPort: 8200
+              protocol: TCP
+          volumeMounts:
+            - name: kubescapedir
+              mountPath: /app/kubescapeDir
+            - name: semgrep
+              mountPath: /app/semgrep
+            - name: openssf
+              mountPath: /app/OpenSSF
+            - name: ssd-opa-volume
+              mountPath: /app/config/ssd-opa.yaml
+              subPath: ssd-opa.yaml
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /health
+              port: 8200
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: kubescapedir
+        - name: semgrep
+          persistentVolumeClaim:
+            claimName: semgrep-pvc
+        - name: openssf
+          persistentVolumeClaim:
+            claimName: openssf-pvc
+        - name: ssd-opa-volume
+          secret:
+            secretName: ssd-opa
+            items:
+              - key: ssd-opa.yaml
+                path: ssd-opa.yaml
+            defaultMode: 420
 ---
 # Source: SSD/templates/supplychain-api/ssd-supplychain-api-deployment.yaml
 apiVersion: apps/v1

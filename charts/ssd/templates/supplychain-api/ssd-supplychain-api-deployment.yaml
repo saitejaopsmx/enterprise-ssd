@@ -32,6 +32,20 @@ spec:
               - key: app-config.yaml
                 path: app-config.yaml
             defaultMode: 420
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: ssd-integrations.yaml
+              path: ssd-integrations.yaml
+            name: supplychain-api-cm
+          name: supplychain-api-cm
+        - name: ssdsecret
+          secret:
+            defaultMode: 420
+            items:
+            - key: AESEncryptionKey
+              path: ssdsecret/AESEncryptionKey
+            secretName: ssdsecret
       containers:
         - name: supplychain-api
           image: {{ template "supplychainapi.image" . }}
@@ -51,6 +65,12 @@ spec:
             - name: supplychain-api-volume
               mountPath: /app/app-config.yaml
               subPath: app-config.yaml
+            - mountPath: /app/ssd-integrations.yaml
+              name: supplychain-api-cm
+              subPath: ssd-integrations.yaml
+            - mountPath: /app/secrets/
+              name: ssdsecret
+              readOnly: true
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

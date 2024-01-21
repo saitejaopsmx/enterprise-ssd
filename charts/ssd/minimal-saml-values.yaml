@@ -14,7 +14,8 @@ global:
 
   oesUI: # URL used to access the application
     protocol: https
-    host: poc-ssd.ryzon7-isd40.opsmx.org 
+    #host: poc-ssd.ryzon7-isd40.opsmx.org 
+    host: oes.ryzon7-isd40.opsmx.org 
 
 # Integrations
   #jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
@@ -29,7 +30,7 @@ global:
   opsmxcreds:
     userName: admin
     password: opsmxadmin123
-    url: https://poc-ssd.ryzon7-isd40.opsmx.org
+    url: https://oes.ryzon7-isd40.opsmx.org
   sourcecode:
     github:
       rest_api_url: "https://api.github.com"

@@ -15,6 +15,8 @@ imageCredentials:
 #storageClass: standard
 # noPvc is true, no PVCs will be created, suitable for minikube
 noPvc: false
+
+AESEncryptionKey: OKPQK0JWS2TVTW9E86IWWYN3VY4Z34WJ
 ####################################################
 # kubernetes services can be exposed to a web-UI based 3 modes
 # ClusterIP (will required Ingress or some other mechanism)

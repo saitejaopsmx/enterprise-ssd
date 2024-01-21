@@ -48,7 +48,7 @@ ssdgate:
   createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    metadata_url: https://dev-14704582.okta.com/app/exkds0o00cAfXCAfv5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: HTTPS://YOUR-SSD-URL is the default. Define if here if you need to change it
 

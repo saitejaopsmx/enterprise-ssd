@@ -31,6 +31,9 @@ spec:
         volumeMounts:
         - mountPath: /etc/config
           name: preprocessor-volume
+        - mountPath: /etc/secrets/
+          name: ssdsecret
+          readOnly: true
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -59,9 +62,34 @@ spec:
       - name: preprocessor-volume
         secret:
           secretName: supplychain-preprocessor
+      - name: ssdsecret
+        secret:
+          defaultMode: 420
+          items:
+          - key: AESEncryptionKey
+            path: ssdsecret/AESEncryptionKey
+          secretName: ssdsecret
       securityContext:
         runAsNonRoot: true
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+

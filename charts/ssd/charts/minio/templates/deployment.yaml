@@ -115,6 +115,9 @@ spec:
               {{- if .Values.persistence.subPath }}
               subPath: "{{ .Values.persistence.subPath }}"
               {{- end }}
+            {{- else }}
+            - name: export
+              mountPath: {{ .Values.mountPath }}
             {{- end }}
             {{- if or .Values.gcsgateway.enabled .Values.etcd.clientCert .Values.etcd.clientCertKey }}
             - name: minio-user

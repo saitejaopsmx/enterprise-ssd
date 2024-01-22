@@ -43,4 +43,3 @@ auth2_oidc:
   {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }}
-

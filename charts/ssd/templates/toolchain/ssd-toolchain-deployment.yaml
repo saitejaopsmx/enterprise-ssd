@@ -32,12 +32,8 @@ spec:
           volumeMounts:
             - mountPath: /var/run
               name: docker-sock
-            - name: logs
-              mountPath: /tools/logs
             - name: scanresult
               mountPath: /tools/scanResult
-            - name: sbom
-              mountPath: /tools/sbom
             - name: tool-chain-volume
               mountPath: /tools/config/tool-chain.yaml
               subPath: tool-chain.yaml
@@ -66,14 +62,17 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
       volumes:
-        - name: logs
         - name: scanresult
+      {{- if .Values.noPvc }}
+          emptyDir: {}
+      {{- else }}
+          persistentVolumeClaim:
+            claimName: tool-chain
+      {{- end }}
         - name: docker-sock
           hostPath:
             path: /var/run
-        - name: sbom
-          persistentVolumeClaim:
-            claimName: tool-chain
+            type: ""
         - name: tool-chain-volume
           configMap:
             name: tool-chain
@@ -83,3 +82,21 @@ spec:
             defaultMode: 420
       restartPolicy: Always
       securityContext: {}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+

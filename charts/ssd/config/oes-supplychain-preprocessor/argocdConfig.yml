@@ -1,6 +1,6 @@
 rabbitmq:
-  username: rabbitmq
-  password: Networks123
+  username: '{{ .Values.rabbitmq.username }}'
+  password: '{{ .Values.rabbitmq.password }}'
   host: rabbitmq-service
   port: 5672
   queue: argo-ssd
@@ -10,4 +10,4 @@ rabbitmq:
 
 postgresql:
   ssddb:
-    connectString: host=oes-db user='postgres' password='networks123' database=ssddb port=5432
+    connectString: host=oes-db user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port=5432

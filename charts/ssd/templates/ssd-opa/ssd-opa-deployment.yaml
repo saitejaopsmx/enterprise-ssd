@@ -30,12 +30,11 @@ spec:
             - containerPort: 8200
               protocol: TCP
           volumeMounts:
-            - name: kubescapedir
-              mountPath: /app/kubescapeDir
-            - name: semgrep
-              mountPath: /app/semgrep
-            - name: openssf
-              mountPath: /app/OpenSSF
+            - mountPath: /app/secrets/
+              name: ssdsecret
+              readOnly: true
+            - mountPath: /app/scanFiles
+              name: scanfilepath
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
@@ -64,13 +63,15 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
       volumes:
-        - name: kubescapedir
-        - name: semgrep
-          persistentVolumeClaim:
-            claimName: semgrep-pvc
-        - name: openssf
-          persistentVolumeClaim:
-            claimName: openssf-pvc
+        - name: ssdsecret
+          secret:
+            defaultMode: 420
+            items:
+            - key: AESEncryptionKey
+              path: ssdsecret/AESEncryptionKey
+            secretName: ssdsecret
+        - emptyDir: {}
+          name: scanfilepath
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa
@@ -78,3 +79,21 @@ spec:
               - key: ssd-opa.yaml
                 path: ssd-opa.yaml
             defaultMode: 420
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+

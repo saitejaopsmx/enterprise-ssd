@@ -3,6 +3,8 @@
 # Using builtin poc login
 #####################################################
 
+RabbitServiceType: NodePort
+
 global:
   createIngress: false
   oesUI:
@@ -15,8 +17,8 @@ global:
   repocreds:
     docker:
       url: "https://docker.io/"
-      username: "xxxx"
-      password: "xxxxxxx"
+      username: "ksrinimba"
+      password: "Kambh12#"
   #    TOKEN is an optional field
   #    token: "token"
   opsmxcreds:

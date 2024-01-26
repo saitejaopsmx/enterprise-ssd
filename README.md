@@ -5,13 +5,16 @@ For more information, visit https://www.opsmx.com
 SSD can be installed in the following ways, depending on your requirements.
 
 ### Look and See (in testing)
-We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
+- __[Argo Application](argo-install/README.md):__: If argoCD is already installed, we can simply install the SSD Application.
+
+We can install SSD on a laptop with minikube, k3s, Docker Desktop, Rancher Desktop,etc.
 The instructions for doing this as are follows:
 - ```kubectl create ns try-ssd```
 - ```kubectl -n try-ssd apply -f https://raw.githubusercontent.com/ksrinimba/testing/main/try-ssd.yaml```
 - ```kubectl -n try-ssd port-forward svc/oes-ui 8080```
 - Go to your browser, http://localhost:8080
-- Get the user/password for logging in: user: admin, the password is in the secret **poc-passwords** in the try-ssd namespace
+- Get the password for logging in: user: admin, the password is in the secret **poc-passwords** in the try-ssd namespace: 
+  ```kubectl get secret -n argocd-ssd poc-passwords -o jsonpath="{.data.ADMIN_PASSWORD}" | base64 -d```
 - if you have argocd installed locally, configure it using instructions **here**.
 
 ### Poc install

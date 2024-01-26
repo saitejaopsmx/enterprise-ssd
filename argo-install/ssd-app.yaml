@@ -12,7 +12,7 @@ spec:
     directory:
       recurse: true
     path: argo-install/SSD
-    repoURL: https://github.com/enterprise-ssd
+    repoURL: https://github.com/ksrinimba/enterprise-ssd
     targetRevision: HEAD
   syncPolicy:
     syncOptions:

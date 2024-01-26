@@ -5,7 +5,9 @@ For more information, visit https://www.opsmx.com
 SSD can be installed in the following ways, depending on your requirements.
 
 ### Look and See (in testing)
-We can install SSD on a laptop with minikube, k3s, Docker Desktop, etc.
+- __[Argo Application](argo-install/README.md):__: If argoCD is already installed, we can simply install the SSD Application.
+
+We can install SSD on a laptop with minikube, k3s, Docker Desktop, Rancher Desktop,etc.
 The instructions for doing this as are follows:
 - ```kubectl create ns try-ssd```
 - ```kubectl -n try-ssd apply -f https://raw.githubusercontent.com/ksrinimba/testing/main/try-ssd.yaml```
@@ -16,7 +18,6 @@ The instructions for doing this as are follows:
 
 ### Poc install
 The same instructios above can be used for POC as well. If we need to integrate with an SSO, we will need URLs, so access to a DNS and ingress/LB is required.
-- __[Spinnaker Overview](docs/spinnaker-overview.md):__ Overview of Spinnaker resources at Zendesk
 - This is a helm based installation where we start with a minimal*values.yaml based on your requirements
 - If integration with an SSO is not required, choose minimal-poc-values.yaml
 - If integrating with SAML, choose minimal-saml-values.yaml

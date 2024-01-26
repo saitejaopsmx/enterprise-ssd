@@ -16,6 +16,7 @@ The instructions for doing this as are follows:
 
 ### Poc install
 The same instructios above can be used for POC as well. If we need to integrate with an SSO, we will need URLs, so access to a DNS and ingress/LB is required.
+- __[Spinnaker Overview](docs/spinnaker-overview.md):__ Overview of Spinnaker resources at Zendesk
 - This is a helm based installation where we start with a minimal*values.yaml based on your requirements
 - If integration with an SSO is not required, choose minimal-poc-values.yaml
 - If integrating with SAML, choose minimal-saml-values.yaml

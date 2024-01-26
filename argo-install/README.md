@@ -13,3 +13,5 @@ Access SSD:
 
 
 [http://localhost:8080/help](http://localhost:8080/help) provides instructions for further configuration and integration.
+
+__Ingress__ : We can also create an ingress for SSD. Sample nginx Ingress Yamls are in this directory.

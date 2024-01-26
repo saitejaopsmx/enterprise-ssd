@@ -14,6 +14,7 @@ The instructions for doing this as are follows:
 - ```kubectl -n try-ssd port-forward svc/oes-ui 8080```
 - Go to your browser, http://localhost:8080
 - Get the user/password for logging in: user: admin, the password is in the secret **poc-passwords** in the try-ssd namespace
+  ```kubectl get secret -n argocd-ssd poc-passwords -o jsonpath="{.data.ADMIN_PASSWORD}" | base64 -d```
 - if you have argocd installed locally, configure it using instructions **here**.
 
 ### Poc install

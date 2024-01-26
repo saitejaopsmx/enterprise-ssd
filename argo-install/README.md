@@ -10,3 +10,6 @@ Access SSD:
 - Port forward: ```kubectl port-forward svc/oes-ui 8080:80```
 - In the browser, navigate to [http://localhost:8080](http://localhost:8080)
 - username: admin , password: PASTE-THE_PASSWORD-FROM ABOVE
+
+
+[http://localhost:8080/help](http://localhost:8080/help) provides instructions for further configuration and integration.

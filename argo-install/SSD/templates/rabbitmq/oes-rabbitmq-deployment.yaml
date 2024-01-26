@@ -32,6 +32,10 @@ spec:
         imagePullPolicy: IfNotPresent
         name: rabbitmq
         env:
+          - name: RABBITMQ_DEFAULT_USER
+            value: 'rabbitmq'
+          - name: RABBITMQ_DEFAULT_PASS
+            value: 'Networks123'
         ports:
         - containerPort: 5672
           protocol: TCP

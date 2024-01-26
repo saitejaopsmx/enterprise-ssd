@@ -52,7 +52,7 @@ spec:
             secretName: ssdsecret
       containers:
         - name: supplychain-api
-          image: opsmx11/supplychain-api:2c9be03-945
+          image: opsmx11/supplychain-api:83dbb61-987
           ports:
             - containerPort: 8099
               protocol: TCP

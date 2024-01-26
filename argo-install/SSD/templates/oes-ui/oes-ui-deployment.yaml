@@ -31,7 +31,7 @@ spec:
         chart: "SSD-4.0.9"
     spec:
       containers:
-      - image: opsmx11/oes-ui:202401182258
+      - image: opsmx11/oes-ui:202401252052
         name: oes-ui
         env:
         ports:

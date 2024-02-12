@@ -1,17 +1,23 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  labels:
+    app: oes
+    component: dgraph
+{{ include "oes.standard-labels" . | indent 4 }}
   name: dgraph
 spec:
   serviceName: "dgraph"
   replicas: 1
   selector:
       matchLabels:
-        app: dgraph
+        app: oes
+        component: dgraph
   template:
     metadata:
       labels:
-        app: dgraph
+        app: oes
+        component: dgraph
     spec:
       containers:
       - name: ratel

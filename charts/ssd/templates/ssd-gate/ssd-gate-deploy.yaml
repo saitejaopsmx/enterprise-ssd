@@ -3,19 +3,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ssd
+    app: oes
     component: gate
+{{ include "oes.standard-labels" . | indent 4 }}
   name: ssd-gate
 spec:
   selector:
     matchLabels:
-      app: ssd
-      component: ssd-gate
+      app: oes
+      component: gate
   template:
     metadata:
       labels:
-        app: ssd
-        component: ssd-gate
+        app: oes
+        component: gate
     spec:
       containers:
       - args:

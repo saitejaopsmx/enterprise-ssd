@@ -9,13 +9,13 @@
 global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   certManager:  # set to true if cert-manager is installed
-    installed: true
-  createIngress: true
+    installed: false
+  createIngress: false
 
   oesUI: # URL used to access the application
     protocol: https
-    #host: poc-ssd.ryzon7-isd40.opsmx.org 
-    host: oes.ryzon7-isd40.opsmx.org 
+    host: poc-ssd.ryzon7-isd40.opsmx.org 
+    #host: oes.ryzon7-isd40.opsmx.org 
 
 # Integrations
   #jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
@@ -30,7 +30,7 @@ global:
   opsmxcreds:
     userName: admin
     password: opsmxadmin123
-    url: https://oes.ryzon7-isd40.opsmx.org
+    url: https://poc-ssd.ryzon7-isd40.opsmx.org
   sourcecode:
     github:
       rest_api_url: "https://api.github.com"
@@ -48,7 +48,10 @@ ssdgate:
   createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkds0o00cAfXCAfv5d7/sso/saml/metadata
+    # ssd-saml-direct, poc-ssd.*
+    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    # oes.ryzon7....
+    #metadata_url: https://dev-14704582.okta.com/app/exkds0o00cAfXCAfv5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: HTTPS://YOUR-SSD-URL is the default. Define if here if you need to change it
 

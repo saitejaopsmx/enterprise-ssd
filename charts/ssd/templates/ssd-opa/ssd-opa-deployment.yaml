@@ -39,12 +39,12 @@ spec:
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
           readinessProbe:
-            failureThreshold: 6
+            failureThreshold: 20
             httpGet:
               path: /health
               port: 8200
               scheme: HTTP
-            periodSeconds: 20
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
           securityContext:

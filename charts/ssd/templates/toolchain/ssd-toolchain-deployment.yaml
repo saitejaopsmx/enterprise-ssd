@@ -30,8 +30,6 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/run
-              name: docker-sock
             - name: scanresult
               mountPath: /tools/scanResult
             - name: tool-chain-volume
@@ -69,10 +67,6 @@ spec:
           persistentVolumeClaim:
             claimName: tool-chain
       {{- end }}
-        - name: docker-sock
-          hostPath:
-            path: /var/run
-            type: ""
         - name: tool-chain-volume
           configMap:
             name: tool-chain

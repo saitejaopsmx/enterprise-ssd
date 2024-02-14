@@ -8,6 +8,7 @@ metadata:
 {{ include "oes.standard-labels" . | indent 4 }}
   name: ssd-gate
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: oes

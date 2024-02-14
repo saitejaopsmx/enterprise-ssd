@@ -9,38 +9,12 @@
 global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   certManager:  # set to true if cert-manager is installed
-    installed: false
-  createIngress: false
+    installed: true
+  createIngress: true
 
   oesUI: # URL used to access the application
     protocol: https
     host: poc-ssd.ryzon7-isd40.opsmx.org 
-    #host: oes.ryzon7-isd40.opsmx.org 
-
-# Integrations
-  #jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
-  dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic,quay.io/opsmxpublic,docker.io/ksrinimba
-  repocreds:
-    docker:
-      url: "https://docker.io/"
-      username: "ksrinimba"
-      password: "Kambh12#"
-  #    TOKEN is an optional field
-  #    token: "token"
-  opsmxcreds:
-    userName: admin
-    password: opsmxadmin123
-    url: https://poc-ssd.ryzon7-isd40.opsmx.org
-  sourcecode:
-    github:
-      rest_api_url: "https://api.github.com"
-      token: "xxxxxxxxxxxx" # Update the github token id
-    slack:
-      channel: "xxxxx"    # Update the slack channel name
-      token: "xxxxxxxxxx" # Update the slack token id
-
-  sonarqubecreds: "xxxxx"  # Update the value eg: username:password
-  openaicreds: "xxxxxxxx" # Update the value eg: openAIApiToken:token
 
 ###############################################################################
 ssdgate:
@@ -50,8 +24,8 @@ ssdgate:
   saml:
     # ssd-saml-direct, poc-ssd.*
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    saml_initiated_login: true
     # oes.ryzon7....
     #metadata_url: https://dev-14704582.okta.com/app/exkds0o00cAfXCAfv5d7/sso/saml/metadata
-    saml_initiated_login: true
     #entity_id: HTTPS://YOUR-SSD-URL is the default. Define if here if you need to change it
 

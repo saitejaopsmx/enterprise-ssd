@@ -11,31 +11,6 @@ global:
     protocol: http
     host: localhost
     port: 8080
-# Integrations
-  #jenkinsurl: povjenkins.opsmx.net, opsmxjenkins.opsmx.net
-  dockerdetails: docker.io/opsmx11, docker.io/opsmxpublic,quay.io/opsmxpublic,docker.io/ksrinimba
-  repocreds:
-    docker:
-      url: "https://docker.io/"
-      username: "ksrinimba"
-      password: "Kambh12#"
-  #    TOKEN is an optional field
-  #    token: "token"
-  opsmxcreds:
-    userName: admin
-    password: opsmxadmin123
-    url: "PROTOCOL://SSD.URL.COMPANY.COM"
-  sourcecode:
-    github:
-      rest_api_url: "https://api.github.com"
-      token: "xxxxxxxxxxxx" # Update the github token id
-    slack:
-      channel: "xxxxx"    # Update the slack channel name
-      token: "xxxxxxxxxx" # Update the slack token id
-
-  sonarqubecreds: "xxxxx"  # Update the value eg: username:password
-  openaicreds: "xxxxxxxx" # Update the value eg: openAIApiToken:token
-  semgrepwebApitoken: "xxxxxx" # Update the semgrepwebApitoken value
 
 noPvc: true
 minio:

@@ -45,8 +45,20 @@ spec:
         resources: {}
 
         securityContext:
+      {{- if .Values.ssdgate.securityContext }}
       {{ toYaml .Values.ssdgate.securityContext | nindent 10 }}
-
+      {{- else }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      {{- end }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

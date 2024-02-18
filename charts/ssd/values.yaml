@@ -141,18 +141,6 @@ ssdgate:
     #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
     #  roles: groups  # groups is default
 
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
-
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -180,19 +168,7 @@ db:
 
   ## Default group to which the default user of a pod belongs and it applies only to K8S
   securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
-
-  #securityContext:
-  #  fsGroup: 1000
+    fsGroup: 1000
 
   ## storageMountSize is the size with which a PVC is to be created
   storageMountSize: 8Gi
@@ -210,18 +186,6 @@ toolchain:
 
   serviceAnnotations: {}
 
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
-
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -235,18 +199,6 @@ supplychainpreprocessor:
 
   serviceAnnotations: {}
   
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
-
 ####################################################
 ssdopa:
   ## Image specific details
@@ -254,17 +206,6 @@ ssdopa:
     repository: ssd-opa
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
 
 
   persistence:
@@ -281,18 +222,6 @@ supplychainapi:
 
   annotations:
     moniker.spinnaker.io/application: isd
-
-  securityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    seccompProfile:
-      type: RuntimeDefault
 
   serviceAnnotations: {}
 

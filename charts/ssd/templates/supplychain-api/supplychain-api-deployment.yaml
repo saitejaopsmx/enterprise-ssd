@@ -72,7 +72,21 @@ spec:
               name: ssdsecret
               readOnly: true
           securityContext:
+      {{- if .Values.supplychainapi.securityContext }}
       {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

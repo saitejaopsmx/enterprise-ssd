@@ -46,7 +46,22 @@ spec:
             timeoutSeconds: 1
 
           securityContext:
+      {{- if .Values.toolchain.securityContext }}
       {{ toYaml .Values.toolchain.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+
+
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

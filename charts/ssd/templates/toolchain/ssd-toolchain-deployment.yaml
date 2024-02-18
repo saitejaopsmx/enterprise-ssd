@@ -44,17 +44,9 @@ spec:
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 1
+
           securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            seccompProfile:
-              type: RuntimeDefault
+      {{ toYaml .Values.toolchain.securityContext | nindent 12 }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

@@ -10,7 +10,9 @@
   log_traffic: true
 - name: ssd-opa-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
-  - "/api/v1/dataCollection"
+  - "/webhook/api/v1/dataCollection" 
+  - "/webhook/api/v1/bundle.tar.gz"
+  strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
   baseUrl: ssd-opa:8200
   health_endpoint: /health
   log_traffic: true

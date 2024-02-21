@@ -39,15 +39,18 @@ spec:
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
           readinessProbe:
-            failureThreshold: 6
+            failureThreshold: 20
             httpGet:
               path: /health
               port: 8200
               scheme: HTTP
-            periodSeconds: 20
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
           securityContext:
+      {{- if .Values.ssdopa.securityContext }}
+      {{ toYaml .Values.ssdopa.securityContext | nindent 12 }}
+      {{- else }}
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -58,6 +61,7 @@ spec:
             runAsGroup: 1000
             seccompProfile:
               type: RuntimeDefault
+      {{- end }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

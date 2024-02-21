@@ -1,5 +1,5 @@
 #####################################################
-# This file contains minimal configuration for using
+# This file contains Feb092024 configuration for using
 # SSD with SAML authentication e.g with Okta SAML 2.0
 #####################################################
 
@@ -14,7 +14,7 @@ global:
 
   oesUI: # URL used to access the application
     protocol: https
-    host: poc-ssd.ryzon7-isd40.opsmx.org 
+    host: feb09-ssd.ryzon7-isd40.opsmx.org 
 
 ###############################################################################
 ssdgate:
@@ -22,10 +22,7 @@ ssdgate:
   createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   saml:
-    # ssd-saml-direct, poc-ssd.*
-    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    # OKTA-ksrinimba App: feb09-ssd
+    metadata_url: https://dev-14704582.okta.com/app/exkf26qs6f8FdWJ3r5d7/sso/saml/metadata
     saml_initiated_login: true
-    # oes.ryzon7....
-    #metadata_url: https://dev-14704582.okta.com/app/exkds0o00cAfXCAfv5d7/sso/saml/metadata
-    #entity_id: HTTPS://YOUR-SSD-URL is the default. Define if here if you need to change it
 

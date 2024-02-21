@@ -30,8 +30,6 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/run
-              name: docker-sock
             - name: scanresult
               mountPath: /tools/scanResult
             - name: tool-chain-volume
@@ -46,7 +44,11 @@ spec:
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 1
+
           securityContext:
+      {{- if .Values.toolchain.securityContext }}
+      {{ toYaml .Values.toolchain.securityContext | nindent 12 }}
+      {{- else }}
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -57,6 +59,9 @@ spec:
             runAsGroup: 1000
             seccompProfile:
               type: RuntimeDefault
+      {{- end }}
+
+
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
@@ -69,10 +74,6 @@ spec:
           persistentVolumeClaim:
             claimName: tool-chain
       {{- end }}
-        - name: docker-sock
-          hostPath:
-            path: /var/run
-            type: ""
         - name: tool-chain-volume
           configMap:
             name: tool-chain

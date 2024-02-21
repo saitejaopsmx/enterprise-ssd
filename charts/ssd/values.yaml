@@ -62,15 +62,6 @@ global:
       tls:
         secretName: ssd-ui-ingress
 
-  # Need to check why we need this, but it fails if this null
-  sourcecode:
-    github:
-      rest_api_url: "https://api.github.com"
-      token: "xxxxxxxxxxxx" # Update the github token id
-    slack:
-      channel: "xxxxx"    # Update the slack channel name
-      token: "xxxxxxxxxx" # Update the slack token id
-
   # Minio is needed for dGraph (till its need is removed)
   minio:
     enabled: true
@@ -149,6 +140,7 @@ ssdgate:
     #entity_map: # OPTIONAL
     #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
     #  roles: groups  # groups is default
+
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -214,6 +206,7 @@ ssdopa:
     repository: ssd-opa
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
+
 
   persistence:
     size: 5Gi

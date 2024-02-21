@@ -57,6 +57,24 @@ spec:
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 5
+        securityContext:
+      {{- if .Values.ui.securityContext }}
+      {{ toYaml .Values.ui.securityContext | nindent 10 }}
+      {{- else }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      {{- end }}
+
+
+
       {{- if .Values.imagePullSecret}}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret}}

@@ -9,12 +9,13 @@ postgresql:
 toolchain:
     host: http://tool-chain
     port: 8100
-#spinnaker:
-#    rabbitmq:
-#      username: '{{ .Values.rabbitmq.username }}'
-#      password: '{{ .Values.rabbitmq.password }}'
-#      host: rabbitmq-service
-#      port: 5672
-#      queue: isd-to-preview-saas
-#      exchange: echo.events
-#      bindingKey: preview-saas-ssd
+spinnaker:
+    rabbitmq:
+      username: '{{ .Values.rabbitmq.username }}'
+      password: '{{ .Values.rabbitmq.password }}'
+      host: rabbitmq-service
+      port: 5672
+      queue: preview-saas-ssd
+      #queue: isd-to-preview-saas
+      exchange: echo.events
+      bindingKey: preview-saas-ssd

@@ -3,19 +3,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ssd
+    app: oes
     component: gate
+{{ include "oes.standard-labels" . | indent 4 }}
   name: ssd-gate
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: ssd
-      component: ssd-gate
+      app: oes
+      component: gate
   template:
     metadata:
       labels:
-        app: ssd
-        component: ssd-gate
+        app: oes
+        component: gate
     spec:
       containers:
       - args:
@@ -41,7 +43,11 @@ spec:
         - secretRef:
             name: poc-passwords 
         resources: {}
+
         securityContext:
+      {{- if .Values.ssdgate.securityContext }}
+      {{ toYaml .Values.ssdgate.securityContext | nindent 10 }}
+      {{- else }}
           allowPrivilegeEscalation: false
           capabilities:
             drop:
@@ -52,6 +58,7 @@ spec:
           runAsGroup: 1000
           seccompProfile:
             type: RuntimeDefault
+      {{- end }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

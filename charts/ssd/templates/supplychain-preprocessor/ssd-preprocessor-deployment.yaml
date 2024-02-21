@@ -43,21 +43,27 @@ spec:
           periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+        securityContext:
+      {{- if .Values.supplychainpreprocessor.securityContext }}
+      {{ toYaml .Values.supplychainpreprocessor.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+
+
       imagePullSecrets:
         - name: opsmx11-secret
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-          - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        seccompProfile:
-          type: RuntimeDefault
       volumes:
       - name: preprocessor-volume
         secret:

@@ -1,6 +1,27 @@
 integrationData:
   - stage: Source
     integrations:
+      - integratorType: gitlab
+        displayName: Gitlab
+        multiSupport: false
+        category: sourcetool
+        configurationFields:
+          url:
+            displayName: API URL
+            dataType: input
+            required: true
+            secret: false
+            helpText: Gitlab Host URL
+            placeholderText: 'Example:https://gitlab.com'
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: false
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
       - integratorType: github
         displayName: Github
         multiSupport: false
@@ -216,7 +237,7 @@ integrationData:
             authType:
               - basic
       - integratorType: grype
-        displayName: Grype
+        displayName: Grype (CMD)
         multiSupport: false
         category: dockerregistry
         configurationFields:
@@ -273,34 +294,6 @@ integrationData:
               - MITRE and ATT&CK Scan
               - NSA-CISA Scan
               - Helm Scan
-      - integratorType: argo
-        displayName: Argo CD
-        multiSupport: false
-        category: cdtool
-        configurationFields:
-          url:
-            displayName: Argo URL
-            dataType: input
-            required: true
-            secret: false
-            helpText: Argo Host URL
-            placeholderText: 'Example:https://argo.io'
-          name:
-            displayName: Account Name
-            dataType: input
-            required: true
-            secret: false
-            helpText: Argo Account Name
-            placeholderText: 'Example:argo'
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: true
-            secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:knjnasjwokldjhse'
-            authType:
-              - apiKey  
       - integratorType: kubernetes
         displayName: Kubernetes
         multiSupport: true
@@ -320,27 +313,6 @@ integrationData:
             secret: false
             helpText: File name
             placeholderText: 'Example:abc.txt'
-      - integratorType: spinnaker
-        displayName: Spinnaker
-        multiSupport: false
-        category: cdtool
-        configurationFields:
-          url:
-            displayName: Host Url
-            dataType: input
-            required: true
-            secret: false
-            helpText: Spinnaker Host URL
-            placeholderText: 'Example:https://spinnaker.io'
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: true
-            secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:username/password'
-            authType:
-              - basic
   - stage: Others
     integrations:
       - integratorType: chatgpt

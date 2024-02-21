@@ -1,7 +1,7 @@
 {{- if .Values.global.oesUI.port }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/ssd-opa
+opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/webhook
 {{- else }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/ssd-opa
+opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/webhook
 {{- end }}
 httpListenPort: 8200
 kubescapeFilePath: /app/kubescapeDir

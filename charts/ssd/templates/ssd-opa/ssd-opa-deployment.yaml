@@ -48,6 +48,9 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           securityContext:
+      {{- if .Values.ssdopa.securityContext }}
+      {{ toYaml .Values.ssdopa.securityContext | nindent 12 }}
+      {{- else }}
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -58,6 +61,7 @@ spec:
             runAsGroup: 1000
             seccompProfile:
               type: RuntimeDefault
+      {{- end }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

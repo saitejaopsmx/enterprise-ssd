@@ -13,6 +13,9 @@ dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
 
 auth_type: {{.Values.ssdgate.auth_type}}
+admin_groups:
+{{- toYaml .Values.ssdgate.admin_groups | nindent 2 }}
+
 saml:
   metadata_url: {{ .Values.ssdgate.saml.metadata_url }}
   {{- if .Values.ssdgate.saml.entity_id }}

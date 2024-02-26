@@ -12,7 +12,7 @@ metadata:
 {{- if .Values.global.oesUI.ingress.annotations }}
 {{ tpl (toYaml .Values.global.oesUI.ingress.annotations) . | indent 4 }}
 {{- end }}
-  name: oes-ui-ingress
+  name: ssd-ui-ingress
 spec:
   rules:
   - host: {{ .Values.global.oesUI.host }}

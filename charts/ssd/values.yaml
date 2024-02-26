@@ -108,6 +108,8 @@ ssdgate:
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
   auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
+  admin_groups:
+    - admin
   auth2_oidc:
     client_id: ssd-gate
     # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET

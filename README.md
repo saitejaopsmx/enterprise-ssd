@@ -5,7 +5,7 @@ For more information, visit https://www.opsmx.com
 SSD can be installed in the following ways, depending on your requirements.
 
 ### Look and See (in testing)
-- __[Argo Application](argo-install/README.md):__: If argoCD is already installed, we can simply install the SSD Application.
+- __[Argo Application](argo-install/README.md):__: If argoCD is already installed, we can simply install the SSD Application in "argo-install" folder above.
 
 We can install SSD on a laptop with minikube, k3s, Docker Desktop, Rancher Desktop,etc.
 The instructions for doing this as are follows:

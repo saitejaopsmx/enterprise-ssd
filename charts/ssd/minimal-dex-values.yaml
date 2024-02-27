@@ -6,12 +6,12 @@
 global:
   # when this flag is set to false; UI will be accessible over http instead of https
   ssl:
-    enabled: false
+    enabled: true
 
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   # Else, the TLS secrets will need to created manually
   certManager:
-    installed: false
+    installed: ftrue
 
   customCerts:
     enabled: false        # Set to true if your organization requires custom TLS certs
@@ -22,45 +22,28 @@ global:
 
   ## OES-UI url configuration, defaults to http://localhost:8080
   oesUI:
-    protocol: http
-    host: test-ssd.ryzon7-isd40.opsmx.org 
-
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: nginx
-      tls:
-        secretName: ssd-ui-ingress
+    protocol: https
+    host: poc-ssd.ryzon7-isd40.opsmx.org 
 
 ###############################################################################
 ssdgate:
   auth_type: dex_oidc  # saml, dex-oidc and poclogin are other valid values
+  admin_groups:
+  - admin
   auth2_oidc:
     client_id: ssd-gate
     connectors: 
-    - type: ldap
-      name: ssd-openldap
-      id: ldap
+    - type: saml
+      id: okta
+      name: Okta
       config:
-        host: "ssd-openldap.opsmx-ssd:389"
-        insecureNoSSL: true
-        insecureSkipVerify: true
-         # Variable name stores ldap bindDN in argocd-secret
-        bindDN: "cn=admin,dc=example,dc=org"
-        # Variable name stores ldap bind password in argocd-secret
-        bindPW: "opsmxadmin123"
-        usernamePrompt: Username
-        # Ldap user serch attributes
-        userSearch:
-          baseDN: "dc=example,dc=org"
-          filter: "(objectClass=simpleSecurityObject)"
-          username: cn
-          idAttr: cn
-          emailAttr: cn
-          nameAttr: cn
-        # Ldap group serch attributes
-        groupSearch:
-          baseDN: "dc=example,dc=org"
-          filter: "(objectClass=simpleSecurityObject)"
-          userAttr: cn
-          groupAttr: cn
-          nameAttr: cn
+        # Single Sign Ok URL - in Okta get it after completing the configuration, "view SAML setup instructions"
+        ssoURL: https://dev-14704582.okta.com/app/dev-14704582_dex_1/exkdkpy0xoMNPZ8AX5d7/sso/saml
+        # Download this from "Sign on" tab (next to general), "SAML Signing Certificates", Actions->Download
+        ca: /etc/dex/okta.crt  # Include this in the gate-dex-config secret
+        redirectURI: https://poc-ssd.ryzon7-isd40.opsmx.org/dex/callback
+        usernameAttr: email
+        emailAttr: email
+        groupsAttr: groups
+
+

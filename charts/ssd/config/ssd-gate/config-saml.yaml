@@ -13,10 +13,16 @@ dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
 
 auth_type: {{.Values.ssdgate.auth_type}}
+admin_groups:
+{{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
+
 saml:
   metadata_url: {{ .Values.ssdgate.saml.metadata_url }}
   {{- if .Values.ssdgate.saml.entity_id }}
   entity_id: {{ .Values.ssdgate.saml.entity_id }}
+  {{- end }}
+  {{- if .Values.ssdgate.saml.acs_endpoint }}
+  acs_endpoint: {{ .Values.ssdgate.saml.acs_endpoint }}
   {{- end }}
   {{- if .Values.ssdgate.saml.saml_initiated_login }}
   saml_initiated_login: {{ .Values.ssdgate.saml.saml_initiated_login }} # OPTIONAL Required for logging in from okta-tiles

@@ -13,6 +13,8 @@ skipstartcheck: {{.Values.ssdgate.skipstartcheck }}
 dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
 auth_type: {{.Values.ssdgate.auth_type}}
+admin_groups:
+{{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
 
 {{- if eq .Values.ssdgate.auth_type "dex_oidc"}}
 auth2_oidc:

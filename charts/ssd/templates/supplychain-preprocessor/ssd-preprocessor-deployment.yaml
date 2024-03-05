@@ -29,6 +29,8 @@ spec:
       - name: oes-supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
         volumeMounts:
+        - mountPath: /tmp
+          name: tmp
         - mountPath: /etc/config
           name: preprocessor-volume
         - mountPath: /etc/secrets/
@@ -65,6 +67,8 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
+      - emptyDir: {}
+        name: tmp
       - name: preprocessor-volume
         secret:
           secretName: supplychain-preprocessor

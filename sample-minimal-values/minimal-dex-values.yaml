@@ -28,8 +28,8 @@ global:
 ###############################################################################
 ssdgate:
   auth_type: dex_oidc  # saml, dex-oidc and poclogin are other valid values
-  admin_groups:
-  - admin
+#  admin_groups:
+#  - admin
   auth2_oidc:
     client_id: ssd-gate
     connectors: 

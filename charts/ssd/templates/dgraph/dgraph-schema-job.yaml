@@ -32,7 +32,7 @@ spec:
           else
               echo "Successfully updated the schema"
           fi
-        image: curlimages/curl:latest
+        image: {{ template "curl.image" . }} # curlimages/curl:latest
         imagePullPolicy: IfNotPresent
         name: schema-update
         volumeMounts:

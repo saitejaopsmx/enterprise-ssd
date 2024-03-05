@@ -24,7 +24,7 @@ spec:
         - /app/ssdgate
         - -configFile=/app/config/ssd-gate-config.yaml
         - -unsafe=false                                 # set to true during initial configuration, not required in production
-        image: ksrinimba/ssdgate:latest   # Replace with quay.io image
+        image: {{ template "ssdgate.image" . }} # ksrinimba/ssdgate:latest   # Replace with quay.io image
         #imagePullPolicy: Always
         name: ssd-gate
         ports:

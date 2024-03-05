@@ -39,6 +39,9 @@ Common labels for metadata.
 heritage: {{ .Release.Service | quote }}
 release: {{ .Release.Name | quote }}
 chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -226,6 +229,46 @@ Return the proper Supplychain-api Image
  {{- $registryName := .Values.imageCredentials.registry -}}
  {{- $repositoryName := .Values.ssdopa.image.repository -}}
  {{- $tag := .Values.ssdopa.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+ Return the proper ssd-opa Image
+*/}}
+ {{- define "ssdgate.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.ssdgate.image.repository -}}
+ {{- $tag := .Values.ssdgate.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+ Return the proper dgraph Image
+*/}}
+ {{- define "dgraph.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.dgraph.image.repository -}}
+ {{- $tag := .Values.dgraph.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+ Return the proper dgraph Image
+*/}}
+ {{- define "ratel.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.ratel.image.repository -}}
+ {{- $tag := .Values.ratel.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+ Return the proper dgraph Image
+*/}}
+ {{- define "curl.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.curl.image.repository -}}
+ {{- $tag := .Values.curl.image.tag | toString -}}
  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
  {{- end -}}
 

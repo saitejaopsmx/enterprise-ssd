@@ -34,8 +34,9 @@ global:
     registry: quay.io/opsmxpublic
 
   # when this flag is set to false; UI will be accessible over http instead of https
-  ssl:
-    enabled: false
+  # This does not appear to be used at all
+  #ssl:
+  #  enabled: false
 
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   # Else, the TLS secrets will need to created manually
@@ -47,7 +48,7 @@ global:
     secretName: oes-cacerts # Please do not change this
 
   ## Set to true to expose oes-ui, oes-gate services over ingress
-  createIngress: true
+  createIngress: false
 
   ## OES-UI url configuration, defaults to http://localhost:8080
   oesUI:
@@ -67,7 +68,7 @@ global:
     enabled: true
     image:
       repository: quay.io/opsmxpublic/minio
-      tag: RELEASE.2020-01-03T19-12-21Z
+      tag: RELEASE.2020-12-03T05-49-24Z  # RELEASE.2020-01-03T19-12-21Z
     mcImage:
       repository: quay.io/opsmxpublic/minio-mc
       tag: RELEASE.2020-11-25T23-04-07Z
@@ -98,8 +99,26 @@ global:
     persistence:
       enabled: true
       size: 10Gi
+dgraph:
+  image:
+    repository: dgraph
+    tag: v23.1.0
+ratel:
+  image:
+    repository: ratel
+    tag: v21.12.0
+curl:
+  image:
+    repository: curl
+    tag: 8.6.0
+customLabels:
+  product: ssd
+  vendor: opsmx
 ###############################################################################
 ssdgate:
+  image:
+    repository: ssdgate
+    tag: v1.0.1
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -209,6 +228,8 @@ ssdopa:
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
 
+  annotations:
+    moniker.spinnaker.io/application: isd
 
   persistence:
     size: 5Gi

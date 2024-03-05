@@ -23,6 +23,7 @@ AESEncryptionKey: OKPQK0JWS2TVTW9E86IWWYN3VY4Z34WJ
 # or LoadBalancer or NodePort
 # OES UI, OES Gate, Spinnaker Deck and Spinnaker Gate service type
 k8sServiceType: ClusterIP
+UIServiceType: ClusterIP
 RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
 
 ####################################################

@@ -1,0 +1,35 @@
+ui:
+  image:
+    tag: 202402292020-ssd
+  securityContext:
+    allowPrivilegeEscalation: false
+  serviceAnnotations:
+    awsAnnotationsGo: HERE
+toolchain:
+  image:
+    tag: v1.3.5
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000
+    runAsGroup: 1000
+ssdgate:
+  image:
+    tag: v1.0.1  # v1.0.1 is the default, this is for testing the helm-chart
+ssdopa:
+  image:
+    tag: v1.3.5
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+supplychainpreprocessor:
+  image:
+    tag: v0.7.4
+  securityContext:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+supplychainapi:
+  image:
+    tag: v0.4.6
+rabbitmq:
+  serviceAnnotations:
+    awsAnnotationsGo: HERE

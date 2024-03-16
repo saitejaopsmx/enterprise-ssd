@@ -29,6 +29,10 @@ spec:
           ports:
             - containerPort: 8200
               protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: ssd-proxy-certs
+              optional: true
           volumeMounts:
             - mountPath: /app/regofiles
               name: opafiles
@@ -40,6 +44,8 @@ spec:
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
+            - mountPath: /usr/local/share/ca-certificates
+              name: custom-certs
           readinessProbe:
             failureThreshold: 20
             httpGet:
@@ -87,6 +93,19 @@ spec:
               - key: ssd-opa.yaml
                 path: ssd-opa.yaml
             defaultMode: 420
+        - name: ssd-proxy-certs
+          configMap:
+            defaultMode: 420
+            optional: true
+            name: ssd-proxy-certs
+        - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
+          configMap:
+            defaultMode: 420
+            items:
+            - key: ca.crt
+              path: ca.crt
+            optional: true
+            name: customer-custon-ca
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

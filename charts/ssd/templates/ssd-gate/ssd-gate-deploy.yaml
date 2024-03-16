@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: oes
+    app: ssd
     component: gate
 {{ include "oes.standard-labels" . | indent 4 }}
   name: ssd-gate
@@ -11,12 +11,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: gate
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: gate
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}

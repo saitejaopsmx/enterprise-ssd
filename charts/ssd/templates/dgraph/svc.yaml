@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: dgraph-public
   labels:
-    app: oes
+    app: ssd
     component: dgraph
 spec:
   type: ClusterIP
@@ -24,5 +24,5 @@ spec:
     targetPort: 8000
     name: http-ratel
   selector:
-    app: oes
+    app: ssd
     component: dgraph

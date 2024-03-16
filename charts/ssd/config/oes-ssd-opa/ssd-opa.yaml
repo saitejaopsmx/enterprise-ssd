@@ -14,4 +14,4 @@ reScheduleDays: 1
 reScheduleTime: 00:00
 databases:
   ssd:
-    connectString: host=oes-db user='{{ .Values.db.username }}' password='{{ .Values.db.password }}' database=ssddb port=5432
+    connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}

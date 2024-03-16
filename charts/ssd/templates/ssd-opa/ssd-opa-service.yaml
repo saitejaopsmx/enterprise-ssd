@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: ssd-opa
   labels:
-    app: oes
+    app: ssd
     component: oes-ssd-opa
 spec:
   selector:
-    app: oes
+    app: ssd
     component: oes-ssd-opa
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.ssdopa.serviceAnnotations }}

@@ -4,8 +4,8 @@ data:
 {{ (tpl (.Files.Glob "config/oes-ui/help-text.json").AsConfig . ) | indent 2 }}
 kind: ConfigMap
 metadata:
-  name: oes-ui-config
+  name: ssd-ui-config
   labels:
-    app: oes
+    app: ssd
     component: ui
 {{ include "oes.standard-labels" . | indent 4 }}

@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: supplychain-preprocessor
   labels:
-    app: oes
+    app: ssd
     component: oes-supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: oes-supplychain-preprocessor
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: oes-supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 8 }}
       annotations:

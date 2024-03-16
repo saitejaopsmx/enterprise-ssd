@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: tool-chain
   labels:
-    app: oes
+    app: ssd
 {{ include "oes.standard-labels" . | indent 4 }}
     component: oes-toolchain
 data:

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: tool-chain
   labels:
-    app: oes
+    app: ssd
     component: oes-toolchain
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.toolchain.serviceAnnotations }}
@@ -20,5 +20,5 @@ spec:
       nodePort: 8100
       {{- end }}
   selector:
-    app: oes
+    app: ssd
     component: oes-toolchain

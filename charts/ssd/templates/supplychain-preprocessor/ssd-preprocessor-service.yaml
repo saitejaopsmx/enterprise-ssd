@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: supplychain-preprocessor
   labels:
-    app: oes
+    app: ssd
     component: oes-supplychain-preprocessor
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.supplychainpreprocessor.serviceAnnotations }}
@@ -20,5 +20,5 @@ spec:
       nodePort: 8058
       {{- end }}
   selector:
-    app: oes
+    app: ssd
     component: oes-supplychain-preprocessor

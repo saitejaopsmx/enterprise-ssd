@@ -1,4 +1,5 @@
 #####################################################
+
 # OpsMx AutoPilot and Integrated Spinnaker Delivery
 # This file contains configurations for AP as well as Spinnaker
 #####################################################
@@ -70,7 +71,7 @@ global:
 
   # Minio is needed for dGraph (till its need is removed)
   minio:
-    enabled: true
+    enabled: false
     image:
       repository: quay.io/opsmxpublic/minio
       tag: RELEASE.2020-12-03T05-49-24Z  # RELEASE.2020-01-03T19-12-21Z
@@ -172,7 +173,9 @@ db:
 
   ## Change the default configuration when above option is set to false
   ## Below url and credentials are used by Autopilot & Sapor
-  url: jdbc:postgresql://oes-db:5432
+  #url: jdbc:postgresql://oes-db:5432
+  host: ssd-db
+  port: 5432
   username: postgres
   password: networks123
 

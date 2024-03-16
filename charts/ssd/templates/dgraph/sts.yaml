@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: oes
+    app: ssd
     component: dgraph
 {{ include "oes.standard-labels" . | indent 4 }}
   name: dgraph
@@ -11,12 +11,12 @@ spec:
   replicas: 1
   selector:
       matchLabels:
-        app: oes
+        app: ssd
         component: dgraph
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: dgraph
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}

@@ -112,7 +112,7 @@ spec:
       volumes:
       - configMap:
           defaultMode: 420
-          name: oes-ui-config
+          name: ssd-ui-config
         name: config-dir
       - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
         configMap:
@@ -124,7 +124,7 @@ spec:
           name: customer-custon-ca
       - configMap:
           defaultMode: 420
-          name: oes-ui-nginxconf
+          name: ssd-ui-nginxconf
         name: nginx-config
       - name: ssd-proxy-certs
         configMap:

@@ -30,6 +30,8 @@ spec:
             - containerPort: 8200
               protocol: TCP
           volumeMounts:
+            - mountPath: /app/regofiles
+              name: opafiles
             - mountPath: /app/secrets/
               name: ssdsecret
               readOnly: true
@@ -76,6 +78,8 @@ spec:
             secretName: ssdsecret
         - emptyDir: {}
           name: scanfilepath
+        - emptyDir: {}
+          name: opafiles
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa

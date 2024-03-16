@@ -17,7 +17,9 @@ spec:
       labels:
         app: oes
         component: oes-toolchain
-{{ include "oes.standard-labels" . | indent 8 }}
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 8}}
+{{- end }}
       annotations:
 {{- if .Values.toolchain.annotations -}}
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}

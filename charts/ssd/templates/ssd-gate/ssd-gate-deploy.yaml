@@ -18,6 +18,9 @@ spec:
       labels:
         app: oes
         component: gate
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 8}}
+{{- end }}
     spec:
       containers:
       - args:

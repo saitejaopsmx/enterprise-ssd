@@ -31,10 +31,17 @@ spec:
        {{- if .Values.extraEnvVars }}
        {{- include "tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 8 }}
        {{- end }}
+        envFrom:
+        - configMapRef:
+            name: ssd-proxy-certs
+            optional: true
         ports:
         - containerPort: {{ .Values.rabbitmq.port }}
           protocol: TCP
         resources: {}
+        volumeMounts:
+        - mountPath: /usr/local/share/ca-certificates
+          name: custom-certs
       {{- if .Values.imagePullSecret}}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret}}
@@ -58,3 +65,17 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: ssd-proxy-certs
+        configMap:
+          defaultMode: 420
+          optional: true
+          name: ssd-proxy-certs
+      - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
+        configMap:
+          defaultMode: 420
+          items:
+          - key: ca.crt
+            path: ca.crt
+          optional: true
+          name: customer-custon-ca

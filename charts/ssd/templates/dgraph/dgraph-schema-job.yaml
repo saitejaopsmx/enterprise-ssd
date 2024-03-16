@@ -15,7 +15,7 @@ spec:
           server_endpoint=http://dgraph-public:8080/admin/schema
           echo "executing updating dgraphs schema at $server_endpoint"
           counter=1
-          while [ $counter -le 60 ]; do # Total wait of about 3 minutes as PVC binding may take time.
+          while [ $counter -le 120 ]; do # Total wait of about 10 minutes as PVC binding may take time.
               echo "Iteration $counter"
               RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat schema.graphql)" $server_endpoint |  grep Success`
               if [ -z $RESP  ]; then

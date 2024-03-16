@@ -18,6 +18,9 @@ spec:
       labels:
         app: oes
         component: gate
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 8}}
+{{- end }}
     spec:
       containers:
       - args:
@@ -40,10 +43,12 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         envFrom:
+        - configMapRef:
+            name: ssd-proxy-certs
+            optional: true
         - secretRef:
-            name: poc-passwords 
-        resources: {}
-
+            name: poc-passwords
+            optional: true
         securityContext:
       {{- if .Values.ssdgate.securityContext }}
       {{ toYaml .Values.ssdgate.securityContext | nindent 10 }}
@@ -141,6 +146,19 @@ spec:
           defaultMode: 420
           optional: true             
           secretName: poc-passwords
+      - name: ssd-proxy-certs
+        configMap:
+          defaultMode: 420
+          optional: true
+          name: ssd-proxy-certs
+      - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
+        configMap:
+          defaultMode: 420
+          items:
+          - key: ca.crt
+            path: ca.crt
+          optional: true
+          name: customer-custon-ca
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

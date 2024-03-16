@@ -1,7 +1,15 @@
 # Backend services to route the calls to. Routes are processed in the order provided here
 # All routed configured can be viewed in the browser at the /showroutes endpoint
 # The 3 routes below are optional, they are filled in automatically if nothing is specified
-# services:   # OPTIONAL default backends are programmed in. If specified ALL backends including these MUST be included
+# OPTIONAL default backends are programmed in. If specified ALL backends including these MUST be included
+# All Options for backend
+  #auth_required: true # Default FALSE!! i.e no login/authentication is required for this backend
+  #strip_prefix: false # If true, the path_prefix is removed before sending to backend. Best is to use only ONE path_prefix
+  #log_traffic: true   # Useful for debugging. This will cause traffic to be logged. NOTE: This MAY expose secrets and should not be used in production
+  #disabled: false     # If true, the backend is temporarily disabled, only for debugging/dev. In prod, best to remove the service altogether
+  #scheme: http        # If the Backend is httpS, please set it https
+  #streaming: false    # If we have a streaming backend e.g. a service that returns results of a DB-query, set this to true(there is a resource hit)
+
 - name: supplychain-api-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
   - "/ssdservice/v1/spinnakerevents"
@@ -10,9 +18,9 @@
   log_traffic: true
 - name: ssd-opa-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
-  - "/webhook/api/v1/dataCollection" 
-  - "/webhook/api/v1/bundle.tar.gz"
-  - "/webhook/logs/api/v1/deploymentFirewallDecisionLogs"
+  - "/webhook/api/v1/dataCollection"   # Need code-change from Shradha?
+  - "/webhook/api/v1/bundle.tar.gz"    # Can be made JWT Authenticated
+  - "/webhook/logs/api/v1/deploymentFirewallDecisionLogs" # Can be made JWT authenticated
   - "/webhook/api/v1/opaPermission"
   strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
   baseUrl: ssd-opa:8200
@@ -22,12 +30,7 @@
   path_prefixes:
   - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend
   baseUrl: supplychain-api:8099
-  #disabled: false          # Default false, set this to true to temporarily disable a service
-  #scheme: http           # Default http. If the Backend is httpS, please set it
-  #streaming: false # Default is false. set this if we have a streaming backend e.g. a service that returns results of a DB-query
   auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
-  #strip_prefix: false  # Default false. If true, the path_prefix is removed before sending to backend. Best is to use only ONE path_prefix
-  #health_endpoint: /healthz # Default, change only if required
   log_traffic: true
 - name: rabbitmq
   path_prefixes:

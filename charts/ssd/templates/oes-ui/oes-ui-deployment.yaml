@@ -4,15 +4,15 @@ metadata:
   annotations:
 {{ include "isd.standard-annotations" . | indent 4 }}
   labels:
-    app: oes
+    app: ssd
     component: ui
 {{ include "oes.standard-labels" . | indent 4 }}
-  name: oes-ui
+  name: ssd-ui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: ui
   template:
     metadata:
@@ -22,7 +22,7 @@ spec:
         {{ toYaml .Values.ui.annotations | nindent 8 }}
 {{- end }}
       labels:
-        app: oes
+        app: ssd
         component: ui
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - image: {{ template "ui.image" . }}
-        name: oes-ui
+        name: ssd-ui
         env:
        {{- if .Values.extraEnvVars }}
        {{- include "tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 8 }}

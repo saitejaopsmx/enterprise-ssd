@@ -24,7 +24,16 @@ ssdgate:
   admin_groups:
   - dev
   saml:
-    ## ssd-saml-direct, poc-ssd.*
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
+    sign_request: false # DEPENDS Default is false, make it match the SAML setting
+    # If using signed assertion, create saml-files secret as follows
+    # k create secret generic saml-files  --from-file certificate.crt --from-file private.key
+    session_crt_file: /app/saml/certificate.crt # OPTIONAL
+    session_key_file: /app/saml/private.key #  OPTIONAL
+    acs_endpoint: /saml/acs # default, If the Single Sign On Endpoint .e.g. /saml/SSO
+    entity_map: # OPTIONAL
+      user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
+      roles: groups # memberOf is another common attribute
+      roles_delimiter: "," # Specify this ONLY if the SAML server sends comma-separated list of groups
 

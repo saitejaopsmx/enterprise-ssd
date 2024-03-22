@@ -5,17 +5,17 @@ metadata:
   annotations:
 {{ include "isd.standard-annotations" . | indent 4 }}
   labels:
-    app: oes
+    app: ssd
     component: db
 {{ include "oes.standard-labels" . | indent 4 }}
-  name: oes-db
+  name: ssd-db
 spec:
   podManagementPolicy: {{ .Values.db.podManagementPolicy }}
   replicas: 1
-  serviceName: oes-db
+  serviceName: ssd-db
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: db
   template:
     metadata:
@@ -24,7 +24,7 @@ spec:
 {{ toYaml .Values.db.annotations | nindent 8 }}
 {{- end }}
       labels:
-        app: oes
+        app: ssd
         component: db
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
@@ -37,7 +37,7 @@ spec:
       containers:
       - image: {{ template "db.image" . }}
         imagePullPolicy: {{ .Values.db.image.pullPolicy }}
-        name: oes-db
+        name: ssd-db
         lifecycle:
           preStop:
             exec:
@@ -49,7 +49,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - mountPath: "/var/lib/pgsql-pv"
-          name: oes-db-postgresql
+          name: ssd-db-postgresql
         readinessProbe:
           tcpSocket:
             port: 5432
@@ -94,16 +94,16 @@ spec:
       {{- end }}
 {{- if .Values.noPvc }}
       volumes:
-      - name: oes-db-postgresql
+      - name: ssd-db-postgresql
         emptyDir: {}
 {{- else }}
   volumeClaimTemplates:
   - metadata:
       creationTimestamp: null
       labels:
-        app: oes
+        app: ssd
         component: db
-      name: oes-db-postgresql
+      name: ssd-db-postgresql
     spec:
       accessModes:
       - ReadWriteOnce

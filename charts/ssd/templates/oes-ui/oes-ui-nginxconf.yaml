@@ -4,8 +4,8 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: oes-ui-nginxconf
+  name: ssd-ui-nginxconf
   labels:
-    app: oes
+    app: ssd
     component: ui
 {{ include "oes.standard-labels" . | indent 4 }}

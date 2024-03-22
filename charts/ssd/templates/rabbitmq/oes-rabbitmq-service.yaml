@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: oes
+    app: ssd
     component: rabbitmq
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.rabbitmq.serviceAnnotations }}
@@ -22,5 +22,5 @@ spec:
     protocol: TCP
     targetPort: 15672
   selector:
-    app: oes
+    app: ssd
     component: rabbitmq

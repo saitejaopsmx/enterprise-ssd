@@ -31,6 +31,7 @@
   - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend
   baseUrl: supplychain-api:8099
   auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
+  health_endpoint: /healthz
   log_traffic: true
 - name: rabbitmq
   path_prefixes:

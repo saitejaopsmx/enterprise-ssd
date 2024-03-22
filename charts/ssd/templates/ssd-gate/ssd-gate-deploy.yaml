@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: oes
+    app: ssd
     component: gate
 {{ include "oes.standard-labels" . | indent 4 }}
   name: ssd-gate
@@ -11,12 +11,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: gate
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: gate
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
@@ -121,14 +121,6 @@ spec:
           name: ssd-gate-templates
           optional: true
         name: ssd-gate-templates
-      - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
-        configMap:
-          defaultMode: 420
-          items:
-          - key: ca.crt
-            path: ca.crt
-          optional: true             
-          name: customer-custon-ca
       - name: saml-files         # Optional: for SAML metadata.xml, certificate and key (required for Signed assertion)
         secret:
           defaultMode: 420

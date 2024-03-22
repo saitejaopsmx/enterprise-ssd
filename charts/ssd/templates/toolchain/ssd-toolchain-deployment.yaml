@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: oes
+    app: ssd
     component: oes-toolchain
 {{ include "oes.standard-labels" . | indent 4 }}
   name: tool-chain
@@ -10,12 +10,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
+      app: ssd
       component: oes-toolchain
   template:
     metadata:
       labels:
-        app: oes
+        app: ssd
         component: oes-toolchain
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
@@ -103,7 +103,8 @@ spec:
             optional: true
             name: customer-custon-ca
       restartPolicy: Always
-      securityContext: {}
+      securityContext:
+        fsGroup: 1000
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

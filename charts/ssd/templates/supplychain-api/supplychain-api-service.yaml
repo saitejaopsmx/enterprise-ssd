@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: supplychain-api
   labels:
-    app: oes
+    app: ssd
     component: oes-supplychain-api
 {{ include "oes.standard-labels" . | indent 4 }}
 {{- if .Values.supplychainapi.serviceAnnotations }}
@@ -20,5 +20,5 @@ spec:
       nodePort: 8099
       {{- end }}
   selector:
-    app: oes
+    app: ssd
     component: oes-supplychain-api

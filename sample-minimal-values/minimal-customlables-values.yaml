@@ -11,9 +11,6 @@ global:
     host: localhost
     port: 8080
 
-customLabels:
-  ssd.admissionreview.accountname: dev
-  ssd.admissionreview.appname: ssdmar
 
 noPvc: true
 minio:
@@ -25,3 +22,17 @@ ssdgate:
   createGateDexSecret: false
   auth_type: poclogin
 
+# All Deployments/pods/Sts will have these labels
+customLabels:
+  ssd.admissionreview.accountname: dev
+  ssd.admissionreview.appname: ssdmar
+
+# If using AWS LB these annotations can be provided
+ui:
+  serviceAnnotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: true
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
+rabbitmq:
+  serviceAnnotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: true
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443

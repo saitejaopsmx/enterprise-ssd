@@ -208,8 +208,7 @@ toolchain:
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
 
-  annotations:
-    moniker.spinnaker.io/application: isd
+  annotations: {}
 
   serviceAnnotations: {}
 
@@ -254,6 +253,17 @@ supplychainapi:
 
   serviceAnnotations: {}
 
+######################################################
+tokenmachine:
+  ## Image specific details
+  image:
+    repository: supplychain-api
+    tag: v4.0.4-rc4
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  serviceAnnotations: {}
 ###############################################################################
 ## Details of rabbitmq message bus image for OES
 ##

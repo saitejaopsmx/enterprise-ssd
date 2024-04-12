@@ -45,10 +45,15 @@ chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 {{- end -}}
 
 {{/*
-Common annotations for ISD.
+Common labels for metadata.
 */}}
-{{- define "isd.standard-annotations" -}}
-moniker.spinnaker.io/application: isd
+{{- define "ssd.standard-labels" -}}
+heritage: {{ .Release.Service | quote }}
+release: {{ .Release.Name | quote }}
+chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -259,6 +264,17 @@ Return the proper Supplychain-api Image
  {{- $registryName := .Values.imageCredentials.registry -}}
  {{- $repositoryName := .Values.ratel.image.repository -}}
  {{- $tag := .Values.ratel.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+
+{{/*
+ Return the proper ssd-opa Image
+*/}}
+ {{- define "tokenmachine.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.tokenmachine.image.repository -}}
+ {{- $tag := .Values.tokenmachine.image.tag | toString -}}
  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
  {{- end -}}
 

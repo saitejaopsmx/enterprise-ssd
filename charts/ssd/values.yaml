@@ -261,8 +261,8 @@ supplychainapi:
 tokenmachine:
   ## Image specific details
   image:
-    repository: supplychain-api
-    tag: v4.0.4-rc4
+    repository: token-machine 
+    tag: v1.0.1
     pullPolicy: IfNotPresent
 
   annotations: {}

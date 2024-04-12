@@ -13,6 +13,10 @@
 - name: supplychain-api-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
   - "/ssdservice/v1/spinnakerevents"
+  - "/ssdservice/v1/setup"
+  - "/ssdservice/v1/ssd-kubernetes-info"
+  - "/ssdservice/v1/events"
+  - "/ssdservice/v1/opa-firewall"
   baseUrl: supplychain-api:8099
   health_endpoint: /health
   log_traffic: true
@@ -59,6 +63,10 @@
   baseUrl: dgraph-public:8000
   health_endpoint: /
   auth_required: true
+  path_prefixes:
+  - "/graphql"
+  log_traffic: true
+  streaming: false
 - name: oes-ui
   baseUrl: oes-ui:8080
   health_endpoint: "/ui/index.html"

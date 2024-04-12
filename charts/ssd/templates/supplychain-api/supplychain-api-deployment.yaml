@@ -55,6 +55,9 @@ spec:
               readOnly: true
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
+            - mountPath: /app/secrets/supplychain-api-token/
+              name: token
+              readOnly: true
           securityContext:
       {{- if .Values.supplychainapi.securityContext }}
       {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}
@@ -119,6 +122,10 @@ spec:
             defaultMode: 420
             optional: true
             name: ssd-proxy-certs
+        - name: token
+          secret:
+            defaultMode: 420
+            secretName: supplychain-api-token
         - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
           configMap:
             defaultMode: 420

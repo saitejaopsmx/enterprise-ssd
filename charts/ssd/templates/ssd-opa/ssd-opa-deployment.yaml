@@ -46,6 +46,9 @@ spec:
               subPath: ssd-opa.yaml
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
+            - mountPath: /app/secrets/ssd-opa-token/
+              name: token
+              readOnly: true
           readinessProbe:
             failureThreshold: 20
             httpGet:
@@ -86,6 +89,10 @@ spec:
           name: scanfilepath
         - emptyDir: {}
           name: opafiles
+        - name: token
+          secret:
+            defaultMode: 420
+            secretName: ssd-opa-token
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa

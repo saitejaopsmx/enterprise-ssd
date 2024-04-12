@@ -40,6 +40,9 @@ spec:
         - mountPath: /etc/secrets/
           name: ssdsecret
           readOnly: true
+        - mountPath: /etc/secrets/supplychain-preprocessor-token/
+          name: token
+          readOnly: true
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs
         readinessProbe:
@@ -90,6 +93,10 @@ spec:
           defaultMode: 420
           optional: true
           name: ssd-proxy-certs
+      - name: token
+        secret:
+          defaultMode: 420
+          secretName: supplychain-preprocessor-token
       - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
         configMap:
           defaultMode: 420

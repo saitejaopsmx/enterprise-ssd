@@ -1,17 +1,7 @@
-{{- if .Values.global.oesUI.port }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/webhook
-{{- else }}
-opaIngress: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/webhook
-{{- end }}
 httpListenPort: 8200
-kubescapeFilePath: /app/kubescapeDir
-toolChainAddr: http://tool-chain:8100/ #default value & optional
-graphQLAddr: http://dgraph-public:8080/graphql #default value & optional
-openSSFFilePath: /app/OpenSSF #default value & optional
-semgrepFilePath: /app/semgrep #default value & optional
-sonarQubeAddr: https://sonar.opsmx.com/
-reScheduleDays: 1
-reScheduleTime: 00:00
-databases:
-  ssd:
-    connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}
+graphQLAddr: http://dgraph-public:8080/graphql
+logLevel: debug
+redis:
+  address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
+  password: {{ .Values.redis.password }}
+  db: 0

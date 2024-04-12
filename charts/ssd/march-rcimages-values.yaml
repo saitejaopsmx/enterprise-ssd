@@ -1,0 +1,35 @@
+ui:
+  image:
+    tag: 202402292020-ssd
+  securityContext:
+    allowPrivilegeEscalation: false
+  serviceAnnotations:
+    awsAnnotationsGo: HERE
+toolchain:
+  image:
+    tag: v1.4.0
+  #securityContext:
+  #  fsGroup: 1000
+  #  runAsUser: 1000
+  #  runAsGroup: 1000
+ssdgate:
+  image:
+    tag: v1.0.3 
+ssdopa:
+  image:
+    tag: v2.0.2
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+supplychainpreprocessor:
+  image:
+    tag: v0.7.4
+  #securityContext:
+  #  readOnlyRootFilesystem: false
+  #  runAsNonRoot: true
+supplychainapi:
+  image:
+    tag: v0.4.6
+rabbitmq:
+  serviceAnnotations:
+    awsAnnotationsGo: HERE

@@ -1,5 +1,6 @@
 opsMxSvc: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}
 ssdOpa: http://ssd-opa:8200
+redis: {{ template "ssd.redisBaseURL" . }}
 graphqlsvc:
     host: http://dgraph-public
     port: 8080

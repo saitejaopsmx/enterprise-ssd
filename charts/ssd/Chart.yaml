@@ -19,6 +19,9 @@ dependencies:
   - name: minio
     version: 8.0.9
     condition: global.minio.enabled
+  - name: redis
+    version: 10.5.3
+    condition: installRedis
 #    version: 1.2.3
 #  - name: openldap
 #    version: 1.2.3
@@ -29,9 +32,6 @@ dependencies:
 #  - name: minio
 #    version: 8.0.9
 #    condition: global.minio.enabled
-#  - name: redis
-#    version: 10.5.3
-#    condition: installRedis
 #  - name: elasticsearch
 #    version: 7.5.0
 #    condition: enableCentralLogging

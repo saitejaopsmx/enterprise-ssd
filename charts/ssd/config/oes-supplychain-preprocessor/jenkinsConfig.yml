@@ -8,6 +8,10 @@ rabbitmq:
   bindingKey: jenkins-ssd
   prefetchCount: 50
 
+graphql:
+  host: http://dgraph-public
+  port: 8080
+
 postgresql:
   ssddb:
     connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}

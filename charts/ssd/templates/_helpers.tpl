@@ -306,7 +306,7 @@ Usage:
 {{/*
 Redis base URL for Spinnaker
 */}}
-{{- define "spinnaker.redisBaseURL" -}}
+{{- define "ssd.redisBaseURL" -}}
 {{- if .Values.installRedis }}
 {{- printf "redis://:%s@%s-redis-master:6379" .Values.redis.password .Release.Name -}}
 {{- else if .Values.redis.external.password }}

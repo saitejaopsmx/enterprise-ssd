@@ -33,6 +33,8 @@ spec:
             name: ssd-proxy-certs
             optional: true
         volumeMounts:
+        - mountPath: /etc/ssd-public-keys
+          name: ssd-public-keys
         - mountPath: /tmp
           name: tmp
         - mountPath: /etc/config
@@ -76,6 +78,10 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
+      - configMap:
+          defaultMode: 420
+          name: ssd-public-keys
+        name: ssd-public-keys
       - emptyDir: {}
         name: tmp
       - name: preprocessor-volume

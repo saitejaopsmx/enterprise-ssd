@@ -34,8 +34,8 @@ spec:
               name: ssd-proxy-certs
               optional: true
           volumeMounts:
-            - mountPath: /app/regofiles
-              name: opafiles
+            - mountPath: /app/ssd-public-keys
+              name: ssd-public-keys
             - mountPath: /app/secrets/
               name: ssdsecret
               readOnly: true
@@ -78,6 +78,10 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
       volumes:
+        - configMap:
+            defaultMode: 420
+            name: ssd-public-keys
+          name: ssd-public-keys
         - name: ssdsecret
           secret:
             defaultMode: 420
@@ -87,8 +91,6 @@ spec:
             secretName: ssdsecret
         - emptyDir: {}
           name: scanfilepath
-        - emptyDir: {}
-          name: opafiles
         - name: token
           secret:
             defaultMode: 420

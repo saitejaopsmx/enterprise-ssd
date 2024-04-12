@@ -44,6 +44,8 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           volumeMounts:
+            - mountPath: /app/ssd-public-keys
+              name: ssd-public-keys
             - name: supplychain-api-volume
               mountPath: /app/app-config.yaml
               subPath: app-config.yaml
@@ -96,6 +98,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+        - configMap:
+            defaultMode: 420
+            name: ssd-public-keys
+          name: ssd-public-keys
         - name: supplychain-api-volume
           secret:
             secretName: supplychain-api

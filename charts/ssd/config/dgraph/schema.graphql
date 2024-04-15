@@ -36,19 +36,19 @@ type Organization implements RBAC
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryOrganization permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryOrganization path=teams permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryOrganization path=teams,applications permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryOrganization permissions=admin)
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryOrganization permissions=admin)
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
     ]},
     delete: 
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -84,17 +84,17 @@ type DeploymentTarget
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryDeploymentTarget path=organization permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryDeploymentTarget path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryDeploymentTarget path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     delete: 
             { rule: "{$type: {eq: \"internal-account/v1\"}}" }
@@ -116,21 +116,21 @@ type Team implements RBAC
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryTeam permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryTeam path=organization permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryTeam path=applications permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryTeam permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryTeam path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryTeam permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryTeam path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     delete: 
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -153,23 +153,23 @@ type Application implements RBAC
     query: {
         or: [
            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryApplication permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team,organization permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryApplication permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team,organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryApplication permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team permissions=admin)
-            @opsmxAuthRule(var=$groups base=queryApplication path=team,organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
     ]},
     delete: 
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -301,19 +301,19 @@ type Integrator
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryIntegrator path=organization permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryIntegrator path=organization,teams permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryIntegrator path=organization,teams,applications permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryIntegrator path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryIntegrator path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     delete: 
         { rule: "{$type: {eq: \"internal-account/v1\"}}" }
@@ -341,19 +341,19 @@ type FeatureMode
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryFeatureMode path=organization permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryFeatureMode path=organization,teams permissions=admin,read)
-            @opsmxAuthRule(var=$groups base=queryFeatureMode path=organization,teams,applications permissions=admin,read)
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryFeatureMode path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-            @opsmxAuthRule(var=$groups base=queryFeatureMode path=organization permissions=admin)
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
     delete: 
         { rule: "{$type: {eq: \"internal-account/v1\"}}" }

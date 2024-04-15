@@ -60,15 +60,15 @@
   health_endpoint: /health
   auth_required: true
 - name: dgraph
-  baseUrl: dgraph-public:8000
+  baseUrl: dgraph-public:8080
   health_endpoint: /
   auth_required: true
   path_prefixes:
   - "/graphql"
   log_traffic: true
   streaming: false
-- name: oes-ui
-  baseUrl: oes-ui:8080
+- name: ssd-ui
+  baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
 - name: ssd-minio 

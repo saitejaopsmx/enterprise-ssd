@@ -17,7 +17,7 @@ ssdgate:
     tag: v14-alpha1 
 ssdopa:
   image:
-    tag: v2.0.0
+    tag: alpha1-v396
   securityContext:
     runAsUser: 1000
     runAsGroup: 1000
@@ -29,7 +29,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: v1.0.0
+    tag: v1.0.1
 tokenmachine:
   image:
     tag: v1.0.1

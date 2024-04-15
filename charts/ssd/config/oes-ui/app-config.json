@@ -6,5 +6,7 @@
     "cdTool": "",
     "ssd": true,
     "stageSecurityThresholdMinScore": 50,
-    "stageSecurityThresholdMaxScore": 70
+    "stageSecurityThresholdMaxScore": 70,
+    "dgraphToken": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjYxZDU1ODM3LTVmNjItNDUyYy04OTliLWU5MzA5MGUxOTcyYSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJPcHNNeCIsImF1ZCI6WyJzc2Qub3BzbXguaW8iXSwiZXhwIjoxNzQ3Mjk2NzEyLCJuYmYiOjE3MTMxNjg3MTIsImp0aSI6ImFiY2QxMjM0Iiwic3NkLm9wc214LmlvIjp7InR5cGUiOiJ1c2VyL3YxIiwiZ3JvdXBzIjpbInFhIiwiRXZlcnlvbmUiLCJhZG1pbiJdLCJpc0FkbWluIjp0cnVlLCJvcmdJRCI6Ik9wc014IiwidXNlcklEIjoiYmFzYXZhcmFqLnNvbWVzZXR0eUBvcHNteC5pbyJ9fQ.RvoOyzC8N8nLLhWPr2RfLdkmKSoXNbog03caOJov3d9WK20D1bJBZKOQ8Wxch9AHMlOFt0UpI6xltIyIRVq7kEtk_x1kwOnLzGqlwIugRIzyn5n55k4DCRJmHiaRva_VfHRaRzmnd6BmvIPbxr3qFId_IjlpH4reJoVSD2K-6kSVcMrxSFGdv9h-sufvkMx8tuLRMI4nXVFscNw0hjO68VIv5SNMBbEnRhqtc02hRJHVAT4YB1qT0-ODj-0zNDRDlj3W2TfV9cpHTKmZfxHzKPgsEe63T2mG843UPosp74XeGj",
+    "dgraphEndPointUrl": "/graphql"
 }

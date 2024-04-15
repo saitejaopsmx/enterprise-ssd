@@ -17,7 +17,7 @@ ssdgate:
     tag: v14-alpha1 
 ssdopa:
   image:
-    tag: alpha1-v396
+    tag: alpha1-v397
   securityContext:
     runAsUser: 1000
     runAsGroup: 1000

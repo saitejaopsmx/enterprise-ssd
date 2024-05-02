@@ -2638,6 +2638,28 @@
       "HEADER": "Microsoft Teams",
       "BODY":""
     },
+    "GOOGLE-ARTIFACT-REGISTRY": {
+        "HEADER": "Google Artifact Registry",
+        "BODY": "",
+        "ACCOUNTNAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                "cannotContainSpace": "Account Name cannot contain space",
+                "required": "Account Name cannot be empty",
+                "startingFromNumber": "Account Name cannot start with numbers",
+                "minlength": "Account Name should be more than 4 characters"
+            }
+        },
+        "KEY": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "cannotContainSpace": "Key cannot contain space",
+                "required": "Key cannot be empty",
+                "minlength": "Key should be more than 4 characters"
+            }
+        }
+    },
     "SLACK":{
       "HEADER": "Slack",
       "BODY":"<span><li><strong>Account Name</strong>: User-defined account name for your Slack access.</li><li><strong>BotName</strong>: Provide the bot name where you want to receive notifications in slack</li><li><strong>Token</strong>: The user's token to authenticate with slack.</li><li><strong>Validate</strong>: This button controls the validation of the configuration. If it is on, ISD will check the configuration for errors before saving it. If it is off, ISD will save the configuration as it is, without any validation. We recommend keeping the button on unless you are sure that the configuration is correct and does not need validation.</li></span>",

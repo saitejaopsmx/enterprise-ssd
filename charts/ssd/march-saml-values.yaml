@@ -18,13 +18,13 @@ global:
 
 ###############################################################################
 ssdgate:
-  installDex: false
+  installDex: false   # set to true if dex need to be installed
   createGateDexSecret: false
-  auth_type: saml  # saml, dex-oidc and poclogin are other valid values
+  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
   admin_groups:
   - admin
   saml:
     # OKTA-ksrinimba App: feb09-ssd
     metadata_url: https://dev-14704582.okta.com/app/exkf26qs6f8FdWJ3r5d7/sso/saml/metadata
-    saml_initiated_login: true
+    saml_initiated_login: false
 

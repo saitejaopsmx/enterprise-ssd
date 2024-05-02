@@ -12,7 +12,8 @@ skipstartcheck: {{.Values.ssdgate.skipstartcheck }}
 {{- if .Values.ssdgate.dex_url }}
 dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
-auth_type: {{.Values.ssdgate.auth_type}}
+auth_type: {{.Values.ssdgate.auth_type }}
+cors_str: "http://localhost:4200"
 admin_groups:
 {{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
 

@@ -1,0 +1,17 @@
+{
+    "organisationName": "opsmx",
+    "organisationRoles": [
+        {
+            "group": "admin",
+            "permission": "admin"
+        }
+    ],
+    "clusters": [
+        {
+            "name": "in-cluster1",
+            "ip": "https://35.225.51.85",
+            "purpose": "testq"
+        }
+        
+    ]
+}

@@ -152,7 +152,7 @@ ssdgate:
     #  auth_url: "https://dev-80355908.okta.com/oauth2/v1/authorize"
     #  token_url: "https://dev-80355908.okta.com/oauth2/v1/token"
     #scopes:         # OPTIONAL Not required of well-known url is provided, else required
-    #  - openid      # openid MUST be specified, if used. 
+    #  - openid      # openid MUST be specified, if used.
     #  - offline_access # It is best to leave offline_access in
     #  - email
     #  - roles
@@ -228,7 +228,7 @@ supplychainpreprocessor:
     moniker.spinnaker.io/application: isd
 
   serviceAnnotations: {}
-  
+
 ####################################################
 ssdopa:
   ## Image specific details
@@ -261,7 +261,7 @@ supplychainapi:
 tokenmachine:
   ## Image specific details
   image:
-    repository: token-machine 
+    repository: token-machine
     tag: v1.0.1
     pullPolicy: IfNotPresent
 
@@ -290,7 +290,7 @@ rabbitmq:
   #Below block is for only for K8S
   securityContext:
     fsGroup: 1000
-    
+
 ###############################################################################
 ## Values of OES UI
 ui:

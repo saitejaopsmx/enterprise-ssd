@@ -50,7 +50,7 @@ type Organization implements RBAC
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
     ]},
-    delete: 
+    delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
             )
 {
@@ -96,7 +96,7 @@ type DeploymentTarget
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
-    delete: 
+    delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" }
             )
 {
@@ -132,7 +132,7 @@ type Team implements RBAC
 { rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
 { rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
-    delete: 
+    delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
     )
 {
@@ -171,7 +171,7 @@ type Application implements RBAC
 { rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
 { rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
     ]},
-    delete: 
+    delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
             )
 {
@@ -253,7 +253,7 @@ type ApplicationDeployment {
     "id is randomly assigned"
     id: String! @id
     "image that is deployed"
-    image: [Image!] 
+    image: [Image!]
     applicationEnvironment: ApplicationEnvironment!
     deployedAt: DateTime @search
     "deploymentStage is an enum and can be discovered, current, previous or blocked"
@@ -315,24 +315,24 @@ type Integrator
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
-    delete: 
+    delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" }
             )
 {
     id: String! @id
-    organization: Organization!   
-    name: String! @search(by: [exact])     
-    type: String! @search(by: [exact])   
+    organization: Organization!
+    name: String! @search(by: [exact])
+    type: String! @search(by: [exact])
     category: String! @search(by: [exact])
     credentials: Credentials!
     createdAt: DateTime!
-    updatedAt: DateTime! 
+    updatedAt: DateTime!
 }
 
 type Credentials {
-    id: ID! 
+    id: ID!
     data: String!
-    integrator: Integrator! @hasInverse(field: credentials)  
+    integrator: Integrator! @hasInverse(field: credentials)
 }
 
 
@@ -355,18 +355,18 @@ type FeatureMode
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]},
-    delete: 
+    delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" }
             )
 {
     id: String! @id
-    organization: Organization!   
-    scan: String! @search(by: [exact]) 
+    organization: Organization!
+    scan: String! @search(by: [exact])
     type: String! @search(by: [exact])
     enabled: Boolean!
     category: String! @search(by: [exact])
     createdAt: DateTime!
-    updatedAt: DateTime! 
+    updatedAt: DateTime!
 }
 
 
@@ -386,7 +386,7 @@ type Tag {
 }
 
 type PolicyDefinition {
-    id: String! @id 
+    id: String! @id
     ownerOrg: Organization!
     ownerTeam: Team
     ownerApplication: Application
@@ -397,11 +397,11 @@ type PolicyDefinition {
     stage: String! @search(by: [exact])
     description: String!
     scheduledPolicy: Boolean!
-    script: String! 
-    datasourceTool: [DatasourceTool!] 
-    variables: String  
-    conditionName: String 
-    suggestion: String 
+    script: String!
+    datasourceTool: [DatasourceTool!]
+    variables: String
+    conditionName: String
+    suggestion: String
 }
 
 type DatasourceTool {
@@ -417,7 +417,7 @@ type PolicyEnforcement {
     enforcedTeam: Team @hasInverse(field: policyEnforcements)
     enforcedApplication: Application @hasInverse(field: policyEnforcements)
     status: Boolean! @search
-    forceApply: Boolean 
+    forceApply: Boolean
     severity: Severity!
     action: String! @search(by: [exact])
     conditionValue: String
@@ -429,31 +429,31 @@ type PolicyEnforcement {
 
 type RunHistory  {
     id: ID!
-    policyId: String! @search(by: [exact])          
+    policyId: String! @search(by: [exact])
     applicationDeployment: ApplicationDeployment! @hasInverse(field: policyRunHistory)
-    PolicyName: String! @search(by: [exact])  
-    Severity: Severity! @search(by: [exact])              
-    Stage: String! @search(by: [exact])             
-    Image: String! @search(by: [exact])        
-    ImageTag: String! @search(by: [exact])       
-    ImageSha: String! @search(by: [exact])             
-    ImageNameTag: String! @search(by: [exact])              
+    PolicyName: String! @search(by: [exact])
+    Severity: Severity! @search(by: [exact])
+    Stage: String! @search(by: [exact])
+    Image: String! @search(by: [exact])
+    ImageTag: String! @search(by: [exact])
+    ImageSha: String! @search(by: [exact])
+    ImageNameTag: String! @search(by: [exact])
     Status: String!
-    DatasourceTool: String!          
-    AlertTitle: String @search(by: [exact])         
-    AlertMessage: String @search(by: [exact])       
-    Suggestions: String @search(by: [exact]) 
-    Reason: String   
+    DatasourceTool: String!
+    AlertTitle: String @search(by: [exact])
+    AlertMessage: String @search(by: [exact])
+    Suggestions: String @search(by: [exact])
+    Reason: String
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
     DeployedAt: DateTime! @search
-    Action: String! @search(by: [exact])              
-    Hash: String                  
-    Error: String @search(by: [exact])                 
-    Pass: Boolean! @search 
-    MetaData: String  
+    Action: String! @search(by: [exact])
+    Hash: String
+    Error: String @search(by: [exact])
+    Pass: Boolean! @search
+    MetaData: String
     scheduledPolicy: Boolean! @search
-    policyEnforcements: PolicyEnforcement! 
+    policyEnforcements: PolicyEnforcement!
 }
 
 
@@ -477,7 +477,7 @@ type BuildTool {
     "digest is the sha of the image"
     digest: String! @search(by: [exact])
     "buildDigest is the sha of the image as sent from the build tool"
-    buildDigest: String @search(by: [exact]) 
+    buildDigest: String @search(by: [exact])
     "imageNode links a BuildTool node to an image"
     imageNode: Image
     "buildTime is the time at which the image was built"
@@ -512,7 +512,7 @@ type SourceCodeTool {
     visibility: String
     "parentRepo is populated in case the git repo is a fork"
     parentRepo: String
-    buildTool: BuildTool! 
+    buildTool: BuildTool!
 }
 
 """

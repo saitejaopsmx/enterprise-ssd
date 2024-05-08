@@ -14,7 +14,7 @@ toolchain:
   #  runAsGroup: 1000
 ssdgate:
   image:
-    tag: v14-alpha1 
+    tag: v14-alpha1
 ssdopa:
   image:
     tag: alpha1-v397

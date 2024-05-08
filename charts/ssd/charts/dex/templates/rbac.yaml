@@ -19,7 +19,7 @@ metadata:
 roleRef:
   kind: Role
   apiGroup: rbac.authorization.k8s.io
-  name: {{ include "dex.fullname" . }}  
+  name: {{ include "dex.fullname" . }}
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}

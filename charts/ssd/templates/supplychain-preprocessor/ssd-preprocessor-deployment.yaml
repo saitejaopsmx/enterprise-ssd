@@ -4,29 +4,29 @@ metadata:
   name: supplychain-preprocessor
   labels:
     app: ssd
-    component: oes-supplychain-preprocessor
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: supplychain-preprocessor
+{{ include "ssd.standard-labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ssd
-      component: oes-supplychain-preprocessor
+      component: supplychain-preprocessor
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: ssd
-        component: oes-supplychain-preprocessor
-{{ include "oes.standard-labels" . | indent 8 }}
+        component: supplychain-preprocessor
+{{ include "ssd.standard-labels" . | indent 8 }}
       annotations:
 {{- if .Values.supplychainpreprocessor.annotations -}}
         {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
 {{- end }}
     spec:
       containers:
-      - name: oes-supplychain-preprocessor
+      - name: supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
         envFrom:
         - configMapRef:
@@ -133,5 +133,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
-

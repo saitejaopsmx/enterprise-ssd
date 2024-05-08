@@ -4,7 +4,7 @@ metadata:
   labels:
     app: ssd
     component: db
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.db.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.db.serviceAnnotations | indent 4 }}

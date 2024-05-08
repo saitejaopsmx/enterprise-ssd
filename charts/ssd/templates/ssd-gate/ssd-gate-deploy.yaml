@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ssd
     component: gate
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
   name: ssd-gate
 spec:
   replicas: 1

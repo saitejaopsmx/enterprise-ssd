@@ -4,7 +4,7 @@ metadata:
   labels:
     app: ssd
     component: rabbitmq
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
   name: rabbitmq
 spec:
   replicas: 1
@@ -21,7 +21,7 @@ spec:
       labels:
         app: ssd
         component: rabbitmq
-{{ include "oes.standard-labels" . | indent 8 }}
+{{ include "ssd.standard-labels" . | indent 8 }}
     spec:
       containers:
       - image: {{ .Values.rabbitmq.image.registry }}:{{ .Values.rabbitmq.image.repository }}

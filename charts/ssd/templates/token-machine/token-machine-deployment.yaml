@@ -4,19 +4,19 @@ metadata:
   name: token-machine
   labels:
     app: ssd
-    component: ssd-token-machine
+    component: token-machine
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ssd
-      component: ssd-token-machine
+      component: token-machine
   template:
     metadata:
       labels:
         app: ssd
-        component: ssd-token-machine
+        component: token-machine
 {{ include "ssd.standard-labels" . | indent 8 }}
       annotations:
 {{- if .Values.tokenmachine.annotations -}}

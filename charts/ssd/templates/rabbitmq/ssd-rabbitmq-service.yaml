@@ -4,7 +4,7 @@ metadata:
   labels:
     app: ssd
     component: rabbitmq
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.rabbitmq.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.rabbitmq.serviceAnnotations | indent 4 }}

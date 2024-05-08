@@ -12,7 +12,7 @@ global:
     installed: true
   createIngress: true
 
-  oesUI: # URL used to access the application
+  ssdUI: # URL used to access the application
     protocol: https
     host: feb09-ssd.ryzon7-isd40.opsmx.org 
 

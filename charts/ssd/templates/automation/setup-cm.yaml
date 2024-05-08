@@ -8,5 +8,5 @@ metadata:
   labels:
     app: ssd
     component: automation
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
 

@@ -57,7 +57,7 @@ global:
   createIngress: false
 
   ## OES-UI url configuration, defaults to http://localhost:8080
-  oesUI:
+  ssdUI:
     protocol: http
     host: localhost
     # Use below port when hostname above is an external IP instead of a hostname

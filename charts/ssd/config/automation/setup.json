@@ -8,9 +8,9 @@
     ],
     "clusters": [
         {
-            "name": "in-cluster1",
+            "name": "in-cluster",
             "ip": "https://35.225.51.85",
-            "purpose": "testq"
+            "purpose": "test"
         }
         
     ]

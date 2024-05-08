@@ -4,7 +4,7 @@ metadata:
   name: token-machine
   labels:
     app: ssd
-    component: ssd-token-machine
+    component: token-machine
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.tokenmachine.serviceAnnotations }}
   annotations:
@@ -21,4 +21,4 @@ spec:
       {{- end }}
   selector:
     app: ssd
-    component: ssd-token-machine
+    component: token-machine

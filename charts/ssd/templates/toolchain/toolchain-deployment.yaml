@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   labels:
     app: ssd
-    component: oes-toolchain
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: toolchain
+{{ include "ssd.standard-labels" . | indent 4 }}
   name: tool-chain
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ssd
-      component: oes-toolchain
+      component: toolchain
   template:
     metadata:
       labels:
         app: ssd
-        component: oes-toolchain
+        component: toolchain
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}

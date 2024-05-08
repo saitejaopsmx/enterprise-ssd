@@ -4,8 +4,8 @@ metadata:
   name: tool-chain
   labels:
     app: ssd
-    component: oes-toolchain
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: toolchain
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.toolchain.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.toolchain.serviceAnnotations | indent 4 }}
@@ -21,4 +21,4 @@ spec:
       {{- end }}
   selector:
     app: ssd
-    component: oes-toolchain
+    component: toolchain

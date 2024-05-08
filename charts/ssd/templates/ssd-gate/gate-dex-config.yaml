@@ -6,7 +6,7 @@ metadata:
   labels:
     app: ssd
     component: gate
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
 stringData:
   config.yaml: |
     {{- tpl (.Files.Get "config/dex/config.yaml") . | nindent 4 }}

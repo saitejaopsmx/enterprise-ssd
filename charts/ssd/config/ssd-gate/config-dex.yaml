@@ -1,4 +1,4 @@
-ssd_baseurl: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}
+ssd_baseurl: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
 
 {{- if .Values.ssdgate.home_page }}
 home_page: {{.Values.ssdgate.home_page }}
@@ -28,7 +28,7 @@ auth2_oidc:
   {{- if .Values.ssdgate.auth2_oidc.well_known_url }}
   well_known_url: "{{.Values.ssdgate.auth2_oidc.well_known_url}}"
   {{- else }}
-  well_known_url: "{{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex/.well-known/openid-configuration"
+  well_known_url: "{{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}/dex/.well-known/openid-configuration"
   {{- end }}
   {{- if .Values.ssdgate.auth2_oidc.userinfo_url }}
   userinfo_url: "{{.Values.ssdgate.auth2_oidc.userinfo_url }}

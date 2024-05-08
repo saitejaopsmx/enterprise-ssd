@@ -7,29 +7,52 @@ spec:
   template:
     spec:
       containers:
-      - command: ["/bin/sh", "-c"]
-        args:
-        - |
-          cd /tmp
-          server_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
-          echo "executing updating dgraphs schema at $server_endpoint"
-          RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat setup.json)" $server_endpoint`
-          echo $RESP
-          cd
-          kubectl -n {{ .Release.Namespace }} get secret supplychain-api-token -o jsonpath='{.data.token}' | base64 -d > secretdata
-          curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"in-cluster\" } }) @cascade{id organization(filter: { name: { eq: \"opsmx\" } }) { id}}}"}' > seconddata
-          cat seconddata
-          instanceid=$(yq eval '.data.queryDeploymentTarget[0].id' seconddata)
-          echo $instanceid
-          orgid=$(yq eval '.data.queryDeploymentTarget.[0].organization.id' seconddata)
-          echo $orgid
-          yq eval '.orgID = "'$orgid'"' /tmp/token/token > org.json
-          cat org.json
-          yq eval '.instance = "'$instanceid'"' org.json > full.json
-          cat full.json
-          curl -X POST http://token-machine:8050/api/v1/createServiceToken -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat /root/secretdata)" -d @full.json > tokencreate
-          yq eval '.token' tokencreate > config.yaml
-          kubectl -n sai-ssd create secret generic kubedetector --from-file=config.yaml
+      - args:
+           - |-
+             server_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
+             echo "executing updating dgraphs schema at $server_endpoint"
+             wait_period=0
+             while true
+             do
+             kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
+             DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
+             SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
+             TOKENMACHINE=$(grep token-machine live.status | awk '{print $2}')
+             wait_period=$(($wait_period+10))
+             if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$TOKENMACHINE" == "true" ];
+             then
+             RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $server_endpoint`
+             echo $RESP
+             kubectl -n {{ .Release.Namespace }} get secret supplychain-api-token -o jsonpath='{.data.token}' | base64 -d > secretdata
+             curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"in-cluster\" } }) @cascade{id organization(filter: { name: { eq: \"opsmx\" } }) { id}}}"}' > seconddata
+             cat seconddata
+             instanceid=$(yq eval '.data.queryDeploymentTarget[0].id' seconddata)
+             echo $instanceid
+             orgid=$(yq eval '.data.queryDeploymentTarget.[0].organization.id' seconddata)
+             echo $orgid
+             yq eval '.orgID = "'$orgid'"' /tmp/token/token > org.json
+             cat org.json
+             yq eval '.instance = "'$instanceid'"' org.json > full.json
+             cat full.json
+             curl -X POST http://token-machine:8050/api/v1/createServiceToken -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d @full.json > tokencreate
+             yq eval '.token' tokencreate > config.yaml
+             kubectl -n {{ .Release.Namespace }} create secret generic kubedetector --from-file=config.yaml
+             break
+             else
+             if [ $wait_period -gt 1000 ];
+             then
+             echo "Script is timed out as the Dgraph and Supply chain is not ready yet......."
+             break
+             else
+             echo "Waiting for Dgraph,Supply chain and Token machine services to be ready"
+             sleep 10
+             fi
+             fi
+             done
+        command:
+          - /bin/bash
+          - +x
+          - '-c'
         image: quay.io/opsmxpublic/opsmx-custom-binaries:kubectl-spin-cli-git-bash-jq-yq
         imagePullPolicy: IfNotPresent
         name: setup-update

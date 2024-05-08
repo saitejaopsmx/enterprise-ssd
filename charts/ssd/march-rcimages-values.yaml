@@ -36,3 +36,7 @@ tokenmachine:
 rabbitmq:
   serviceAnnotations:
     awsAnnotationsGo: HERE
+kubedetector:
+  namespaces:
+  ## Update the namespaces in the below
+  -

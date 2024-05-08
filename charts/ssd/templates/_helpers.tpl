@@ -29,26 +29,6 @@ Return the proper UI image name
 {{- end -}}
 
 {{/*
-Return the proper GATE image name
-*/}}
-{{- define "gate.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.gate.image.repository -}}
-{{- $tag := .Values.gate.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
-Return the proper datascience image name
-*/}}
-{{- define "datascience.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.datascience.image.repository -}}
-{{- $tag := .Values.datascience.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
 Return the proper sapor-db image name
 */}}
 {{- define "db.image" -}}
@@ -150,7 +130,7 @@ Return the proper Supplychain-api Image
 
 
 {{/*
- Return the proper ssd-opa Image
+ Return the proper Token-Machine Image
 */}}
  {{- define "tokenmachine.image" -}}
  {{- $registryName := .Values.imageCredentials.registry -}}
@@ -160,7 +140,7 @@ Return the proper Supplychain-api Image
  {{- end -}}
 
 {{/*
- Return the proper dgraph Image
+ Return the proper Curl Image
 */}}
  {{- define "curl.image" -}}
  {{- $registryName := .Values.imageCredentials.registry -}}
@@ -168,6 +148,17 @@ Return the proper Supplychain-api Image
  {{- $tag := .Values.curl.image.tag | toString -}}
  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
  {{- end -}}
+
+{{/*
+Return the proper kube-detector image name
+*/}}
+{{- define "kubedetector.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.kubedetector.image.repository -}}
+{{- $tag := .Values.kubedetector.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
 
 {{/* vim: set filetype=mustache: */}}
 {{/*

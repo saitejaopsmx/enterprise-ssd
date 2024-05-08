@@ -19,16 +19,15 @@ spec:
         component: ssd-kubernetes-detector
     spec:
       containers:
-      - env:
+      - name: kubernetes-detector
+        image: {{ template "kubedetector.image" . }}
+        env:
         - name: INCLUSTER
           value: INCLUSTER
         - name: SSD_API_URL
           value: http://supplychain-api:8099/ssdservice/v1/ssd-kubernetes-info
         - name: LOG_LEVEL
           value: debug
-        image: quay.io/opsmxpublic/kubernetes-detector:v1.0.1 
-        imagePullPolicy: IfNotPresent
-        name: main
         resources:
           limits:
             cpu: "1"
@@ -36,22 +35,31 @@ spec:
           requests:
             cpu: 100m
             memory: 10Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /app/secrets/
           name: ssdtoken
           readOnly: true
+        securityContext:
+      {{- if .Values.supplychainapi.securityContext }}
+      {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      restartPolicy: Always
       serviceAccountName: ssd-kubernetes-detector-{{ .Release.Namespace }}
-      terminationGracePeriodSeconds: 30
       volumes:
       - name: ssdtoken
         secret:

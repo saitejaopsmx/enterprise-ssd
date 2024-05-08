@@ -216,6 +216,7 @@ toolchain:
 
   serviceAnnotations: {}
 
+  securityContext: {}
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -228,6 +229,8 @@ supplychainpreprocessor:
     moniker.spinnaker.io/application: isd
 
   serviceAnnotations: {}
+
+  securityContext: {}
 
 ####################################################
 ssdopa:
@@ -257,6 +260,8 @@ supplychainapi:
 
   serviceAnnotations: {}
 
+  securityContext: {}
+
 ######################################################
 tokenmachine:
   ## Image specific details
@@ -268,8 +273,10 @@ tokenmachine:
   annotations: {}
 
   serviceAnnotations: {}
+
+  securityContext: {}
 ###############################################################################
-## Details of rabbitmq message bus image for OES
+## Details of rabbitmq message bus image for SSD
 ##
 rabbitmq:
   ## rabbitmq  endpoint that is used by oes-gate and oes-platform for caching;
@@ -292,7 +299,7 @@ rabbitmq:
     fsGroup: 1000
 
 ###############################################################################
-## Values of OES UI
+## Values of SSD UI
 ui:
   ## Image specific details
   image:
@@ -308,6 +315,25 @@ ui:
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
+
+##############################################################################
+kubedetector:
+  image:
+    repository: kubernetes-detector
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  securityContext: {}
+
+  namespaces:
+  ## Update the namespaces in the below
+  -
+
+#################################################################################
 
 nodeSelector: {}
 tolerations: []

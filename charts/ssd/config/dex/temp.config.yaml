@@ -71,7 +71,7 @@ enablePasswordDB: true
 # A static list of passwords for the password connector.
 #
 # Alternatively, passwords my be added/updated through the gRPC API.
-staticPasswords: 
+staticPasswords:
 - email: "admin@opsmx.io"
   hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
   username: "admin"

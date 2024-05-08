@@ -100,7 +100,7 @@ integrationData:
             helpText: Enable/Disable
             placeholderText: 'Example:Helm Scan'
             data:
-              - Sast/Dast scan   
+              - Sast/Dast scan
   - stage: Build
     integrations:
       - integratorType: jenkins
@@ -272,7 +272,7 @@ integrationData:
             helpText: Enable/Disable
             placeholderText: 'Example:Helm Scan'
             data:
-              - Helm Scan 
+              - Helm Scan
   - stage: Deploy
     integrations:
       - integratorType: kubescape
@@ -370,4 +370,4 @@ integrationData:
             helpText: Authentiation Type
             placeholderText: 'Example:knjnasjwokldjhse'
             authType:
-              - apiKey  
+              - apiKey

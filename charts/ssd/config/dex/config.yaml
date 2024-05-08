@@ -30,7 +30,7 @@ staticClients:
 
 {{- if .Values.ssdgate.auth2_oidc.connectors }}
 {{- with .Values.ssdgate.auth2_oidc.connectors }}
-connectors: 
+connectors:
 {{- toYaml . | nindent 2 }}
 {{- end }}
 {{- else }}
@@ -79,7 +79,7 @@ connectors: []
 # Enable the password database.
 enablePasswordDB: false
 # A static list of passwords for the password connector.
-#staticPasswords: 
+#staticPasswords:
 #- email: "admin@opsmx.io"
 #  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
 #  username: "admin"

@@ -21,7 +21,7 @@ spec:
               if [ -z $RESP  ]; then
                 counter=$((counter + 1))
                 echo "Sleeping for 5 sec...:$RESP"
-                sleep 5 
+                sleep 5
               else
                 echo "Update Response:$RESP"
                 break

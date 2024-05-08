@@ -71,7 +71,7 @@
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
-- name: ssd-minio 
+- name: ssd-minio
   baseUrl: ssd-minio:9000
   health_endpoint: ""
   auth_required: true

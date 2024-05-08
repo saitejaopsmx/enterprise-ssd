@@ -13,4 +13,3 @@ Thank you for installing Secure Software Delivery (SSD) platform from OpsMx
 
 {{- end }}
     You can login with admin and admin-password stored in ssd-initial-passwords secret
-    

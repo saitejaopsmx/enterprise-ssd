@@ -74,7 +74,7 @@ spec:
         - mountPath: /app/saml   # Any saml-authenticator specific files go here. this is option
           name: saml-files
         - mountPath: /usr/local/share/ca-certificates
-          name: custom-certs 
+          name: custom-certs
         - mountPath: /app/internaltoken
           name: ssd-gate-token
       initContainers:
@@ -143,12 +143,12 @@ spec:
             path: private.key         # Only key is a secret
           - key: metadata.xml
             path: metadata.xml        #e.g. Specify /app/saml/metadata.xml ssd-gate-config.yaml
-          optional: true             
+          optional: true
           secretName: saml-files
       - name: poc-passwords         # Can be deleted after Authentication has been configured, this is for POC/start up only
         secret:
           defaultMode: 420
-          optional: true             
+          optional: true
           secretName: poc-passwords
       - name: ssd-proxy-certs
         configMap:
@@ -179,5 +179,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
 

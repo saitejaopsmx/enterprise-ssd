@@ -44,8 +44,8 @@ spec:
              cat config.yaml
              kubectl -n {{ .Release.Namespace }} delete secret kubedetector
              kubectl -n {{ .Release.Namespace }} create secret generic kubedetector --from-file=config.yaml
-             sleep 5
-             kubectl -n {{ .Release.Namespace }} rollout restart deploy -l component=ssd-kubernetes-detector
+             sleep 1
+             kubectl -n {{ .Release.Namespace }} rollout restart deploy kubernetes-detector
              break
              else
              if [ $wait_period -gt 1000 ];

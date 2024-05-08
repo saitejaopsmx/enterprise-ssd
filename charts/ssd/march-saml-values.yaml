@@ -18,8 +18,8 @@ global:
 
 ###############################################################################
 ssdgate:
-  installDex: false   # set to true if dex need to be installed
-  createGateDexSecret: false
+  installDex: true   # set to true if dex need to be installed
+  createGateDexSecret: true
   auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
   admin_groups:
   - admin

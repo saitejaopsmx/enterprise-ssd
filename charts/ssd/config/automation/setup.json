@@ -1,5 +1,5 @@
 {
-    "organisationName": "opsmx",
+    "organisationName": "default",
     "organisationRoles": [
         {
             "group": "admin",
@@ -10,7 +10,7 @@
         {
             "name": "in-cluster",
             "ip": "https://35.225.51.85",
-            "purpose": "test"
+            "purpose": "in-cluster"
         }
     ]
 }

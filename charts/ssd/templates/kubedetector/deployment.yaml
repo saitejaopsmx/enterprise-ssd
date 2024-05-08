@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-detector
+  labels:
+    app: ssd
+    component: ssd-kubernetes-detector
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssd
+      component: ssd-kubernetes-detector
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: ssd-kubernetes-detector
+    spec:
+      containers:
+      - env:
+        - name: INCLUSTER
+          value: INCLUSTER
+        - name: SSD_API_URL
+          value: http://supplychain-api:8099/ssdservice/v1/ssd-kubernetes-info
+        - name: LOG_LEVEL
+          value: debug
+        image: quay.io/opsmxpublic/kubernetes-detector:v1.0.1 
+        imagePullPolicy: IfNotPresent
+        name: main
+        resources:
+          limits:
+            cpu: "1"
+            memory: 50Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /app/secrets/
+          name: ssdtoken
+          readOnly: true
+      serviceAccountName: ssd-kubernetes-detector-{{ .Release.Namespace }}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: ssdtoken
+        secret:
+          defaultMode: 420
+          secretName: kubedetector

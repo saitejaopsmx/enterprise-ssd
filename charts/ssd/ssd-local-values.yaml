@@ -1,0 +1,30 @@
+#####################################################
+# This is a minimal configuration needed for SSD Installation
+# Using builtin poc login
+#####################################################
+
+RabbitServiceType: NodePort
+
+kubedetector:
+  namespaces:
+  ## Update the namespaces in the below section if not leave as empty.
+  ## If the namespace is provided the container Images of the respective namespace vunarabilities will be displayed.
+  - 
+
+#############User doesn't need to change anything in below lines##################
+global:
+  createIngress: false
+  ssdUI:
+    protocol: http
+    host: localhost
+    port: 8080
+
+noPvc: true
+minio:
+  mode: standalone
+  persistence:
+    enabled: false
+ssdgate:
+  installDex: false
+  createGateDexSecret: false
+  auth_type: poclogin

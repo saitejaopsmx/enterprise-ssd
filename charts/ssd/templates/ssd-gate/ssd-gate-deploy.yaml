@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ssd
     component: gate
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
   name: ssd-gate
 spec:
   replicas: 1
@@ -47,7 +47,7 @@ spec:
             name: ssd-proxy-certs
             optional: true
         - secretRef:
-            name: poc-passwords
+            name: ssd-initial-password
             optional: true
         securityContext:
       {{- if .Values.ssdgate.securityContext }}
@@ -74,7 +74,9 @@ spec:
         - mountPath: /app/saml   # Any saml-authenticator specific files go here. this is option
           name: saml-files
         - mountPath: /usr/local/share/ca-certificates
-          name: custom-certs 
+          name: custom-certs
+        - mountPath: /app/internaltoken
+          name: ssd-gate-token
       initContainers:
       - command:
         - sh
@@ -94,6 +96,8 @@ spec:
           name: ssd-gate-config
         - mountPath: /app/config   # emptyDir where the files with secrets replaced with correct values will be placed
           name: config-home
+        - mountPath: /app/publickeys
+          name: ssd-public-keys
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -111,6 +115,14 @@ spec:
           name: services-config
           optional: true
         name: services-config
+      - name: ssd-gate-token
+        secret:
+          defaultMode: 420
+          secretName: ssd-gate-token
+      - configMap:
+          defaultMode: 420
+          name: ssd-public-keys
+        name: ssd-public-keys
       - configMap:                # Script for secret replacement, use "encrypted:SECRETE-NAME:KEY" for value, key should be same as the secret-name
           defaultMode: 420
           name: secret-decoder
@@ -131,13 +143,13 @@ spec:
             path: private.key         # Only key is a secret
           - key: metadata.xml
             path: metadata.xml        #e.g. Specify /app/saml/metadata.xml ssd-gate-config.yaml
-          optional: true             
+          optional: true
           secretName: saml-files
       - name: poc-passwords         # Can be deleted after Authentication has been configured, this is for POC/start up only
         secret:
           defaultMode: 420
-          optional: true             
-          secretName: poc-passwords
+          optional: true
+          secretName: ssd-initial-passwords
       - name: ssd-proxy-certs
         configMap:
           defaultMode: 420
@@ -167,5 +179,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
 

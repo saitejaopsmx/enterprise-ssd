@@ -1,0 +1,42 @@
+ui:
+  image:
+    tag: 202404121157-ssd
+  securityContext:
+    allowPrivilegeEscalation: false
+  serviceAnnotations:
+    awsAnnotationsGo: HERE
+toolchain:
+  image:
+    tag: v1.4.0
+  #securityContext:
+  #  fsGroup: 1000
+  #  runAsUser: 1000
+  #  runAsGroup: 1000
+ssdgate:
+  image:
+    tag: v14-alpha1
+ssdopa:
+  image:
+    tag: alpha1-v397
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+supplychainpreprocessor:
+  image:
+    tag: v1.3.0-alpha.1
+  #securityContext:
+  #  readOnlyRootFilesystem: false
+  #  runAsNonRoot: true
+supplychainapi:
+  image:
+    tag: v1.0.1
+tokenmachine:
+  image:
+    tag: v1.0.1
+rabbitmq:
+  serviceAnnotations:
+    awsAnnotationsGo: HERE
+kubedetector:
+  namespaces:
+  ## Update the namespaces in the below
+  -

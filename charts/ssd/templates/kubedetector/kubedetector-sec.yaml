@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubedetector
+  labels:
+    app: ssd
+{{ include "ssd.standard-labels" . | indent 4 }}
+stringData:
+{{ (tpl (.Files.Glob "config/kubedetector/config.yaml").AsConfig . ) | indent 2 }}

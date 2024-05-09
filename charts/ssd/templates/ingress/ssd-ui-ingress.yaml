@@ -9,26 +9,26 @@ metadata:
     cert-manager.io/issuer: letsencrypt-{{ .Release.Namespace }}-spin
     kubernetes.io/tls-acme: "true"
 {{- end }}
-{{- if .Values.global.oesUI.ingress.annotations }}
-{{ tpl (toYaml .Values.global.oesUI.ingress.annotations) . | indent 4 }}
+{{- if .Values.global.ssdUI.ingress.annotations }}
+{{ tpl (toYaml .Values.global.ssdUI.ingress.annotations) . | indent 4 }}
 {{- end }}
   name: ssd-ui-ingress
 spec:
   rules:
-  - host: {{ .Values.global.oesUI.host }}
+  - host: {{ .Values.global.ssdUI.host }}
     http:
       paths:
       - backend:
           service:
-            name: oes-ui
+            name: ssd-ui
             port:
               number: 8080
         path: /
         pathType: ImplementationSpecific
-{{- if eq .Values.global.oesUI.protocol "https" }}
+{{- if eq .Values.global.ssdUI.protocol "https" }}
   tls:
   - hosts:
-    - {{ .Values.global.oesUI.host }}
-{{ toYaml .Values.global.oesUI.ingress.tls | indent 4 }}
+    - {{ .Values.global.ssdUI.host }}
+{{ toYaml .Values.global.ssdUI.ingress.tls | indent 4 }}
 {{- end }}
 {{- end }}

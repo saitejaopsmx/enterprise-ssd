@@ -1,13 +1,13 @@
 # https://github.com/dexidp/dex/blob/master/config.yaml.dist
 
-{{- if eq .Values.global.oesUI.host "localhost" }}
-issuer: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
+{{- if eq .Values.global.ssdUI.host "localhost" }}
+issuer: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}:{{.Values.global.ssdUI.port}}/dex
 web:
-  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/dex
+  http: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}:{{.Values.global.ssdUI.port}}/dex
 {{- else }}
-issuer: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
+issuer: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}/dex
 web:
-  http: {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/dex
+  http: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}/dex
 {{- end }}
 
 storage:
@@ -20,17 +20,17 @@ staticClients:
   - id: ssd-gate
     redirectURIs:
       - 'http://ssd-gate:8084/oidccallbackendpoint'
-{{- if eq .Values.global.oesUI.host "localhost" }}
-      - {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}:{{.Values.global.oesUI.port}}/oidccallbackendpoint
+{{- if eq .Values.global.ssdUI.host "localhost" }}
+      - {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}:{{.Values.global.ssdUI.port}}/oidccallbackendpoint
 {{- else }}
-      - {{.Values.global.oesUI.protocol}}://{{.Values.global.oesUI.host}}/oidccallbackendpoint
+      - {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}/oidccallbackendpoint
 {{- end }}
     name: 'ssd gate'
     secretEnv: GATE_CLIENT_SECRET
 
 {{- if .Values.ssdgate.auth2_oidc.connectors }}
 {{- with .Values.ssdgate.auth2_oidc.connectors }}
-connectors: 
+connectors:
 {{- toYaml . | nindent 2 }}
 {{- end }}
 {{- else }}
@@ -79,7 +79,7 @@ connectors: []
 # Enable the password database.
 enablePasswordDB: false
 # A static list of passwords for the password connector.
-#staticPasswords: 
+#staticPasswords:
 #- email: "admin@opsmx.io"
 #  hash: "$2y$10$oVR6AAUpc.oitoRoRRuETu4qY/8ZzQjcIGmGUQMjMKp9vOeWv6C7C"    # password is password
 #  username: "admin"

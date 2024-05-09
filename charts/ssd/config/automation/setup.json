@@ -1,0 +1,16 @@
+{
+    "organisationName": "{{ .Values.organisationname }}",
+    "organisationRoles": [
+        {
+            "group": "admin",
+            "permission": "admin"
+        }
+    ],
+    "clusters": [
+        {
+            "name": "{{ .Values.clustername }}",
+            "ip": "https://35.225.51.85",
+            "purpose": "{{ .Values.clustername }}"
+        }
+    ]
+}

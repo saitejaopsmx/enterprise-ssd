@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-detector
+  labels:
+    app: ssd
+    component: ssd-kubernetes-detector
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssd
+      component: ssd-kubernetes-detector
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: ssd-kubernetes-detector
+    spec:
+      containers:
+      - name: kubernetes-detector
+        image: {{ template "kubedetector.image" . }}
+        env:
+        - name: INCLUSTER
+          value: INCLUSTER
+        - name: SSD_API_URL
+          value: http://supplychain-api:8099/ssdservice/v1/ssd-kubernetes-info
+        - name: LOG_LEVEL
+          value: debug
+        resources:
+          limits:
+            cpu: "1"
+            memory: 50Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        volumeMounts:
+        - mountPath: /app/secrets/
+          name: ssdtoken
+          readOnly: true
+        securityContext:
+      {{- if .Values.supplychainapi.securityContext }}
+      {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      restartPolicy: Always
+      serviceAccountName: ssd-kubernetes-detector-{{ .Release.Namespace }}
+      volumes:
+      - name: ssdtoken
+        secret:
+          defaultMode: 420
+          secretName: kubedetector

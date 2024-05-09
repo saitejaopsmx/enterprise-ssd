@@ -19,6 +19,10 @@ noPvc: false
 
 AESEncryptionKey: OKPQK0JWS2TVTW9E86IWWYN3VY4Z34WJ
 ####################################################
+## Redis configuration
+## Set it to false only if SSD needs to be configured with external redis
+installRedis: true
+###################################################
 # kubernetes services can be exposed to a web-UI based 3 modes
 # ClusterIP (will required Ingress or some other mechanism)
 # or LoadBalancer or NodePort
@@ -27,6 +31,11 @@ k8sServiceType: ClusterIP
 UIServiceType: ClusterIP
 RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
 
+#################################################
+clustername: in-cluster
+
+## Change the Organisation name if user wants a different name in the UI
+organisationname: default
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
@@ -53,7 +62,7 @@ global:
   createIngress: false
 
   ## OES-UI url configuration, defaults to http://localhost:8080
-  oesUI:
+  ssdUI:
     protocol: http
     host: localhost
     # Use below port when hostname above is an external IP instead of a hostname
@@ -148,7 +157,7 @@ ssdgate:
     #  auth_url: "https://dev-80355908.okta.com/oauth2/v1/authorize"
     #  token_url: "https://dev-80355908.okta.com/oauth2/v1/token"
     #scopes:         # OPTIONAL Not required of well-known url is provided, else required
-    #  - openid      # openid MUST be specified, if used. 
+    #  - openid      # openid MUST be specified, if used.
     #  - offline_access # It is best to leave offline_access in
     #  - email
     #  - roles
@@ -208,11 +217,11 @@ toolchain:
     tag: v4.0.4-rc4
     pullPolicy: IfNotPresent
 
-  annotations:
-    moniker.spinnaker.io/application: isd
+  annotations: {}
 
   serviceAnnotations: {}
 
+  securityContext: {}
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -225,7 +234,9 @@ supplychainpreprocessor:
     moniker.spinnaker.io/application: isd
 
   serviceAnnotations: {}
-  
+
+  securityContext: {}
+
 ####################################################
 ssdopa:
   ## Image specific details
@@ -254,8 +265,23 @@ supplychainapi:
 
   serviceAnnotations: {}
 
+  securityContext: {}
+
+######################################################
+tokenmachine:
+  ## Image specific details
+  image:
+    repository: token-machine
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  securityContext: {}
 ###############################################################################
-## Details of rabbitmq message bus image for OES
+## Details of rabbitmq message bus image for SSD
 ##
 rabbitmq:
   ## rabbitmq  endpoint that is used by oes-gate and oes-platform for caching;
@@ -276,9 +302,9 @@ rabbitmq:
   #Below block is for only for K8S
   securityContext:
     fsGroup: 1000
-    
+
 ###############################################################################
-## Values of OES UI
+## Values of SSD UI
 ui:
   ## Image specific details
   image:
@@ -294,6 +320,25 @@ ui:
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
+
+##############################################################################
+kubedetector:
+  image:
+    repository: kubernetes-detector
+    tag: v1.0.1
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  securityContext: {}
+
+  namespaces:
+  ## Update the namespaces in the below
+  -
+
+#################################################################################
 
 nodeSelector: {}
 tolerations: []
@@ -338,3 +383,47 @@ dex:
         secretKeyRef:
           name: gate-dex-client-secret
           key: client-secret
+###############################################################################################
+###  Redis Configuration
+###############################################################################################
+## Details of redis-master image for OES
+redis:
+  ## Redis endpoint that is used by oes-gate and oes-platform for caching;
+  ## Change this to custom URL if installRedis is set to false
+  ## url: redis://{{ .Release.Name }}-redis-master:6379
+  url: redis://:password@{{ .Release.Name }}-redis-master
+  port: 6379
+  image:
+    registry: quay.io/opsmxpublic
+    repository: bitnami-redis
+  password: password
+  cluster:
+    enabled: false
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+
+  # External Redis option will be enabled if in-cluster redis is disabled
+  external:
+    host: "<EXTERNAL-REDIS-HOST-NAME>"
+    port: 6379
+    # password: ""
+  nodeSelector: {}
+  master:
+    affinity: {}
+    tolerations: []
+
+  ## Redis config file
+  ## ref: https://redis.io/topics/config
+  ##
+  configmap: |-
+    # Enable AOF https://redis.io/topics/persistence#append-only-file
+    appendonly no
+    # Disable RDB persistence, AOF persistence already enabled.
+    save 60 1000
+
+  # Uncomment if you don't want to create a PVC for redis
+  #  master:
+  #    persistence:
+  #      enabled: false

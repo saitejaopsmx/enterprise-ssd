@@ -11,7 +11,7 @@ global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   # Else, the TLS secrets will need to created manually
   certManager:
-    installed: ftrue
+    installed: true
 
   customCerts:
     enabled: false        # Set to true if your organization requires custom TLS certs

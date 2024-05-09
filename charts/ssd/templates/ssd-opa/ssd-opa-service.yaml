@@ -4,12 +4,12 @@ metadata:
   name: ssd-opa
   labels:
     app: ssd
-    component: oes-ssd-opa
+    component: ssd-opa
 spec:
   selector:
     app: ssd
-    component: oes-ssd-opa
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: ssd-opa
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.ssdopa.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdopa.serviceAnnotations | indent 4 }}

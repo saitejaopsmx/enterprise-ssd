@@ -1,0 +1,21 @@
+rabbitmq:
+  username: '{{ .Values.rabbitmq.username }}'
+  password: '{{ .Values.rabbitmq.password }}'
+  host: rabbitmq-service
+  port: 5672
+  queue: jenkins-ssd
+  exchange: jenkins.events
+  bindingKey: jenkins-ssd
+  prefetchCount: 50
+
+graphql:
+  host: http://dgraph-public
+  port: 8080
+
+postgresql:
+  ssddb:
+    connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}
+
+ssdopasvc:
+  host: http://ssd-opa
+  port: 8200

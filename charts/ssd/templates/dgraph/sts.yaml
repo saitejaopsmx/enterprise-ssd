@@ -4,7 +4,7 @@ metadata:
   labels:
     app: ssd
     component: dgraph
-{{ include "oes.standard-labels" . | indent 4 }}
+{{ include "ssd.standard-labels" . | indent 4 }}
   name: dgraph
 spec:
   serviceName: "dgraph"

@@ -4,8 +4,8 @@ metadata:
   name: supplychain-api
   labels:
     app: ssd
-    component: oes-supplychain-api
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: supplychain-api
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.supplychainapi.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.supplychainapi.serviceAnnotations | indent 4 }}
@@ -21,4 +21,4 @@ spec:
       {{- end }}
   selector:
     app: ssd
-    component: oes-supplychain-api
+    component: supplychain-api

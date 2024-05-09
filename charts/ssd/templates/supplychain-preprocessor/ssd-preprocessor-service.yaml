@@ -4,8 +4,8 @@ metadata:
   name: supplychain-preprocessor
   labels:
     app: ssd
-    component: oes-supplychain-preprocessor
-{{ include "oes.standard-labels" . | indent 4 }}
+    component: supplychain-preprocessor
+{{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.supplychainpreprocessor.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.supplychainpreprocessor.serviceAnnotations | indent 4 }}
@@ -21,4 +21,4 @@ spec:
       {{- end }}
   selector:
     app: ssd
-    component: oes-supplychain-preprocessor
+    component: supplychain-preprocessor

@@ -9,8 +9,9 @@ spec:
       containers:
       - args:
            - |-
-             server_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
-             echo "executing updating dgraphs schema at $server_endpoint"
+             schema_endpoint=http://dgraph-public:8080/admin/schema
+             setup_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
+             echo "Checking the Pod Status of Dgraph,Supply Chain API and Token Machine"
              wait_period=0
              while true
              do
@@ -21,28 +22,34 @@ spec:
              wait_period=$(($wait_period+10))
              if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$TOKENMACHINE" == "true" ];
              then
+             sleep 10
+             echo "############******Adding the Dgraph Schema*********#######################"
+             SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
+             echo $SCHEMA_CHECK | grep -i Success
+             if [ $? -eq 0 ]; then
+                echo "##############***Sucesfully Updated the Dgraph Schema***########################"
+             else
+                echo "##############***Failed to Updated the Dgraph Schema***#########################"
+                exit 1
+             fi
              sleep 30
-             RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $server_endpoint`
-             echo $RESP
+             echo "#################*****Executing the Setup API Schema****##########################"
+             RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
+             echo "#################*****Feteching the Supply Chain Api Token Secret******################"
              kubectl -n {{ .Release.Namespace }} get secret supplychain-api-token -o jsonpath='{.data.token}' | base64 -d > secretdata
-             curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"in-cluster\" } }) @cascade{id organization(filter: { name: { eq: \"default\" } }) { id}}}"}' > seconddata
-             cat seconddata
+             echo "################******Updating the Orgnaisation Name and Cluster Name******##############"
+             curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"{{ .Values.clustername }}\" } }) @cascade{id organization(filter: { name: { eq: \"{{ .Values.organisationname }}\" } }) { id}}}"}' > seconddata
              instanceid=$(yq eval '.data.queryDeploymentTarget[0].id' seconddata)
-             echo $instanceid
              orgid=$(yq eval '.data.queryDeploymentTarget.[0].organization.id' seconddata)
-             echo $orgid
              yq eval '.orgID = "'$orgid'"' /tmp/token/token > org.json
-             cat org.json
              yq eval '.instance = "'$instanceid'"' org.json > full.json
              cat full.json
              curl -X POST http://token-machine:8050/api/v1/createServiceToken -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d @full.json > tokencreate
              kubectl -n {{ .Release.Namespace }} get secret kubedetector -o jsonpath='{.data.*}' | base64 -d > config.yaml
-             cat config.yaml
              value=$(yq eval '.token' tokencreate)
-             echo $value
              sed -i 's/token: .*"xxxx"/token: "'$value'"/g' config.yaml
-             cat config.yaml
              kubectl -n {{ .Release.Namespace }} delete secret kubedetector
+             echo "#############****Creating the Kubedetector Secret****####################################"
              kubectl -n {{ .Release.Namespace }} create secret generic kubedetector --from-file=config.yaml
              sleep 1
              kubectl -n {{ .Release.Namespace }} rollout restart deploy kubernetes-detector
@@ -50,10 +57,10 @@ spec:
              else
              if [ $wait_period -gt 1000 ];
              then
-             echo "Script is timed out as the Dgraph and Supply chain is not ready yet......."
+             echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
              break
              else
-             echo "Waiting for Dgraph,Supply chain and Token machine services to be ready"
+             echo "############****Waiting for Dgraph,Supply chain and Token machine services to be ready*****#########"
              sleep 10
              fi
              fi
@@ -66,12 +73,17 @@ spec:
         imagePullPolicy: IfNotPresent
         name: setup-update
         volumeMounts:
+        - mountPath: /tmp/schema
+          name: dgraph-schema
         - mountPath: /tmp
           name: setup-update
         - mountPath: /tmp/token
           name: token-test
       restartPolicy: OnFailure
       volumes:
+      - name: dgraph-schema
+        configMap:
+          name: schema-cm
       - name: setup-update
         configMap:
           name: setup-cm

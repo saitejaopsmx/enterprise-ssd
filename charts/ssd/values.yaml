@@ -31,6 +31,11 @@ k8sServiceType: ClusterIP
 UIServiceType: ClusterIP
 RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
 
+#################################################
+clustername: in-cluster
+
+## Change the Organisation name if user wants a different name in the UI
+organisationname: default
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:

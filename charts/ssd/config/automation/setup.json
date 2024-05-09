@@ -1,5 +1,5 @@
 {
-    "organisationName": "default",
+    "organisationName": "{{ .Values.organisationname }}",
     "organisationRoles": [
         {
             "group": "admin",
@@ -8,9 +8,9 @@
     ],
     "clusters": [
         {
-            "name": "in-cluster",
+            "name": "{{ .Values.clustername }}",
             "ip": "https://35.225.51.85",
-            "purpose": "in-cluster"
+            "purpose": "{{ .Values.clustername }}"
         }
     ]
 }

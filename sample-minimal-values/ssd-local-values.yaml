@@ -7,7 +7,7 @@ RabbitServiceType: NodePort
 
 global:
   createIngress: false
-  oesUI:
+  ssdUI:
     protocol: http
     host: localhost
     port: 8080
@@ -21,4 +21,3 @@ ssdgate:
   installDex: false
   createGateDexSecret: false
   auth_type: poclogin
-

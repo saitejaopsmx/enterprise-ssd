@@ -47,7 +47,7 @@ spec:
             name: ssd-proxy-certs
             optional: true
         - secretRef:
-            name: poc-passwords
+            name: ssd-initial-password
             optional: true
         securityContext:
       {{- if .Values.ssdgate.securityContext }}
@@ -149,7 +149,7 @@ spec:
         secret:
           defaultMode: 420
           optional: true
-          secretName: poc-passwords
+          secretName: ssd-initial-passwords
       - name: ssd-proxy-certs
         configMap:
           defaultMode: 420

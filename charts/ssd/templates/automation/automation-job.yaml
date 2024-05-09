@@ -1,7 +1,6 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  annotations:
   name: setup-job
 spec:
   template:
@@ -79,6 +78,7 @@ spec:
           name: setup-update
         - mountPath: /tmp/token
           name: token-test
+      serviceAccountName: dgraph-schema-configure-{{ .Release.Namespace }}
       restartPolicy: OnFailure
       volumes:
       - name: dgraph-schema

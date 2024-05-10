@@ -7,17 +7,17 @@ ui:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: v1.3.6
+    tag: v169-tcs
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
   #  runAsGroup: 1000
 ssdgate:
   image:
-    tag: v1.0.3 
+    tag: v1.0.3
 ssdopa:
   image:
-    tag: v1.3.6
+    tag: v355-tcs
   securityContext:
     runAsUser: 1000
     runAsGroup: 1000

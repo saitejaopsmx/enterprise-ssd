@@ -47,6 +47,8 @@ spec:
           readOnly: true
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs
+        - mountPath: /etc/mode
+          name: ssd-mode
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -73,11 +75,13 @@ spec:
       {{- end }}
 
 
-      imagePullSecrets:
-        - name: opsmx11-secret
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
+      - configMap:
+          defaultMode: 420
+          name: ssd-mode
+        name: ssd-mode
       - configMap:
           defaultMode: 420
           name: ssd-public-keys

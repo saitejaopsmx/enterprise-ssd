@@ -39,26 +39,6 @@ Return the proper sapor-db image name
 {{- end -}}
 
 {{/*
-Return the proper Opa image name
-*/}}
-{{- define "opa.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.opa.image.repository -}}
-{{- $tag := .Values.opa.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
-Return the proper Create Controller Image
-*/}}
-{{- define "createcontroller.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.createcontroller.image.repository -}}
-{{- $tag := .Values.createcontroller.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
 Return the proper Tool Chain Image
 */}}
 {{- define "toolchain.image" -}}

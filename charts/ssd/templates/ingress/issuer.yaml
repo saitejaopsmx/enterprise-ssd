@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: letsencrypt-{{ .Release.Namespace }}-spin
+  name: letsencrypt-{{ .Release.Namespace }}-ssd
 spec:
   acme:
     email: srinivas@opsmx.io

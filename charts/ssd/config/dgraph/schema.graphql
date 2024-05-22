@@ -221,7 +221,7 @@ ApplicationRiskStatus tells us about the risk status and alerts for different st
 """
 type ApplicationRiskStatus {
     id: ID!
-    riskStatus: RiskStatus
+    riskStatus: RiskStatus @search
     sourceCodeAlerts: Int
     buildAlerts: Int
     artifactAlerts: Int
@@ -238,7 +238,7 @@ DeploymentStage is an enum denoting the stage of the deployment. .
 enum DeploymentStage {
     "deployment is discovered from the events"
     discovered
-    "deployment is known to have passed the deployment firewall and the deployment(ie the image) is live"
+    "deployment is known to have passed the deployment firewall and the deployment(ie the artifact) is live"
     current
     "deployment becomes a past deployment because another fresh deployment has happened"
     previous
@@ -247,13 +247,13 @@ enum DeploymentStage {
 }
 
 """
-ApplicationDeployment tells us about the the image deployed along with its associated details.
+ApplicationDeployment tells us about the the artifact deployed along with its associated details.
 """
 type ApplicationDeployment {
     "id is randomly assigned"
     id: String! @id
-    "image that is deployed"
-    image: [Image!]
+    "artifact that is deployed"
+    artifact: [Artifact!]
     applicationEnvironment: ApplicationEnvironment!
     deployedAt: DateTime @search
     "deploymentStage is an enum and can be discovered, current, previous or blocked"
@@ -262,7 +262,7 @@ type ApplicationDeployment {
     source: String!
     "component would be a service"
     component: String! @search(by: [exact])
-    "user who deployed the image"
+    "user who deployed the artifact"
     deployedBy: String
     "toolsUsed contains tools of different stages of source, build, artifact and deploy along with some different tools"
     toolsUsed: ToolsUsed!
@@ -291,7 +291,7 @@ type ApplicationDeploymentRisk {
     buildAlertsScore: Int
     artifactAlertsScore: Int
     deploymentAlertsScore: Int
-    imageRiskStatus: RiskStatus
+    deploymentRiskStatus: RiskStatus
     applicationDeployment: ApplicationDeployment! @hasInverse(field: deploymentRisk)
 }
 
@@ -398,15 +398,9 @@ type PolicyDefinition {
     description: String!
     scheduledPolicy: Boolean!
     script: String!
-    datasourceTool: [DatasourceTool!]
     variables: String
     conditionName: String
     suggestion: String
-}
-
-type DatasourceTool {
-    id: String! @id
-    name: String! @search(by: [exact])
 }
 
 type PolicyEnforcement {
@@ -419,6 +413,7 @@ type PolicyEnforcement {
     status: Boolean! @search
     forceApply: Boolean
     severity: Severity!
+    datasourceTool: String! @search(by: [exact])
     action: String! @search(by: [exact])
     conditionValue: String
     environments: [Environment!]
@@ -434,10 +429,10 @@ type RunHistory  {
     PolicyName: String! @search(by: [exact])
     Severity: Severity! @search(by: [exact])
     Stage: String! @search(by: [exact])
-    Image: String! @search(by: [exact])
-    ImageTag: String! @search(by: [exact])
-    ImageSha: String! @search(by: [exact])
-    ImageNameTag: String! @search(by: [exact])
+    Artifact: String! @search(by: [exact])
+    ArtifactTag: String! @search(by: [exact])
+    ArtifactSha: String! @search(by: [exact])
+    ArtifactNameTag: String! @search(by: [exact])
     Status: String!
     DatasourceTool: String!
     AlertTitle: String @search(by: [exact])
@@ -452,6 +447,8 @@ type RunHistory  {
     Error: String @search(by: [exact])
     Pass: Boolean! @search
     MetaData: String
+    FileApi: String
+    JiraUrl: String
     scheduledPolicy: Boolean! @search
     policyEnforcements: PolicyEnforcement!
 }
@@ -470,19 +467,20 @@ type BuildTool {
     "buildName is the name of the job/pipeline/action"
     buildName: String! @search(by: [exact])
     buildUrl: String! @search(by: [exact])
-    "image would be something like nginx without the tag"
-    image: String! @search(by: [exact])
-    "imageTag would be the tag of the image"
-    imageTag: String! @search(by: [exact])
-    "digest is the sha of the image"
+    artifactType: String  @search(by: [exact])
+    "artifact would be something like nginx without the tag"
+    artifact: String! @search(by: [exact])
+    "artifactTag would be the tag of the artifact"
+    artifactTag: String! @search(by: [exact])
+    "digest is the sha of the artifact"
     digest: String! @search(by: [exact])
-    "buildDigest is the sha of the image as sent from the build tool"
+    "buildDigest is the sha of the artifact as sent from the build tool"
     buildDigest: String @search(by: [exact])
-    "imageNode links a BuildTool node to an image"
-    imageNode: Image
-    "buildTime is the time at which the image was built"
+    "artifactNode links a BuildTool node to an artifact"
+    artifactNode: Artifact
+    "buildTime is the time at which the artifact was built"
     buildTime: DateTime
-    "buildUser is the user that built the image"
+    "buildUser is the user that built the artifact"
     buildUser: String
     "sourceCodeTool links a BuildTool node to the source details"
     sourceCodeTool: SourceCodeTool @hasInverse(field: buildTool)
@@ -492,7 +490,7 @@ type BuildTool {
 }
 
 """
-SourceCodeTool contains the source details about the image that was built.
+SourceCodeTool contains the source details about the artifact that was built.
 """
 type SourceCodeTool {
     "id is randomly assigned"
@@ -502,11 +500,11 @@ type SourceCodeTool {
     scm: String!
     "repository is the git remote repository"
     repository: String!
-    "branch is the git branch on which the image was built"
+    "branch is the git branch on which the artifact was built"
     branch: String!
     "headCommit is the checkout out head commit"
     headCommit: String
-    "diffCommits is a comma separated string of the commits between the previous built image and the current"
+    "diffCommits is a comma separated string of the commits between the previous built artifact and the current"
     diffCommits: String
     licenseName: String
     visibility: String
@@ -521,7 +519,7 @@ CommitMetaData contains the git commit related details of the source repository 
 type CommitMetaData {
     "id is randomly assigned"
     id: ID!
-    "commit is a git commit that was used to build an image"
+    "commit is a git commit that was used to build an artifact"
     commit: String
     repository: String
     "commitSign tells us whether the commit is signed"
@@ -532,19 +530,20 @@ type CommitMetaData {
     buildTool: BuildTool! @hasInverse(field: commitMetaData)
 }
 
-type Image {
+type Artifact {
     id: String! @id
-    imageName: String! @search(by: [exact])
-    imageTag: String! @search(by: [exact])
-    imageSha: String! @search(by: [exact])
-    scanData: [ImageScanData!]
+    artifactType: String! @search(by: [exact])
+    artifactName: String! @search(by: [exact])
+    artifactTag: String! @search(by: [exact])
+    artifactSha: String! @search(by: [exact])
+    scanData: [ArtifactScanData!]
 }
 
-type ImageScanData {
+type ArtifactScanData {
     id: String! @id
-    imageSha: String! @search(by: [exact])
+    artifactSha: String! @search(by: [exact])
     tool: String! @search(by: [exact])
-    imageDetails: Image @hasInverse(field: scanData)
+    artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
     components: [Component!]
     vulnCriticalCount: Int @search
@@ -565,8 +564,9 @@ type Component {
     licenses: [String!]
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
+    scannedAt: DateTime
     vulnerabilities: [Vulnerability!] @hasInverse(field: affects)
-    images: [ImageScanData!] @hasInverse(field: components)
+    artifacts: [ArtifactScanData!] @hasInverse(field: components)
 }
 
 enum Severity {
@@ -589,6 +589,7 @@ type Vulnerability {
     recommendation: String
     published: DateTime
     modified: DateTime
+    createdAt: DateTime @search
     cvss: [CVSS!]
     affects: [Component!] @hasInverse(field: vulnerabilities)
 }

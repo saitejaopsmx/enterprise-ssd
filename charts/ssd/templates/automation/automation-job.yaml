@@ -12,56 +12,67 @@ spec:
              setup_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
              echo "Checking the Pod Status of Dgraph,Supply Chain API and Token Machine"
              wait_period=0
-             while true
-             do
-             kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
-             DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
-             SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
-             TOKENMACHINE=$(grep token-machine live.status | awk '{print $2}')
-             wait_period=$(($wait_period+10))
-             if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$TOKENMACHINE" == "true" ];
-             then
-             sleep 10
-             echo "############******Adding the Dgraph Schema*********#######################"
-             SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
-             echo $SCHEMA_CHECK | grep -i Success
-             if [ $? -eq 0 ]; then
-                echo "##############***Sucesfully Updated the Dgraph Schema***########################"
+             while true; do
+               kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
+               DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
+               SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
+               TOKENMACHINE=$(grep token-machine live.status | awk '{print $2}')
+               status=$(kubectl get pods -l component=db --field-selector=status.phase=Running --no-headers=true | awk '{print $2}')
+               wait_period=$(($wait_period+10))
+               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$TOKENMACHINE" == "true" ] && [ "$status" == "1/1" ]; then
+               sleep 10
+               echo "############******Adding the Dgraph Schema*********#######################"
+               SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
+               echo $SCHEMA_CHECK | grep -i Success
+               if [ $? -eq 0 ]; then
+                   echo "##############***Sucesfully Updated the Dgraph Schema***########################"
+               else
+                   echo "##############***Failed to Updated the Dgraph Schema***#########################"
+                   exit 1
+               fi
+               sleep 30
+               echo "#################*****Executing the Setup API Schema****##########################"
+               RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
+               echo "#################*****Feteching the Supply Chain Api Token Secret******################"
+               kubectl -n {{ .Release.Namespace }} get secret supplychain-api-token -o jsonpath='{.data.token}' | base64 -d > secretdata
+               echo "################******Updating the Orgnaisation Name and Cluster Name******##############"
+               curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"{{ .Values.clustername }}\" } }) @cascade{id organization(filter: { name: { eq: \"{{ .Values.organisationname }}\" } }) { id}}}"}' > seconddata
+               instanceid=$(yq eval '.data.queryDeploymentTarget[0].id' seconddata)
+               orgid=$(yq eval '.data.queryDeploymentTarget.[0].organization.id' seconddata)
+               yq eval '.orgID = "'$orgid'"' /tmp/token/token > org.json
+               yq eval '.instance = "'$instanceid'"' org.json > full.json
+               cat full.json
+               curl -X POST http://token-machine:8050/api/v1/createServiceToken -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d @full.json > tokencreate
+               kubectl -n {{ .Release.Namespace }} get secret kubedetector -o jsonpath='{.data.*}' | base64 -d > config.yaml
+               value=$(yq eval '.token' tokencreate)
+               sed -i 's/token: .*"xxxx"/token: "'$value'"/g' config.yaml
+               kubectl -n {{ .Release.Namespace }} delete secret kubedetector
+               echo "#############****Creating the Kubedetector Secret****####################################"
+               kubectl -n {{ .Release.Namespace }} create secret generic kubedetector --from-file=config.yaml
+               sleep 1
+               kubectl -n {{ .Release.Namespace }} rollout restart deploy kubernetes-detector
+               sleep 10
+               kubectl -n {{ .Release.Namespace }} logs ssd-db-0 > logs.txt
+               count=$(cat logs.txt | grep -i "UpdateSchemeTask done"| wc -l)
+               if [ "$count" == "2" ]; then
+                 kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
+                 sleep 30
+                 frontendpod=$(kubectl get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
+                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
+                 kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
+                 break
+               else
+                 echo "The Schema Updation if failed"
+                 sleep 10
+               fi
              else
-                echo "##############***Failed to Updated the Dgraph Schema***#########################"
-                exit 1
-             fi
-             sleep 30
-             echo "#################*****Executing the Setup API Schema****##########################"
-             RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
-             echo "#################*****Feteching the Supply Chain Api Token Secret******################"
-             kubectl -n {{ .Release.Namespace }} get secret supplychain-api-token -o jsonpath='{.data.token}' | base64 -d > secretdata
-             echo "################******Updating the Orgnaisation Name and Cluster Name******##############"
-             curl -X POST http://dgraph-public:8080/graphql -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d '{"query": "query QueryDeploymentTarget {queryDeploymentTarget(filter: { name: { eq: \"{{ .Values.clustername }}\" } }) @cascade{id organization(filter: { name: { eq: \"{{ .Values.organisationname }}\" } }) { id}}}"}' > seconddata
-             instanceid=$(yq eval '.data.queryDeploymentTarget[0].id' seconddata)
-             orgid=$(yq eval '.data.queryDeploymentTarget.[0].organization.id' seconddata)
-             yq eval '.orgID = "'$orgid'"' /tmp/token/token > org.json
-             yq eval '.instance = "'$instanceid'"' org.json > full.json
-             cat full.json
-             curl -X POST http://token-machine:8050/api/v1/createServiceToken -H "Content-Type: application/json" -H "X-OpsMx-Auth: Bearer $(cat secretdata)" -d @full.json > tokencreate
-             kubectl -n {{ .Release.Namespace }} get secret kubedetector -o jsonpath='{.data.*}' | base64 -d > config.yaml
-             value=$(yq eval '.token' tokencreate)
-             sed -i 's/token: .*"xxxx"/token: "'$value'"/g' config.yaml
-             kubectl -n {{ .Release.Namespace }} delete secret kubedetector
-             echo "#############****Creating the Kubedetector Secret****####################################"
-             kubectl -n {{ .Release.Namespace }} create secret generic kubedetector --from-file=config.yaml
-             sleep 1
-             kubectl -n {{ .Release.Namespace }} rollout restart deploy kubernetes-detector
-             break
-             else
-             if [ $wait_period -gt 1000 ];
-             then
-             echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
-             break
-             else
-             echo "############****Waiting for Dgraph,Supply chain and Token machine services to be ready*****#########"
-             sleep 10
-             fi
+               if [ $wait_period -gt 1000 ]; then
+                 echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
+                 break
+               else
+                 echo "############****Waiting for Dgraph,Supply chain and Token machine services to be ready*****#########"
+                 sleep 10
+               fi
              fi
              done
         command:

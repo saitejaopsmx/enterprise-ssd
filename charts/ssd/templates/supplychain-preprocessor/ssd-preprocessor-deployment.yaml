@@ -25,6 +25,18 @@ spec:
         {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
 {{- end }}
     spec:
+      initContainers:
+      - name: rabbitmq-check
+        image: {{ .Values.global.customImages.registry }}/pgchecker:v1
+        command:
+          - sh
+          - -c
+          - |
+            echo 'Waiting for RABBITMQ-SERVICE to become ready...'
+            until printf "." && nc -z -w 2 rabbitmq-service 5672; do
+               sleep 2;
+            done;
+            echo 'RABBITMQ-SERVICE OK ✓'
       containers:
       - name: supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
@@ -115,8 +127,6 @@ spec:
             path: ca.crt
           optional: true
           name: customer-custon-ca
-      securityContext:
-        runAsNonRoot: true
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

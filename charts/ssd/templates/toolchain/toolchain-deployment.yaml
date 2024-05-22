@@ -25,6 +25,18 @@ spec:
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}
 {{- end }}
     spec:
+      initContainers:
+      - name: temporalfrontend-check
+        image: {{ .Values.global.customImages.registry }}/pgchecker:v1
+        command:
+          - sh
+          - -c
+          - |
+            echo 'Waiting for TEMPORAL-FRONTEND to become ready...'
+            until printf "." && nc -z -w 2 {{ .Release.Name }}-temporal-frontend 7233; do
+               sleep 2;
+            done;
+            echo 'TEMPORAL-FRONTEND OK ✓'
       containers:
         - name: tool-chain
           image: {{ template "toolchain.image" . }}

@@ -104,15 +104,12 @@ global:
       runAsGroup: 1000
       fsGroup: 1000
     buckets:
-    - name: "spinnaker"
-      policy: none
-      purge: false
-    - name: "autopilot"
+    - name: "ssd-temporal"
       policy: none
       purge: false
     defaultBucket:
       enabled: true
-      name: "spinnaker"
+      name: "ssd-temporal"
     nodeSelector: {}
     affinity: {}
     tolerations: []

@@ -10,7 +10,7 @@ spec:
            - |-
              schema_endpoint=http://dgraph-public:8080/admin/schema
              setup_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
-             echo "Checking the Pod Status of Dgraph,Supply Chain API and Token Machine"
+             echo "Checking the Pod Status of Dgraph,Supply Chain API,Token Machine and SSD DB"
              wait_period=0
              while true; do
                kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
@@ -53,6 +53,7 @@ spec:
                kubectl -n {{ .Release.Namespace }} rollout restart deploy kubernetes-detector
                sleep 10
                kubectl -n {{ .Release.Namespace }} logs ssd-db-0 > logs.txt
+               echo "Checking the Schema is updation"
                count=$(cat logs.txt | grep -i "UpdateSchemeTask done"| wc -l)
                if [ "$count" == "2" ]; then
                  kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal

@@ -25,6 +25,18 @@ spec:
         {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
 {{- end }}
     spec:
+      initContainers:
+      - name: rabbitmq-check
+        image: {{ .Values.global.customImages.registry }}/pgchecker:v1
+        command:
+          - sh
+          - -c
+          - |
+            echo 'Waiting for RABBITMQ-SERVICE to become ready...'
+            until printf "." && nc -z -w 2 rabbitmq-service 5672; do
+               sleep 2;
+            done;
+            echo 'RABBITMQ-SERVICE OK ✓'
       containers:
       - name: supplychain-preprocessor
         image: {{ template "supplychainpreprocessor.image" . }}
@@ -47,6 +59,8 @@ spec:
           readOnly: true
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs
+        - mountPath: /etc/mode
+          name: ssd-mode
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -73,11 +87,13 @@ spec:
       {{- end }}
 
 
-      imagePullSecrets:
-        - name: opsmx11-secret
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       volumes:
+      - configMap:
+          defaultMode: 420
+          name: ssd-mode
+        name: ssd-mode
       - configMap:
           defaultMode: 420
           name: ssd-public-keys
@@ -111,8 +127,6 @@ spec:
             path: ca.crt
           optional: true
           name: customer-custon-ca
-      securityContext:
-        runAsNonRoot: true
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

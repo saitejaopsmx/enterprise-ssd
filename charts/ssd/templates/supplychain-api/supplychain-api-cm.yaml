@@ -9,4 +9,3 @@ metadata:
     app: ssd
     component: supplychain-api
 {{ include "ssd.standard-labels" . | indent 4 }}
-

@@ -1,21 +1,21 @@
 ui:
   image:
-    tag: 202405170637-ssd
+    tag: v1.0.0
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: v2.1.1
+    tag: v2.1.2
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
   #  runAsGroup: 1000
 ssdgate:
   image:
-    tag: v14-alpha1
+    tag: v1.0.8
 ssdopa:
   image:
-    tag: v2.1.1
+    tag: v2.1.2
 supplychainpreprocessor:
   image:
     tag: v1.5.0
@@ -24,7 +24,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: v1.1.1
+    tag: v1.1.2
 tokenmachine:
   image:
     tag: v1.0.1

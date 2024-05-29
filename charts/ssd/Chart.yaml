@@ -2,7 +2,7 @@ apiVersion: v2
 name: SSD
 version: "2024-04-00"
 appVersion: "2024-04-00"
-description: "Secure Software Delivery for CI/CD Pipelines"
+description: "Secure Software Delivery for CI CD Pipelines"
 icon: https://raw.githubusercontent.com/OpsMx/enterprise-spinnaker/master/img/opsmx.png
 maintainers:
 - email: srinivas@opsmx.io

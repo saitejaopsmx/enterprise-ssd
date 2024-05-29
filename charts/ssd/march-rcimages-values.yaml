@@ -1,8 +1,6 @@
 ui:
   image:
     tag: 202405170637-ssd
-  securityContext:
-    allowPrivilegeEscalation: false
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
@@ -18,9 +16,6 @@ ssdgate:
 ssdopa:
   image:
     tag: v2.1.1
-  securityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
 supplychainpreprocessor:
   image:
     tag: v1.5.0

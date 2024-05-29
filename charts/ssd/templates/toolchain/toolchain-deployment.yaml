@@ -152,8 +152,6 @@ spec:
                 volumeMode: Filesystem
         {{- end }}
       restartPolicy: Always
-      securityContext:
-        fsGroup: 1000
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

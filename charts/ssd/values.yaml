@@ -1,7 +1,6 @@
 #####################################################
 
-# OpsMx AutoPilot and Integrated Spinnaker Delivery
-# This file contains configurations for AP as well as Spinnaker
+# OpsMx Secure Software Delivery
 #####################################################
 
 #This should not be required
@@ -133,7 +132,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: v1.0.8
+    tag: "2024_04_00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -215,7 +214,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: v2.1.2
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -228,7 +227,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: v1.5.0
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -242,7 +241,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: v2.1.2
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -258,7 +257,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v1.1.2
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -272,7 +271,7 @@ tokenmachine:
   ## Image specific details
   image:
     repository: token-machine
-    tag: v1.0.1
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -308,7 +307,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: v1.0.0
+    tag: "2024_04_00"
     pullPolicy: IfNotPresent
 
   annotations: {}

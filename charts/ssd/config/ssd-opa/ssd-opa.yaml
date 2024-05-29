@@ -1,7 +1,0 @@
-httpListenPort: 8200
-graphQLAddr: http://dgraph-public:8080/graphql
-logLevel: debug
-redis:
-  address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
-  password: {{ .Values.redis.password }}
-  db: 0

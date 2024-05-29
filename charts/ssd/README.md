@@ -76,7 +76,7 @@ For more information, visit https://www.opsmx.com
 - Install SSD by executing this command:
 
    ```console
-   helm install ssd opsmxssd/opsmxssd -f ssd-minimal-values.yaml -n opsmx-ssd --timeout=600s
+   helm install ssd opsmxssd/ssd -f ssd-minimal-values.yaml -n opsmx-ssd --timeout=600s
    ```
 
 ## Monitor the installation process

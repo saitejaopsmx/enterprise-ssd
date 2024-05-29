@@ -32,10 +32,10 @@ For more information, visit https://www.opsmx.com
    ```console
    git clone https://github.com/OpsMx/enterprise-ssd.git
    ```
-- Add opsmx helm repo to your local machine(Update later)
+- Add opsmx helm repo to your local machine
 
    ```console
-   helm repo add
+   helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
    ```
   **Note**: If opsmx-ssd helm repo is already added, do a repo update before installing the chart
 
@@ -73,17 +73,17 @@ For more information, visit https://www.opsmx.com
 
   **NOTE**: Please read the inline comments of ssd-minimal-values.yaml.
 
-- Install SSD by executing this command:(Updated later)
+- Install SSD by executing this command:
 
    ```console
-   helm install ssd charts/ssd -f ssd-minimal-values.yaml -n opsmx-ssd --timeout=600s
+   helm install ssd opsmxssd/opsmxssd -f ssd-minimal-values.yaml -n opsmx-ssd --timeout=600s
    ```
 
 ## Monitor the installation process
 - Wait for all pods to stabilize (about 2-3 min, depending on your cluster load). The "setup-job" in Completed status indicates completion of the installation process. Check status using:
 
     ```console
-    $ kubectl -n opsmx-ssd get po -w
+    $ kubectl -n opsmx-ssd get pods
     ```
 
 ## Check the installation
@@ -91,13 +91,13 @@ For more information, visit https://www.opsmx.com
 - Get the SSD URL using the below command and Access in a browser such as Chrome.
    
   ```console
-   kubectl -n ssd get ingress
+   kubectl -n opsmx-ssd get ingress
   ````
 
 - Fetch the SSD password from the Secret using the below command and Login to SSD
 
   ```console 
-  kubectl -n ssd get secret ssd-initial-password -o jsonpath='{.data.ADMIN_PASSWORD}' | base64 -d
+  kubectl -n opsmx-ssd get secret ssd-initial-password -o jsonpath='{.data.ADMIN_PASSWORD}' | base64 -d
   ````
 - After logging into the SSD the wait for 5m .. So the data will be populated.
 

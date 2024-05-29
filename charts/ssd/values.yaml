@@ -228,7 +228,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-04-00"
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -258,7 +258,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-04-00"
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}

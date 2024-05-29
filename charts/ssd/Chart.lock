@@ -1,33 +1,12 @@
 dependencies:
-- name: openldap
+- name: dex
   repository: ""
-  version: 1.2.3
-- name: spinnaker
-  repository: ""
-  version: 2.2.3
+  version: 0.15.3
 - name: minio
   repository: ""
   version: 8.0.9
 - name: redis
   repository: ""
   version: 10.5.3
-- name: elasticsearch
-  repository: ""
-  version: 7.5.0
-- name: kibana
-  repository: ""
-  version: 7.5.0
-- name: fluent-bit
-  repository: ""
-  version: 2.8.2
-- name: prometheus
-  repository: ""
-  version: 11.16.2
-- name: grafana
-  repository: ""
-  version: 6.31.0
-- name: gitea
-  repository: ""
-  version: 5.0.1
-digest: sha256:673f5637aaea43189db1daba48399b82d61add60acdf8fa7d68ea3a7f769c347
-generated: "2022-08-30T14:58:35.332742395+05:30"
+digest: sha256:c97b2c7b68ea6d51be56633045d457f062a3a902aef70e5e4fbfd1b424110ab3
+generated: "2024-05-29T18:40:17.846921139+05:30"

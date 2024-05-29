@@ -1,7 +1,6 @@
 #####################################################
 
-# OpsMx AutoPilot and Integrated Spinnaker Delivery
-# This file contains configurations for AP as well as Spinnaker
+# OpsMx Secure Software Delivery
 #####################################################
 
 #This should not be required
@@ -133,7 +132,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: v1.0.2
+    tag: "2024-04-00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -192,8 +191,8 @@ db:
 
   ## Image specific details
   image:
-    repository: ubi8-oes-db
-    tag: v3.0.1-ssd
+    repository: ssd-db
+    tag: v1.0.0
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -215,7 +214,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: v2.1.1
+    tag: "2024-04-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -223,12 +222,13 @@ toolchain:
   serviceAnnotations: {}
 
   securityContext: {}
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: v1.5.0
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -242,10 +242,12 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: v2.1.1
+    tag: "2024-04-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
+
+  securityContext: {}
 
   persistence:
     size: 5Gi
@@ -256,7 +258,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: v1.1.1
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -270,7 +272,7 @@ tokenmachine:
   ## Image specific details
   image:
     repository: token-machine
-    tag: v1.0.1
+    tag: "2024-04-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -305,8 +307,8 @@ rabbitmq:
 ui:
   ## Image specific details
   image:
-    repository: ubi8-oes-ui
-    tag: 202405170637-ssd
+    repository: ssd-ui
+    tag: "2024-04-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -317,6 +319,8 @@ ui:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
 
+  securityContext:
+    allowPrivilegeEscalation: false
 ##############################################################################
 kubedetector:
   image:

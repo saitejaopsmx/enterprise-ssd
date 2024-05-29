@@ -53,18 +53,20 @@ spec:
             port: 5432
           initialDelaySeconds: 10
           periodSeconds: 5
-      {{- if and (not .Values.global.openshift) (.Values.db.securityContext) }}
       securityContext:
-{{ toYaml .Values.db.securityContext | indent 8 }}
+      {{- if .Values.db.securityContext }}
+      {{ toYaml .Values.db.securityContext | nindent 8 }}
       {{- else }}
-      {{- if and (.Values.global.openshift) (.Values.global.securityContext) }}
-      securityContext:
-{{ toYaml .Values.global.securityContext | indent 8 }}
-      {{- else }}
-      {{- if and (.Values.global.openshift) (not .Values.global.securityContext) }}
-      securityContext: {{ default "{}" }}
-      {{- end }}
-      {{- end }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
       {{- end }}
       {{- if .Values.global.affinity }}
       affinity:

@@ -14,17 +14,24 @@ global:
 
   ssdUI: # URL used to access the application
     protocol: https
-    host: feb09-ssd.ryzon7-isd40.opsmx.org
+    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
 ###############################################################################
 ssdgate:
-  installDex: true   # set to true if dex need to be installed
-  createGateDexSecret: true
-  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
+  installDex: false   # set to true if dex need to be installed
+  createGateDexSecret: false
+  auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   admin_groups:
   - admin
   saml:
-    # OKTA-ksrinimba App: feb09-ssd
     metadata_url: https://dev-14704582.okta.com/app/exkf26qs6f8FdWJ3r5d7/sso/saml/metadata
-    saml_initiated_login: false
+    saml_initiated_login: true
 
+#######################################################################
+clustername: in-cluster
+
+### Change the Organisation name if user wants a different name in the UI
+organisationname: default
+
+### Change the Env name if user wants a different name in the UI
+enviornmentname: in-cluster

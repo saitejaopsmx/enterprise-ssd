@@ -236,6 +236,45 @@ integrationData:
             placeholderText: 'Example:username/password'
             authType:
               - basic
+      - integratorType: google-artifact-registry
+        displayName: Google Artifact Registry
+        category: aptregistry
+        configurationFields:
+          key:
+            displayName: Service Account Key
+            dataType: input
+            required: false
+            secret: false
+            helpText: service account json only required for private
+            placeholderText: '{sample}'
+          source:
+            displayName: Source
+            dataType: chipset
+            required: true
+            secret: false
+            helpText: entire source
+            placeholderText: 'deb https://<REGION>-apt.pkg.dev/projects/<PROJECTID> <REPONAME> main'
+      - integratorType: bitbucket
+        displayName: BitBucket
+        multiSupport: false
+        category: sourcetool
+        configurationFields:
+          url:
+            displayName: API URL
+            dataType: input
+            required: true
+            secret: false
+            helpText: BitBucket Host URL
+            placeholderText: 'Example:https://bitbucket.com'
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: false
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
       - integratorType: grype
         displayName: Grype (CMD)
         multiSupport: false

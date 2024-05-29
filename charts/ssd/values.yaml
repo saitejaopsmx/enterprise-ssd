@@ -222,6 +222,7 @@ toolchain:
   serviceAnnotations: {}
 
   securityContext: {}
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details

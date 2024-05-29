@@ -57,6 +57,11 @@ spec:
               secretKeyRef:
                 key: secretkey
                 name: {{ .Release.Name }}-minio
+          - name: Cypher_Key
+            valueFrom:
+              secretKeyRef:
+                key: AESEncryptionKey
+                name: ssdsecret
           - name: TMPDIR
             value: /scratch
           envFrom:
@@ -86,22 +91,12 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
 
-          securityContext:
       {{- if .Values.toolchain.securityContext }}
+          securityContext:
       {{ toYaml .Values.toolchain.securityContext | nindent 12 }}
       {{- else }}
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-            readOnlyRootFilesystem: false
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            seccompProfile:
-              type: RuntimeDefault
+          securityContext: {{ default "{}" }}
       {{- end }}
-
 
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:

@@ -14,13 +14,13 @@ global:
 
   ssdUI: # URL used to access the application
     protocol: https
-    host: feb09-ssd.ryzon7-isd40.opsmx.org
+    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
 ###############################################################################
 ssdgate:
   installDex: true   # set to true if dex need to be installed
   createGateDexSecret: true
-  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
+  auth_type: saml  # saml, dex-oidc and poclogin are other valid values
   admin_groups:
   - admin
   saml:

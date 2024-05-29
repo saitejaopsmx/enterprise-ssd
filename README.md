@@ -1,3 +1,7 @@
+<p align="center">
+	<img src="https://github.com/OpsMx/enterprise-argo/blob/main/img/opsmx.png" width="20%" align="center" alt="OpsMx">
+</p>
+
 # OpsMx Secure Software Delivery
 For more information, visit https://www.opsmx.com
 

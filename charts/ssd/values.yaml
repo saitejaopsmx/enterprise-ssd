@@ -307,7 +307,7 @@ rabbitmq:
 ui:
   ## Image specific details
   image:
-    repository: ubi8-oes-ui
+    repository: ssd-ui
     tag: v1.0.0
     pullPolicy: IfNotPresent
 

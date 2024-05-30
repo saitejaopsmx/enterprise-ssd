@@ -76,9 +76,6 @@ global:
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/client-header-buffer-size: 100k
-        nginx.ingress.kubernetes.io/server-snippet: |
-          client_header_buffer_size 100k;
-          large_client_header_buffers 4 100k;
       tls:
         secretName: ssd-ui-ingress
 
@@ -214,7 +211,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-04-00"
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -258,7 +255,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-04-01"
+    tag: "2024-04-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -308,7 +305,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-04-00"
+    tag: "2024-04-01"
     pullPolicy: IfNotPresent
 
   annotations: {}

@@ -255,7 +255,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-04-02"
+    tag: "2024-04-04"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -305,7 +305,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-04-01"
+    tag: "2024-04-04"
     pullPolicy: IfNotPresent
 
   annotations: {}

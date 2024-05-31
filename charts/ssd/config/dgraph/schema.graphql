@@ -100,10 +100,16 @@ type DeploymentTarget
             { rule: "{$type: {eq: \"internal-account/v1\"}}" }
             )
 {
-    "id is randomly assigned"
+   "id is randomly assigned"
     id: String! @id
-    name: String! @search(by: [exact])
+    name: String! @search(by: [exact, regexp])
+    "this would be the ip/server address of the target environment"
     ip: String! @search(by: [exact])
+    account: String
+    "this would be something like aws, gcp etc"
+    targetType: String
+    "this would be something like us-east-1 etc"
+    region: String
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
     defaultEnvironment: Environment!
@@ -177,7 +183,7 @@ type Application implements RBAC
 {
     "id is randomly assigned"
     id: String! @id
-    name: String! @search(by: [exact])
+    name: String! @search(by: [exact, regexp])
     roles: [Role!]
     environments: [ApplicationEnvironment!] @hasInverse(field: application)
     team: Team! @hasInverse(field: applications)
@@ -197,7 +203,7 @@ type ApplicationEnvironment @withSubscription {
     environment: Environment
     application: Application!
     deploymentTarget: DeploymentTarget!
-    namespace: String! @search(by:[exact])
+    namespace: String! @search(by:[exact, regexp])
     "toolsUsed is a comma-separated string that contains all the tools(source, build, artifact, deploy etc) for an app env"
     toolsUsed: String
     deployments: [ApplicationDeployment!] @hasInverse(field: applicationEnvironment)
@@ -221,7 +227,7 @@ ApplicationRiskStatus tells us about the risk status and alerts for different st
 """
 type ApplicationRiskStatus {
     id: ID!
-    riskStatus: RiskStatus @search
+    riskStatus: RiskStatus @search(by: [exact,regexp])
     sourceCodeAlerts: Int
     buildAlerts: Int
     artifactAlerts: Int
@@ -253,7 +259,7 @@ type ApplicationDeployment {
     "id is randomly assigned"
     id: String! @id
     "artifact that is deployed"
-    artifact: [Artifact!]
+    artifact: [Artifact!] @hasInverse(field: artifactDeployment)
     applicationEnvironment: ApplicationEnvironment!
     deployedAt: DateTime @search
     "deploymentStage is an enum and can be discovered, current, previous or blocked"
@@ -261,7 +267,7 @@ type ApplicationDeployment {
     "source is argo, spinnaker etc"
     source: String!
     "component would be a service"
-    component: String! @search(by: [exact])
+    component: String! @search(by: [exact, regexp])
     "user who deployed the artifact"
     deployedBy: String
     "toolsUsed contains tools of different stages of source, build, artifact and deploy along with some different tools"
@@ -291,7 +297,7 @@ type ApplicationDeploymentRisk {
     buildAlertsScore: Int
     artifactAlertsScore: Int
     deploymentAlertsScore: Int
-    deploymentRiskStatus: RiskStatus
+    deploymentRiskStatus: RiskStatus @search(by: [exact,regexp])
     applicationDeployment: ApplicationDeployment! @hasInverse(field: deploymentRisk)
 }
 
@@ -425,32 +431,41 @@ type PolicyEnforcement {
 type RunHistory  {
     id: ID!
     policyId: String! @search(by: [exact])
-    applicationDeployment: ApplicationDeployment! @hasInverse(field: policyRunHistory)
+    applicationDeployment: ApplicationDeployment @hasInverse(field: policyRunHistory)
+    artifactScan: ArtifactScanData @hasInverse(field: artifactRunHistory)
     PolicyName: String! @search(by: [exact])
-    Severity: Severity! @search(by: [exact])
     Stage: String! @search(by: [exact])
     Artifact: String! @search(by: [exact])
     ArtifactTag: String! @search(by: [exact])
     ArtifactSha: String! @search(by: [exact])
-    ArtifactNameTag: String! @search(by: [exact])
-    Status: String!
+    ArtifactNameTag: String! @search(by: [exact,regexp])
     DatasourceTool: String!
-    AlertTitle: String @search(by: [exact])
-    AlertMessage: String @search(by: [exact])
-    Suggestions: String @search(by: [exact])
-    Reason: String
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
     DeployedAt: DateTime! @search
-    Action: String! @search(by: [exact])
     Hash: String
-    Error: String @search(by: [exact])
     Pass: Boolean! @search
     MetaData: String
     FileApi: String
-    JiraUrl: String
     scheduledPolicy: Boolean! @search
     policyEnforcements: PolicyEnforcement!
+    securityIssue: SecurityIssue @hasInverse(field: Affects)
+}
+
+type SecurityIssue {
+    id: ID!
+    AlertTitle: String @search(by: [exact,regexp])
+    AlertMessage: String @search(by: [exact])
+    Suggestions: String @search(by: [exact])
+    Severity: Severity! @search(by: [exact])
+    CreatedAt: DateTime! @search
+    UpdatedAt: DateTime! @search
+    Action: String! @search(by: [exact])
+    JiraUrl: String
+    Status: String! @search(by: [exact])
+    Reason: String @search(by: [exact])
+    Error: String @search(by: [exact])
+    Affects: [RunHistory!] @hasInverse(field: securityIssue)
 }
 
 
@@ -461,11 +476,11 @@ type BuildTool {
     "id is randomly assigned"
     id: String! @id
     "buildId is a unique job id, run id for a job/pipeline/action"
-    buildId: String! @search(by: [exact])
+    buildId: String! @search(by: [exact,regexp])
     "tool is jenkins etc"
     tool: String! @search(by: [exact])
     "buildName is the name of the job/pipeline/action"
-    buildName: String! @search(by: [exact])
+    buildName: String! @search(by: [exact, regexp])
     buildUrl: String! @search(by: [exact])
     artifactType: String  @search(by: [exact])
     "artifact would be something like nginx without the tag"
@@ -477,7 +492,7 @@ type BuildTool {
     "buildDigest is the sha of the artifact as sent from the build tool"
     buildDigest: String @search(by: [exact])
     "artifactNode links a BuildTool node to an artifact"
-    artifactNode: Artifact
+    artifactNode: Artifact @hasInverse(field: buildDetails)
     "buildTime is the time at which the artifact was built"
     buildTime: DateTime
     "buildUser is the user that built the artifact"
@@ -499,7 +514,7 @@ type SourceCodeTool {
     "scm is the scm tool github/gitlab etc"
     scm: String!
     "repository is the git remote repository"
-    repository: String!
+    repository: String! @search(by: [exact,regexp])
     "branch is the git branch on which the artifact was built"
     branch: String!
     "headCommit is the checkout out head commit"
@@ -533,10 +548,12 @@ type CommitMetaData {
 type Artifact {
     id: String! @id
     artifactType: String! @search(by: [exact])
-    artifactName: String! @search(by: [exact])
-    artifactTag: String! @search(by: [exact])
+    artifactName: String! @search(by: [exact, regexp])
+    artifactTag: String! @search(by: [exact, regexp])
     artifactSha: String! @search(by: [exact])
     scanData: [ArtifactScanData!]
+    artifactDeployment: [ApplicationDeployment!] @hasInverse(field: artifact)
+    buildDetails: BuildTool @hasInverse(field: artifactNode)
 }
 
 type ArtifactScanData {
@@ -545,6 +562,7 @@ type ArtifactScanData {
     tool: String! @search(by: [exact])
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
+    createdAt: DateTime
     components: [Component!]
     vulnCriticalCount: Int @search
     vulnHighCount: Int @search
@@ -554,13 +572,24 @@ type ArtifactScanData {
     vulnUnknownCount: Int @search
     vulnNoneCount: Int @search
     vulnTotalCount: Int @search
+    sbomUrl: String
+    artifactLicenseScanUrl: String
+    artifactSecretScanUrl: String
+    sourceLicenseScanUrl: String
+    sourceSecretScanUrl: String
+    sourceScorecardScanUrl: String
+    sourceSemgrepHighSeverityScanUrl: String
+    sourceSemgrepMediumSeverityScanUrl: String
+    sourceSemgrepLowSeverityScanUrl: String
+    riskStatus: RiskStatus @search(by: [exact, regexp])
+    artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
 }
 
 type Component {
     id: String! @id
     type: String!
-    name: String! @search(by: [exact])
-    version: String! @search(by: [exact])
+    name: String! @search(by: [exact, regexp])
+    version: String! @search(by: [exact, regexp])
     licenses: [String!]
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
@@ -581,7 +610,7 @@ enum Severity {
 
 type Vulnerability {
     id: String! @id
-    parent: String! @search(by: [exact])
+    parent: String! @search(by: [exact, regexp])
     ratings: Severity @search(by: [exact])
     cwes: [CWE!]
     summary: String
@@ -590,7 +619,10 @@ type Vulnerability {
     published: DateTime
     modified: DateTime
     createdAt: DateTime @search
-    cvss: [CVSS!]
+    cvss: Float @search
+    priority: String @search(by: [exact, regexp])
+    epss: Float @search
+    cisa_kev: String @search(by: [exact, regexp])
     affects: [Component!] @hasInverse(field: vulnerabilities)
 }
 
@@ -598,11 +630,6 @@ type CWE {
     id: String! @id
     name: String!
     description: String
-}
-
-type CVSS {
-    type: String
-    score: String
 }
 
 # Dgraph.Allow-Origin "http://localhost:4200"

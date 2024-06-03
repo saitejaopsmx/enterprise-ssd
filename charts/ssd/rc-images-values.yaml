@@ -1,6 +1,11 @@
+imageCredentials:
+  repoUrl: docker.io
+  # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
+  registry: opsmx11
+
 ui:
   image:
-    tag: v1.0.0
+    tag: "41e724937-202405311624"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
@@ -12,19 +17,20 @@ toolchain:
   #  runAsGroup: 1000
 ssdgate:
   image:
-    tag: v1.0.8
+    repository: ssd-gate
+    tag: "1250283-3"
 ssdopa:
   image:
     tag: v2.1.2
 supplychainpreprocessor:
   image:
-    tag: v1.5.0
+    tag: "36277d3-5"
   #securityContext:
   #  readOnlyRootFilesystem: false
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: v1.1.2
+    tag: "8751e97-1369"
 tokenmachine:
   image:
     tag: v1.0.1

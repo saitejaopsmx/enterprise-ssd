@@ -131,14 +131,12 @@ spec:
           emptyDir: {}
         {{- else }}
             volumeClaimTemplate:
-              metadata:
-                creationTimestamp: null
               spec:
                 accessModes:
-                - ReadWriteOnce
+                - {{ .Values.toolchain.persistence.accessMode }}
                 resources:
                   requests:
-                    storage: 50Gi
+                    storage: {{ .Values.toolchain.persistence.size }}
                 volumeMode: Filesystem
         {{- end }}
       restartPolicy: Always

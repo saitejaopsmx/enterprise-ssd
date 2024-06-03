@@ -5,6 +5,7 @@ integrationData:
         displayName: Gitlab
         multiSupport: false
         category: sourcetool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: API URL
@@ -26,6 +27,7 @@ integrationData:
         displayName: Github
         multiSupport: false
         category: sourcetool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: API URL
@@ -68,6 +70,7 @@ integrationData:
         displayName: Sonarqube
         multiSupport: false
         category: sourcetool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: URL
@@ -89,6 +92,7 @@ integrationData:
         displayName: OpenSSF
         multiSupport: false
         category: scanningtool
+        testConnectionFlag: false
         configurationFields:
           compliancescan:
             displayName: Compliance Scan
@@ -103,6 +107,7 @@ integrationData:
         displayName: SemGrep
         multiSupport: false
         category: sourcetool
+        testConnectionFlag: false
         configurationFields:
           auth:
             displayName: Auth Type
@@ -158,6 +163,7 @@ integrationData:
         displayName: Trivy
         multiSupport: false
         category: scanningtool
+        testConnectionFlag: false
         configurationFields:
           scantype:
             displayName: Scan Type
@@ -177,6 +183,7 @@ integrationData:
         displayName: Docker
         multiSupport: true
         category: dockerregistry
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: Host Url
@@ -205,6 +212,7 @@ integrationData:
         displayName: Quay
         multiSupport: true
         category: dockerregistry
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: Host Url
@@ -233,6 +241,7 @@ integrationData:
         displayName: JFrog
         multiSupport: true
         category: dockerregistry
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: Host Url
@@ -279,6 +288,7 @@ integrationData:
         displayName: Grype (CMD)
         multiSupport: false
         category: dockerregistry
+        testConnectionFlag: true
         configurationFields:
           vulnerabilityScan:
             displayName: Vulnerability Scan
@@ -293,6 +303,7 @@ integrationData:
         displayName: Snyk
         multiSupport: false
         category: scanningtool
+        testConnectionFlag: true
         configurationFields:
           auth:
             displayName: Auth Type
@@ -318,6 +329,7 @@ integrationData:
         displayName: KubeScape
         multiSupport: false
         category: scanningtool
+        testConnectionFlag: false
         configurationFields:
           scantype:
             displayName: Scan Type
@@ -337,6 +349,7 @@ integrationData:
         displayName: Kubernetes
         multiSupport: true
         category: deploymenttarget
+        testConnectionFlag: true
         configurationFields:
           clustername:
             displayName: Cluster Name
@@ -358,6 +371,7 @@ integrationData:
         displayName: ChatGPT
         multiSupport: false
         category: communications
+        testConnectionFlag: true
         configurationFields:
           auth:
             displayName: Auth Type
@@ -393,6 +407,7 @@ integrationData:
         displayName: Custom Policy Source
         multiSupport: false
         category: managementtool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: Repo URL & Path

@@ -14,12 +14,12 @@ For more information, visit https://www.opsmx.com
 - Kubernetes cluster should support persistent volumes.
 - Ensure that this URL(SSD) is reachable from your browser. Either DNS name server record must exist or "hosts" file must be updated.The following URL need to be exist in DNS and point to Loadbalancer IP of the nginx ingress controller.
 
-	```console
-	Ip-address SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
-	```
-	`E.g.: ssd.opsmx.com`
+  ```console
+  Ip-address SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
+  ```
+  `E.g.: ssd.opsmx.com`
 - Use below command to check if helm is installed or not
-        
+
    ```console
    helm version
    ```
@@ -28,7 +28,7 @@ For more information, visit https://www.opsmx.com
 ### Installation Instructions
 
 - Clone the repo enterprise-ssd repo
-  
+
    ```console
    git clone https://github.com/OpsMx/enterprise-ssd.git
    ```
@@ -57,8 +57,8 @@ For more information, visit https://www.opsmx.com
   ```
 - There are different flavours of Installations
 
-    Values yamls    | Description 
-  --------------| ----------- 
+    Values yamls    | Description
+  --------------| -----------
   ssd-minimal-values.yaml | This file is used for Installing SSD with default Authentication
   ssd-saml-values.yaml | This file is used for Installing SSD with Saml Authentication
   ssd-local-values.yaml | This file is used for Installing SSD without Ingress
@@ -89,14 +89,14 @@ For more information, visit https://www.opsmx.com
 ## Check the installation
 
 - Get the SSD URL using the below command and Access in a browser such as Chrome.
-   
+
   ```console
    kubectl -n opsmx-ssd get ingress
   ````
 
 - Fetch the SSD password from the Secret using the below command and Login to SSD
 
-  ```console 
+  ```console
   kubectl -n opsmx-ssd get secret ssd-initial-password -o jsonpath='{.data.ADMIN_PASSWORD}' | base64 -d
   ````
 - After logging into the SSD the wait for 5m .. So the data will be populated.

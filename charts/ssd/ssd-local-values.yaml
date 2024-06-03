@@ -5,12 +5,6 @@
 
 RabbitServiceType: NodePort
 
-kubedetector:
-  namespaces:
-  ## Update the namespaces in the below section if not leave as empty.
-  ## If the namespace is provided the container Images of the respective namespace vunarabilities will be displayed.
-  - 
-
 #############User doesn't need to change anything in below lines##################
 global:
   createIngress: false

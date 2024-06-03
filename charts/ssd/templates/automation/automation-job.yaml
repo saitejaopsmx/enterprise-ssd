@@ -10,16 +10,15 @@ spec:
            - |-
              schema_endpoint=http://dgraph-public:8080/admin/schema
              setup_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
-             echo "Checking the Pod Status of Dgraph,Supply Chain API,Token Machine and SSD DB"
+             echo "Checking the Pod Status of Dgraph,Supply Chain API and SSD DB"
              wait_period=0
              while true; do
                kubectl get po -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
                DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
                SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
-               TOKENMACHINE=$(grep token-machine live.status | awk '{print $2}')
                status=$(kubectl get pods -l component=db --field-selector=status.phase=Running --no-headers=true | awk '{print $2}')
                wait_period=$(($wait_period+10))
-               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$TOKENMACHINE" == "true" ] && [ "$status" == "1/1" ]; then
+               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$status" == "1/1" ]; then
                sleep 10
                echo "############******Adding the Dgraph Schema*********#######################"
                SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
@@ -70,8 +69,6 @@ spec:
           name: dgraph-schema
         - mountPath: /tmp
           name: setup-update
-        - mountPath: /tmp/token
-          name: token-test
       serviceAccountName: dgraph-schema-configure-{{ .Release.Namespace }}
       restartPolicy: OnFailure
       volumes:
@@ -81,6 +78,3 @@ spec:
       - name: setup-update
         configMap:
           name: setup-cm
-      - name: token-test
-        configMap:
-          name: test-cm

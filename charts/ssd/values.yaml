@@ -31,13 +31,8 @@ UIServiceType: ClusterIP
 RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
 
 #################################################
-clustername: in-cluster
-
 ## Change the Organisation name if user wants a different name in the UI
 organisationname: default
-
-## Change the Env name if user wants a different name in the UI
-enviornmentname: default
 ########################################
 SSDMode: kubernetes
 ####################################################
@@ -220,6 +215,11 @@ toolchain:
 
   securityContext: {}
 
+  persistence:
+    ## Change the pvc size as per the cluster requirements
+    size: 50Gi
+    accessMode: ReadWriteOnce
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -245,10 +245,6 @@ ssdopa:
   annotations: {}
 
   securityContext: {}
-
-  persistence:
-    size: 5Gi
-    accessMode: ReadWriteOnce
 
 ####################################################
 supplychainapi:

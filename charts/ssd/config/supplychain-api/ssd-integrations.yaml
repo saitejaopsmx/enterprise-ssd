@@ -49,6 +49,7 @@ integrationData:
         displayName: BitBucket
         multiSupport: false
         category: sourcetool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: API URL

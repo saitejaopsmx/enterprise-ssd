@@ -134,6 +134,7 @@ integrationData:
         displayName: Jenkins
         multiSupport: true
         category: citool
+        testConnectionFlag: true
         configurationFields:
           url:
             displayName: Host Url

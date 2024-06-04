@@ -351,7 +351,7 @@ integrationData:
         displayName: Kubernetes
         multiSupport: true
         category: deploymenttarget
-        testConnectionFlag: true
+        testConnectionFlag: false
         configurationFields:
           clustername:
             displayName: Cluster Name
@@ -409,7 +409,7 @@ integrationData:
         displayName: Jira
         multiSupport: false
         category: communications
-        testConnectionFlag: false
+        testConnectionFlag: true
         configurationFields:
           projectKey:
             displayName: Jira Project Key

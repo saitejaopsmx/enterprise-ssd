@@ -388,6 +388,7 @@ integrationData:
         displayName: Slack
         multiSupport: false
         category: communications
+        testConnectionFlag: true
         configurationFields:
           channel:
             displayName: Channel

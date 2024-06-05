@@ -28,10 +28,8 @@ ssdgate:
     saml_initiated_login: true
 
 #######################################################################
-clustername: in-cluster
-
 ### Change the Organisation name if user wants a different name in the UI
 organisationname: default
 
-### Change the Env name if user wants a different name in the UI
-enviornmentname: in-cluster
+### Admin groups for Rbac #############################################
+admingroups: ssd-admin

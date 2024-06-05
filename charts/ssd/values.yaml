@@ -33,6 +33,9 @@ RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be
 #################################################
 ## Change the Organisation name if user wants a different name in the UI
 organisationname: default
+
+## Admin Groups for Rbac #######################
+admingroups: admin
 ########################################
 SSDMode: kubernetes
 ####################################################

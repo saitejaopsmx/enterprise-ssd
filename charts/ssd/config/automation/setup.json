@@ -2,7 +2,7 @@
     "organisationName": "{{ .Values.organisationname }}",
     "organisationRoles": [
         {
-            "group": "admin",
+            "group": "{{ .Values.admingroups }}",
             "permission": "admin"
         }
     ]

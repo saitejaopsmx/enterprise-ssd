@@ -85,6 +85,7 @@ type DeploymentTarget
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [

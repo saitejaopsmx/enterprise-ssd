@@ -9,8 +9,22 @@ For more information, visit https://www.opsmx.com
 
 ### Prerequisites
 
-- Kubernetes cluster 1.20 or later with at least 4 cores and 16 GB memory
+- Kubernetes cluster 1.20 or later with 3 nodes of each 4 cores and 16 GB memory.
+  
+  Below is the command to check the kubernetes version
+
+  ```console
+  kubectl version --short
+  ```
 - Helm 3 is setup on the client system with 3.10.3 or later.
+
+  Below is command to check if helm version
+
+   ```console
+   helm version
+   ```
+  If helm is not setup, follow <https://helm.sh/docs/intro/install/> to install helm.
+  
 - Kubernetes cluster should support persistent volumes.
 - Ensure that this URL(SSD) is reachable from your browser. Either DNS name server record must exist or "hosts" file must be updated.The following URL need to be exist in DNS and point to Loadbalancer IP of the nginx ingress controller.
 
@@ -18,7 +32,6 @@ For more information, visit https://www.opsmx.com
 	Ip-address SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 	```
 	`E.g.: ssd.opsmx.com`
-- Use below command to check if helm is installed or not
         
    ```console
    helm version

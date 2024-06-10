@@ -57,8 +57,13 @@
   auth_required: true
 - name: tool-chain
   baseUrl: tool-chain:8100
-  health_endpoint: /health
+  health_endpoint: /
   auth_required: true
+  path_prefixes:
+  - "/tool-chain"
+  log_traffic: true
+  streaming: false
+  strip_path: "/tool-chain"
 - name: dgraph
   baseUrl: dgraph-public:8080
   health_endpoint: /

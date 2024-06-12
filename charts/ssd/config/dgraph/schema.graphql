@@ -111,6 +111,7 @@ type DeploymentTarget
     targetType: String
     "this would be something like us-east-1 etc"
     region: String
+    kubescapeServiceConnected: String
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
     defaultEnvironment: Environment!
@@ -206,7 +207,7 @@ type ApplicationEnvironment @withSubscription {
     deploymentTarget: DeploymentTarget!
     namespace: String! @search(by:[exact, regexp])
     "toolsUsed is a comma-separated string that contains all the tools(source, build, artifact, deploy etc) for an app env"
-    toolsUsed: String
+    toolsUsed: [String!]
     deployments: [ApplicationDeployment!] @hasInverse(field: applicationEnvironment)
     riskStatus: ApplicationRiskStatus @hasInverse(field: applicationEnvironment)
     metadata: [KeyValue!]
@@ -383,10 +384,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-	tagName: String! @search(by:[exact])
-	tagValue: String! @search(by:[exact])
-	tagDescription: String
-	createdBy: String @search(by:[exact])
+  tagName: String! @search(by:[exact])
+  tagValue: String! @search(by:[exact])
+  tagDescription: String
+  createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)

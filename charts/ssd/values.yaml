@@ -416,6 +416,9 @@ redis:
 #########################################################################
 temporal:
   server:
+    image:
+      repository: quay.io/opsmxpublic/temporal-server
+      tag: 1.20.3
     config:
       persistence:
         default:
@@ -457,6 +460,17 @@ temporal:
           #  enabled: true
           #  enableHostVerification: true
           #  serverName: _HOST_ # this is strictly required when using serverless CRDB offerings
+
+  web:
+    image:
+      repository: quay.io/opsmxpublic/temporal-ui
+      tag: 2.9.0
+
+  admintools:
+    enabled: true
+    image:
+      repository: quay.io/opsmxpublic/temporal-admin-tools
+      tag: 1.20.3
 
   cassandra:
     enabled: false

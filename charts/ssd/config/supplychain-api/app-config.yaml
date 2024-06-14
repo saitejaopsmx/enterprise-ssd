@@ -1,3 +1,9 @@
+ssdIngress: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
+detectorImage: quay.io/opsmxpublic/kubernetes-detector:v1.0.2
+kubescapeImage: quay.io/opsmxpublic/kubescape-service:v0.0.1
+tokenMachine:
+    host: http://token-machine
+    port: 8050
 opsMxSvc: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
 ssdOpa: http://ssd-opa:8200
 redis: {{ template "ssd.redisBaseURL" . }}

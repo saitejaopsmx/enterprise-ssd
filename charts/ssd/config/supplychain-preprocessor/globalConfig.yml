@@ -2,4 +2,5 @@ plugins:
   - argocd
   - jenkins
   - spinnaker
+  - githubactions
 loglevel: info

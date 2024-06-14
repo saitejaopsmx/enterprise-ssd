@@ -24,14 +24,12 @@ ssdgate:
   admin_groups:
   - admin
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkf26qs6f8FdWJ3r5d7/sso/saml/metadata
+    metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
 
 #######################################################################
-clustername: in-cluster
-
 ### Change the Organisation name if user wants a different name in the UI
 organisationname: default
 
-### Change the Env name if user wants a different name in the UI
-enviornmentname: in-cluster
+### Admin groups for Rbac #############################################
+admingroups: admin

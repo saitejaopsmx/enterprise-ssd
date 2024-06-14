@@ -13,13 +13,8 @@ global:
     # Change to http if global.certManager.installed is false
     protocol: https
     ## Update the host value with proper dns entry to access the SSD UI
-    host: SSDURL.REPLACE.THIS.WITH.YOURCOMPANY.COM
+    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
-kubedetector:
-  namespaces:
-  ## Update the namespaces in the below section if not leave as empty.
-  ## If the namespace is provided the container Images of the respective namespace vunarabilities will be displayed.
-  - 
 ###############################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 ssdgate:
@@ -32,10 +27,8 @@ ssdgate:
     saml_initiated_login: false
 
 #######################################################################
-clustername: in-cluster
-
 ### Change the Organisation name if user wants a different name in the UI
-organisationname: default
+organisationname: opsmx
 
-### Change the Env name if user wants a different name in the UI
-enviornmentname: in-cluster
+### Admin groups in SSD for Rbac #############################################
+admingroups: admin

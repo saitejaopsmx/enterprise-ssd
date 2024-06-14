@@ -24,13 +24,13 @@ spec:
     spec:
       containers:
       - name: ratel
-        image: {{ template "ratel.image" . }} # dgraph/ratel:latest
+        image: {{ template "ratel.image" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
           name: http-ratel
       - name: zero
-        image: {{ template "dgraph.image" . }} # dgraph/dgraph:latest
+        image: {{ template "dgraph.image" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5080
@@ -47,7 +47,7 @@ spec:
             set -ex
             dgraph zero --my=$(hostname -f):5080
       - name: alpha
-        image: {{ template "dgraph.image" . }} # dgraph/dgraph:latest
+        image: {{ template "dgraph.image" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

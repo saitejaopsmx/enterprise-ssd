@@ -384,10 +384,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-  tagName: String! @search(by:[exact])
-  tagValue: String! @search(by:[exact])
-  tagDescription: String
-  createdBy: String @search(by:[exact])
+    tagName: String! @search(by:[exact])
+    tagValue: String! @search(by:[exact])
+    tagDescription: String
+    createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)

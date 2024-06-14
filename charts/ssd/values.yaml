@@ -2,10 +2,6 @@
 
 # OpsMx Secure Software Delivery
 #####################################################
-
-#This should not be required
-#installationMode: SSD-SPIN
-
 ## Info related to registry where OES images are stored
 imageCredentials:
   repoUrl: https://quay.io/
@@ -74,6 +70,7 @@ global:
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/client-header-buffer-size: 100k
+        nginx.ingress.kubernetes.io/proxy-body-size: 50m
       tls:
         secretName: ssd-ui-ingress
 
@@ -127,7 +124,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2024-04-00"
+    tag: "2024_05_00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -209,7 +206,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-04-01"
+    tag: "2024_05_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -228,7 +225,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-04-01"
+    tag: "2024_05_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -242,7 +239,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-04-00"
+    tag: "2024_05_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -254,7 +251,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-04-04"
+    tag: "2024_05_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -304,7 +301,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-04-04"
+    tag: "2024_05_00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -322,18 +319,6 @@ kubedetector:
   image:
     repository: kubernetes-detector
     tag: v1.0.1
-    pullPolicy: IfNotPresent
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  securityContext: {}
-
-  namespaces:
-  ## Update the namespaces in the below
-  -
-
 #################################################################################
 
 nodeSelector: {}

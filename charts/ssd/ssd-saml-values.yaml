@@ -24,7 +24,7 @@ ssdgate:
   admin_groups:
   - admin
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkf26qs6f8FdWJ3r5d7/sso/saml/metadata
+    metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
 
 #######################################################################

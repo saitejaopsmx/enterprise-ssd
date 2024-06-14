@@ -13,7 +13,7 @@ global:
     # Change to http if global.certManager.installed is false
     protocol: https
     ## Update the host value with proper dns entry to access the SSD UI
-    host: ssd-mayrel.oea-dev.opsmx.net
+    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
 ###############################################################################
 #####User doesn't need to change the below flags let it be the default one######################
@@ -27,10 +27,5 @@ ssdgate:
     saml_initiated_login: false
 
 #######################################################################
-clustername: in-cluster
-
 ### Change the Organisation name if user wants a different name in the UI
 organisationname: opsmx
-
-### Change the Env name if user wants a different name in the UI
-enviornmentname: in-cluster

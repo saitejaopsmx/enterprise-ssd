@@ -319,6 +319,10 @@ kubedetector:
   image:
     repository: kubernetes-detector
     tag: v1.0.1
+kubescape:
+  image:
+    repository: kubescape-service
+    tag: v0.0.1
 #################################################################################
 
 nodeSelector: {}

@@ -32,4 +32,4 @@ ssdgate:
 organisationname: default
 
 ### Admin groups for Rbac #############################################
-admingroups: ssd-admin
+admingroups: admin

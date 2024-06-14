@@ -29,3 +29,6 @@ ssdgate:
 #######################################################################
 ### Change the Organisation name if user wants a different name in the UI
 organisationname: opsmx
+
+### Admin groups in SSD for Rbac #############################################
+admingroups: admin

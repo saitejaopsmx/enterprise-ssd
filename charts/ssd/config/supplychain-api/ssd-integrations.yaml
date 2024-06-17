@@ -49,7 +49,6 @@ integrationData:
         displayName: BitBucket
         multiSupport: false
         category: sourcetool
-        testConnectionFlag: true
         configurationFields:
           url:
             displayName: API URL
@@ -210,6 +209,34 @@ integrationData:
             placeholderText: 'Example:username/password'
             authType:
               - basic
+      - integratorType: ecr
+        displayName: ECR
+        multiSupport: true
+        category: dockerregistry
+        configurationFields:
+          url:
+            displayName: Host Url
+            dataType: input
+            required: true
+            secret: false
+            helpText: ECR Host URL
+            placeholderText: 'Example:https://aws_account_id.dkr.ecr.us-west-2.amazonaws.com'
+          repo:
+            displayName: Approved Artifact Repo
+            dataType: chipset
+            required: false
+            secret: false
+            helpText: Repo Name
+            placeholderText: 'Example:ecr'
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: true
+            helpText: Authentiation Type
+            placeholderText: 'Example:username/token'
+            authType:
+              - apiKey
       - integratorType: quay
         displayName: Quay
         multiSupport: true

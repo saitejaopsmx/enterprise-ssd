@@ -239,7 +239,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024_05_00"
+    tag: "2024_05_01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -251,7 +251,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024_05_00"
+    tag: "2024_05_01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -301,7 +301,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024_05_00"
+    tag: "2024_05_01"
     pullPolicy: IfNotPresent
 
   annotations: {}

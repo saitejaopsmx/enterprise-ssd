@@ -35,7 +35,7 @@ integrationData:
             required: true
             secret: false
             helpText: GitHub Host URL
-            placeholderText: 'Example:https://github.com'
+            placeholderText: 'Example:https://api.github.com'
           auth:
             displayName: Auth Type
             dataType: auth
@@ -56,7 +56,7 @@ integrationData:
             required: true
             secret: false
             helpText: BitBucket Host URL
-            placeholderText: 'Example:https://bitbucket.com'
+            placeholderText: 'Example:https://api.bitbucket.org'
           auth:
             displayName: Auth Type
             dataType: auth
@@ -236,7 +236,7 @@ integrationData:
             helpText: Authentiation Type
             placeholderText: 'Example:username/token'
             authType:
-              - apiKey
+              - basic
       - integratorType: quay
         displayName: Quay
         multiSupport: true

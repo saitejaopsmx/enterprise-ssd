@@ -184,7 +184,7 @@ db:
   ## Image specific details
   image:
     repository: ssd-db
-    tag: v1.0.0
+    tag: "2024-05-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -301,7 +301,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-05-01"
+    tag: "2024-05-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -371,6 +371,7 @@ redis:
   image:
     registry: quay.io/opsmxpublic
     repository: bitnami-redis
+    tag: "2024-05-00"
   password: password
   cluster:
     enabled: false

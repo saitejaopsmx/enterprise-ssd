@@ -16,6 +16,12 @@ global:
     protocol: https
     host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
+#######################################################################
+### Change the Organisation name if user wants a different name in the UI
+organisationname: opsmx
+
+### Admin groups for Rbac #############################################
+admingroups: admin
 ###############################################################################
 ssdgate:
   installDex: false   # set to true if dex need to be installed
@@ -26,10 +32,3 @@ ssdgate:
   saml:
     metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
-
-#######################################################################
-### Change the Organisation name if user wants a different name in the UI
-organisationname: default
-
-### Admin groups for Rbac #############################################
-admingroups: admin

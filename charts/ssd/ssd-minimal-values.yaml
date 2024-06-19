@@ -1,4 +1,4 @@
-#################This file is used to Install SSD with Random Password##########################
+#################This file is used to Install SSD with Inbuilt Authentication##########################
 #####################################################
 #k8sServiceType: LoadBalancer
 ####################################################
@@ -15,20 +15,24 @@ global:
     ## Update the host value with proper dns entry to access the SSD UI
     host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
 
-###############################################################################
-#####User doesn't need to change the below flags let it be the default one######################
-ssdgate:
-  installDex: false   # Default will be false, Set to true if dex need to be installed
-  createGateDexSecret: true
-  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
-  admin_groups:
-  - admin
-  saml:
-    saml_initiated_login: false
-
-#######################################################################
+#############################################################################
 ### Change the Organisation name if user wants a different name in the UI
 organisationname: opsmx
 
 ### Admin groups in SSD for Rbac #############################################
 admingroups: admin
+
+############## PVC for the Tool Chain #######################################
+toolchain:
+  persistence:
+    ## Change the pvc size as per the cluster requirements
+    size: 50Gi
+###############################################################################
+#####User doesn't need to change the below flags let it be the default one######################
+ssdgate:
+  installDex: false   # Default will be false, Set to true if dex need to be installed
+  auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values
+  admin_groups:
+  - admin
+  saml:
+    saml_initiated_login: false

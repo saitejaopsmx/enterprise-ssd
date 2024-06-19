@@ -22,6 +22,7 @@ organisationname: opsmx
 
 ### Admin groups for Rbac #############################################
 admingroups: admin
+
 ###############################################################################
 ssdgate:
   installDex: false   # set to true if dex need to be installed
@@ -32,3 +33,10 @@ ssdgate:
   saml:
     metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
+
+############## PVC for the Tool Chain #######################################
+toolchain:
+  persistence:
+    ## Change the pvc size as per the cluster requirements
+    size: 50Gi
+

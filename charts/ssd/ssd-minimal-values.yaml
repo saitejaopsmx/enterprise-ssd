@@ -21,6 +21,12 @@ organisationname: opsmx
 
 ### Admin groups in SSD for Rbac #############################################
 admingroups: admin
+
+############## PVC for the Tool Chain #######################################
+toolchain:
+  persistence:
+    ## Change the pvc size as per the cluster requirements
+    size: 50Gi
 ###############################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 ssdgate:

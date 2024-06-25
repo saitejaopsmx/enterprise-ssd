@@ -206,7 +206,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-05-00"
+    tag: "2024-05-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -225,7 +225,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-05-00"
+    tag: "2024-05-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -239,7 +239,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-05-01"
+    tag: "2024-05-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -251,7 +251,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-05-01"
+    tag: "2024-05-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -282,10 +282,10 @@ rabbitmq:
   url: rabbitmq-service
   port: 5672
   username: rabbitmq
-  password: Networks123
+  password: 7I3g7jUgIL
   image:
     registry: quay.io/opsmxpublic/rabbitmq
-    repository: 3-management
+    repository: "2024-05-00"
 
   annotations: {}
 

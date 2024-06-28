@@ -167,3 +167,20 @@ Redis base URL for Spinnaker
 {{- printf "redis://%s:%s" .Values.redis.external.host (.Values.redis.external.port | toString) -}}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Looks if there's an existing secret and reuses its password. If not, it generates
+a new password and uses it.
+*/}}
+{{- define "getRabbitMQPassword" -}}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace "rabbitmq-secret") -}}
+{{- if and $secret (index $secret.data "rabbitmqPassword") }}
+  {{- $existingPassword := index $secret.data "rabbitmqPassword" | b64dec }}
+  {{- $existingPassword }}
+{{- else -}}
+{{- $newPassword := randAlphaNum 20 | b64enc }}
+{{- $newPassword }}
+{{- end -}}
+{{- end -}}
+

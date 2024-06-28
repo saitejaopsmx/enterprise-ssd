@@ -1,6 +1,6 @@
 rabbitmq:
   username: '{{ .Values.rabbitmq.username }}'
-  password: '{{ .Values.rabbitmq.password }}'
+  password: {{ include "getRabbitMQPassword" . }}
   host: rabbitmq-service
   port: 5672
   queue: isd-to-preview-saas

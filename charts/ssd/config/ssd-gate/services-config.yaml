@@ -32,13 +32,6 @@
   baseUrl: ssd-opa:8200
   health_endpoint: /health
   log_traffic: true
-- name: tool-chain-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
-  path_prefixes:
-  - "/webhook/api/v1/sbom"
-  strip_path: "/webhook"
-  baseUrl: tool-chain:8100
-  health_endpoint: /health
-  log_traffic: true
 - name: supplychain-api  # Name
   path_prefixes:
   - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend

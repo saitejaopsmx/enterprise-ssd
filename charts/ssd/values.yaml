@@ -251,7 +251,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-05-01"
+    tag: "jul1"
     pullPolicy: IfNotPresent
 
   annotations: {}

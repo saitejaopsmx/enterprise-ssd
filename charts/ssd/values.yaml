@@ -277,24 +277,28 @@ tokenmachine:
 ## Details of rabbitmq message bus image for SSD
 ##
 rabbitmq:
-  ## rabbitmq  endpoint that is used by oes-gate and oes-platform for caching;
-  ## Change this to custom URL if installRedis is set to false
-  url: rabbitmq-service
-  port: 5672
-  username: rabbitmq
-  password: Networks123
+  auth:
+    username: rabbitmq
+    password: "laPEifnlO51EE6e"
+    securePassword: true
+    existingPasswordSecret: ""
+    existingSecretPasswordKey: ""
+
+  service:
+    type: LoadBalancer
+
   image:
-    registry: quay.io/opsmxpublic/rabbitmq
-    repository: 3-management
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  #Below block is for only for K8S
-  securityContext:
-    fsGroup: 1000
-
+    registry: docker.io
+    repository: bitnami/rabbitmq
+    tag: 3.13.3-debian-12-r0
+    digest: ""
+    debug: false
+    pullPolicy: IfNotPresent
+    ## Example:
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: []
 ###############################################################################
 ## Values of SSD UI
 ui:

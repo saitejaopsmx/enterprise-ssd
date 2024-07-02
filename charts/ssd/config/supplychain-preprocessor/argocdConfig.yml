@@ -1,7 +1,7 @@
 rabbitmq:
-  username: '{{ .Values.rabbitmq.username }}'
-  password: '{{ .Values.rabbitmq.password }}'
-  host: rabbitmq-service
+  username: '{{ .Values.rabbitmq.auth.username }}'
+  password: '{{ .Values.rabbitmq.auth.password }}'
+  host: rabbitmq
   port: 5672
   queue: argo-ssd
   exchange: argo.events

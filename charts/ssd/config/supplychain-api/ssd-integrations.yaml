@@ -103,6 +103,52 @@ integrationData:
             placeholderText: 'Example:Compliance Scan'
             data:
               - Compliance Scan
+      - integratorType: virustotal
+        displayName: VirusTotal
+        multiSupport: false
+        category: sourcetool
+        testConnectionFlag: false
+        configurationFields:
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: false
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
+      - integratorType: snyk
+        displayName: Snyk
+        multiSupport: false
+        category: sourcetool
+        testConnectionFlag: false
+        configurationFields:
+          snykorgid:
+            displayName: Snyk Org Id
+            dataType: input
+            required: false
+            secret: false
+            helpText: Snyk Org Id
+            placeholderText: 'Example:12234'
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: true
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
+          sassnykscan:
+            displayName: Sass scan
+            dataType: checkbox
+            required: true
+            secret: false
+            helpText: Enable/Disable
+            placeholderText: 'Example:Helm Scan'
+            data:
+              - Sass scan
       - integratorType: semgrep
         displayName: SemGrep
         multiSupport: false

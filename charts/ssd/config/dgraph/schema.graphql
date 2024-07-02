@@ -221,7 +221,7 @@ enum RiskStatus {
     mediumrisk
     highrisk
     apocalypserisk
-    inprogress
+    scanning
 }
 
 """
@@ -246,6 +246,8 @@ DeploymentStage is an enum denoting the stage of the deployment. .
 enum DeploymentStage {
     "deployment is discovered from the events"
     discovered
+    "scanning is under process"
+    scanning
     "deployment is known to have passed the deployment firewall and the deployment(ie the artifact) is live"
     current
     "deployment becomes a past deployment because another fresh deployment has happened"
@@ -525,6 +527,7 @@ type SourceCodeTool {
     diffCommits: String
     licenseName: String
     visibility: String
+    workflowName: String
     "parentRepo is populated in case the git repo is a fork"
     parentRepo: String
     buildTool: BuildTool!
@@ -583,6 +586,8 @@ type ArtifactScanData {
     sourceSemgrepHighSeverityScanUrl: String
     sourceSemgrepMediumSeverityScanUrl: String
     sourceSemgrepLowSeverityScanUrl: String
+    sourceSnykScanUrl: String
+    virusTotalUrlScan: String
     riskStatus: RiskStatus @search(by: [exact, regexp])
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
 }

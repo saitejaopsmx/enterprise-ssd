@@ -69,8 +69,11 @@ global:
     ingress:
       annotations:
         kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/client-header-buffer-size: 100k
-        nginx.ingress.kubernetes.io/proxy-body-size: 50m
+        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
+        nginx.ingress.kubernetes.io/proxy-body-size: 500m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
       tls:
         secretName: ssd-ui-ingress
 

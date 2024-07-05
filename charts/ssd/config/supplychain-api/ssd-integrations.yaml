@@ -274,15 +274,27 @@ integrationData:
             secret: false
             helpText: Repo Name
             placeholderText: 'Example:ecr'
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: true
+          region:
+            displayName: Region
+            dataType: input
+            required: false
+            secret: false
+            helpText: Mandatory to update the Region if the repo is Private
+            placeholderText: 'Example:us-west-1/us-east-2'
+          awsAccessKey:
+            displayName: AWS AccessKey
+            dataType: input
+            required: false
             secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:username/token'
-            authType:
-              - basic
+            helpText: Mandatory to update the Access Key if the repo is Private
+            placeholderText: 'Example:rxdtfcgvhbj'
+          awsSecretKey:
+            displayName: AWS SecretKey
+            dataType: input
+            required: false
+            secret: true
+            helpText: Mandatory to update the Secret Key if the repo is Private
+            placeholderText: 'Example:qwertyuisdxcv'
       - integratorType: quay
         displayName: Quay
         multiSupport: true
@@ -374,30 +386,6 @@ integrationData:
             placeholderText: 'Example:Vulnerability Scan'
             data:
               - Vulnerability Scan
-      - integratorType: snyk
-        displayName: Snyk
-        multiSupport: false
-        category: scanningtool
-        testConnectionFlag: true
-        configurationFields:
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: false
-            secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:knjnasjwokldjhse'
-            authType:
-              - apiKey
-          helmscan:
-            displayName: Helm Scan
-            dataType: checkbox
-            required: true
-            secret: false
-            helpText: Enable/Disable
-            placeholderText: 'Example:Helm Scan'
-            data:
-              - Helm Scan
   - stage: Others
     integrations:
       - integratorType: chatgpt

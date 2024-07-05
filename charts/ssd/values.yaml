@@ -220,6 +220,9 @@ toolchain:
     size: 50Gi
     accessMode: ReadWriteOnce
 
+  ## During the scanning if the repo need to clone only once set to true
+  cloneRepoOnce: false
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details

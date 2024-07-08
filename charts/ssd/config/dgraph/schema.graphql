@@ -568,6 +568,7 @@ type ArtifactScanData {
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
     createdAt: DateTime
+    vulnTrackingId: String
     components: [Component!]
     vulnCriticalCount: Int @search
     vulnHighCount: Int @search

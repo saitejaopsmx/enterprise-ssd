@@ -242,7 +242,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-06-02"
+    tag: "2024-06-03"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -254,7 +254,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-06-00"
+    tag: "2024-06-01"
     pullPolicy: IfNotPresent
 
   annotations: {}

@@ -103,6 +103,52 @@ integrationData:
             placeholderText: 'Example:Compliance Scan'
             data:
               - Compliance Scan
+      - integratorType: virustotal
+        displayName: VirusTotal
+        multiSupport: false
+        category: sourcetool
+        testConnectionFlag: false
+        configurationFields:
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: false
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
+      - integratorType: snyk
+        displayName: Snyk
+        multiSupport: false
+        category: sourcetool
+        testConnectionFlag: false
+        configurationFields:
+          snykorgid:
+            displayName: Snyk Org Id
+            dataType: input
+            required: false
+            secret: false
+            helpText: Snyk Org Id
+            placeholderText: 'Example:12234'
+          auth:
+            displayName: Auth Type
+            dataType: auth
+            required: true
+            secret: true
+            helpText: Authentiation Type
+            placeholderText: 'Example:knjnasjwokldjhse'
+            authType:
+              - apiKey
+          sassnykscan:
+            displayName: Sass scan
+            dataType: checkbox
+            required: true
+            secret: false
+            helpText: Enable/Disable
+            placeholderText: 'Example:Helm Scan'
+            data:
+              - Sass scan
       - integratorType: semgrep
         displayName: SemGrep
         multiSupport: false
@@ -228,15 +274,27 @@ integrationData:
             secret: false
             helpText: Repo Name
             placeholderText: 'Example:ecr'
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: true
+          region:
+            displayName: Region
+            dataType: input
+            required: false
+            secret: false
+            helpText: Mandatory to update the Region if the repo is Private
+            placeholderText: 'Example:us-west-1/us-east-2'
+          awsAccessKey:
+            displayName: AWS AccessKey
+            dataType: input
+            required: false
             secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:username/token'
-            authType:
-              - basic
+            helpText: Mandatory to update the Access Key if the repo is Private
+            placeholderText: 'Example:rxdtfcgvhbj'
+          awsSecretKey:
+            displayName: AWS SecretKey
+            dataType: input
+            required: false
+            secret: true
+            helpText: Mandatory to update the Secret Key if the repo is Private
+            placeholderText: 'Example:qwertyuisdxcv'
       - integratorType: quay
         displayName: Quay
         multiSupport: true
@@ -328,30 +386,6 @@ integrationData:
             placeholderText: 'Example:Vulnerability Scan'
             data:
               - Vulnerability Scan
-      - integratorType: snyk
-        displayName: Snyk
-        multiSupport: false
-        category: scanningtool
-        testConnectionFlag: true
-        configurationFields:
-          auth:
-            displayName: Auth Type
-            dataType: auth
-            required: false
-            secret: true
-            helpText: Authentiation Type
-            placeholderText: 'Example:knjnasjwokldjhse'
-            authType:
-              - apiKey
-          helmscan:
-            displayName: Helm Scan
-            dataType: checkbox
-            required: true
-            secret: false
-            helpText: Enable/Disable
-            placeholderText: 'Example:Helm Scan'
-            data:
-              - Helm Scan
   - stage: Others
     integrations:
       - integratorType: chatgpt

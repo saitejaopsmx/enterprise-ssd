@@ -14,6 +14,14 @@ global:
     protocol: https
     ## Update the host value with proper dns entry to access the SSD UI
     host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
+    ingress:
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
+        nginx.ingress.kubernetes.io/proxy-body-size: 500m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
 
 #############################################################################
 ### Change the Organisation name if user wants a different name in the UI

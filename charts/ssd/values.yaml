@@ -69,8 +69,11 @@ global:
     ingress:
       annotations:
         kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/client-header-buffer-size: 100k
-        nginx.ingress.kubernetes.io/proxy-body-size: 50m
+        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
+        nginx.ingress.kubernetes.io/proxy-body-size: 500m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
       tls:
         secretName: ssd-ui-ingress
 
@@ -334,16 +337,6 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 topologySpreadConstraints: []
-dex:
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  topologySpreadConstraints: []
-minio:
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  topologySpreadConstraints: []
 
 ###############################################################################################
 #### The values below this line are best not changed except in rare situations
@@ -363,6 +356,10 @@ dex:
         secretKeyRef:
           name: gate-dex-client-secret
           key: client-secret
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  topologySpreadConstraints: []
 ###############################################################################################
 ###  Redis Configuration
 ###############################################################################################

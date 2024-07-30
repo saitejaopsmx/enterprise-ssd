@@ -285,11 +285,10 @@ rabbitmq:
   url: rabbitmq-service
   port: 5672
   username: rabbitmq
-  password: 7I3g7jUgIL
+  password: Networks123
   image:
     registry: quay.io/opsmxpublic/rabbitmq
-    repository: "2024-05-00"
-
+    repository: 3-management
   annotations: {}
 
   serviceAnnotations: {}

@@ -68,11 +68,11 @@ temporal:
         tolerations: []
         affinity: {}
         topologySpreadConstraints: {}
-    web:
-      podAnnotations: {}
-      nodeSelector: {}
-      tolerations: []
-      affinity: {}
+  web:
+    podAnnotations: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
 
   admintools:
     podAnnotations: {}

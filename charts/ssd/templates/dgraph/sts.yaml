@@ -21,6 +21,10 @@ spec:
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}
+      annotations:
+{{- if .Values.dgraph.annotations -}}
+        {{ toYaml .Values.dgraph.annotations | nindent 8 }}
+{{- end }}
     spec:
       containers:
       - name: ratel

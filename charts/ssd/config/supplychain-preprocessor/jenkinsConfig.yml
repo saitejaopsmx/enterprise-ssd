@@ -12,10 +12,11 @@ graphql:
   host: http://dgraph-public
   port: 8080
 
-postgresql:
-  ssddb:
-    connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}
-
 ssdopasvc:
   host: http://ssd-opa
   port: 8200
+
+redis:
+  address: {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
+  password: {{ .Values.redis.password }}
+  DB: 0

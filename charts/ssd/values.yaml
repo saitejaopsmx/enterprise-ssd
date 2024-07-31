@@ -243,6 +243,9 @@ supplychainpreprocessor:
 
   securityContext: {}
 
+  # Supported values are info,debug  
+  loglevel: info
+
 ####################################################
 ssdopa:
   ## Image specific details

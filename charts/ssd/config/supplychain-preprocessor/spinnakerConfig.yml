@@ -18,14 +18,8 @@ graphql:
 supplychainapi:
   host: http://supplychain-api
   port: 8099
-postgresql:
-  ssddb:
-    connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}
 ssdopasvc:
   host: http://ssd-opa
   port: 8200
-#toolchainsvc:
-#  host: http://tool-chain
-#  port: 8100
 
 

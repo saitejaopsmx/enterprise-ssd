@@ -5,6 +5,10 @@ metadata:
   labels:
     app: ssd
     component: dgraph
+{{- if .Values.dgraph.serviceAnnotations }}
+  annotations:
+{{ toYaml .Values.dgraph.serviceAnnotations | indent 4 }}
+{{- end }}
 spec:
   type: ClusterIP
   ports:

@@ -386,10 +386,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-    tagName: String! @search(by:[exact])
-    tagValue: String! @search(by:[exact])
-    tagDescription: String
-    createdBy: String @search(by:[exact])
+	tagName: String! @search(by:[exact])
+	tagValue: String! @search(by:[exact])
+	tagDescription: String
+	createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)
@@ -405,12 +405,12 @@ type PolicyDefinition {
     policyName: String! @search(by: [exact])
     category: String! @search(by: [exact])
     stage: String! @search(by: [exact])
-    description: String!
-    scheduledPolicy: Boolean!
-    script: String!
-    variables: String
-    conditionName: String
-    suggestion: String
+    description: String! @search(by: [exact])
+    scheduledPolicy: Boolean! @search
+    script: String! @search(by: [exact])
+    variables: String @search(by: [exact])
+    conditionName: String @search(by: [exact])
+    suggestion: String @search(by: [exact])
 }
 
 type PolicyEnforcement {
@@ -421,11 +421,11 @@ type PolicyEnforcement {
     enforcedTeam: Team @hasInverse(field: policyEnforcements)
     enforcedApplication: Application @hasInverse(field: policyEnforcements)
     status: Boolean! @search
-    forceApply: Boolean
+    forceApply: Boolean @search
     severity: Severity!
     datasourceTool: String! @search(by: [exact])
     action: String! @search(by: [exact])
-    conditionValue: String
+    conditionValue: String @search(by: [exact])
     environments: [Environment!]
     tags: [Tag!] @hasInverse(field: policies)
     createdAt: DateTime!
@@ -588,6 +588,7 @@ type ArtifactScanData {
     sourceSemgrepMediumSeverityScanUrl: String
     sourceSemgrepLowSeverityScanUrl: String
     sourceSnykScanUrl: String
+    sourceSonarQubeScanUrl: String
     virusTotalUrlScan: String
     riskStatus: RiskStatus @search(by: [exact, regexp])
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)

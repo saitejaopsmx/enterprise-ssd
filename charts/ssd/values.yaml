@@ -56,7 +56,7 @@ global:
     enabled: false        # Set to true if your organization requires custom TLS certs
     secretName: oes-cacerts # Please do not change this
 
-  ## Set to true to expose oes-ui, oes-gate services over ingress
+  ## Set to true to expose ssd-ui over ingress
   createIngress: false
 
   ## OES-UI url configuration, defaults to http://localhost:8080
@@ -69,8 +69,11 @@ global:
     ingress:
       annotations:
         kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/client-header-buffer-size: 100k
-        nginx.ingress.kubernetes.io/proxy-body-size: 50m
+        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
+        nginx.ingress.kubernetes.io/proxy-body-size: 500m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
       tls:
         secretName: ssd-ui-ingress
 
@@ -85,8 +88,9 @@ global:
       tag: RELEASE.2020-11-25T23-04-07Z
     service:
       type: ClusterIP
-    accessKey: spinnakeradmin
-    secretKey: spinnakeradmin
+    # User can provide the any value of accessKey,secretKey. If the values are empty it will be Auto Generated
+    accessKey:
+    secretKey:
     region: us-east-1
     #Below is the securityContext block for only for K8S
     securityContext:
@@ -107,6 +111,8 @@ global:
     persistence:
       enabled: true
       size: 10Gi
+#  redis:
+#    password:
 dgraph:
   image:
     repository: dgraph
@@ -168,6 +174,8 @@ ssdgate:
     #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
     #  roles: groups  # groups is default
 
+  annotations: {}
+  serviceAnnotations: {}
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -175,7 +183,7 @@ db:
 
   ## Change the default configuration when above option is set to false
   ## Below url and credentials are used by Autopilot & Sapor
-  #url: jdbc:postgresql://oes-db:5432
+  #url: jdbc:postgresql://ssd-db:5432
   host: ssd-db
   port: 5432
   username: postgres
@@ -237,6 +245,9 @@ supplychainpreprocessor:
 
   securityContext: {}
 
+  # Supported values are info,debug  
+  loglevel: info
+
 ####################################################
 ssdopa:
   ## Image specific details
@@ -289,7 +300,6 @@ rabbitmq:
   image:
     registry: quay.io/opsmxpublic/rabbitmq
     repository: 3-management
-
   annotations: {}
 
   serviceAnnotations: {}
@@ -332,16 +342,6 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 topologySpreadConstraints: []
-dex:
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  topologySpreadConstraints: []
-minio:
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  topologySpreadConstraints: []
 
 ###############################################################################################
 #### The values below this line are best not changed except in rare situations
@@ -361,6 +361,10 @@ dex:
         secretKeyRef:
           name: gate-dex-client-secret
           key: client-secret
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  topologySpreadConstraints: []
 ###############################################################################################
 ###  Redis Configuration
 ###############################################################################################
@@ -369,13 +373,13 @@ redis:
   ## Redis endpoint that is used by oes-gate and oes-platform for caching;
   ## Change this to custom URL if installRedis is set to false
   ## url: redis://{{ .Release.Name }}-redis-master:6379
-  url: redis://:password@{{ .Release.Name }}-redis-master
+  #url: redis://:password@{{ .Release.Name }}-redis-master
   port: 6379
   image:
     registry: quay.io/opsmxpublic
     repository: bitnami-redis
     tag: "2024-05-00"
-  password: password
+  password: 12345sdfa
   cluster:
     enabled: false
   securityContext:

@@ -3,4 +3,5 @@ plugins:
   - jenkins
   - spinnaker
   - githubactions
-loglevel: info
+  - bitbucket
+loglevel: {{ .Values.supplychainpreprocessor.loglevel }}

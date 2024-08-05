@@ -206,6 +206,7 @@
         {
         "integratorType": "virustotal",
         "displayName": "VirusTotal",
+	"testConnectionFlag": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "token": {
@@ -233,6 +234,7 @@
         {
         "integratorType": "snyk",
         "displayName": "Snyk",
+	"testConnectionFlag": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "snykOrgId": {
@@ -275,6 +277,7 @@
         {
         "integratorType": "semgrep",
         "displayName": "SemGrep",
+	"testConnectionFlag": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "sastsemgrepscan": {
@@ -300,6 +303,7 @@
         {
         "integratorType": "codacy",
         "displayName": "Codacy",
+	"testConnectionFlag": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "sastcodacyscan": {
@@ -672,6 +676,7 @@
         {
         "integratorType": "google-artifact-registry",
         "displayName": "Google Artifact Registry",
+	"testConnectionFlag": false,
         "category": "aptregistry",
         "integratorConfigs": {
             "key": {
@@ -696,7 +701,7 @@
         "integratorType": "grype",
         "displayName": "Grype (CMD)",
         "category": "dockerregistry",
-        "testConnectionFlag": true,
+        "testConnectionFlag": false,
         "integratorConfigs": {
             "vulnerabilityscan": {
             "dataTypeOptions": [

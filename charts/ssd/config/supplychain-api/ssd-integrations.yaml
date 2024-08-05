@@ -44,6 +44,9 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+        featureConfigs:
+          sonarqubeFileInsertion:
+            default: inactive
       - integratorType: openssf
         category: scanningtool
         featureConfigs:

@@ -51,7 +51,7 @@
     "DOCKER": {
         "HEADER": "Docker Registry",
         "BODY": "<span><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Docker registry access.</li><li><strong>Registry URL</strong>: The registry URL from which you want to pull and deploy images. <span class='noBr'> DockerHub example: https://hub.docker.com</span></li><li><strong>Email</strong>: Users docker registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used.</li><li><strong>Repositories</strong>: An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. <span class='noBr'> Example: library/ubuntu (Public repositories are prefixed with library/)</span></li><li><strong>Group Membership</strong>: Select an authentication type that corresponds to the connection credential parameter.</li><li><strong>Connect to Spinnaker</strong>: Toggle on to propagate the change into the CD Tool.</li></ul></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -117,7 +117,7 @@
     "QUAY": {
         "HEADER": "Docker Registry",
         "BODY": "<span><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Docker registry access.</li><li><strong>Registry URL</strong>: The registry URL from which you want to pull and deploy images. <span class='noBr'> DockerHub example: https://hub.docker.com</span></li><li><strong>Email</strong>: Users docker registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used.</li><li><strong>Repositories</strong>: An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. <span class='noBr'> Example: library/ubuntu (Public repositories are prefixed with library/)</span></li><li><strong>Group Membership</strong>: Select an authentication type that corresponds to the connection credential parameter.</li><li><strong>Connect to Spinnaker</strong>: Toggle on to propagate the change into the CD Tool.</li></ul></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -137,7 +137,7 @@
     },
     "ECR": {
         "HEADER": "ECR",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -156,7 +156,7 @@
     },
     "BITBUCKET":{
         "HEADER": "Bitbucket",
-        "ACCOUNTNAME":{
+        "NAME":{
           "TOOLTIP":"User-defined account name for your BitBucket access.",
           "VALIDATION_MESSAGE":{
             "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -191,7 +191,7 @@
     "GITHUB": {
         "HEADER": "GitHub",
         "BODY": "<span><p>GITHUB integration can be used as a datasource for Approval Gate as well as to configure Spinnaker for GitHub.</p><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your GitHub access.<span class='noBr'>(Example: opsmx-github)</span></li><li><strong>URL</strong>: Github's host address, such as https://github.com</li><li><strong>API URL</strong>: Github's API endpoint host address, <span class='noBr'>such as https://api.github.com</span></li><li><strong>Token</strong>: GitHub personal access token. You can find <a href='https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token' target='_blank'>here</a> how to generate personal access tokens. <span class='noBr'>(Example: ghp_ln1eJK4yuomnY6JREp72IDJC4Hq6Sm)</span></li><li><strong>User Name</strong>: The GitHub username</li><li><strong>Connect to Spinnaker</strong>: Toggle to configure Spinnaker for GitHub</li><li><strong>Permissions</strong>: Enable/disable access to the GITHUB account in Autopilot to specific user groups</li></ul></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -230,7 +230,7 @@
     "GITLAB": {
         "HEADER": "GitLab",
         "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your GitLab access.</li><li><strong>Host URL</strong>: GitLab's host address, such as https://gitlab.com</li><li><strong>Username</strong>: The GitLab server username </li><li><strong>Token</strong>: The user's personal access token. Please refer <a href='https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html' target='_blank'>this document</a> for generating tokens.</li></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -271,7 +271,7 @@
     "JENKINS": {
         "HEADER": "Jenkins",
         "BODY": "<span><p>Jenkins integration can be used as a datasource for Approval Gate as well as to configure Spinnaker for Jenkins.</p><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Jenkins access. <span class='noBr'>(Example: opsmx-jenkins)</span></li><li><strong>Host URL</strong>: Jenkins host address, <span class='noBr'>such as https://jenkins.opsmx.net</span></li><li><strong>Authentication Type</strong>: Select an authentication type that corresponds to the connection credential parameter. It is preferable to use token authentication with username and token. </li><li><strong>Token</strong>: Jenkins personal access token. You can find <a href='https://www.jenkins.io/doc/book/using/using-credentials/' target='_blank'>here</a> how to generate personal access tokens. <span>(Example: 77d67609a841b1811a114b7fbfa109b3c2)</span></li><li><strong>CSRF</strong>: Recommended to toggle on the CSRF (Cross-Site Request Forgery) flag</li><li><strong>User Name</strong>: Jenkins User Name</li><li><strong>Password</strong>: Jenkins Password</li><li><strong>Connect to Spinnaker</strong>: Toggle to configure Spinnaker for Jenkins</li><li><strong>Permissions</strong>: Enable/disable access to the Jenkins account in Autopilot to specific user groups</li></ul></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -324,7 +324,7 @@
     "HARBOR": {
         "HEADER": "HARBOR",
         "BODY": "",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -338,7 +338,7 @@
     "GOOGLE-ARTIFACT-REGISTRY": {
         "HEADER": "Google Artifact Registry",
         "BODY": "",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -360,7 +360,7 @@
     "SLACK": {
         "HEADER": "Slack",
         "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Slack access.</li><li><strong>BotName</strong>: Provide the bot name where you want to receive notifications in slack</li><li><strong>Token</strong>: The user's token to authenticate with slack.</li></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -382,7 +382,7 @@
     "CUSTOMPOLICY": {
         "HEADER": "Slack",
         "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Slack access.</li><li><strong>BotName</strong>: Provide the bot name where you want to receive notifications in slack</li><li><strong>Token</strong>: The user's token to authenticate with slack.</li></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -402,7 +402,7 @@
     "JFROG": {
         "HEADER": "JFrog XRay Scanning",
         "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Jfrog Xray access.</li><li><strong>Endpoint</strong>: Your Jfrog Xray host address, from which you access the Jfrog Xray instance</li><li><strong>Token</strong>: The user's token.</li></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -429,7 +429,7 @@
     "KUBERNETES": {
         "HEADER": "",
         "BODY": "",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -512,7 +512,7 @@
     "SNYK": {
         "HEADER": "",
         "BODY": "",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -540,7 +540,7 @@
     "JIRA":{
         "HEADER": "Jira",
         "BODY":"",
-        "ACCOUNTNAME":{
+        "NAME":{
           "TOOLTIP":"User defined name for the Jira account",
           "VALIDATION_MESSAGE":{
           "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -573,7 +573,7 @@
     "SONARQUBE": {
         "HEADER": "SonarQube",
         "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Sonarqube access. </li><li><strong>Host Url</strong>: Sonarqube host address, from which you access the Sonaqube instance</li><li><strong>Token</strong>: The user's token (it is optional)</li></span>",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -599,7 +599,7 @@
     "AUTOPILOT": {
         "HEADER": "Autopilot",
         "BODY": "",
-        "ACCOUNTNAME": {
+        "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",

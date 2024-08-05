@@ -590,7 +590,7 @@
             }
         },
         "TOKEN": {
-            "TOOLTIP": "The user's token (it is optional)",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Token cannot be empty"
             }

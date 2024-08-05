@@ -183,6 +183,16 @@
             "encrypt": true,
             "helpText": "Authentiation Type",
             "placeholderText": "Example:knjnasjwokldjhse"
+            },
+            "sonarqubeFileInsertion": {
+            "dataType": "checkbox",
+            "default": "inactive",
+            "displayName": "Sonarqube File Insertion",
+            "helpText": "",
+            "placeholderText": "",
+            "required": true,
+            "encrypt": false,
+            "featureConfig": true
             }
         }
         },

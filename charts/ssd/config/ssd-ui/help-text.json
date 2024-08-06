@@ -50,7 +50,7 @@
 "INTEGRATION": {
     "DOCKER": {
         "HEADER": "Docker Registry",
-        "BODY": "<span><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Docker registry access.</li><li><strong>Registry URL</strong>: The registry URL from which you want to pull and deploy images. <span class='noBr'> DockerHub example: https://hub.docker.com</span></li><li><strong>Email</strong>: Users docker registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used.</li><li><strong>Repositories</strong>: An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. <span class='noBr'> Example: library/ubuntu (Public repositories are prefixed with library/)</span></li><li><strong>Group Membership</strong>: Select an authentication type that corresponds to the connection credential parameter.</li><li><strong>Connect to Spinnaker</strong>: Toggle on to propagate the change into the CD Tool.</li></ul></span>",
+        "BODY": "<p>Docker Hub is a cloud-based repository where developers can store, manage, and distribute Docker container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the Docker Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -115,8 +115,8 @@
         }
     },
     "QUAY": {
-        "HEADER": "Docker Registry",
-        "BODY": "<span><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Docker registry access.</li><li><strong>Registry URL</strong>: The registry URL from which you want to pull and deploy images. <span class='noBr'> DockerHub example: https://hub.docker.com</span></li><li><strong>Email</strong>: Users docker registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used.</li><li><strong>Repositories</strong>: An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. <span class='noBr'> Example: library/ubuntu (Public repositories are prefixed with library/)</span></li><li><strong>Group Membership</strong>: Select an authentication type that corresponds to the connection credential parameter.</li><li><strong>Connect to Spinnaker</strong>: Toggle on to propagate the change into the CD Tool.</li></ul></span>",
+        "HEADER": "Quay",
+        "BODY": "<p>Quay.io is a container registry service for storing, managing, and distributing container images. It offers additional features and flexibility compared to other container registries like Docker Hub or Google Container Registry.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the Quay repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -137,6 +137,7 @@
     },
     "ECR": {
         "HEADER": "ECR",
+        "BODY": "<p>Amazon Elastic Container Registry (ECR) is a fully managed container registry service that makes it easy to store, manage, and deploy Docker container images.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li><strong>Image Scanning</strong>: SSD integrates with Amazon ECR to monitor container images. It detects new images (via build events) and runs security scans to identify vulnerabilities.</li> <li><strong>Metadata Collection</strong>: SSD collects metadata from Amazon ECR, such as image tags and repository details, to perform supply chain security analysis and maintain audit records.</li> <li><strong>Results Display</strong>: The scan results are available in the Vulnerability Management page and the Artifact section of the DBOM page, providing insights into the security status of the container images and their associated risks.</li> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -156,6 +157,7 @@
     },
     "BITBUCKET":{
         "HEADER": "Bitbucket",
+        "BODY":"<p>Bitbucket is a platform that enables developers to create, store, manage, and share their code.</p><div ><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis</strong>: SSD runs security analyses on Bitbucket repositories to identify git security posture.</li><li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li><li><strong>Security Scans</strong>: SSD can execute various security scans on Bitbucket repositories, such as:<ul><li>SAST (Static Application Security Testing)</li><li>Secret Scan</li><li>License Scan</li></ul></li></ul></div>",
         "NAME":{
           "TOOLTIP":"User-defined account name for your BitBucket access.",
           "VALIDATION_MESSAGE":{
@@ -190,7 +192,7 @@
     },
     "GITHUB": {
         "HEADER": "GitHub",
-        "BODY": "<span><p>GITHUB integration can be used as a datasource for Approval Gate as well as to configure Spinnaker for GitHub.</p><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your GitHub access.<span class='noBr'>(Example: opsmx-github)</span></li><li><strong>URL</strong>: Github's host address, such as https://github.com</li><li><strong>API URL</strong>: Github's API endpoint host address, <span class='noBr'>such as https://api.github.com</span></li><li><strong>Token</strong>: GitHub personal access token. You can find <a href='https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token' target='_blank'>here</a> how to generate personal access tokens. <span class='noBr'>(Example: ghp_ln1eJK4yuomnY6JREp72IDJC4Hq6Sm)</span></li><li><strong>User Name</strong>: The GitHub username</li><li><strong>Connect to Spinnaker</strong>: Toggle to configure Spinnaker for GitHub</li><li><strong>Permissions</strong>: Enable/disable access to the GITHUB account in Autopilot to specific user groups</li></ul></span>",
+        "BODY": "<p>GitHub is a platform that enables developers to create, store, manage, and share their code.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li><strong>Security Analysis</strong>: SSD runs security analyses on GitHub repositories to identify security posture using frameworks like OpenSSF Scorecard.</li> <li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li> <li><strong>Security Scans</strong>: SSD can execute various security scans on GitHub repositories, such as: <ul> <li>SAST (Static Application Security Testing)</li> <li>Secret Scan</li> <li>License Scan</li> </ul> </li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -229,8 +231,7 @@
     },
     "GITLAB": {
         "HEADER": "GitLab",
-        "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your GitLab access.</li><li><strong>Host URL</strong>: GitLab's host address, such as https://gitlab.com</li><li><strong>Username</strong>: The GitLab server username </li><li><strong>Token</strong>: The user's personal access token. Please refer <a href='https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html' target='_blank'>this document</a> for generating tokens.</li></span>",
-        "NAME": {
+        "BODY": "<p>GitLab is a platform that enables developers to create, store, manage, and share their code.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis</strong>: SSD runs security analyses on GitLab repositories to identify git security posture.</li><li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li><li><strong>Security Scans</strong>: SSD can execute various security scans on GitLab repositories, such as:<ul><li>SAST (Static Application Security Testing)</li><li>Secret Scan</li><li>License Scan</li></ul></li></ul></div>",                "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -268,10 +269,110 @@
             "VALIDATION_MESSAGE": {}
         }
     },
+    "VIRUSTOTAL": {
+    "HEADER": "Virus Total",
+    "BODY": "<p>VirusTotal is a service that analyzes URLs for security threats using multiple antivirus engines and website scanners.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>URL Detection and Scanning:</strong> SSD detects URLs in your CI/CD configurations and code base, then uses VirusTotal to scan these URLs for potential security threats.</li><li><strong>Threat Analysis:</strong> SSD retrieves and analyzes threat reports from VirusTotal to evaluate the security of the detected URLs.</li><li><strong>Results Display:</strong> The scan results are available on the View Open Security Issues page, providing detailed insights into detected threats and vulnerabilities.</li></ul></div>",                "NAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                "cannotContainSpace": "Account Name cannot contain space",
+                "required": "Account Name cannot be empty",
+                "startingFromNumber": "Account Name cannot start with numbers",
+                "minlength": "Account Name should be more than 2 characters"
+            }
+        },
+        "TOKEN": {
+            "TOOLTIP": "Token",
+            "VALIDATION_MESSAGE": {
+            "required": "Token cannot be empty"
+            }
+        }
+    },
+    "OPENSSF": {
+        "HEADER": "OpenSSF",
+        "BODY": "<p>OpenSSF Scorecard is a security assessment tool designed to evaluate the security posture of open-source projects. It provides a set of metrics to assess the security practices and vulnerabilities associated with projects.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis:</strong> SSD utilizes OpenSSF Scorecard to run security analysis on repositories. It assesses the security posture of GitHub repositories by checking various security practices and metrics.</li><li><strong>Metadata Collection:</strong> SSD collects metadata such as repository name, branch, list of commits, and approvers to perform supply chain security-related analysis.</li><li><strong>Results Display:</strong> The results of the security analysis are available on the DBOM page for audit purposes, providing insights into the security posture and helping to identify areas for improvement.</li><li>OpenSSF Scorecard is available out of the box with SSD. You can enable or disable this feature using the setting below.</li></ul></div>",
+        "TOKEN": {
+            "TOOLTIP": "Token",
+            "VALIDATION_MESSAGE": {
+            "required": "Token cannot be empty"
+            }
+        }
+    },
+    "TRIVY": {
+        "HEADER": "Trivy",
+        "BODY": "<p>Trivy is an open-source vulnerability scanner for container images and file systems, helping identify security vulnerabilities in images and configurations.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD mandates security scans on images using Trivy. It connects with Trivy to check if the required version of an image has been scanned; if not, SSD generates a security issue. It also triggers periodic vulnerability scans on deployed images.</li> <li>Once the Trivy scan is completed, SSD pulls the security scan results to calculate the overall security status of the images and applications, generating alerts and remediation recommendations.</li> <li>It also pulls results from other scans, such as IaC configuration scans and secret scans, to assess the overall risk of the application.</li> <li>The scanned results are displayed on the Vulnerability Management page, the Artifact section of the DBOM page, and the View Open Security Issues page.</li> <li>It performs correlation and additional prioritisation, which helps you to focus on the most important findings from the Snyk results.</li> <li>SSD imports SBOMs generated by Trivy and analyzes them to identify supply chain security issues.</li> </ul> </div>",
+    },
+    "GRYPE": {
+        "HEADER": "Grype",
+        "BODY": "<p>Grype is a vulnerability scanning tool designed specifically for container images, helping to identify vulnerabilities within Docker containers and other container formats.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>Grype is used to run security scans on images discovered by SSD. The Grype CLI is available out of the box with SSD.</li> <li>To enable SSD to perform vulnerability scans on artifacts, you can activate this feature below.</li> <li>The scan results fetched by SSD are displayed on the Vulnerability Management page, the Artifact section of the DBOM page, and the View Open Security Issues page.</li> </ul> </div>"
+    },
+    "SEMGREP": {
+    "HEADER": "Semgrep",
+    "BODY": "",
+        "NAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                "cannotContainSpace": "Account Name cannot contain space",
+                "required": "Account Name cannot be empty",
+                "startingFromNumber": "Account Name cannot start with numbers",
+                "minlength": "Account Name should be more than 2 characters"
+            }
+        },
+        "TOKEN": {
+            "TOOLTIP": "Token",
+            "VALIDATION_MESSAGE": {
+            "required": "Token cannot be empty"
+            }
+        }
+    },
+    "CODACY": {
+    "HEADER": "Codacy",
+    "BODY": "",
+        "NAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                "cannotContainSpace": "Account Name cannot contain space",
+                "required": "Account Name cannot be empty",
+                "startingFromNumber": "Account Name cannot start with numbers",
+                "minlength": "Account Name should be more than 2 characters"
+            }
+        },
+        "TOKEN": {
+            "TOOLTIP": "Token",
+            "VALIDATION_MESSAGE": {
+            "required": "Token cannot be empty"
+            }
+        }
+    },
+    "KUBESCAPE": {
+    "HEADER": "Kubescape",
+    "BODY": "<p>Kubescape is a security tool designed for Kubernetes environments. It assesses the security posture of Kubernetes clusters by identifying potential vulnerabilities and misconfigurations. Kubescape scans your Kubernetes cluster configuration and resources for security issues, vulnerabilities, and best practice violations.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>Kubescape scans your Kubernetes cluster to detect issues based on security frameworks such as: <ul> <li>CIS Benchmark for Kubernetes</li> <li>MITRE ATT&CK</li> <li>NSA CISA</li> <li>SSD uses Kubescape to perform security analysis on your Kubernetes clusters. It runs security scans on clusters before deployment and can optionally block deployments in insecure clusters.</li> <li>The scan results assist in calculating the overall image and application risk. These results are available in the Deploy section of the DBOM page and the View Open Security Issues page.</li> </ul> </li> </ul> </div>"
+    },
+    "CHATGPT": {
+    "HEADER": "ChatGPT",
+    "BODY": "<p>ChatGPT is an AI chatbot with natural language processing (NLP) capabilities, designed to facilitate human-like conversations and assist with various tasks.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>The Rules Genie option on the Policy page utilizes ChatGPT to create security policies based on provided descriptions and sample inputs. For more information, see Rules Genie.</li> <li>AI-Powered Remediation uses ChatGPT to generate remediation suggestions for security issues identified by SSD. For more information, see AI-powered remediation.</li> </ul> </div>",
+        "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters"
+                }
+        },
+        "TOKEN": {
+            "TOOLTIP": "Token",
+            "VALIDATION_MESSAGE": {
+            "required": "Token cannot be empty"
+            }
+        }
+    },
     "JENKINS": {
         "HEADER": "Jenkins",
-        "BODY": "<span><p>Jenkins integration can be used as a datasource for Approval Gate as well as to configure Spinnaker for Jenkins.</p><p><strong>Fields</strong>:</p><ul class='helpTextUl'><li><strong>Account Name</strong>: User-defined account name for your Jenkins access. <span class='noBr'>(Example: opsmx-jenkins)</span></li><li><strong>Host URL</strong>: Jenkins host address, <span class='noBr'>such as https://jenkins.opsmx.net</span></li><li><strong>Authentication Type</strong>: Select an authentication type that corresponds to the connection credential parameter. It is preferable to use token authentication with username and token. </li><li><strong>Token</strong>: Jenkins personal access token. You can find <a href='https://www.jenkins.io/doc/book/using/using-credentials/' target='_blank'>here</a> how to generate personal access tokens. <span>(Example: 77d67609a841b1811a114b7fbfa109b3c2)</span></li><li><strong>CSRF</strong>: Recommended to toggle on the CSRF (Cross-Site Request Forgery) flag</li><li><strong>User Name</strong>: Jenkins User Name</li><li><strong>Password</strong>: Jenkins Password</li><li><strong>Connect to Spinnaker</strong>: Toggle to configure Spinnaker for Jenkins</li><li><strong>Permissions</strong>: Enable/disable access to the Jenkins account in Autopilot to specific user groups</li></ul></span>",
-        "NAME": {
+        "BODY": "<p>Jenkins is an open-source automation server that automates the building, testing, and deploying of software applications, essential for continuous integration and continuous delivery (CI/CD) pipelines.</p> <div> <p><strong>Usage in SSD</strong></p> <strong>Continuous Integration (CI)</strong>: <ul> <li>SSD receives notifications for every Jenkins pipeline execution.</li> <li>It collects build-related data to conduct security analysis on dependencies, build artifacts, and pipeline step configurations.</li> <li>SSD can detect build artifacts (e.g., images) and display their security status, vulnerabilities, and other relevant information on the Artifact Security page.</li> <li>Metadata such as job name, trigger, and Artifact SHA is collected to perform artifact integrity checks, ensuring supply chain security. This metadata is also populated in the DBOM for audit purposes.</li> </ul> </li> <strong>Continuous Deployment (CD)</strong>: <ul> <li>SSD receives notifications for every Jenkins pipeline execution.</li> <li>It performs security analysis on the image being deployed and the target cluster where the image is deployed.</li> </ul> </li> </div>",                "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -337,7 +438,7 @@
     },
     "GOOGLE-ARTIFACT-REGISTRY": {
         "HEADER": "Google Artifact Registry",
-        "BODY": "",
+        "BODY": "<p>Google Artifact Registry allows you to centrally store artifacts and build dependencies as part of an integrated Google Cloud experience.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to Google Artifact Registry to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -359,8 +460,7 @@
     },
     "SLACK": {
         "HEADER": "Slack",
-        "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Slack access.</li><li><strong>BotName</strong>: Provide the bot name where you want to receive notifications in slack</li><li><strong>Token</strong>: The user's token to authenticate with slack.</li></span>",
-        "NAME": {
+        "BODY": "<p>Slack is a communication platform used in organizations, where communications are organized into channels that are easy to create, join, and search.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li><strong>Real-time Notifications</strong>: SSD can send real-time notifications to a designated Slack channel whenever a new security issue is detected. This ensures that the team is promptly informed and can take immediate action.</li> </ul> </div>",                "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -381,8 +481,7 @@
     },
     "CUSTOMPOLICY": {
         "HEADER": "Slack",
-        "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Slack access.</li><li><strong>BotName</strong>: Provide the bot name where you want to receive notifications in slack</li><li><strong>Token</strong>: The user's token to authenticate with slack.</li></span>",
-        "NAME": {
+        "BODY": "<p>Custom policy source refers to a mechanism or source from which CI systems can retrieve and apply custom policies or rules to the code being built or integrated. These policies or rules could be related to coding standards, security checks, compliance requirements, or any other guidelines that the development team wants to enforce as part of the process.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>Users can import existing security policies from their organization or create new policies using the custom policy source.</li> <li>SSD will periodically scan the custom policy repository to detect and import any changes. For more information, see Custom Policies.</li> </ul> </div>",                "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -401,8 +500,7 @@
     },
     "JFROG": {
         "HEADER": "JFrog XRay Scanning",
-        "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Jfrog Xray access.</li><li><strong>Endpoint</strong>: Your Jfrog Xray host address, from which you access the Jfrog Xray instance</li><li><strong>Token</strong>: The user's token.</li></span>",
-        "NAME": {
+        "BODY": "<p>JFrog Artifactory is a universal artifact repository manager designed to store, manage, and distribute binaries and artifacts produced during the software development process, including compiled code, libraries, dependencies, Docker images, and more.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>JFrog Artifactory notifies SSD of each pipeline execution. SSD identifies the image for every build and connects to the Artifactory repository to pull the newly built image.</li> <li>SSD then runs security scans on the pulled images. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>JFrog Artifactory helps collect metadata such as Artifact SHA for artifact integrity checks, ensuring security in the supply chain. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",                "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
@@ -510,16 +608,16 @@
         }
     },
     "SNYK": {
-        "HEADER": "",
-        "BODY": "",
-        "NAME": {
-            "TOOLTIP": "",
-            "VALIDATION_MESSAGE": {
-                "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                "cannotContainSpace": "Account Name cannot contain space",
-                "required": "Account Name cannot be empty",
-                "startingFromNumber": "Account Name cannot start with numbers",
-                "minlength": "Account Name should be more than 2 characters"
+    "HEADER": "Snyk",
+    "BODY": "<p>Snyk is a platform that helps developers find and fix vulnerabilities in their open-source dependencies and application code. It scans code and project dependencies to identify and alert about any known security vulnerabilities</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD can mandate security scans on images and code repositories using Snyk. It connects with Snyk to verify if the required version of an image or repository has been scanned; if not, SSD generates a security issue.</li> <li>Once the scan is completed, SSD pulls the security scan results from Snyk. This data is used to calculate the overall security status of the images and applications, generating alerts and remediation recommendations.</li> <li>SSD also performs correlation and additional prioritisation, which helps you to focus on the most important findings from the Snyk results.</li> <li>The scan results fetched by SSD are displayed on the Vulnerability Management page, the DBOM page, and the Open Security Issues page.</li> </ul> </div>",
+    "NAME": {
+        "TOOLTIP": "",
+        "VALIDATION_MESSAGE": {
+            "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+            "cannotContainSpace": "Account Name cannot contain space",
+            "required": "Account Name cannot be empty",
+            "startingFromNumber": "Account Name cannot start with numbers",
+            "minlength": "Account Name should be more than 2 characters"
             }
         },
         "URL": {
@@ -530,7 +628,7 @@
             }
         },
         "TOKEN": {
-            "TOOLTIP": "The user's token from jfrog xray to authenticate",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Token cannot be empty",
                 "minlength": "Token should be more than 2 characters"
@@ -538,41 +636,41 @@
         }
     },
     "JIRA":{
-        "HEADER": "Jira",
-        "BODY":"",
+    "HEADER": "Jira",
+    "BODY":"<p>JIRA is a project management and issue tracking tool used to manage and track work within teams.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD allows users to generate JIRA tickets directly from the Security Issues screen.</li> <li>The “Create JIRA Ticket” button is available for each security issue, enabling the creation of a JIRA ticket with all relevant details. This facilitates the efficient resolution of issues by developers.</li> </ul> </div>",
         "NAME":{
-          "TOOLTIP":"User defined name for the Jira account",
-          "VALIDATION_MESSAGE":{
-          "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-          "cannotContainSpace":"Account Name cannot contain space",
-          "required":"Account Name cannot be empty",
-          "startingFromNumber": "Account Name cannot start with numbers"
-        }
+            "TOOLTIP":"User defined name for the Jira account",
+            "VALIDATION_MESSAGE":{
+            "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+            "cannotContainSpace":"Account Name cannot contain space",
+            "required":"Account Name cannot be empty",
+            "startingFromNumber": "Account Name cannot start with numbers"
+            }
         },
         "EMAIL":{
-          "TOOLTIP":"Jira Email Id",
-          "VALIDATION_MESSAGE":{
-            "email":"Email Id is invalid",
-            "required":"Email Id cannot be empty"
-          }
+            "TOOLTIP":"Jira Email Id",
+            "VALIDATION_MESSAGE":{
+                "email":"Email Id is invalid",
+                "required":"Email Id cannot be empty"
+            }
         },
         "TOKEN":{
-          "TOOLTIP":"Jira Personal Access Token",
-          "VALIDATION_MESSAGE":{
-            "required":"Token cannot be empty"
-          }
+            "TOOLTIP":"Jira Personal Access Token",
+            "VALIDATION_MESSAGE":{
+                "required":"Token cannot be empty"
+            }
         },
         "HOSTURL":{
-          "TOOLTIP":"Jira Host URL",
-          "VALIDATION_MESSAGE":{
-            "required":"Host URL cannot be empty",
-            "invalidUrl": "Host URL is invalid"
-          }
+            "TOOLTIP":"Jira Host URL",
+            "VALIDATION_MESSAGE":{
+                "required":"Host URL cannot be empty",
+                "invalidUrl": "Host URL is invalid"
+            }
         }
-      },
+    },
     "SONARQUBE": {
-        "HEADER": "SonarQube",
-        "BODY": "<span><li><strong>Account Name</strong>: User-defined account name for your Sonarqube access. </li><li><strong>Host Url</strong>: Sonarqube host address, from which you access the Sonaqube instance</li><li><strong>Token</strong>: The user's token (it is optional)</li></span>",
+    "HEADER": "SonarQube",
+    "BODY": "<p>SonarQube is a self-managed, automatic code review tool that helps ensure clean and secure code through systematic analysis.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li>SSD can mandate security scans on code repositories using SonarQube. It connects with SonarQube to verify if the required code repository has been scanned. If not, SSD generates a security issue.</li><li>Once the SonarQube scan is completed, SSD pulls the SAST scan results to calculate the overall image and application risk scoring.</li><li>The scan results are available on the Vulnerability Management page, the Source section of the DBOM page, and the View Open Security Issues page.</li><li>Users can create custom policies based on SAST scan results, such as policies to block images built from repositories where the SonarQube quality gate check failed at the time of build.</li></ul></div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -680,5 +778,3 @@
         }
     }
 }
-}
-

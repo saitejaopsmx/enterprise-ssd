@@ -7,6 +7,7 @@
         "integratorType": "gitlab",
         "displayName": "Gitlab",
         "category": "sourcetool",
+        "deleteAccount": true,
         "testConnectionFlag": true,
         "integratorConfigs": {
             "url": {
@@ -32,6 +33,7 @@
         "integratorType": "github",
         "displayName": "Github",
         "category": "sourcetool",
+        "deleteAccount": true,
         "testConnectionFlag": true,
         "integratorConfigs": {
             "url": {
@@ -57,15 +59,10 @@
         "integratorType": "bitbucket",
         "displayName": "BitBucket",
         "category": "sourcetool",
-        "multiSupport": true,
+        "deleteAccount": true,
+        "multiSupport": false,
+        "testConnectionFlag": true,
         "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
-            },
             "url": {
             "dataType": "input",
             "displayName": "API URL",
@@ -110,7 +107,7 @@
             "placeholderText": "Workspace ID"
             },
             "repository": {
-            "displayName": "Repository",
+            "displayName": "Workspace ID",
             "dataType": "input",
             "required": true,
             "requiredKey": "accessLevel",
@@ -133,7 +130,7 @@
             "displayName": "Username",
             "dataType": "input",
             "required": true,
-            "requiredKey": "authenticationMode",
+            "requiredKey": "bitbucketAuthMode",
             "requiredValue": "App Password",
             "encrypt": false,
             "helpText": "Authentiation Type",
@@ -144,7 +141,7 @@
             "dataType": "input",
             "required": true,
             "encrypt": true,
-            "requiredKey": "authenticationMode",
+            "requiredKey": "bitbucketAuthMode",
             "requiredValue": "App Password",
             "helpText": "Password",
             "placeholderText": "Password"
@@ -153,7 +150,7 @@
             "displayName": "Token",
             "dataType": "input",
             "required": true,
-            "requiredKey": "authenticationMode",
+            "requiredKey": "bitbucketAuthMode",
             "requiredValue": "Token",
             "encrypt": true,
             "helpText": "Authentiation Type",
@@ -165,6 +162,7 @@
         "integratorType": "sonarqube",
         "displayName": "Sonarqube",
         "category": "sourcetool",
+        "deleteAccount": true,
         "testConnectionFlag": true,
         "integratorConfigs": {
             "url": {
@@ -190,7 +188,7 @@
             "displayName": "Sonarqube File Insertion",
             "helpText": "",
             "placeholderText": "",
-            "required": true,
+            "required": false,
             "encrypt": false,
             "featureConfig": true
             }
@@ -199,6 +197,7 @@
         {
         "integratorType": "openssf",
         "displayName": "OpenSSF",
+        "deleteAccount": false,
         "category": "scanningtool",
         "integratorConfigs": {
             "openssfcompliancescan": {
@@ -207,7 +206,7 @@
             "displayName": "Compliance Scan",
             "helpText": "Enable/Disable",
             "placeholderText": "Example:Compliance Scan",
-            "required": true,
+            "required": false,
             "encrypt": false,
             "featureConfig": true
             }
@@ -216,7 +215,8 @@
         {
         "integratorType": "virustotal",
         "displayName": "VirusTotal",
-	"testConnectionFlag": true,
+        "testConnectionFlag": true,
+        "deleteAccount": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "token": {
@@ -225,26 +225,15 @@
             "required": true,
             "encrypt": true,
             "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            },
-            "sastVirusTotalscan": {
-            "dataType": "dropdown",
-            "default": "Local Mode",
-            "displayName": "Mode",
-            "helpText": "Enable/Disable",
-            "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
-            ],
-            "required": true,
-            "featureConfig": true
+            "placeholderText": ""
             }
         }
         },
         {
         "integratorType": "snyk",
         "displayName": "Snyk",
-	"testConnectionFlag": true,
+        "testConnectionFlag": true,
+        "deleteAccount": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "snykOrgId": {
@@ -278,6 +267,8 @@
             "displayName": "URL",
             "helpText": "URL",
             "placeholderText": "",
+            "requiredKey": "sastsnykscan",
+            "requiredValue": "Cloud Mode",
             "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
             "required": true,
             "encrypt": false
@@ -287,7 +278,8 @@
         {
         "integratorType": "semgrep",
         "displayName": "SemGrep",
-	"testConnectionFlag": true,
+        "testConnectionFlag": true,
+        "deleteAccount": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "sastsemgrepscan": {
@@ -305,6 +297,8 @@
             "dataType": "input",
             "required": true,
             "encrypt": true,
+            "requiredKey": "sastsemgrepscan",
+            "requiredValue": "Cloud Mode",
             "helpText": "Authentiation Type",
             "placeholderText": "Example:knjnasjwokldjhse"
             }
@@ -313,7 +307,8 @@
         {
         "integratorType": "codacy",
         "displayName": "Codacy",
-	"testConnectionFlag": true,
+        "testConnectionFlag": true,
+        "deleteAccount": true,
         "category": "sourcetool",
         "integratorConfigs": {
             "sastcodacyscan": {
@@ -345,6 +340,7 @@
         "integratorType": "jenkins",
         "displayName": "Jenkins",
         "multiSupport": true,
+        "deleteAccount": true,
         "category": "citool",
         "testConnectionFlag": true,
         "integratorConfigs": {
@@ -399,6 +395,7 @@
         "integratorType": "trivy",
         "displayName": "Trivy",
         "category": "scanningtool",
+        "deleteAccount": false,
         "integratorConfigs": {
             "vulnerabilityscan": {
             "displayName": "Vulnerability Scan",
@@ -408,7 +405,7 @@
                 "inactive"
             ],
             "default": "active",
-            "required": true,
+            "required": false,
             "helpText": "Options",
             "featureConfig": true,
             "placeholderText": "----------"
@@ -421,7 +418,7 @@
                 "inactive"
             ],
             "default": "active",
-            "required": true,
+            "required": false,
             "featureConfig": true,
             "helpText": "Options",
             "placeholderText": "----------"
@@ -434,7 +431,7 @@
                 "inactive"
             ],
             "default": "active",
-            "required": true,
+            "required": false,
             "featureConfig": true,
             "helpText": "Options",
             "placeholderText": "----------"
@@ -447,7 +444,7 @@
                 "inactive"
             ],
             "default": "active",
-            "required": true,
+            "required": false,
             "featureConfig": true,
             "helpText": "Options",
             "placeholderText": "----------"
@@ -460,7 +457,7 @@
                 "inactive"
             ],
             "default": "active",
-            "required": true,
+            "required": false,
             "featureConfig": true,
             "helpText": "Options",
             "placeholderText": "----------"
@@ -474,7 +471,7 @@
             ],
             "default": "active",
             "featureConfig": true,
-            "required": true,
+            "required": false,
             "helpText": "Options",
             "placeholderText": "----------"
             }
@@ -483,6 +480,7 @@
         {
         "integratorType": "docker",
         "displayName": "Docker",
+        "deleteAccount": true,
         "multiSupport": true,
         "category": "dockerregistry",
         "testConnectionFlag": true,
@@ -533,6 +531,8 @@
         "integratorType": "ecr",
         "displayName": "ECR",
         "multiSupport": true,
+        "deleteAccount": true,
+        "testConnectionFlag": true,
         "category": "dockerregistry",
         "integratorConfigs": {
             "name": {
@@ -589,6 +589,7 @@
         "integratorType": "quay",
         "displayName": "Quay",
         "multiSupport": true,
+        "deleteAccount": true,
         "category": "dockerregistry",
         "testConnectionFlag": true,
         "integratorConfigs": {
@@ -638,6 +639,7 @@
         "integratorType": "jfrog",
         "displayName": "JFrog",
         "multiSupport": true,
+        "deleteAccount": true,
         "category": "dockerregistry",
         "testConnectionFlag": true,
         "integratorConfigs": {
@@ -686,7 +688,8 @@
         {
         "integratorType": "google-artifact-registry",
         "displayName": "Google Artifact Registry",
-	"testConnectionFlag": false,
+        "testConnectionFlag": false,
+        "deleteAccount": true,
         "category": "aptregistry",
         "integratorConfigs": {
             "key": {
@@ -712,6 +715,7 @@
         "displayName": "Grype (CMD)",
         "category": "dockerregistry",
         "testConnectionFlag": false,
+        "deleteAccount": false,
         "integratorConfigs": {
             "vulnerabilityscan": {
             "dataTypeOptions": [
@@ -739,6 +743,7 @@
         "displayName": "ChatGPT",
         "category": "communications",
         "testConnectionFlag": true,
+        "deleteAccount": true,
         "integratorConfigs": {
             "token": {
             "displayName": "Token",
@@ -755,6 +760,7 @@
         "displayName": "Slack",
         "category": "communications",
         "testConnectionFlag": true,
+        "deleteAccount": true,
         "integratorConfigs": {
             "channel": {
             "dataType": "input",
@@ -779,6 +785,7 @@
         "displayName": "Jira",
         "category": "communications",
         "testConnectionFlag": true,
+        "deleteAccount": true,
         "integratorConfigs": {
             "projectKey": {
             "dataType": "input",
@@ -800,9 +807,8 @@
             "username": {
             "dataType": "input",
             "displayName": "Jira Username",
-            "helpText": "Jira Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://your.domain.net",
+            "helpText": "",
+            "placeholderText": "Jira Username",
             "required": true,
             "encrypt": false
             },
@@ -821,6 +827,7 @@
         "displayName": "Custom Policy Source",
         "category": "managementtool",
         "testConnectionFlag": true,
+        "deleteAccount": true,
         "integratorConfigs": {
             "url": {
             "dataType": "input",
@@ -843,5 +850,7 @@
         }
     ]
     }
-]
+],
+"featureConfigs": {
+    "vulnerabilityscan": ["trivy","grype"]
 }

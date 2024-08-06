@@ -3,9 +3,9 @@ rabbitmq:
   password: '{{ .Values.rabbitmq.password }}'
   host: rabbitmq-service
   port: 5672
-  queue: githubactions-ssd
-  exchange: githubactions.events
-  bindingKey: githubactions-ssd
+  queue: bitbucket-ssd
+  exchange: bitbucket.events
+  bindingKey: bitbucket-ssd
   prefetchCount: 50
 
 graphql:

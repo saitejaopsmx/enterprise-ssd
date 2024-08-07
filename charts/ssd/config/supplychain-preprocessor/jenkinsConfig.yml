@@ -20,3 +20,7 @@ redis:
   address: {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
   password: {{ .Values.redis.password }}
   DB: 0
+
+supplychainapi:
+  host: http://supplychain-api
+  port: 8099

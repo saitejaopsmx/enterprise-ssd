@@ -77,9 +77,6 @@ integrationData:
         integratorConfigs:
           token:
             encrypt: true
-        featureConfigs:
-          sastsemgrepscan:
-            default: Local Mode
       - integratorType: codacy
         category: sourcetool
         integratorConfigs:

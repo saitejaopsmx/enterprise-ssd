@@ -127,6 +127,18 @@
                 "minlength": "Account Name should be more than 2 characters"
             }
         },
+         "USERNAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "User Name cannot be empty"
+                }
+        },
+        "PASSWORD": {
+            "TOOLTIP": "The password of the Docker Registry user to authenticate as",
+            "VALIDATION_MESSAGE": {
+                "required": "Password cannot be empty"
+            }
+        },
         "URL": {
             "TOOLTIP": "The registry URL from which you want to pull and deploy images. DockerHub example: https://hub.docker.com",
             "VALIDATION_MESSAGE": {
@@ -173,6 +185,24 @@
               "required":"Name cannot be empty",
               "noSpecialCharacters": "Name cannot contain special characters other than -,/,@,.",
               "cannotContainSpace":"Name cannot contain space"
+            }
+        },
+        "WORKSPACEID":{
+            "TOOLTIP":"",
+            "VALIDATION_MESSAGE":{
+                "required":"Workspace ID cannot be empty"
+            }
+        },
+        "PROJECTKEY":{
+            "TOOLTIP":"",
+            "VALIDATION_MESSAGE":{
+                "required":"Project key cannot be empty"
+            }
+        },
+        "REPOSITORY":{
+            "TOOLTIP":"",
+            "VALIDATION_MESSAGE":{
+                "required":"Workspace ID cannot be empty"
             }
         },
         "HOSTURL":{
@@ -456,6 +486,13 @@
                 "required": "Key cannot be empty",
                 "minlength": "Key should be more than 2 characters"
             }
+        },
+        "SOURCE": {
+            "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Key cannot be empty",
+                    "minlength": "Key should be more than 2 characters"
+                }
         }
     },
     "SLACK": {
@@ -467,6 +504,12 @@
                 "cannotContainSpace": "Account Name cannot contain space",
                 "required": "Account Name cannot be empty",
                 "startingFromNumber": "Account Name cannot start with numbers"
+            }
+        },
+         "TOKEN": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Token cannot be empty"
             }
         },
         "CHANNEL": {
@@ -488,6 +531,12 @@
                 "cannotContainSpace": "Account Name cannot contain space",
                 "required": "Account Name cannot be empty",
                 "startingFromNumber": "Account Name cannot start with numbers"
+            }
+        },
+        "TOKEN":{
+            "TOOLTIP":"",
+            "VALIDATION_MESSAGE":{
+            "required":"Token cannot be empty"
             }
         },
         "URL": {
@@ -515,6 +564,17 @@
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
                 "invalidUrl": "Host URL is invalid"
+            }
+        },
+        "USERNAME": {
+        "TOOLTIP": "",
+        "VALIDATION_MESSAGE": {
+            "required": "User Name cannot be empty"                }
+        },
+        "PASSWORD": {
+            "TOOLTIP": "The password of the Docker Registry user to authenticate as",
+            "VALIDATION_MESSAGE": {
+                "required": "Password cannot be empty"
             }
         },
         "TOKEN": {
@@ -647,6 +707,12 @@
             "startingFromNumber": "Account Name cannot start with numbers"
             }
         },
+        "PROJECTKEY":{
+            "TOOLTIP":"User defined name for the Jira account",
+            "VALIDATION_MESSAGE":{
+            "required":"Project key cannot be empty"
+            }
+        },
         "EMAIL":{
             "TOOLTIP":"Jira Email Id",
             "VALIDATION_MESSAGE":{
@@ -660,11 +726,20 @@
                 "required":"Token cannot be empty"
             }
         },
-        "HOSTURL":{
+         "USERNAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
+                "cannotContainSpace": "User Name cannot contain space",
+                "required": "User Name cannot be empty",
+                "startingFromNumber": "User Name cannot start with numbers"
+            }
+        },
+        "URL":{
             "TOOLTIP":"Jira Host URL",
             "VALIDATION_MESSAGE":{
-                "required":"Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "required":"URL cannot be empty",
+                "invalidUrl": "URL is invalid"
             }
         }
     },

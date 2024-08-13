@@ -72,7 +72,7 @@ Environment can be things like dev, prod, staging etc.
 type Environment {
     id: String! @id
     organization: Organization!
-    purpose: String! @search(by: [exact])
+    purpose: String! @search(by: [exact,regexp])
 }
 
 """
@@ -394,10 +394,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-    tagName: String! @search(by:[exact])
-    tagValue: String! @search(by:[exact])
-    tagDescription: String
-    createdBy: String @search(by:[exact])
+	tagName: String! @search(by:[exact])
+	tagValue: String! @search(by:[exact,regexp])
+	tagDescription: String
+	createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)
@@ -445,11 +445,11 @@ type RunHistory  {
     policyId: String! @search(by: [exact])
     applicationDeployment: ApplicationDeployment @hasInverse(field: policyRunHistory)
     artifactScan: ArtifactScanData @hasInverse(field: artifactRunHistory)
-    PolicyName: String! @search(by: [exact])
-    Stage: String! @search(by: [exact])
+    PolicyName: String! @search(by: [exact,regexp])
+    Stage: String! @search(by: [exact,regexp])
     Artifact: String! @search(by: [exact])
     ArtifactTag: String! @search(by: [exact])
-    ArtifactSha: String! @search(by: [exact])
+    ArtifactSha: String! @search(by: [exact,regexp])
     ArtifactNameTag: String! @search(by: [exact,regexp])
     DatasourceTool: String!
     CreatedAt: DateTime! @search
@@ -470,10 +470,11 @@ type SecurityIssue {
     AlertTitle: String @search(by: [exact,regexp])
     AlertMessage: String @search(by: [exact])
     Suggestions: String @search(by: [exact])
-    Severity: Severity! @search(by: [exact])
+    Severity: Severity! @search(by: [exact,regexp])
+    SeverityInt: Int! @search
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
-    Action: String! @search(by: [exact])
+    Action: String! @search(by: [exact,regexp])
     Status: String! @search(by: [exact])
     Reason: String @search(by: [exact])
     Error: String @search(by: [exact])

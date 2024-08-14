@@ -57,9 +57,6 @@ integrationData:
         integratorConfigs:
           token:
             encrypt: true
-        featureConfigs:
-          sastVirusTotalscan:
-            default: Local Mode
       - integratorType: snyk
         category: sourcetool
         integratorConfigs:

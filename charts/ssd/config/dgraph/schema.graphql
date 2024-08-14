@@ -340,7 +340,30 @@ type Integrator
     updatedAt: DateTime!
 }
 
-type IntegratorConfigs {
+type IntegratorConfigs @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]},
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]}
+            ) {
     id: ID!
     name: String! @search(by: [exact])
     configs: [IntegratorKeyValues!]
@@ -394,10 +417,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-	tagName: String! @search(by:[exact])
-	tagValue: String! @search(by:[exact,regexp])
-	tagDescription: String
-	createdBy: String @search(by:[exact])
+    tagName: String! @search(by:[exact])
+    tagValue: String! @search(by:[exact,regexp])
+    tagDescription: String
+    createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)

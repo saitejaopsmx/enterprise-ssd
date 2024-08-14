@@ -134,13 +134,13 @@
                 }
         },
         "PASSWORD": {
-            "TOOLTIP": "The password of the Docker Registry user to authenticate as",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Password cannot be empty"
             }
         },
         "URL": {
-            "TOOLTIP": "The registry URL from which you want to pull and deploy images. DockerHub example: https://hub.docker.com",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
                 "invalidUrl": "Host URL is invalid"
@@ -572,7 +572,7 @@
             "required": "User Name cannot be empty"                }
         },
         "PASSWORD": {
-            "TOOLTIP": "The password of the Docker Registry user to authenticate as",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Password cannot be empty"
             }
@@ -607,7 +607,7 @@
             }
         },
         "TOKEN": {
-            "TOOLTIP": "The user's token from jfrog xray to authenticate",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Token cannot be empty"
             }
@@ -681,7 +681,7 @@
             }
         },
         "URL": {
-            "TOOLTIP": "Jfrog Xray host address, from which you access the Jfrog Xray instance",
+            "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
                 "invalidUrl": "Host URL is invalid"
@@ -849,6 +849,14 @@
         "PERMISSIONS": {
             "VALIDATION_MESSAGE": {
                 "required": "Atleast one feature has to be enabled"
+            }
+        }
+    },
+    "TEAM_CREATION":  {
+        "TEAM_NAME": {
+        "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Name cannot be empty"
             }
         }
     }

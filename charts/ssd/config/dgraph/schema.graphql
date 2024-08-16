@@ -72,7 +72,7 @@ Environment can be things like dev, prod, staging etc.
 type Environment {
     id: String! @id
     organization: Organization!
-    purpose: String! @search(by: [exact])
+    purpose: String! @search(by: [exact,regexp])
 }
 
 """
@@ -288,7 +288,7 @@ type ToolsUsed {
     build: String
     artifact: String
     deploy: String
-    sbom: String
+    sbom: String @search(by: [exact, regexp])
     misc: [String!]
 }
 
@@ -331,18 +331,49 @@ type Integrator
 {
     id: String! @id
     organization: Organization!
-    name: String! @search(by: [exact])
     type: String! @search(by: [exact])
     category: String! @search(by: [exact])
-    credentials: Credentials!
+    status: String! @search(by: [exact])
+    integratorConfigs: [IntegratorConfigs!]
+    featureConfigs: [FeatureMode!] @hasInverse(field: integrator)
     createdAt: DateTime!
     updatedAt: DateTime!
 }
 
-type Credentials {
+type IntegratorConfigs @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]},
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+    ]}
+            ) {
     id: ID!
-    data: String!
-    integrator: Integrator! @hasInverse(field: credentials)
+    name: String! @search(by: [exact])
+    configs: [IntegratorKeyValues!]
+    integrator: Integrator! @hasInverse(field: integratorConfigs)
+}
+
+type IntegratorKeyValues {
+    key: String! @search(by: [exact])
+    value: String! @search(by: [exact])
+    encrypt: Boolean!
 }
 
 
@@ -371,12 +402,12 @@ type FeatureMode
 {
     id: String! @id
     organization: Organization!
-    scan: String! @search(by: [exact])
-    type: String! @search(by: [exact])
-    enabled: Boolean!
+    key: String! @search(by: [exact])
+    value: String! @search(by: [exact])
     category: String! @search(by: [exact])
     createdAt: DateTime!
     updatedAt: DateTime!
+    integrator: Integrator! @hasInverse(field: featureConfigs)
 }
 
 
@@ -386,10 +417,10 @@ Tag tells us about the tags that are linked to policies and other components.
 """
 type Tag {
     id: String! @id @search(by:[exact])
-	tagName: String! @search(by:[exact])
-	tagValue: String! @search(by:[exact])
-	tagDescription: String
-	createdBy: String @search(by:[exact])
+    tagName: String! @search(by:[exact])
+    tagValue: String! @search(by:[exact,regexp])
+    tagDescription: String
+    createdBy: String @search(by:[exact])
     createdAt: DateTime!
     updatedAt: DateTime!
     policies: [PolicyEnforcement!] @hasInverse(field: tags)
@@ -437,11 +468,11 @@ type RunHistory  {
     policyId: String! @search(by: [exact])
     applicationDeployment: ApplicationDeployment @hasInverse(field: policyRunHistory)
     artifactScan: ArtifactScanData @hasInverse(field: artifactRunHistory)
-    PolicyName: String! @search(by: [exact])
-    Stage: String! @search(by: [exact])
+    PolicyName: String! @search(by: [exact,regexp])
+    Stage: String! @search(by: [exact,regexp])
     Artifact: String! @search(by: [exact])
     ArtifactTag: String! @search(by: [exact])
-    ArtifactSha: String! @search(by: [exact])
+    ArtifactSha: String! @search(by: [exact,regexp])
     ArtifactNameTag: String! @search(by: [exact,regexp])
     DatasourceTool: String!
     CreatedAt: DateTime! @search
@@ -451,6 +482,7 @@ type RunHistory  {
     Pass: Boolean! @search
     MetaData: String
     FileApi: String
+    JiraUrl: String
     scheduledPolicy: Boolean! @search
     policyEnforcements: PolicyEnforcement!
     securityIssue: SecurityIssue @hasInverse(field: Affects)
@@ -461,11 +493,11 @@ type SecurityIssue {
     AlertTitle: String @search(by: [exact,regexp])
     AlertMessage: String @search(by: [exact])
     Suggestions: String @search(by: [exact])
-    Severity: Severity! @search(by: [exact])
+    Severity: Severity! @search(by: [exact,regexp])
+    SeverityInt: Int! @search
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
-    Action: String! @search(by: [exact])
-    JiraUrl: String
+    Action: String! @search(by: [exact,regexp])
     Status: String! @search(by: [exact])
     Reason: String @search(by: [exact])
     Error: String @search(by: [exact])
@@ -578,20 +610,15 @@ type ArtifactScanData {
     vulnUnknownCount: Int @search
     vulnNoneCount: Int @search
     vulnTotalCount: Int @search
-    sbomUrl: String
-    artifactLicenseScanUrl: String
-    artifactSecretScanUrl: String
-    sourceLicenseScanUrl: String
-    sourceSecretScanUrl: String
-    sourceScorecardScanUrl: String
-    sourceSemgrepHighSeverityScanUrl: String
-    sourceSemgrepMediumSeverityScanUrl: String
-    sourceSemgrepLowSeverityScanUrl: String
-    sourceSnykScanUrl: String
-    sourceSonarQubeScanUrl: String
-    virusTotalUrlScan: String
+    scanFile: [ScanFileResult!]
     riskStatus: RiskStatus @search(by: [exact, regexp])
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
+}
+
+type ScanFileResult {
+    id: ID!
+    name: String! @search(by: [exact, regexp])
+    url: String!
 }
 
 type Component {

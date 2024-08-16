@@ -214,7 +214,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-06-01"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -236,7 +236,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-06-02"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -253,7 +253,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-06-03"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -265,7 +265,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-06-03"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -279,7 +279,7 @@ tokenmachine:
   ## Image specific details
   image:
     repository: token-machine
-    tag: "2024-04-00"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -314,7 +314,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-06-00"
+    tag: "julrc1"
     pullPolicy: IfNotPresent
 
   annotations: {}

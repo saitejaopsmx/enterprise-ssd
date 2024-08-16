@@ -21,5 +21,3 @@ supplychainapi:
 ssdopasvc:
   host: http://ssd-opa
   port: 8200
-
-

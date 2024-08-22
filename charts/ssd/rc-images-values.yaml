@@ -5,12 +5,12 @@ imageCredentials:
 
 ui:
   image:
-    tag: "c358387f2-171"
+    tag: "ed80af370-180"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "b54544b-115"
+    tag: "fb225e8-123"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
@@ -21,7 +21,7 @@ ssdgate:
     tag: "7688913-90"
 ssdopa:
   image:
-    tag: "958780e-105"
+    tag: "f2b5038-94"
 supplychainpreprocessor:
   image:
     tag: "09c0b90-105"
@@ -30,8 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "dfe98bb-1778"
+    tag: "7b1c6a1-1801"
 tokenmachine:
   image:
     tag: "eca0aed-2"
-

@@ -231,6 +231,10 @@ toolchain:
   ## During the scanning if the repo need to clone only once set to true
   cloneRepoOnce: false
 
+
+  # Supported values are info,debug
+  logLevel: info
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -245,7 +249,7 @@ supplychainpreprocessor:
 
   securityContext: {}
 
-  # Supported values are info,debug  
+  # Supported values are info,debug
   loglevel: info
 
 ####################################################
@@ -259,6 +263,9 @@ ssdopa:
   annotations: {}
 
   securityContext: {}
+
+  # Supported values are info,debug
+  loglevel: info
 
 ####################################################
 supplychainapi:

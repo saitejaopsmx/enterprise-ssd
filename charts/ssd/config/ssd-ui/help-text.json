@@ -741,8 +741,20 @@
                 "required":"URL cannot be empty",
                 "invalidUrl": "URL is invalid"
             }
+        },
+         "FIELD": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Field cannot be empty"
+            }
+        },
+        "VALUE": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Value cannot be empty"
+            }
         }
-    },
+     },
     "SONARQUBE": {
     "HEADER": "SonarQube",
     "BODY": "<p>SonarQube is a self-managed, automatic code review tool that helps ensure clean and secure code through systematic analysis.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li>SSD can mandate security scans on code repositories using SonarQube. It connects with SonarQube to verify if the required code repository has been scanned. If not, SSD generates a security issue.</li><li>Once the SonarQube scan is completed, SSD pulls the SAST scan results to calculate the overall image and application risk scoring.</li><li>The scan results are available on the Vulnerability Management page, the Source section of the DBOM page, and the View Open Security Issues page.</li><li>Users can create custom policies based on SAST scan results, such as policies to block images built from repositories where the SonarQube quality gate check failed at the time of build.</li></ul></div>",

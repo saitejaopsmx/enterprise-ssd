@@ -76,10 +76,19 @@
             "displayName": "Access Level",
             "dataType": "dropdown",
             "dataTypeOptions": [
-                "Workspace",
-                "Project",
-                "Repository"
-            ],
+                    {
+                    "name": "Workspace",
+                    "value": "Workspace"
+                    },
+                    {
+                    "name": "Project",
+                    "value": "Project"
+                    },
+                    {
+                    "name": "Repository",
+                    "value": "Repository"
+                    }
+                ],
             "default": "Workspace",
             "required": true,
             "helpText": "Options",
@@ -120,8 +129,14 @@
             "dataType": "dropdown",
             "displayName": "Auth Type",
             "dataTypeOptions": [
-                "Token",
-                "App Password"
+                {
+                "name": "Token",
+                "value": "Token"
+                },
+                {
+                "name": "App Password",
+                "value": "App Password"
+                }
             ],
             "default": "Token",
             "featureConfig": true
@@ -248,8 +263,14 @@
             "dataType": "dropdown",
             "displayName": "Mode",
             "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
+                {
+                "name": "Local Mode",
+                "value": "Local Mode"
+                },
+                {
+                "name": "Cloud Mode",
+                "value": "Cloud Mode"
+                }
             ],
             "default": "Local Mode",
             "featureConfig": true
@@ -286,8 +307,14 @@
             "dataType": "dropdown",
             "displayName": "Mode",
             "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
+                {
+                "name": "Local Mode",
+                "value": "Local Mode"
+                },
+                {
+                "name": "Cloud Mode",
+                "value": "Cloud Mode"
+                }
             ],
             "default": "Local Mode",
             "featureConfig": true
@@ -315,8 +342,14 @@
             "dataType": "dropdown",
             "displayName": "Mode",
             "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
+                {
+                "name": "Local Mode",
+                "value": "Local Mode"
+                },
+                {
+                "name": "Cloud Mode",
+                "value": "Cloud Mode"
+                }
             ],
             "default": "Local Mode",
             "featureConfig": true
@@ -401,8 +434,14 @@
             "displayName": "Vulnerability Scan",
             "dataType": "checkbox",
             "dataTypeOptions": [
-                "active",
-                "inactive"
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "required": false,
@@ -414,8 +453,14 @@
             "displayName": "License Scan for Source",
             "dataType": "checkbox",
             "dataTypeOptions": [
-                "active",
-                "inactive"
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "required": false,
@@ -426,9 +471,15 @@
             "licensescanforcontainers": {
             "displayName": "License Scan for Containers",
             "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
+           "dataTypeOptions": [
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "required": false,
@@ -440,8 +491,14 @@
             "displayName": "Secret Scan for Containers",
             "dataType": "checkbox",
             "dataTypeOptions": [
-                "active",
-                "inactive"
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "required": false,
@@ -452,9 +509,15 @@
             "secretscanforsource": {
             "displayName": "Secret Scan for Source Code",
             "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
+           "dataTypeOptions": [
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "required": false,
@@ -465,9 +528,15 @@
             "helmscan": {
             "displayName": "Helm Scan",
             "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
+           "dataTypeOptions": [
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "active",
             "featureConfig": true,
@@ -719,8 +788,14 @@
         "integratorConfigs": {
             "vulnerabilityscan": {
             "dataTypeOptions": [
-                "active",
-                "inactive"
+                {
+                "name": "active",
+                "value": "active"
+                },
+                {
+                "name": "inactive",
+                "value": "inactive"
+                }
             ],
             "default": "inactive",
             "featureConfig": true,
@@ -819,8 +894,56 @@
             "encrypt": true,
             "helpText": "Authentiation Type",
             "placeholderText": "Example:knjnasjwokldjhse"
+            },
+            "jiraTicketTriggerType": {
+            "dataType": "dropdown",
+            "displayName": "Trigger Type",
+                "dataTypeOptions": [
+                    {
+                    "name": "Create Jira ticket at Deduplication Alert Level",
+                    "value": "deduplications"
+                    },
+                    {
+                    "name": "Create Jira ticket at the Component Alert Level",
+                    "value": "all_components"
+                    }
+                ],
+                "default": "deduplications",
+                "featureConfig": true
+            },
+            "jiraTicketCreationScope": {
+            "dataType": "dropdown",
+            "displayName": "Creation Scope",
+                "dataTypeOptions": [
+                    {
+                    "name": "Vulnerability Policies",
+                    "value": "vulnerability_policies"
+                    },
+                    {
+                    "name": "All Policies",
+                    "value": "all_policies"
+                    }
+                ],
+            "default": "vulnerability_policies",
+            "featureConfig": true
+            },
+            "field": {
+                "dataType": "input",
+                "displayName": "Field",
+                "helpText": "",
+                "placeholderText": "Labels",
+                "required": true,
+                "encrypt": false
+            },
+            "value": {
+                "dataType": "input",
+                "displayName": "Value",
+                "helpText": "",
+                "placeholderText": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
+                "required": true,
+                "encrypt": false
             }
-        }
+            }
         },
         {
         "integratorType": "custompolicy",
@@ -853,5 +976,4 @@
 ],
 "featureConfigs": {
     "vulnerabilityscan": ["trivy","grype"]
-}
 }

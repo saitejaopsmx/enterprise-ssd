@@ -1,3 +1,4 @@
 httpListenPort: 8100
 graphQLAddr: http://dgraph-public:8080/graphql
 cloneRepoOnce: {{ .Values.toolchain.cloneRepoOnce }}
+logLevel: {{ .Values.toolchain.logLevel }}

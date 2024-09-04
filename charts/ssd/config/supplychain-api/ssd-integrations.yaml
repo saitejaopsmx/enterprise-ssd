@@ -197,6 +197,15 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+          field:
+            encrypt: false
+          value:
+            encrypt: false
+        featureConfigs:
+          jiraTicketTriggerType:
+            default: deduplications
+          jiraTicketCreationScope:
+            default: vulnerability_policies
       - integratorType: custompolicy
         category: managementtool
         integratorConfigs:

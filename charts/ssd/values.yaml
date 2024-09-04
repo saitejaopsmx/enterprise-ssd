@@ -286,7 +286,7 @@ tokenmachine:
   ## Image specific details
   image:
     repository: token-machine
-    tag: "julrc1"
+    tag: "2024-07-00"
     pullPolicy: IfNotPresent
 
   annotations: {}

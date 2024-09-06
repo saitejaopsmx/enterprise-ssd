@@ -25,8 +25,9 @@ KeyValue is a generic key/value pair, used as an attribute list or similar.
 """
 type KeyValue {
     id: String! @id
-    name: String!
-    value: String!
+    name: String! @search(by: [exact, regexp])
+    value: String! @search(by: [exact, regexp])
+    createdAt: DateTime! @search
 }
 
 
@@ -36,9 +37,9 @@ type Organization implements RBAC
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
@@ -84,8 +85,8 @@ type DeploymentTarget
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
@@ -124,9 +125,9 @@ type Team implements RBAC
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryTeam @cascade { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
     ]},
     add: {
         or: [
@@ -153,6 +154,7 @@ type Team implements RBAC
     labels: [KeyValue!]
     policies: [PolicyDefinition!] @hasInverse(field: ownerTeam)
     policyEnforcements: [PolicyEnforcement!]
+    exceptions: [ExceptionAffects!] @hasInverse(field: affectsTeam)
 }
 
 type Application implements RBAC
@@ -161,9 +163,9 @@ type Application implements RBAC
     query: {
         or: [
            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
@@ -280,6 +282,7 @@ type ApplicationDeployment {
     deploymentRisk: ApplicationDeploymentRisk @hasInverse(field: applicationDeployment)
     "policyRunHistory is the policy execution history for this deployment"
     policyRunHistory: [RunHistory!] @hasInverse(field: applicationDeployment)
+    deploymentTags: [KeyValue!]
 }
 
 type ToolsUsed {
@@ -311,9 +314,9 @@ type Integrator
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
     ]},
     add: {
         or: [
@@ -344,9 +347,9 @@ type IntegratorConfigs @auth(
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}}"},
     ]},
     add: {
         or: [
@@ -382,9 +385,9 @@ type FeatureMode
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryFeatureMode @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
     ]},
     add: {
         or: [
@@ -463,6 +466,17 @@ type PolicyEnforcement {
     updatedAt: DateTime!
 }
 
+type Jira {
+    id: ID!
+    jiraId: String! @search(by: [exact, regexp])
+    url: String!
+    status: String! @search(by: [exact, regexp])
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    affectsIndividualComponent: RunHistory @hasInverse(field: AttachedJira)
+    affectsSecurityissue: SecurityIssue @hasInverse(field: AttachedJira)
+}
+
 type RunHistory  {
     id: ID!
     policyId: String! @search(by: [exact])
@@ -474,7 +488,7 @@ type RunHistory  {
     ArtifactTag: String! @search(by: [exact])
     ArtifactSha: String! @search(by: [exact,regexp])
     ArtifactNameTag: String! @search(by: [exact,regexp])
-    DatasourceTool: String!
+    DatasourceTool: String! @search(by: [exact,regexp])
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
     DeployedAt: DateTime! @search
@@ -482,7 +496,9 @@ type RunHistory  {
     Pass: Boolean! @search
     MetaData: String
     FileApi: String
-    JiraUrl: String
+    AttachedJira: Jira @hasInverse(field: affectsIndividualComponent)
+    Status: String! @search(by: [exact])
+    exception: ExceptionAffects @hasInverse(field: runHistories)
     scheduledPolicy: Boolean! @search
     policyEnforcements: PolicyEnforcement!
     securityIssue: SecurityIssue @hasInverse(field: Affects)
@@ -498,9 +514,9 @@ type SecurityIssue {
     CreatedAt: DateTime! @search
     UpdatedAt: DateTime! @search
     Action: String! @search(by: [exact,regexp])
-    Status: String! @search(by: [exact])
     Reason: String @search(by: [exact])
     Error: String @search(by: [exact])
+    AttachedJira: Jira @hasInverse(field: affectsSecurityissue)
     Affects: [RunHistory!] @hasInverse(field: securityIssue)
 }
 
@@ -614,6 +630,7 @@ type ArtifactScanData {
     scanFile: [ScanFileResult!]
     riskStatus: RiskStatus @search(by: [exact, regexp])
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
+    artifactTags: [KeyValue!]
 }
 
 type ScanFileResult {
@@ -667,6 +684,78 @@ type CWE {
     id: String! @id
     name: String!
     description: String
+}
+
+type Exception implements RBAC
+    @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryException @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+    ]},
+    delete:{
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+    ]}
+            )
+{
+    id: ID!
+    type: String! @search(by: [exact, regexp])
+    name: String! @search(by: [exact, regexp])
+    affects: [ExceptionAffects!]
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+}
+
+type ExceptionAffects implements RBAC
+    @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+    ]},
+    delete:{
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+    ]}      
+            )
+{
+    id: ID!
+    createdBy: String! @search(by: [exact, regexp])
+    affectsTeam: Team! @hasInverse(field: exceptions)
+    affectsApplication: Application
+    affectsServices: [String!] @search(by: [exact, regexp])
+    validUpTo: DateTime! @search
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+    reason: String! @search(by: [exact, regexp])
+    status: String! @search(by: [exact, regexp])
+    exception: Exception! @hasInverse(field: affects)
+    runHistories: [RunHistory!] @hasInverse(field: exception)
 }
 
 # Dgraph.Allow-Origin "http://localhost:4200"

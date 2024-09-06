@@ -81,6 +81,8 @@ spec:
           name: custom-certs
         - mountPath: /app/internaltoken
           name: ssd-gate-token
+        - mountPath: /app/publickeys
+          name: ssd-public-keys
       initContainers:
       - command:
         - sh

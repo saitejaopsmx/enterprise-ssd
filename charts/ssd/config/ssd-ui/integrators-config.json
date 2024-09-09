@@ -933,11 +933,14 @@
                     "helpText": "",
                     "placeholderText": "Labels",
                     "required": true,
-                    "encrypt": false
+                    "encrypt": false,
+		    "default": "labels",
+		    "disabled": true
                 },
                 "value": {
                     "dataType": "input",
                     "displayName": "Value",
+		    "regexpValue": "^\\S+$",
                     "helpText": "",
                     "placeholderText": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
                     "required": true,

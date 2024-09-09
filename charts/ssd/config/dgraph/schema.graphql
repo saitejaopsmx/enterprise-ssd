@@ -741,7 +741,7 @@ type ExceptionAffects implements RBAC
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
-    ]}      
+    ]}
             )
 {
     id: ID!

@@ -65,7 +65,7 @@
             "TOOLTIP": "The registry URL from which you want to pull and deploy images. DockerHub example: https://hub.docker.com",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "EMAIL": {
@@ -106,7 +106,7 @@
             "TOOLTIP": "Docker Registry Host URL",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "SPINNAKERTOGGLE": {
@@ -143,7 +143,7 @@
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         }
     },
@@ -163,7 +163,7 @@
         "URL": {
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         }
     },
@@ -209,14 +209,14 @@
           "TOOLTIP":"BitBucket Web URL. It is usually https://bitbucket.org",
           "VALIDATION_MESSAGE":{
             "required":"Host URL cannot be empty",
-            "invalidUrl": "Host URL is invalid"
+            "invalidValue": "Host URL is invalid"
           }
         },
         "APIURL":{
           "TOOLTIP":"",
           "VALIDATION_MESSAGE":{
             "required":"API URL cannot be empty",
-            "invalidUrl": "API URL is invalid"
+            "invalidValue": "API URL is invalid"
           }
         }
     },
@@ -236,7 +236,7 @@
             "TOOLTIP": "Github's host address, such as https://github.com",
             "VALIDATION_MESSAGE": {
                 "required": "API URL cannot be empty",
-                "invalidUrl": "API URL is invalid"
+                "invalidValue": "API URL is invalid"
             }
         },
         "TOKEN": {
@@ -274,14 +274,14 @@
             "TOOLTIP": "GitLab's host address, such as https://gitlab.com",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "URL": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "API URL cannot be empty",
-                "invalidUrl": "API URL is invalid"
+                "invalidValue": "API URL is invalid"
             }
         },
         "AUTHENTICATIONTYPE": {
@@ -416,7 +416,7 @@
             "TOOLTIP": "Jenkins host address, such as https://jenkins.opsmx.net",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "CSRFFLAG": {
@@ -543,7 +543,7 @@
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Repo URL cannot be empty",
-                "invalidUrl": "REpo URL is invalid"
+                "invalidValue": "REpo URL is invalid"
             }
         }
     },
@@ -563,7 +563,7 @@
             "TOOLTIP": "Jfrog Xray host address, from which you access the Jfrog Xray instance",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "USERNAME": {
@@ -602,7 +602,7 @@
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "Cluster Name cannot contain special characters other than -",
                 "required": "Cluster name cannot be empty",
-                "invalidUrl": "Cluster name is invalid",
+                "invalidValue": "Cluster name is invalid",
                 "minlength": "Cluster Name should be more than 2 characters"
             }
         },
@@ -630,7 +630,7 @@
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Argo URL cannot be empty",
-                "invalidUrl": "Argo URL is invalid"
+                "invalidValue": "Argo URL is invalid"
             }
         },
         "TOKEN": {
@@ -657,7 +657,7 @@
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "TOKEN": {
@@ -684,7 +684,7 @@
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
-                "invalidUrl": "Host URL is invalid"
+                "invalidValue": "Host URL is invalid"
             }
         },
         "TOKEN": {
@@ -739,7 +739,7 @@
             "TOOLTIP":"Jira Host URL",
             "VALIDATION_MESSAGE":{
                 "required":"URL cannot be empty",
-                "invalidUrl": "URL is invalid"
+                "invalidValue": "URL is invalid"
             }
         },
          "FIELD": {
@@ -751,7 +751,8 @@
         "VALUE": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
-                "required": "Value cannot be empty"
+                "required": "Value cannot be empty",
+                "invalidValue": "Value is invalid"
             }
         }
      },
@@ -771,7 +772,7 @@
             "TOOLTIP": "Sonarqube host address, from which you access the Sonaqube instance",
             "VALIDATION_MESSAGE": {
                 "required": "URL cannot be empty",
-                "invalidUrl": "URL is invalid"
+                "invalidValue": "URL is invalid"
             }
         },
         "TOKEN": {

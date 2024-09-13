@@ -1,857 +1,983 @@
 {
-"integrationData": [
-    {
-    "stage": "Source",
-    "integrations": [
+    "integrationData": [
         {
-        "integratorType": "gitlab",
-        "displayName": "Gitlab",
-        "category": "sourcetool",
-        "deleteAccount": true,
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "url": {
-            "dataType": "input",
-            "displayName": "API URL",
-            "helpText": "Gitlab Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://gitlab.com",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
+        "stage": "Source",
+        "integrations": [
+            {
+            "integratorType": "gitlab",
+            "displayName": "Gitlab",
+            "category": "sourcetool",
+            "deleteAccount": true,
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "url": {
+                "dataType": "input",
+                "displayName": "API URL",
+                "helpText": "Gitlab Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://gitlab.com",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
             }
-        }
+            },
+            {
+            "integratorType": "github",
+            "displayName": "Github",
+            "category": "sourcetool",
+            "deleteAccount": true,
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "url": {
+                "dataType": "input",
+                "displayName": "API URL",
+                "helpText": "GitHub Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://api.github.com",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
+            }
+            },
+            {
+            "integratorType": "bitbucket",
+            "displayName": "BitBucket",
+            "category": "sourcetool",
+            "deleteAccount": true,
+            "multiSupport": false,
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "url": {
+                "dataType": "input",
+                "displayName": "API URL",
+                "helpText": "BitBucket Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://api.bitbucket.org",
+                "required": true,
+                "secret": false
+                },
+                "accessLevel": {
+                "displayName": "Access Level",
+                "dataType": "dropdown",
+                "dataTypeOptions": [
+                        {
+                        "name": "Workspace",
+                        "value": "Workspace"
+                        },
+                        {
+                        "name": "Project",
+                        "value": "Project"
+                        },
+                        {
+                        "name": "Repository",
+                        "value": "Repository"
+                        }
+                    ],
+                "default": "Workspace",
+                "required": true,
+                "helpText": "Options",
+                "placeholderText": "----------",
+                "featureConfig": true
+                },
+                "projectKey": {
+                "displayName": "Project key",
+                "dataType": "input",
+                "required": true,
+                "requiredKey": "accessLevel",
+                "requiredValue": "Project",
+                "encrypt": false,
+                "helpText": "",
+                "placeholderText": "WorkspaceId/ProjectKey"
+                },
+                "workspaceId": {
+                "displayName": "Workspace ID",
+                "dataType": "input",
+                "required": true,
+                "requiredKey": "accessLevel",
+                "requiredValue": "Workspace",
+                "encrypt": false,
+                "helpText": "",
+                "placeholderText": "Workspace ID"
+                },
+                "repository": {
+                "displayName": "Workspace ID",
+                "dataType": "input",
+                "required": true,
+                "requiredKey": "accessLevel",
+                "requiredValue": "Repository",
+                "encrypt": false,
+                "helpText": "",
+                "placeholderText": "Workspace ID"
+                },
+                "bitbucketAuthMode": {
+                "dataType": "dropdown",
+                "displayName": "Auth Type",
+                "dataTypeOptions": [
+                    {
+                    "name": "Token",
+                    "value": "Token"
+                    },
+                    {
+                    "name": "App Password",
+                    "value": "App Password"
+                    }
+                ],
+                "default": "Token",
+                "featureConfig": true
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "requiredKey": "bitbucketAuthMode",
+                "requiredValue": "App Password",
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "requiredKey": "bitbucketAuthMode",
+                "requiredValue": "App Password",
+                "helpText": "Password",
+                "placeholderText": "Password"
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "requiredKey": "bitbucketAuthMode",
+                "requiredValue": "Token",
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
+            }
+            },
+            {
+            "integratorType": "sonarqube",
+            "displayName": "Sonarqube",
+            "category": "sourcetool",
+            "deleteAccount": true,
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "url": {
+                "dataType": "input",
+                "displayName": "URL",
+                "helpText": "Sonarqube Host URL",
+                "placeholderText": "Example:https://sonarqube.com",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                },
+                "sonarqubeFileInsertion": {
+                "dataType": "checkbox",
+                "default": "inactive",
+                "displayName": "Sonarqube File Insertion",
+                "helpText": "",
+                "placeholderText": "",
+                "required": false,
+                "encrypt": false,
+                "featureConfig": true
+                }
+            }
+            },
+            {
+            "integratorType": "openssf",
+            "displayName": "OpenSSF",
+            "deleteAccount": false,
+            "category": "scanningtool",
+            "integratorConfigs": {
+                "openssfcompliancescan": {
+                "dataType": "checkbox",
+                "default": "active",
+                "displayName": "Compliance Scan",
+                "helpText": "Enable/Disable",
+                "placeholderText": "Example:Compliance Scan",
+                "required": false,
+                "encrypt": false,
+                "featureConfig": true
+                }
+            }
+            },
+            {
+            "integratorType": "virustotal",
+            "displayName": "VirusTotal",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "category": "sourcetool",
+            "integratorConfigs": {
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": ""
+                }
+            }
+            },
+            {
+            "integratorType": "snyk",
+            "displayName": "Snyk",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "category": "sourcetool",
+            "integratorConfigs": {
+                "snykOrgId": {
+                "dataType": "input",
+                "displayName": "Snyk Org Id",
+                "helpText": "Snyk Org Id",
+                "placeholderText": "Example:12234",
+                "required": false,
+                "encrypt": false
+                },
+                "sastsnykscan": {
+                "dataType": "dropdown",
+                "displayName": "Mode",
+                "dataTypeOptions": [
+                    {
+                    "name": "Local Mode",
+                    "value": "Local Mode"
+                    },
+                    {
+                    "name": "Cloud Mode",
+                    "value": "Cloud Mode"
+                    }
+                ],
+                "default": "Local Mode",
+                "featureConfig": true
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "URL",
+                "helpText": "URL",
+                "placeholderText": "",
+                "requiredKey": "sastsnykscan",
+                "requiredValue": "Cloud Mode",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "required": true,
+                "encrypt": false
+                }
+            }
+            },
+            {
+            "integratorType": "semgrep",
+            "displayName": "SemGrep",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "category": "sourcetool",
+            "integratorConfigs": {
+                "sastsemgrepscan": {
+                "dataType": "dropdown",
+                "displayName": "Mode",
+                "dataTypeOptions": [
+                    {
+                    "name": "Local Mode",
+                    "value": "Local Mode"
+                    },
+                    {
+                    "name": "Cloud Mode",
+                    "value": "Cloud Mode"
+                    }
+                ],
+                "default": "Local Mode",
+                "featureConfig": true
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "requiredKey": "sastsemgrepscan",
+                "requiredValue": "Cloud Mode",
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
+            }
+            },
+            {
+            "integratorType": "codacy",
+            "displayName": "Codacy",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "category": "sourcetool",
+            "integratorConfigs": {
+                "sastcodacyscan": {
+                "dataType": "dropdown",
+                "displayName": "Mode",
+                "dataTypeOptions": [
+                    {
+                    "name": "Local Mode",
+                    "value": "Local Mode"
+                    },
+                    {
+                    "name": "Cloud Mode",
+                    "value": "Cloud Mode"
+                    }
+                ],
+                "default": "Local Mode",
+                "featureConfig": true
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
+            }
+            }
+        ]
         },
         {
-        "integratorType": "github",
-        "displayName": "Github",
-        "category": "sourcetool",
-        "deleteAccount": true,
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "url": {
-            "dataType": "input",
-            "displayName": "API URL",
-            "helpText": "GitHub Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://api.github.com",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
+        "stage": "Build",
+        "integrations": [
+            {
+            "integratorType": "jenkins",
+            "displayName": "Jenkins",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "category": "citool",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "approved_user": {
+                "dataType": "chipset",
+                "displayName": "Approved Build User",
+                "helpText": "build_username",
+                "placeholderText": "Example:approved_build_username",
+                "required": true,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "Jenkins Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://org.myjenkin.com/jenkins",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Password",
+                "placeholderText": "Password"
+                }
             }
-        }
+            }
+        ]
         },
         {
-        "integratorType": "bitbucket",
-        "displayName": "BitBucket",
-        "category": "sourcetool",
-        "deleteAccount": true,
-        "multiSupport": false,
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "url": {
-            "dataType": "input",
-            "displayName": "API URL",
-            "helpText": "BitBucket Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://api.bitbucket.org",
-            "required": true,
-            "secret": false
-            },
-            "accessLevel": {
-            "displayName": "Access Level",
-            "dataType": "dropdown",
+        "stage": "Artifact",
+        "integrations": [
+            {
+            "integratorType": "trivy",
+            "displayName": "Trivy",
+            "category": "scanningtool",
+            "deleteAccount": false,
+            "integratorConfigs": {
+                "vulnerabilityscan": {
+                "displayName": "Vulnerability Scan",
+                "dataType": "checkbox",
+                "dataTypeOptions": [
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "required": false,
+                "helpText": "Options",
+                "featureConfig": true,
+                "placeholderText": "----------"
+                },
+                "licensescanforsource": {
+                "displayName": "License Scan for Source",
+                "dataType": "checkbox",
+                "dataTypeOptions": [
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "required": false,
+                "featureConfig": true,
+                "helpText": "Options",
+                "placeholderText": "----------"
+                },
+                "licensescanforcontainers": {
+                "displayName": "License Scan for Containers",
+                "dataType": "checkbox",
             "dataTypeOptions": [
-                "Workspace",
-                "Project",
-                "Repository"
-            ],
-            "default": "Workspace",
-            "required": true,
-            "helpText": "Options",
-            "placeholderText": "----------",
-            "featureConfig": true
-            },
-            "projectKey": {
-            "displayName": "Project key",
-            "dataType": "input",
-            "required": true,
-            "requiredKey": "accessLevel",
-            "requiredValue": "Project",
-            "encrypt": false,
-            "helpText": "",
-            "placeholderText": "WorkspaceId/ProjectKey"
-            },
-            "workspaceId": {
-            "displayName": "Workspace ID",
-            "dataType": "input",
-            "required": true,
-            "requiredKey": "accessLevel",
-            "requiredValue": "Workspace",
-            "encrypt": false,
-            "helpText": "",
-            "placeholderText": "Workspace ID"
-            },
-            "repository": {
-            "displayName": "Workspace ID",
-            "dataType": "input",
-            "required": true,
-            "requiredKey": "accessLevel",
-            "requiredValue": "Repository",
-            "encrypt": false,
-            "helpText": "",
-            "placeholderText": "Workspace ID"
-            },
-            "bitbucketAuthMode": {
-            "dataType": "dropdown",
-            "displayName": "Auth Type",
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "required": false,
+                "featureConfig": true,
+                "helpText": "Options",
+                "placeholderText": "----------"
+                },
+                "secretscanforcontainers": {
+                "displayName": "Secret Scan for Containers",
+                "dataType": "checkbox",
+                "dataTypeOptions": [
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "required": false,
+                "featureConfig": true,
+                "helpText": "Options",
+                "placeholderText": "----------"
+                },
+                "secretscanforsource": {
+                "displayName": "Secret Scan for Source Code",
+                "dataType": "checkbox",
             "dataTypeOptions": [
-                "Token",
-                "App Password"
-            ],
-            "default": "Token",
-            "featureConfig": true
-            },
-            "username": {
-            "displayName": "Username",
-            "dataType": "input",
-            "required": true,
-            "requiredKey": "bitbucketAuthMode",
-            "requiredValue": "App Password",
-            "encrypt": false,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:opsmx-user"
-            },
-            "password": {
-            "displayName": "Password",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "requiredKey": "bitbucketAuthMode",
-            "requiredValue": "App Password",
-            "helpText": "Password",
-            "placeholderText": "Password"
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "requiredKey": "bitbucketAuthMode",
-            "requiredValue": "Token",
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            }
-        }
-        },
-        {
-        "integratorType": "sonarqube",
-        "displayName": "Sonarqube",
-        "category": "sourcetool",
-        "deleteAccount": true,
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "url": {
-            "dataType": "input",
-            "displayName": "URL",
-            "helpText": "Sonarqube Host URL",
-            "placeholderText": "Example:https://sonarqube.com",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            },
-            "sonarqubeFileInsertion": {
-            "dataType": "checkbox",
-            "default": "inactive",
-            "displayName": "Sonarqube File Insertion",
-            "helpText": "",
-            "placeholderText": "",
-            "required": false,
-            "encrypt": false,
-            "featureConfig": true
-            }
-        }
-        },
-        {
-        "integratorType": "openssf",
-        "displayName": "OpenSSF",
-        "deleteAccount": false,
-        "category": "scanningtool",
-        "integratorConfigs": {
-            "openssfcompliancescan": {
-            "dataType": "checkbox",
-            "default": "active",
-            "displayName": "Compliance Scan",
-            "helpText": "Enable/Disable",
-            "placeholderText": "Example:Compliance Scan",
-            "required": false,
-            "encrypt": false,
-            "featureConfig": true
-            }
-        }
-        },
-        {
-        "integratorType": "virustotal",
-        "displayName": "VirusTotal",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "category": "sourcetool",
-        "integratorConfigs": {
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": ""
-            }
-        }
-        },
-        {
-        "integratorType": "snyk",
-        "displayName": "Snyk",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "category": "sourcetool",
-        "integratorConfigs": {
-            "snykOrgId": {
-            "dataType": "input",
-            "displayName": "Snyk Org Id",
-            "helpText": "Snyk Org Id",
-            "placeholderText": "Example:12234",
-            "required": false,
-            "encrypt": false
-            },
-            "sastsnykscan": {
-            "dataType": "dropdown",
-            "displayName": "Mode",
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "required": false,
+                "featureConfig": true,
+                "helpText": "Options",
+                "placeholderText": "----------"
+                },
+                "helmscan": {
+                "displayName": "Helm Scan",
+                "dataType": "checkbox",
             "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
-            ],
-            "default": "Local Mode",
-            "featureConfig": true
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "URL",
-            "helpText": "URL",
-            "placeholderText": "",
-            "requiredKey": "sastsnykscan",
-            "requiredValue": "Cloud Mode",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "required": true,
-            "encrypt": false
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "active",
+                "featureConfig": true,
+                "required": false,
+                "helpText": "Options",
+                "placeholderText": "----------"
+                }
             }
-        }
+            },
+            {
+            "integratorType": "docker",
+            "displayName": "Docker",
+            "deleteAccount": true,
+            "multiSupport": true,
+            "category": "dockerregistry",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "repo": {
+                "dataType": "chipset",
+                "displayName": "Approved Artifact Repo",
+                "helpText": "Repo Name",
+                "placeholderText": "Example:dockerhub",
+                "required": false,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "Docker Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://docker.io",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Password",
+                "placeholderText": "Password"
+                }
+            }
+            },
+            {
+            "integratorType": "ecr",
+            "displayName": "ECR",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "testConnectionFlag": true,
+            "category": "dockerregistry",
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "awsAccessKey": {
+                "dataType": "input",
+                "displayName": "AWS AccessKey",
+                "helpText": "Mandatory to update the Access Key if the repo is Private",
+                "placeholderText": "Example:rxdtfcgvhbj",
+                "required": false,
+                "encrypt": true
+                },
+                "awsSecretKey": {
+                "dataType": "input",
+                "displayName": "AWS Secret Key",
+                "helpText": "Mandatory to update the encrypt Key if the repo is Private",
+                "placeholderText": "Example:qwertyuisdxcv",
+                "required": false,
+                "encrypt": true
+                },
+                "region": {
+                "dataType": "input",
+                "displayName": "Region",
+                "helpText": "Mandatory to update the Region if the repo is Private",
+                "placeholderText": "Example:us-west-1/us-east-2",
+                "required": false,
+                "encrypt": false
+                },
+                "repo": {
+                "dataType": "chipset",
+                "displayName": "Approved Artifact Repo",
+                "helpText": "Repo Name",
+                "placeholderText": "Example:ecr",
+                "required": false,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "ECR Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://aws_account_id.dkr.ecr.us-west-2.amazonaws.com",
+                "required": true,
+                "encrypt": false
+                }
+            }
+            },
+            {
+            "integratorType": "quay",
+            "displayName": "Quay",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "category": "dockerregistry",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "repo": {
+                "dataType": "chipset",
+                "displayName": "Approved Artifact Repo",
+                "helpText": "Repo Name",
+                "placeholderText": "Example:quayrepo",
+                "required": false,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "Quay Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://quay.io",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Password",
+                "placeholderText": "Password"
+                }
+            }
+            },
+            {
+            "integratorType": "jfrog",
+            "displayName": "JFrog",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "category": "dockerregistry",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "repo": {
+                "dataType": "chipset",
+                "displayName": "Approved Artifact Repo",
+                "helpText": "Repo Name",
+                "placeholderText": "Example:jfrog",
+                "required": false,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "JFrog Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://jfrogartifactory.io",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Password",
+                "placeholderText": "Password"
+                }
+            }
+            },
+            {
+            "integratorType": "google-artifact-registry",
+            "displayName": "Google Artifact Registry",
+            "testConnectionFlag": false,
+            "deleteAccount": true,
+            "category": "aptregistry",
+            "integratorConfigs": {
+                "key": {
+                "dataType": "input",
+                "displayName": "Service Account Key",
+                "helpText": "service account json only required for private",
+                "placeholderText": "{sample}",
+                "required": false,
+                "encrypt": true
+                },
+                "source": {
+                "dataType": "chipset",
+                "displayName": "Source",
+                "helpText": "entire source",
+                "placeholderText": "deb https://<REGION>-apt.pkg.dev/projects/<PROJECTID> <REPONAME> main",
+                "required": true,
+                "encrypt": false
+                }
+            }
+            },
+            {
+            "integratorType": "grype",
+            "displayName": "Grype (CMD)",
+            "category": "dockerregistry",
+            "testConnectionFlag": false,
+            "deleteAccount": false,
+            "integratorConfigs": {
+                "vulnerabilityscan": {
+                "dataTypeOptions": [
+                    {
+                    "name": "active",
+                    "value": "active"
+                    },
+                    {
+                    "name": "inactive",
+                    "value": "inactive"
+                    }
+                ],
+                "default": "inactive",
+                "featureConfig": true,
+                "dataType": "checkbox",
+                "displayName": "Vulnerability Scan",
+                "helpText": "Enable/Disable",
+                "placeholderText": "Example:Vulnerability Scan",
+                "required": true,
+                "encrypt": false
+                }
+            }
+            }
+        ]
         },
         {
-        "integratorType": "semgrep",
-        "displayName": "SemGrep",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "category": "sourcetool",
-        "integratorConfigs": {
-            "sastsemgrepscan": {
-            "dataType": "dropdown",
-            "displayName": "Mode",
-            "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
-            ],
-            "default": "Local Mode",
-            "featureConfig": true
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "requiredKey": "sastsemgrepscan",
-            "requiredValue": "Cloud Mode",
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
+        "stage": "Others",
+        "integrations": [
+            {
+            "integratorType": "chatgpt",
+            "displayName": "ChatGPT",
+            "category": "communications",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "integratorConfigs": {
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
             }
-        }
-        },
-        {
-        "integratorType": "codacy",
-        "displayName": "Codacy",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "category": "sourcetool",
-        "integratorConfigs": {
-            "sastcodacyscan": {
-            "dataType": "dropdown",
-            "displayName": "Mode",
-            "dataTypeOptions": [
-                "Local Mode",
-                "Cloud Mode"
-            ],
-            "default": "Local Mode",
-            "featureConfig": true
             },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
+            {
+            "integratorType": "slack",
+            "displayName": "Slack",
+            "category": "communications",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "integratorConfigs": {
+                "channel": {
+                "dataType": "input",
+                "displayName": "Channel",
+                "helpText": "Slack Channel Name",
+                "placeholderText": "Example:channel_name",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
             }
-        }
-        }
-    ]
-    },
-    {
-    "stage": "Build",
-    "integrations": [
-        {
-        "integratorType": "jenkins",
-        "displayName": "Jenkins",
-        "multiSupport": true,
-        "deleteAccount": true,
-        "category": "citool",
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
             },
-            "approved_user": {
-            "dataType": "chipset",
-            "displayName": "Approved Build User",
-            "helpText": "build_username",
-            "placeholderText": "Example:approved_build_username",
-            "required": true,
-            "encrypt": false
+            {
+            "integratorType": "jira",
+            "displayName": "Jira",
+            "category": "communications",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "integratorConfigs": {
+                "projectKey": {
+                "dataType": "input",
+                "displayName": "Jira Project Key",
+                "helpText": "Jira Project Key",
+                "placeholderText": "Example:KAN",
+                "required": true,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Jira URL",
+                "helpText": "Jira Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://your.domain.net",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "dataType": "input",
+                "displayName": "Jira Username",
+                "helpText": "",
+                "placeholderText": "Jira Username",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                },
+                "jiraTicketTriggerType": {
+                "dataType": "dropdown",
+                "displayName": "Trigger Type",
+                    "dataTypeOptions": [
+                        {
+                        "name": "Create Jira ticket at Deduplication Alert Level",
+                        "value": "deduplications"
+                        },
+                        {
+                        "name": "Create Jira ticket at the Component Alert Level",
+                        "value": "all_components"
+                        }
+                    ],
+                    "default": "deduplications",
+                    "featureConfig": true
+                },
+                "jiraTicketCreationScope": {
+                "dataType": "dropdown",
+                "displayName": "Creation Scope",
+                    "dataTypeOptions": [
+                        {
+                        "name": "Vulnerability Policies",
+                        "value": "vulnerability_policies"
+                        },
+                        {
+                        "name": "All Policies",
+                        "value": "all_policies"
+                        }
+                    ],
+                "default": "vulnerability_policies",
+                "featureConfig": true
+                },
+                "field": {
+                    "dataType": "input",
+                    "displayName": "Field",
+                    "helpText": "",
+                    "placeholderText": "Labels",
+                    "required": true,
+                    "encrypt": false,
+		    "default": "labels",
+		    "disabled": true
+                },
+                "value": {
+                    "dataType": "input",
+                    "displayName": "Value",
+		    "regexpValue": "^\\S+$",
+                    "helpText": "",
+                    "placeholderText": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
+                    "required": true,
+                    "encrypt": false
+                }
+                }
             },
-            "url": {
-            "dataType": "input",
-            "displayName": "Host Url",
-            "helpText": "Jenkins Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://org.myjenkin.com/jenkins",
-            "required": true,
-            "encrypt": false
-            },
-            "username": {
-            "displayName": "Username",
-            "dataType": "input",
-            "required": true,
-            "encrypt": false,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:opsmx-user"
-            },
-            "password": {
-            "displayName": "Password",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Password",
-            "placeholderText": "Password"
+            {
+            "integratorType": "custompolicy",
+            "displayName": "Custom Policy Source",
+            "category": "managementtool",
+            "testConnectionFlag": true,
+            "deleteAccount": true,
+            "integratorConfigs": {
+                "url": {
+                "dataType": "input",
+                "displayName": "Repo URL & Path",
+                "helpText": "Custom Policy Source Path",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://github.com/abc/def",
+                "required": true,
+                "encrypt": false
+                },
+                "token": {
+                "displayName": "Token",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:knjnasjwokldjhse"
+                }
             }
-        }
-        }
-    ]
-    },
-    {
-    "stage": "Artifact",
-    "integrations": [
-        {
-        "integratorType": "trivy",
-        "displayName": "Trivy",
-        "category": "scanningtool",
-        "deleteAccount": false,
-        "integratorConfigs": {
-            "vulnerabilityscan": {
-            "displayName": "Vulnerability Scan",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "required": false,
-            "helpText": "Options",
-            "featureConfig": true,
-            "placeholderText": "----------"
-            },
-            "licensescanforsource": {
-            "displayName": "License Scan for Source",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "required": false,
-            "featureConfig": true,
-            "helpText": "Options",
-            "placeholderText": "----------"
-            },
-            "licensescanforcontainers": {
-            "displayName": "License Scan for Containers",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "required": false,
-            "featureConfig": true,
-            "helpText": "Options",
-            "placeholderText": "----------"
-            },
-            "secretscanforcontainers": {
-            "displayName": "Secret Scan for Containers",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "required": false,
-            "featureConfig": true,
-            "helpText": "Options",
-            "placeholderText": "----------"
-            },
-            "secretscanforsource": {
-            "displayName": "Secret Scan for Source Code",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "required": false,
-            "featureConfig": true,
-            "helpText": "Options",
-            "placeholderText": "----------"
-            },
-            "helmscan": {
-            "displayName": "Helm Scan",
-            "dataType": "checkbox",
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "active",
-            "featureConfig": true,
-            "required": false,
-            "helpText": "Options",
-            "placeholderText": "----------"
             }
+        ]
         }
-        },
-        {
-        "integratorType": "docker",
-        "displayName": "Docker",
-        "deleteAccount": true,
-        "multiSupport": true,
-        "category": "dockerregistry",
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
-            },
-            "repo": {
-            "dataType": "chipset",
-            "displayName": "Approved Artifact Repo",
-            "helpText": "Repo Name",
-            "placeholderText": "Example:dockerhub",
-            "required": false,
-            "encrypt": false
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "Host Url",
-            "helpText": "Docker Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://docker.io",
-            "required": true,
-            "encrypt": false
-            },
-            "username": {
-            "displayName": "Username",
-            "dataType": "input",
-            "required": true,
-            "encrypt": false,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:opsmx-user"
-            },
-            "password": {
-            "displayName": "Password",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Password",
-            "placeholderText": "Password"
-            }
-        }
-        },
-        {
-        "integratorType": "ecr",
-        "displayName": "ECR",
-        "multiSupport": true,
-        "deleteAccount": true,
-        "testConnectionFlag": true,
-        "category": "dockerregistry",
-        "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
-            },
-            "awsAccessKey": {
-            "dataType": "input",
-            "displayName": "AWS AccessKey",
-            "helpText": "Mandatory to update the Access Key if the repo is Private",
-            "placeholderText": "Example:rxdtfcgvhbj",
-            "required": false,
-            "encrypt": true
-            },
-            "awsSecretKey": {
-            "dataType": "input",
-            "displayName": "AWS Secret Key",
-            "helpText": "Mandatory to update the encrypt Key if the repo is Private",
-            "placeholderText": "Example:qwertyuisdxcv",
-            "required": false,
-            "encrypt": true
-            },
-            "region": {
-            "dataType": "input",
-            "displayName": "Region",
-            "helpText": "Mandatory to update the Region if the repo is Private",
-            "placeholderText": "Example:us-west-1/us-east-2",
-            "required": false,
-            "encrypt": false
-            },
-            "repo": {
-            "dataType": "chipset",
-            "displayName": "Approved Artifact Repo",
-            "helpText": "Repo Name",
-            "placeholderText": "Example:ecr",
-            "required": false,
-            "encrypt": false
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "Host Url",
-            "helpText": "ECR Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://aws_account_id.dkr.ecr.us-west-2.amazonaws.com",
-            "required": true,
-            "encrypt": false
-            }
-        }
-        },
-        {
-        "integratorType": "quay",
-        "displayName": "Quay",
-        "multiSupport": true,
-        "deleteAccount": true,
-        "category": "dockerregistry",
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
-            },
-            "repo": {
-            "dataType": "chipset",
-            "displayName": "Approved Artifact Repo",
-            "helpText": "Repo Name",
-            "placeholderText": "Example:quayrepo",
-            "required": false,
-            "encrypt": false
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "Host Url",
-            "helpText": "Quay Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://quay.io",
-            "required": true,
-            "encrypt": false
-            },
-            "username": {
-            "displayName": "Username",
-            "dataType": "input",
-            "required": true,
-            "encrypt": false,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:opsmx-user"
-            },
-            "password": {
-            "displayName": "Password",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Password",
-            "placeholderText": "Password"
-            }
-        }
-        },
-        {
-        "integratorType": "jfrog",
-        "displayName": "JFrog",
-        "multiSupport": true,
-        "deleteAccount": true,
-        "category": "dockerregistry",
-        "testConnectionFlag": true,
-        "integratorConfigs": {
-            "name": {
-            "displayName": "Account Name",
-            "dataType": "input",
-            "required": true,
-            "helpText": "",
-            "placeholderText": "opsmx-accountname"
-            },
-            "repo": {
-            "dataType": "chipset",
-            "displayName": "Approved Artifact Repo",
-            "helpText": "Repo Name",
-            "placeholderText": "Example:jfrog",
-            "required": false,
-            "encrypt": false
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "Host Url",
-            "helpText": "JFrog Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://jfrogartifactory.io",
-            "required": true,
-            "encrypt": false
-            },
-            "username": {
-            "displayName": "Username",
-            "dataType": "input",
-            "required": true,
-            "encrypt": false,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:opsmx-user"
-            },
-            "password": {
-            "displayName": "Password",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Password",
-            "placeholderText": "Password"
-            }
-        }
-        },
-        {
-        "integratorType": "google-artifact-registry",
-        "displayName": "Google Artifact Registry",
-        "testConnectionFlag": false,
-        "deleteAccount": true,
-        "category": "aptregistry",
-        "integratorConfigs": {
-            "key": {
-            "dataType": "input",
-            "displayName": "Service Account Key",
-            "helpText": "service account json only required for private",
-            "placeholderText": "{sample}",
-            "required": false,
-            "encrypt": true
-            },
-            "source": {
-            "dataType": "chipset",
-            "displayName": "Source",
-            "helpText": "entire source",
-            "placeholderText": "deb https://<REGION>-apt.pkg.dev/projects/<PROJECTID> <REPONAME> main",
-            "required": true,
-            "encrypt": false
-            }
-        }
-        },
-        {
-        "integratorType": "grype",
-        "displayName": "Grype (CMD)",
-        "category": "dockerregistry",
-        "testConnectionFlag": false,
-        "deleteAccount": false,
-        "integratorConfigs": {
-            "vulnerabilityscan": {
-            "dataTypeOptions": [
-                "active",
-                "inactive"
-            ],
-            "default": "inactive",
-            "featureConfig": true,
-            "dataType": "checkbox",
-            "displayName": "Vulnerability Scan",
-            "helpText": "Enable/Disable",
-            "placeholderText": "Example:Vulnerability Scan",
-            "required": true,
-            "encrypt": false
-            }
-        }
-        }
-    ]
-    },
-    {
-    "stage": "Others",
-    "integrations": [
-        {
-        "integratorType": "chatgpt",
-        "displayName": "ChatGPT",
-        "category": "communications",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "integratorConfigs": {
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            }
-        }
-        },
-        {
-        "integratorType": "slack",
-        "displayName": "Slack",
-        "category": "communications",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "integratorConfigs": {
-            "channel": {
-            "dataType": "input",
-            "displayName": "Channel",
-            "helpText": "Slack Channel Name",
-            "placeholderText": "Example:channel_name",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            }
-        }
-        },
-        {
-        "integratorType": "jira",
-        "displayName": "Jira",
-        "category": "communications",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "integratorConfigs": {
-            "projectKey": {
-            "dataType": "input",
-            "displayName": "Jira Project Key",
-            "helpText": "Jira Project Key",
-            "placeholderText": "Example:KAN",
-            "required": true,
-            "encrypt": false
-            },
-            "url": {
-            "dataType": "input",
-            "displayName": "Jira URL",
-            "helpText": "Jira Host URL",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://your.domain.net",
-            "required": true,
-            "encrypt": false
-            },
-            "username": {
-            "dataType": "input",
-            "displayName": "Jira Username",
-            "helpText": "",
-            "placeholderText": "Jira Username",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            }
-        }
-        },
-        {
-        "integratorType": "custompolicy",
-        "displayName": "Custom Policy Source",
-        "category": "managementtool",
-        "testConnectionFlag": true,
-        "deleteAccount": true,
-        "integratorConfigs": {
-            "url": {
-            "dataType": "input",
-            "displayName": "Repo URL & Path",
-            "helpText": "Custom Policy Source Path",
-            "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-            "placeholderText": "Example:https://github.com/abc/def",
-            "required": true,
-            "encrypt": false
-            },
-            "token": {
-            "displayName": "Token",
-            "dataType": "input",
-            "required": true,
-            "encrypt": true,
-            "helpText": "Authentiation Type",
-            "placeholderText": "Example:knjnasjwokldjhse"
-            }
-        }
-        }
-    ]
+    ],
+    "featureConfigs": {
+        "vulnerabilityscan": ["trivy","grype"]
     }
-],
-"featureConfigs": {
-    "vulnerabilityscan": ["trivy","grype"]
-}
 }

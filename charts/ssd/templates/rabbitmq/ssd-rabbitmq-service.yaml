@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: ssd
-    component: rabbitmq
+    component: ssd-rabbitmq
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.rabbitmq.serviceAnnotations }}
   annotations:
@@ -23,4 +23,4 @@ spec:
     targetPort: 15672
   selector:
     app: ssd
-    component: rabbitmq
+    component: ssd-rabbitmq

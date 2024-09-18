@@ -749,7 +749,7 @@
             }
         },
         "VALUE": {
-            "TOOLTIP": "",
+            "TOOLTIP": "Use [Organization], [Team], [ApplicationName] and [Service] variables to create 'Value' string. These variables will be replaced with actual values during Jira Ticket creation.",
             "VALIDATION_MESSAGE": {
                 "required": "Value cannot be empty",
                 "invalidValue": "Value is invalid"

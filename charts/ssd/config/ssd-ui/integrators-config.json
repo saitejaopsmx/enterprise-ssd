@@ -934,14 +934,15 @@
                     "placeholderText": "Labels",
                     "required": true,
                     "encrypt": false,
-		    "default": "labels",
-		    "disabled": true
+                    "default": "labels",
+                    "disabled": true
                 },
                 "value": {
                     "dataType": "input",
                     "displayName": "Value",
-		    "regexpValue": "^\\S+$",
+                    "regexpValue": "^\\S+$",
                     "helpText": "",
+                    "default": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
                     "placeholderText": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
                     "required": true,
                     "encrypt": false

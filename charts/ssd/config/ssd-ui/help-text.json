@@ -218,7 +218,27 @@
             "required":"API URL cannot be empty",
             "invalidValue": "API URL is invalid"
           }
-        }
+        },
+        "PASSWORD": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Password cannot be empty"
+            }
+        },
+        "TOKEN": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Token cannot be empty"
+            }
+        },
+        "USERNAME":{
+            "TOOLTIP":"",
+            "VALIDATION_MESSAGE":{
+                "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
+                "cannotContainSpace":"User Name cannot contain space",
+                "required":"User Name cannot be empty"
+            }
+        },
     },
     "GITHUB": {
         "HEADER": "GitHub",

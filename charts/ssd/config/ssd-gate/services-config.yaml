@@ -24,8 +24,6 @@
 - name: ssd-opa-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
   - "/webhook/api/v1/dataCollection"   # Need code-change from Shradha?
-  - "/webhook/api/v1/bundle.tar.gz"    # Can be made JWT Authenticated
-  - "/webhook/logs/api/v1/deploymentFirewallDecisionLogs" # Can be made JWT authenticated
   - "/webhook/api/v1/opaPermission"
   - "/webhook/api/v1/kubescape"
   strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
@@ -86,11 +84,20 @@
   health_endpoint: "/ui/index.html"
   auth_required: true
 - name: ssd-minio
-  baseUrl: ssd-minio:9000
+  path_prefixes:
+  - "/minio"
+  baseUrl: {{ .Release.Namespace }}-minio:9000
   health_endpoint: ""
-  auth_required: true
+- name: ssd-temporal-web
+  baseUrl: {{ .Release.Namespace }}-temporal-web:8080 #change as per the svc configured during installation (Take care in helm chart)
+  health_endpoint: ""
+  path_prefixes:
+  - "/namespaces/default/workflows"
+  - "/_app"
+  - "/api/v1"
+  - "/favicon.ico"
 {{- if .Values.ssdgate.installDex }}
 - name: ssd-dex
-  baseUrl: ssd-dex:5558
+  baseUrl: {{ .Release.Namespace }}-dex:5558
   health_endpoint: /healthz/ready
 {{- end }}

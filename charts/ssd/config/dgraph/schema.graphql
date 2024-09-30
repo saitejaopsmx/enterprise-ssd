@@ -628,9 +628,19 @@ type ArtifactScanData {
     vulnNoneCount: Int @search
     vulnTotalCount: Int @search
     scanFile: [ScanFileResult!]
-    riskStatus: RiskStatus @search(by: [exact, regexp])
+    artifactRisk: ArtifactRisk @hasInverse(field: artifactScanResult)
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
     artifactTags: [KeyValue!]
+}
+
+type ArtifactRisk {
+    id: ID!
+    sourceCodeAlertsScore: Int
+    buildAlertsScore: Int
+    artifactAlertsScore: Int
+    deploymentAlertsScore: Int
+    artifactRiskStatus: RiskStatus @search(by: [exact,regexp])
+    artifactScanResult: ArtifactScanData! @hasInverse(field: artifactRisk)
 }
 
 type ScanFileResult {

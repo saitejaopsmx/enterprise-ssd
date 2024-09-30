@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: ssd
-    component: rabbitmq
+    component: ssd-rabbitmq
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: rabbitmq
 spec:
@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app: ssd
-      component: rabbitmq
+      component: ssd-rabbitmq
   template:
     metadata:
       annotations:
@@ -20,7 +20,7 @@ spec:
 {{- end }}
       labels:
         app: ssd
-        component: rabbitmq
+        component: ssd-rabbitmq
 {{ include "ssd.standard-labels" . | indent 8 }}
     spec:
       containers:

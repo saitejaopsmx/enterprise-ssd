@@ -24,7 +24,7 @@ spec:
                SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
                echo $SCHEMA_CHECK | grep -i Success
                if [ $? -eq 0 ]; then
-                   echo "##############***Sucesfully Updated the Dgraph Schema***########################"
+                   echo "##############***Successfully Updated the Dgraph Schema***########################"
                else
                    echo "##############***Failed to Updated the Dgraph Schema***#########################"
                    exit 1

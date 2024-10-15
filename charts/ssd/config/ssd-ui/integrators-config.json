@@ -528,6 +528,89 @@
         }
         },
         {
+            "integratorType": "azure",
+            "displayName": "Azure",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "category": "azureregistry",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "repo": {
+                "dataType": "chipset",
+                "displayName": "Repository",
+                "helpText": "Repo Name",
+                "placeholderText": "Example:repoName",
+                "required": true,
+                "encrypt": false
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "Azure Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://azure.io",
+                "required": true,
+                "encrypt": false
+                },
+                "username": {
+                "displayName": "Username",
+                "dataType": "input",
+                "required": true,
+                "encrypt": false,
+                "helpText": "Authentiation Type",
+                "placeholderText": "Example:opsmx-user"
+                },
+                "password": {
+                "displayName": "Password",
+                "dataType": "input",
+                "required": true,
+                "encrypt": true,
+                "helpText": "Password",
+                "placeholderText": "Password"
+                }
+            }
+        },
+        {
+            "integratorType": "gcp",
+            "displayName": "GCP",
+            "multiSupport": true,
+            "deleteAccount": true,
+            "category": "dockerregistry",
+            "testConnectionFlag": true,
+            "integratorConfigs": {
+                "name": {
+                "displayName": "Account Name",
+                "dataType": "input",
+                "required": true,
+                "helpText": "",
+                "placeholderText": "opsmx-accountname"
+                },
+                "url": {
+                "dataType": "input",
+                "displayName": "Host Url",
+                "helpText": "GCP Host URL",
+                "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
+                "placeholderText": "Example:https://cloud.google.com/",
+                "required": true,
+                "encrypt": false
+                },
+                "fileData": {
+                "displayName": "Upload File",
+                "dataType": "file",
+                "required": true,
+                "helpText": "select",
+                "placeholderText": "choose file"
+                }
+            }
+        },
+        {
         "integratorType": "ecr",
         "displayName": "ECR",
         "multiSupport": true,

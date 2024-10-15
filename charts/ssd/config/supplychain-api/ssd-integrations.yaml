@@ -126,6 +126,22 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
+      - integratorType: azure
+        category: dockerregistry
+        integratorConfigs:
+          url:
+            encrypt: false
+          repo:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+      - integratorType: gcp
+        category: dockerregistry
+        integratorConfigs:
+          file:
+            encrypt: true
       - integratorType: ecr
         category: dockerregistry
         integratorConfigs:

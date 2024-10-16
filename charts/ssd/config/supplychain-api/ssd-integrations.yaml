@@ -247,4 +247,4 @@ integrationData:
           loginIndicator:
             encrypt: false
           logoutIndicator:
-            encrypt: fals
+            encrypt: false

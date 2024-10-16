@@ -114,9 +114,9 @@
             "VALIDATION_MESSAGE": {}
         }
     },
-    "AZURE": {
-        "HEADER": "Azure Registry",
-        "BODY": "<p>Azure Hub is a cloud-based repository where developers can store, manage, and distribute Azure container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the Azure Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
+    "ACR": {
+        "HEADER": "Azure Container Registry",
+        "BODY": "<p>ACR Hub is a cloud-based repository where developers can store, manage, and distribute ACR container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the ACR Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
@@ -128,14 +128,14 @@
             }
         },
         "URL": {
-            "TOOLTIP": "The registry URL from which you want to pull and deploy images. AzureHub example: https://azure.microsoft.com",
+            "TOOLTIP": "The registry URL from which you want to pull and deploy images. ACR Hub example: https://azure.microsoft.com",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
                 "invalidUrl": "Host URL is invalid"
             }
         },
         "EMAIL": {
-            "TOOLTIP": "Users azure registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used."
+            "TOOLTIP": "Users azure container registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used."
         },
         "REPOSITORIES": {
             "TOOLTIP": "An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. Example: library/ubuntu (Public repositories are prefixed with library/)"
@@ -148,13 +148,13 @@
             "VALIDATION_MESSAGE": {}
         },
         "TOKEN": {
-            "TOOLTIP": "The token of the Azure Registry user to authenticate as",
+            "TOOLTIP": "The token of the Azure Container user to authenticate as",
             "VALIDATION_MESSAGE": {
                 "required": "Token cannot be empty"
             }
         },
         "USERNAME": {
-            "TOOLTIP": "The username of the Azure Registry user to authenticate as",
+            "TOOLTIP": "The username of the Azure Container user to authenticate as",
             "VALIDATION_MESSAGE": {
                 "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
                 "cannotContainSpace": "User Name cannot contain space",
@@ -163,13 +163,13 @@
             }
         },
         "PASSWORD": {
-            "TOOLTIP": "The password of the Azure Registry user to authenticate as",
+            "TOOLTIP": "The password of the Azure Container user to authenticate as",
             "VALIDATION_MESSAGE": {
                 "required": "Password cannot be empty"
             }
         },
         "HOSTURL": {
-            "TOOLTIP": "Azure Registry Host URL",
+            "TOOLTIP": "Azure Container Host URL",
             "VALIDATION_MESSAGE": {
                 "required": "Host URL cannot be empty",
                 "invalidUrl": "Host URL is invalid"
@@ -180,9 +180,9 @@
             "VALIDATION_MESSAGE": {}
         }
     },
-    "GCP": {
-        "HEADER": "GCP Registry",
-        "BODY": "<p>GCP is a cloud-based repository where developers can store, manage, and distribute GCP container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the GCP Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
+    "GCR": {
+        "HEADER": "Google Container Registry",
+        "BODY": "<p>GCR is a cloud-based repository where developers can store, manage, and distribute GCR container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the GCR Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {

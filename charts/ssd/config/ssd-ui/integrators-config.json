@@ -528,11 +528,11 @@
         }
         },
         {
-            "integratorType": "azure",
-            "displayName": "Azure",
+            "integratorType": "acr",
+            "displayName": "ACR",
             "multiSupport": true,
             "deleteAccount": true,
-            "category": "azureregistry",
+            "category": "dockerregistry",
             "testConnectionFlag": true,
             "integratorConfigs": {
                 "name": {
@@ -543,7 +543,7 @@
                 "placeholderText": "opsmx-accountname"
                 },
                 "repo": {
-                "dataType": "chipset",
+                "dataType": "input",
                 "displayName": "Repository",
                 "helpText": "Repo Name",
                 "placeholderText": "Example:repoName",
@@ -553,9 +553,9 @@
                 "url": {
                 "dataType": "input",
                 "displayName": "Host Url",
-                "helpText": "Azure Host URL",
+                "helpText": "ACR Host URL",
                 "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
-                "placeholderText": "Example:https://azure.io",
+                "placeholderText": "Example:https://acr.io",
                 "required": true,
                 "encrypt": false
                 },
@@ -578,8 +578,8 @@
             }
         },
         {
-            "integratorType": "gcp",
-            "displayName": "GCP",
+            "integratorType": "gcr",
+            "displayName": "GCR",
             "multiSupport": true,
             "deleteAccount": true,
             "category": "dockerregistry",
@@ -595,7 +595,7 @@
                 "url": {
                 "dataType": "input",
                 "displayName": "Host Url",
-                "helpText": "GCP Host URL",
+                "helpText": "GCR Host URL",
                 "regexpValue": "^(?:https?:\\/\\/|s?ftps?:\\/\\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\\/%&=\\?_:;-]+$|https?:\\/\\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/\\w+>|\\/?>))",
                 "placeholderText": "Example:https://cloud.google.com/",
                 "required": true,

@@ -823,6 +823,94 @@
                 "startingFromNumber": "User Name cannot start with numbers"
             }
         }
+    },
+    "ZAP": {
+        "HEADER": "ZAP",
+        "BODY": "",
+        "SERVICEURL": {
+            "TOOLTIP": "URL of the target application (zapIncludeUrl)",
+            "VALIDATION_MESSAGE": {
+                "required": "URL cannot be empty"
+            }
+        },
+        "USER": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "User cannot be empty"
+            }
+        },
+        "PASSWORD": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Password cannot be empty"
+            }
+        },
+        "RETRIES": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Retries cannot be empty"
+            }
+        },
+        "THRESHOLD": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Threshold cannot be empty"
+            }
+        },
+        "DELAY": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Delay cannot be empty"
+            }
+        },
+        "TEAMNAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Team Name cannot be empty"
+            }
+        },
+        "APPNAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "AppName cannot be empty"
+            }
+        },
+        "SERVICENAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Service Name cannot be empty"
+            }
+        },
+        "LOGINURL": {
+            "TOOLTIP": "URL of the login page",
+            "VALIDATION_MESSAGE": {
+                "required": "Login Url cannot be empty"
+            }
+        },
+        "USERNAMEFIELD": {
+            "TOOLTIP": "Field name for the username to the login page",
+            "VALIDATION_MESSAGE": {
+                "required": "User name cannot be empty"
+            }
+        },
+        "PASSWORDFIELD": {
+            "TOOLTIP": "Field name for the password to the login page ",
+            "VALIDATION_MESSAGE": {
+                "required": "Password cannot be empty"
+            }
+        },
+        "LOGININDICATOR": {
+            "TOOLTIP": "Regex to identify the login success",
+            "VALIDATION_MESSAGE": {
+                "required": "Login Indicator cannot be empty"
+            }
+        },
+        "LOGOUTINDICATOR": {
+            "TOOLTIP": "Regex to identify the logout success",
+            "VALIDATION_MESSAGE": {
+                "required": "Logout Indicator cannot be empty"
+            }
+        }
     }
 },
 "UNCHANGED_FORM": "Form is unchanged. Please make modifications in the form to enable the button.",

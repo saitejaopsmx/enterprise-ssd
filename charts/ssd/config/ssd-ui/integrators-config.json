@@ -810,6 +810,140 @@
             }
         ]
         },
+        "stage": "Post Deploy",
+        "integrations": [
+            {
+            "integratorType": "zap",
+            "displayName": "ZAP",
+            "category": "scanningtool",
+            "testConnectionFlag": false,
+            "multiSupport": true,
+            "deleteAccount": true,
+            "integratorConfigs": {
+                "serviceUrl": {
+                    "dataType": "input",
+                    "displayName": "Service URL",
+                    "helpText": "URL",
+                    "placeholderText": "https://test-ns.opsmx.org/",
+                    "required": true,
+                    "encrypt": false
+                },
+                "username": {
+                    "displayName": "User Name",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "admin"
+                },
+                "password": {
+                    "displayName": "Password",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": true,
+                    "helpText": "",
+                    "placeholderText": ""
+                },
+                "retries": {
+                    "displayName": "Retries",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "4"
+                },
+                "threshold": {
+                    "displayName": "Threshold",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "20"
+                },
+                "delay": {
+                    "displayName": "Delay",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "5"
+                },
+                "account": {
+                    "displayName": "Account",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "account-name"
+                },
+                "appName": {
+                    "displayName": "Application",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "application-name"
+                    },
+                "serviceName": {
+                    "displayName": "Service",
+                    "dataType": "input",
+                    "required": false,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": ""
+                },
+                "excludeUrls": {
+                    "displayName": "Exclude Urls",
+                    "dataType": "chipset",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "http://example.com/logout"
+                },
+                "loginUrl": {
+                    "displayName": "Login Url",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "URL of the login page",
+                    "placeholderText": ""
+                },
+                "usernameField": {
+                    "displayName": "Username Field",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": "user1"
+                },
+                "passwordField": {
+                    "displayName": "Password Field",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "",
+                    "placeholderText": ""
+                },
+                "loginIndicator": {
+                    "displayName": "Login Indicator",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "Regex to identify the login success",
+                    "placeholderText": "Ex: \\\\Qadmin\\\\E"
+                },
+                "logoutIndicator": {
+                    "displayName": "Logout Indicator",
+                    "dataType": "input",
+                    "required": true,
+                    "encrypt": false,
+                    "helpText": "Regex to identify the logout success",
+                    "placeholderText": "Ex: \\\\QSign in\\\\E"
+                }
+            }
+            }
+        ]
+        },
         {
         "stage": "Others",
         "integrations": [

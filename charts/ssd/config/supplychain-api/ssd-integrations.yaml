@@ -213,3 +213,38 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+  - stage: Post Deploy
+    integrations:
+      - integratorType": zap
+        category: scanningtool
+        integratorConfigs:
+          serviceUrl:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          retries:
+            encrypt: false
+          threshold:
+            encrypt: false
+          delay:
+            encrypt: false
+          account:
+            encrypt: false
+          appName:
+            encrypt: false
+          serviceName:
+            encrypt: false
+          excludeUrls:
+            encrypt: false
+          loginUrl:
+            encrypt: false
+          usernameField:
+            encrypt: false
+          passwordField:
+            encrypt: false
+          loginIndicator:
+            encrypt: false
+          logoutIndicator:
+            encrypt: fals

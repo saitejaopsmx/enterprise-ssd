@@ -126,6 +126,26 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
+      - integratorType: acr
+        category: dockerregistry
+        integratorConfigs:
+          url:
+            encrypt: false
+          repo:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+      - integratorType: gcr
+        category: dockerregistry
+        integratorConfigs:
+          url:
+            encrypt: false
+          fileName:
+            encrypt: false
+          fileData:
+            encrypt: true
       - integratorType: ecr
         category: dockerregistry
         integratorConfigs:
@@ -215,7 +235,7 @@ integrationData:
             encrypt: true
   - stage: Post Deploy
     integrations:
-      - integratorType": zap
+      - integratorType: zap
         category: scanningtool
         integratorConfigs:
           serviceUrl:

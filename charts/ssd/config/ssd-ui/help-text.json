@@ -36,6 +36,21 @@
     "CREATE_HEADER": "Create Cluster",
     "UPDATE_HEADER": "Update Cluster",
     "BODY": "<p>This page lets you add/update the clusters to which your applications are getting deployed. You can specify the name, environments and server/ip of the file related to the cluster. </p>",
+    "NAME": {
+    "TOOLTIP": "",
+        "VALIDATION_MESSAGE": {
+            "required": "Name cannot be empty",
+            "cannotContainSpace": "Account name cannot contain space",
+            "noSpecialCharacters": "Allowed special character is '-'",
+            "startingFromNumber": "Account Name cannot start with numbers"
+        }
+    },
+    "TARGET_TYPE": {
+    "TOOLTIP": "",
+        "VALIDATION_MESSAGE": {
+            "required": "Target Type cannot be empty"
+        }
+    },
     "ACCOUNT_NAME": {
     "TOOLTIP": "Name of the account to operate on",
     "VALIDATION_MESSAGE": {
@@ -43,9 +58,20 @@
         "cannotContainSpace": "Account name cannot contain space",
         "noSpecialCharacters": "Allowed special character is '-'",
         "startingFromNumber": "Account Name cannot start with numbers"
-    }
+        }
     },
-    "SERVER_IP": "The public IP/Server address that is mentioned in the cluster config file"
+    "SERVER_IP": {
+    "TOOLTIP": "The public IP/Server address that is mentioned in the cluster config file",
+        "VALIDATION_MESSAGE": {
+            "required": "Server/Ip cannot be empty"
+        }
+    },
+    "DEFAULT_ENVIRONMENT": {
+        "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Default Environment cannot be empty"
+            }
+    }
 },
 "INTEGRATION": {
     "DOCKER": {
@@ -827,16 +853,26 @@
     "ZAP": {
         "HEADER": "ZAP",
         "BODY": "",
+        "NAME": {
+        "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                 "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                 "cannotContainSpace": "Account Name cannot contain space",
+                 "required": "Account Name cannot be empty",
+                 "startingFromNumber": "Account Name cannot start with numbers",
+                 "minlength": "Account Name should be more than 2 characters"
+            }
+        },
         "SERVICEURL": {
             "TOOLTIP": "URL of the target application (zapIncludeUrl)",
             "VALIDATION_MESSAGE": {
                 "required": "URL cannot be empty"
             }
         },
-        "USER": {
+        "USERNAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {
-                "required": "User cannot be empty"
+                "required": "User Name cannot be empty"
             }
         },
         "PASSWORD": {

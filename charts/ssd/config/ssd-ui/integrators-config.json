@@ -816,10 +816,17 @@
             "integratorType": "zap",
             "displayName": "ZAP",
             "category": "scanningtool",
-            "testConnectionFlag": false,
+            "testConnectionFlag": true,
             "multiSupport": true,
             "deleteAccount": true,
             "integratorConfigs": {
+                "name": {
+                    "displayName": "Account Name",
+                    "dataType": "input",
+                    "required": true,
+                    "helpText": "",
+                    "placeholderText": "opsmx-accountname"
+                },
                 "serviceUrl": {
                     "dataType": "input",
                     "displayName": "Service URL",
@@ -831,7 +838,7 @@
                 "username": {
                     "displayName": "User Name",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "",
                     "placeholderText": "admin"
@@ -839,7 +846,7 @@
                 "password": {
                     "displayName": "Password",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": true,
                     "helpText": "",
                     "placeholderText": ""
@@ -895,7 +902,7 @@
                 "excludeUrls": {
                     "displayName": "Exclude Urls",
                     "dataType": "chipset",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "",
                     "placeholderText": "http://example.com/logout"
@@ -903,7 +910,7 @@
                 "loginUrl": {
                     "displayName": "Login Url",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "URL of the login page",
                     "placeholderText": ""
@@ -911,7 +918,7 @@
                 "usernameField": {
                     "displayName": "Username Field",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "",
                     "placeholderText": "user1"
@@ -919,7 +926,7 @@
                 "passwordField": {
                     "displayName": "Password Field",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "",
                     "placeholderText": ""
@@ -927,7 +934,7 @@
                 "loginIndicator": {
                     "displayName": "Login Indicator",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "Regex to identify the login success",
                     "placeholderText": "Ex: \\\\Qadmin\\\\E"
@@ -935,7 +942,7 @@
                 "logoutIndicator": {
                     "displayName": "Logout Indicator",
                     "dataType": "input",
-                    "required": true,
+                    "required": false,
                     "encrypt": false,
                     "helpText": "Regex to identify the logout success",
                     "placeholderText": "Ex: \\\\QSign in\\\\E"

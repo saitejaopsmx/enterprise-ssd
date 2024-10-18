@@ -233,7 +233,7 @@ toolchain:
 
 
   # Supported values are info,debug
-  logLevel: info
+  logLevel: debug
 
 ####################################################
 supplychainpreprocessor:
@@ -265,7 +265,7 @@ ssdopa:
   securityContext: {}
 
   # Supported values are info,debug
-  loglevel: info
+  loglevel: debug
 
 ####################################################
 supplychainapi:

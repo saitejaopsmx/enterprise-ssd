@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ssd
+    component: zap
+{{ include "ssd.standard-labels" . | indent 4 }}
+  name: zap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssd
+      component: zap
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: {{ (.Files.Glob "config/ssd-ui/app-config.json").AsConfig | sha256sum }}
+{{- if .Values.ui.annotations -}}
+        {{ toYaml .Values.ui.annotations | nindent 8 }}
+{{- end }}
+      labels:
+        app: ssd
+        component: zap
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 8}}
+{{- end }}
+    spec:
+      containers:
+      - image: zaproxy/zap-stable
+        name: zap
+        command:
+          - /zap/zap.sh
+          - '-daemon'
+          - '-host'
+          - 0.0.0.0
+          - '-port'
+          - '8080'
+          - '-config'
+          - api.disablekey=true
+          - '-config'
+          - api.addrs.addr.name=.*
+          - '-config'
+          - api.addrs.addr.regex=true
+        env:
+        - name: ZAP_API_ADDRESSES
+          value: '*'
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: auth-script
+          mountPath: /tmp/Form-Based-Auth.js
+          subPath: Form-Based-Auth.js
+        securityContext:
+      {{- if .Values.zap.securityContext }}
+      {{ toYaml .Values.zap.securityContext | nindent 10 }}
+      {{- else }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      {{- end }}
+      {{- if .Values.imagePullSecret}}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret}}
+      {{- end }}
+      {{- if .Values.global.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.global.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.global.affinity }}
+      affinity:
+{{ toYaml .Values.global.affinity | indent 8 }}
+      {{- end }}
+      {{- if .Values.global.tolerations }}
+      tolerations:
+{{ toYaml .Values.global.tolerations | indent 8 }}
+      {{- end }}
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: zap-auth-script
+        name: auth-script
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -335,6 +335,14 @@ ui:
   securityContext:
     allowPrivilegeEscalation: false
 ##############################################################################
+##
+zap:
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  securityContext: {}
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

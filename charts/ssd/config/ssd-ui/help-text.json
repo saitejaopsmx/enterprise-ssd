@@ -908,7 +908,7 @@
         },
         "ACR": {
             "HEADER": "Azure Container Registry",
-            "BODY": "<p>ACR Hub is a cloud-based repository where developers can store, manage, and distribute ACR container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the ACR Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
+            "BODY": "",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -920,7 +920,7 @@
                 }
             },
             "URL": {
-                "TOOLTIP": "The registry URL from which you want to pull and deploy images. ACRHub example: https://azure.microsoft.com",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Host URL cannot be empty",
                     "invalidUrl": "Host URL is invalid"
@@ -930,7 +930,7 @@
                 "TOOLTIP": "Users azure container registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used."
             },
             "REPO": {
-                "TOOLTIP": "An optional list of repositories to cache images from. If not provided, Spinnaker will try to read the list of accessible repositories from the registries _catalog endpoint. Example: library/ubuntu (Public repositories are prefixed with library/)",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Repositories URL cannot be empty",
                     "invalidUrl": "Repositories URL is invalid"
@@ -965,7 +965,7 @@
                 }
             },
             "HOSTURL": {
-                "TOOLTIP": "Azure Container Registry Host URL",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Host URL cannot be empty",
                     "invalidUrl": "Host URL is invalid"
@@ -978,7 +978,7 @@
         },
         "GCR": {
             "HEADER": "Google Container Registry",
-            "BODY": "<p>GCR is a cloud-based repository where developers can store, manage, and distribute GCR container images. It provides a central location for container image management and enables easy collaboration and sharing within the development community.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD receives notifications for every build run in a pipeline and connects to the GCR Hub repository to identify and pull the newly built image.</li> <li>Once the image is pulled, SSD runs security scans on it. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>SSD collects metadata such as Artifact SHA to perform artifact integrity checks, ensuring supply chain security. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
+            "BODY": "",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -990,7 +990,7 @@
                 }
             },
             "URL": {
-                "TOOLTIP": "The registry URL from which you want to pull and deploy images. GCRHub example: https://hub.gcp.com",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Host URL cannot be empty",
                     "invalidUrl": "Host URL is invalid"

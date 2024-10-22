@@ -238,7 +238,7 @@
                     "invalidValue": "Host URL is invalid"
                 }
             },
-            "APIURL": {
+            "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "API URL cannot be empty",
@@ -349,16 +349,6 @@
         "VIRUSTOTAL": {
             "HEADER": "Virus Total",
             "BODY": "<p>VirusTotal is a service that analyzes URLs for security threats using multiple antivirus engines and website scanners.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>URL Detection and Scanning:</strong> SSD detects URLs in your CI/CD configurations and code base, then uses VirusTotal to scan these URLs for potential security threats.</li><li><strong>Threat Analysis:</strong> SSD retrieves and analyzes threat reports from VirusTotal to evaluate the security of the detected URLs.</li><li><strong>Results Display:</strong> The scan results are available on the View Open Security Issues page, providing detailed insights into detected threats and vulnerabilities.</li></ul></div>",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters"
-                }
-            },
             "TOKEN": {
                 "TOOLTIP": "Token",
                 "VALIDATION_MESSAGE": {
@@ -386,17 +376,7 @@
         },
         "SEMGREP": {
             "HEADER": "Semgrep",
-            "BODY": "",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters"
-                }
-            },
+            "BODY": "<p>Semgrep is an open-source static analysis tool designed for identifying and fixing security issues in source code. It uses a pattern-based approach to detect and address security vulnerabilities, coding errors, and other issues in code bases and integrates seamlessly into the development workflow.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD can mandate source code scanning and connect with Semgrep to ensure that scanning is performed on the repository. If scanning has not been done, SSD generates security issues.</li> <li>SSD collects and analyzes the scanned data to assess the overall image and application risk scoring.</li> <li>The scan results are displayed on the Vulnerability Management page, the Artifact section of the DBOM page, and the View Open Security Issues page.</li> <li>Users can create custom policies based on SAST scan results. For example, users can set policies to block images built from repositories containing critical SAST issues.</li> </ul> </div>",
             "TOKEN": {
                 "TOOLTIP": "Token",
                 "VALIDATION_MESSAGE": {
@@ -407,16 +387,6 @@
         "CODACY": {
             "HEADER": "Codacy",
             "BODY": "",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters"
-                }
-            },
             "TOKEN": {
                 "TOOLTIP": "Token",
                 "VALIDATION_MESSAGE": {
@@ -431,16 +401,6 @@
         "CHATGPT": {
             "HEADER": "ChatGPT",
             "BODY": "<p>ChatGPT is an AI chatbot with natural language processing (NLP) capabilities, designed to facilitate human-like conversations and assist with various tasks.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>The Rules Genie option on the Policy page utilizes ChatGPT to create security policies based on provided descriptions and sample inputs. For more information, see Rules Genie.</li> <li>AI-Powered Remediation uses ChatGPT to generate remediation suggestions for security issues identified by SSD. For more information, see AI-powered remediation.</li> </ul> </div>",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters"
-                }
-            },
             "TOKEN": {
                 "TOOLTIP": "Token",
                 "VALIDATION_MESSAGE": {
@@ -573,7 +533,7 @@
             }
         },
         "CUSTOMPOLICY": {
-            "HEADER": "Slack",
+            "HEADER": "Custom Policy",
             "BODY": "<p>Custom policy source refers to a mechanism or source from which CI systems can retrieve and apply custom policies or rules to the code being built or integrated. These policies or rules could be related to coding standards, security checks, compliance requirements, or any other guidelines that the development team wants to enforce as part of the process.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>Users can import existing security policies from their organization or create new policies using the custom policy source.</li> <li>SSD will periodically scan the custom policy repository to detect and import any changes. For more information, see Custom Policies.</li> </ul> </div>",
             "NAME": {
                 "TOOLTIP": "",
@@ -751,15 +711,6 @@
         "JIRA": {
             "HEADER": "Jira",
             "BODY": "<p>JIRA is a project management and issue tracking tool used to manage and track work within teams.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD allows users to generate JIRA tickets directly from the Security Issues screen.</li> <li>The “Create JIRA Ticket” button is available for each security issue, enabling the creation of a JIRA ticket with all relevant details. This facilitates the efficient resolution of issues by developers.</li> </ul> </div>",
-            "NAME": {
-                "TOOLTIP": "User defined name for the Jira account",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers"
-                }
-            },
             "PROJECTKEY": {
                 "TOOLTIP": "User defined name for the Jira account",
                 "VALIDATION_MESSAGE": {

@@ -14,29 +14,46 @@
   path_prefixes:
   - "/ssdservice/v1/spinnakerevents"
   - "/ssdservice/v1/setup"
-  - "/ssdservice/v1/ssd-kubernetes-info"
   - "/ssdservice/v1/events"
-  - "/ssdservice/v1/opa-firewall"
-  - "/ssdservice/v1/kubescapeIntegration"
   baseUrl: supplychain-api:8099
   health_endpoint: /health
   log_traffic: true
+- name: supplychain-api-auth # Authenticated service apis for supplychain-api
+  path_prefixes:
+  - "/ssdservice/v1/ssd-kubernetes-info"
+  - "/ssdservice/v1/kubescapeIntegration"
+  - "/ssdservice/v1/opa-firewall"
+  baseUrl: supplychain-api:8099
+  health_endpoint: /health
+  log_traffic: true
+  auth_required: true
+  token_type: serviceToken
+- name: ssd-opa-service-auth # Authenticated service apis for ssd-opa
+  path_prefixes:
+  - "/webhook/api/v1/kubescape"
+  baseUrl: ssd-opa:8200
+  health_endpoint: /health
+  log_traffic: true
+  auth_required: true
+  strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
+  token_type: serviceToken
 - name: ssd-opa-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
   - "/webhook/api/v1/dataCollection"   # Need code-change from Shradha?
   - "/webhook/api/v1/opaPermission"
-  - "/webhook/api/v1/kubescape"
   strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
   baseUrl: ssd-opa:8200
   health_endpoint: /health
   log_traffic: true
-- name: tool-chain-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
+- name: tool-chain-team-auth  # Authenticated end-point for web-hook posts
   path_prefixes:
   - "/webhook/api/v1/sbom"
   strip_path: "/webhook"
   baseUrl: tool-chain:8100
   health_endpoint: /health
   log_traffic: true
+  auth_required: true
+  token_type: teamToken
 - name: supplychain-api  # Name
   path_prefixes:
   - "/ssdservice"        # incoming calls are routed based on this. Processed in Order i.e. we can have multiple of these going to the same backend
@@ -83,7 +100,7 @@
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
-- name: ssd-minio
+- name: minio
   path_prefixes:
   - "/minio"
   baseUrl: {{ .Release.Namespace }}-minio:9000

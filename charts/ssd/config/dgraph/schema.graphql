@@ -155,6 +155,7 @@ type Team implements RBAC
     policies: [PolicyDefinition!] @hasInverse(field: ownerTeam)
     policyEnforcements: [PolicyEnforcement!]
     exceptions: [ExceptionAffects!] @hasInverse(field: affectsTeam)
+    hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: team)
 }
 
 type Application implements RBAC
@@ -194,6 +195,7 @@ type Application implements RBAC
     policies: [PolicyDefinition!] @hasInverse(field: ownerApplication)
     policyEnforcements: [PolicyEnforcement!] @hasInverse(field: enforcedApplication)
     metadata: [KeyValue!]
+    hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: application)
 }
 
 
@@ -213,6 +215,7 @@ type ApplicationEnvironment @withSubscription {
     deployments: [ApplicationDeployment!] @hasInverse(field: applicationEnvironment)
     riskStatus: ApplicationRiskStatus @hasInverse(field: applicationEnvironment)
     metadata: [KeyValue!]
+    hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: applicationEnvironment)
 }
 
 """
@@ -236,6 +239,7 @@ type ApplicationRiskStatus {
     buildAlerts: Int
     artifactAlerts: Int
     deploymentAlerts: Int
+    postDeploymentAlerts: Int
     createdAt: DateTime!
     updatedAt: DateTime!
     applicationEnvironment: ApplicationEnvironment!
@@ -264,6 +268,9 @@ ApplicationDeployment tells us about the the artifact deployed along with its as
 type ApplicationDeployment {
     "id is randomly assigned"
     id: String! @id
+    "platform will help us identify which image was actually deployed helping us identify the accurate sha"
+    platform: String @search
+    serviceUrl: String @search
     "artifact that is deployed"
     artifact: [Artifact!] @hasInverse(field: artifactDeployment)
     applicationEnvironment: ApplicationEnvironment!
@@ -283,6 +290,7 @@ type ApplicationDeployment {
     "policyRunHistory is the policy execution history for this deployment"
     policyRunHistory: [RunHistory!] @hasInverse(field: applicationDeployment)
     deploymentTags: [KeyValue!]
+    hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: currentDeployed)
 }
 
 type ToolsUsed {
@@ -291,6 +299,7 @@ type ToolsUsed {
     build: String
     artifact: String
     deploy: String
+    postdeploy: String
     sbom: String @search(by: [exact, regexp])
     misc: [String!]
 }
@@ -304,6 +313,7 @@ type ApplicationDeploymentRisk {
     buildAlertsScore: Int
     artifactAlertsScore: Int
     deploymentAlertsScore: Int
+    postDeploymentAlertsScore: Int
     deploymentRiskStatus: RiskStatus @search(by: [exact,regexp])
     applicationDeployment: ApplicationDeployment! @hasInverse(field: deploymentRisk)
 }
@@ -436,9 +446,9 @@ type PolicyDefinition {
     ownerApplication: Application
     createdAt: DateTime!
     updatedAt: DateTime!
-    policyName: String! @search(by: [exact])
+    policyName: String! @search(by: [exact,regexp])
     category: String! @search(by: [exact])
-    stage: String! @search(by: [exact])
+    stage: String! @search(by: [exact,regexp])
     description: String! @search(by: [exact])
     scheduledPolicy: Boolean! @search
     script: String! @search(by: [exact])
@@ -494,7 +504,7 @@ type RunHistory  {
     DeployedAt: DateTime! @search
     Hash: String
     Pass: Boolean! @search
-    MetaData: String
+    EvalData: PolicyEvaluationData @hasInverse(field: affects)
     FileApi: String
     AttachedJira: Jira @hasInverse(field: affectsIndividualComponent)
     Status: String! @search(by: [exact])
@@ -502,6 +512,16 @@ type RunHistory  {
     scheduledPolicy: Boolean! @search
     policyEnforcements: PolicyEnforcement!
     securityIssue: SecurityIssue @hasInverse(field: Affects)
+}
+
+type PolicyEvaluationData {
+    """data Type is gonna help us identify if a DB record is used to evaluate or a json
+   current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
+    Id: ID!
+    dataType: String! @search(by: [exact])
+    rawData: String
+    vulnNode: Vulnerability @hasInverse(field: policyEvaluation)
+    affects:RunHistory! @hasInverse(field: EvalData)
 }
 
 type SecurityIssue {
@@ -516,10 +536,32 @@ type SecurityIssue {
     Action: String! @search(by: [exact,regexp])
     Reason: String @search(by: [exact])
     Error: String @search(by: [exact])
+    policyEnforcements: PolicyEnforcement!
     AttachedJira: Jira @hasInverse(field: affectsSecurityissue)
     Affects: [RunHistory!] @hasInverse(field: securityIssue)
+    Summary: [SecurityIssueAffectsSummary!] @hasInverse(field: securityIssue)
 }
 
+type SecurityIssueAffectsSummary {
+    id: ID!
+    "only pre-deployment analysis or deployment analysis"
+    type: String! @search(by: [exact])
+    team: Team @hasInverse(field: hasSecurityIssues)
+    application: Application @hasInverse(field: hasSecurityIssues)
+    applicationEnvironment: ApplicationEnvironment @hasInverse(field: hasSecurityIssues)
+    service: String  @search(by: [exact,regexp])
+    currentDeployed: ApplicationDeployment @hasInverse(field: hasSecurityIssues)
+    artifactScanTS: [ArtifactScanDataTS!] @hasInverse(field: summary)
+    exception: ExceptionAffects @hasInverse(field: hasSecurityIssues)
+    securityIssue: SecurityIssue! @hasInverse(field: Summary)
+}
+
+type ArtifactScanDataTS {
+    id: ID!
+    artifact: ArtifactScanData! @hasInverse(field: artifactScanTS)
+    timestamps: [DateTime!] @search
+    summary: [SecurityIssueAffectsSummary!] @hasInverse(field: artifactScanTS)
+}
 
 """
 BuildTool contains data from build tool events.
@@ -611,7 +653,9 @@ type Artifact {
 
 type ArtifactScanData {
     id: String! @id
+    "platform: String! @search(by: [exact]) -> add later"
     artifactSha: String! @search(by: [exact])
+    artifactNameTag: String! @search(by: [exact,regexp])
     tool: String! @search(by: [exact])
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
@@ -631,6 +675,7 @@ type ArtifactScanData {
     artifactRisk: ArtifactRisk @hasInverse(field: artifactScanResult)
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
     artifactTags: [KeyValue!]
+    artifactScanTS: [ArtifactScanDataTS!] @hasInverse(field: artifact)
 }
 
 type ArtifactRisk {
@@ -676,6 +721,7 @@ type Vulnerability {
     id: String! @id
     parent: String! @search(by: [exact, regexp])
     ratings: Severity @search(by: [exact])
+    ratingsInt: Int @search
     cwes: [CWE!]
     summary: String
     detail: String
@@ -685,9 +731,11 @@ type Vulnerability {
     createdAt: DateTime @search
     cvss: Float @search
     priority: String @search(by: [exact, regexp])
+    priorityInt: Int @search
     epss: Float @search
     cisa_kev: String @search(by: [exact, regexp])
     affects: [Component!] @hasInverse(field: vulnerabilities)
+    policyEvaluation: [PolicyEvaluationData!] @hasInverse(field: vulnNode)
 }
 
 type CWE {
@@ -766,6 +814,7 @@ type ExceptionAffects implements RBAC
     status: String! @search(by: [exact, regexp])
     exception: Exception! @hasInverse(field: affects)
     runHistories: [RunHistory!] @hasInverse(field: exception)
+    hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: exception)
 }
 
 # Dgraph.Allow-Origin "http://localhost:4200"

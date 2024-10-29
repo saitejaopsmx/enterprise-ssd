@@ -3,7 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
-      - 2024-08
+      - 2024-09
     paths:
       - 'charts/ssd/Chart.yaml'
       - 'charts/ssd/Chart.lock'

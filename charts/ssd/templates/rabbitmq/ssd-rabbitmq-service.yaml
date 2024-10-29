@@ -17,10 +17,16 @@ spec:
     port: 5672
     protocol: TCP
     targetPort: 5672
+    {{- if eq  .Values.RabbitServiceType "NodePort" }}
+    nodePort: 30302
+    {{- end }}
   - name: rabbitmq-mgmt
     port: 15672
     protocol: TCP
     targetPort: 15672
+    {{- if eq  .Values.RabbitServiceType "NodePort" }}
+    nodePort: 32372
+    {{- end }}
   selector:
     app: ssd
     component: ssd-rabbitmq

@@ -111,8 +111,12 @@ spec:
         requests:
           storage: {{ .Values.db.storageMountSize }}
       volumeMode: Filesystem
-      {{- if .Values.db.storageClassName }}
-      storageClassName: {{ .Values.db.storageClassName }}
-      {{- end -}}
+      {{- if .Values.storageClass }}
+      {{- if (eq "-" .Values.storageClass) }}
+      storageClassName: ""
+      {{- else }}
+      storageClassName: "{{ .Values.storageClass }}"
+      {{- end }}
+      {{- end }}
 {{- end -}}
 {{- end -}}

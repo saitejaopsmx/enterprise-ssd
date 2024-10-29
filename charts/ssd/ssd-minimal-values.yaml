@@ -44,3 +44,15 @@ ssdgate:
   - admin
   saml:
     saml_initiated_login: false
+
+#################################################################################
+# The below storage class for SSD-DB,Tool Chain,Dgraph. If set to empty the default value will be set
+storageClass: ""
+
+# Type for the Rabbit MQ, default is LB, can be changed to ClusterIP,NodePort
+RabbitServiceType: LoadBalancer 
+
+redis:
+  master:
+    persistence:
+      storageClass: ""

@@ -6,22 +6,40 @@
 global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   certManager:  # set to true if cert-manager is installed
-    installed: true
+    installed: false
   createIngress: true
 
   ssdUI: # URL used to access the application
     # Change to http if global.certManager.installed is false
     protocol: https
     ## Update the host value with proper dns entry to access the SSD UI
-    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
+    host: ssd.qlaws.opsmx.net
     ingress:
       annotations:
-        kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
-        nginx.ingress.kubernetes.io/proxy-body-size: 500m
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
+        kubernetes.io/ingress.class: alb
+        alb.ingress.kubernetes.io/scheme: "internal"
+        #alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-2016-08
+        # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:732813442182:certificate/<certificate-id>
+        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:<aws-account-id:certificate/<cert-id>
+        #alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:xxxxx:certificate/cert1,
+        #arn:aws:acm:us-west-2:xxxxx:certificate/cert2,arn:aws:acm:us-west-2:xxxxx:certificate/cert3
+        alb.ingress.kubernetes.io/target-type: instance
+        alb.ingress.kubernetes.io/backend-protocol: HTTP
+        alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+        alb.ingress.kubernetes.io/healthcheck-path: /static/underconstruction.html
+        alb.ingress.kubernetes.io/healthcheck-port: 'traffic-port'
+        alb.ingress.kubernetes.io/healthcheck-interval-seconds: '35'
+        alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '30'
+        alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+        alb.ingress.kubernetes.io/unhealthy-threshold-count: '4'
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+        alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+        #kubernetes.io/ingress.class: nginx
+        #nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
+        #nginx.ingress.kubernetes.io/proxy-body-size: 500m
+        #nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+        #nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+        #nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
 
 #############################################################################
 ### Change the Organisation name if user wants a different name in the UI
@@ -47,16 +65,16 @@ ssdgate:
 
 #################################################################################
 # The below storage class for SSD-DB,Tool Chain,Dgraph. If set to empty the default value will be set
-storageClass: ""
+storageClass: "gp2"
 
 # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP,NodePort
-RabbitServiceType: LoadBalancer 
+RabbitServiceType: NodePort
 
 
 # Type of Service for SSD UI, can be changed to NodePort
-UIServiceType: ClusterIP
+UIServiceType: NodePort
 
 redis:
   master:
     persistence:
-      storageClass: ""
+      storageClass: "gp2"

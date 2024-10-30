@@ -52,6 +52,10 @@ storageClass: ""
 # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP,NodePort
 RabbitServiceType: LoadBalancer 
 
+
+# Type of Service for SSD UI, can be changed to NodePort
+UIServiceType: ClusterIP
+
 redis:
   master:
     persistence:

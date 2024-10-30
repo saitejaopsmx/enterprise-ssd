@@ -24,7 +24,7 @@ spec:
             port:
               number: 8080
         path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
 {{- if eq .Values.global.ssdUI.protocol "https" }}
   tls:
   - hosts:

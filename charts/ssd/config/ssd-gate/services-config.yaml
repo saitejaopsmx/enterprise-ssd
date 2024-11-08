@@ -103,10 +103,10 @@
 - name: minio
   path_prefixes:
   - "/minio"
-  baseUrl: {{ .Release.Namespace }}-minio:9000
+  baseUrl: ssd-minio:9000
   health_endpoint: ""
 - name: ssd-temporal-web
-  baseUrl: {{ .Release.Namespace }}-temporal-web:8080 #change as per the svc configured during installation (Take care in helm chart)
+  baseUrl: ssd-temporal-web:8080
   health_endpoint: ""
   path_prefixes:
   - "/namespaces/default/workflows"
@@ -115,6 +115,6 @@
   - "/favicon.ico"
 {{- if .Values.ssdgate.installDex }}
 - name: ssd-dex
-  baseUrl: {{ .Release.Namespace }}-dex:5558
+  baseUrl: ssd-dex:5558
   health_endpoint: /healthz/ready
 {{- end }}

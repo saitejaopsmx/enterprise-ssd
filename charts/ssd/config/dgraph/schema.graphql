@@ -576,23 +576,14 @@ type BuildTool {
     "buildName is the name of the job/pipeline/action"
     buildName: String! @search(by: [exact, regexp])
     buildUrl: String! @search(by: [exact])
-    artifactType: String  @search(by: [exact])
-    "artifact would be something like nginx without the tag"
-    artifact: String! @search(by: [exact])
-    "artifactTag would be the tag of the artifact"
-    artifactTag: String! @search(by: [exact])
-    "digest is the sha of the artifact"
-    digest: String! @search(by: [exact])
-    "buildDigest is the sha of the artifact as sent from the build tool"
-    buildDigest: String @search(by: [exact])
-    "artifactNode links a BuildTool node to an artifact"
-    artifactNode: Artifact @hasInverse(field: buildDetails)
     "buildTime is the time at which the artifact was built"
     buildTime: DateTime
     "buildUser is the user that built the artifact"
     buildUser: String
+    "plugins used at the build time"
+    buildPlugins:[Artifact!] @hasInverse(field: plugins)
     "sourceCodeTool links a BuildTool node to the source details"
-    sourceCodeTool: SourceCodeTool @hasInverse(field: buildTool)
+    sourceCodeTool: [SourceCodeTool!] @hasInverse(field: buildTool)
     "commitMetaData links a BuildTool node to the git commit based details"
     commitMetaData: [CommitMetaData!] @hasInverse(field: buildTool)
     createdAt: DateTime!
@@ -621,6 +612,14 @@ type SourceCodeTool {
     "parentRepo is populated in case the git repo is a fork"
     parentRepo: String
     buildTool: BuildTool!
+    sourceCodePath: String
+    sonarqubeProjectKey: String
+    "artifactNode links a Source node to an artifact"
+    artifactNode: Artifact @hasInverse(field: sourceDetails)
+    "digest is the sha of the artifact"
+    digest: String! @search(by: [exact])
+    "buildDigest is the sha of the artifact as sent from the build tool"
+    buildDigest: String @search(by: [exact])
 }
 
 """
@@ -648,7 +647,8 @@ type Artifact {
     artifactSha: String! @search(by: [exact])
     scanData: [ArtifactScanData!]
     artifactDeployment: [ApplicationDeployment!] @hasInverse(field: artifact)
-    buildDetails: BuildTool @hasInverse(field: artifactNode)
+    sourceDetails: SourceCodeTool @hasInverse(field: artifactNode)
+    plugins: [BuildTool!] @hasInverse(field: buildPlugins)
 }
 
 type ArtifactScanData {
@@ -703,8 +703,37 @@ type Component {
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
     scannedAt: DateTime
+    analysisRequired: Boolean @search
+    analysis: ComponentAnalysis @hasInverse(field: Components)
     vulnerabilities: [Vulnerability!] @hasInverse(field: affects)
     artifacts: [ArtifactScanData!] @hasInverse(field: components)
+}
+
+type ComponentAnalysis {
+    Id: ID!
+    Name: String! @search(by: [exact,regexp])
+    Components:[Component!] @hasInverse(field: analysis)
+    Severity: Severity @search(by: [exact,regexp])
+    SeverityInt: Int @search
+    Stars: Int @search
+    Forks: Int @search
+    Contributors: Int @search
+    VulnCritical: Int @search
+    VulnHigh: Int @search
+    VulnMedium: Int @search
+    VulnLow: Int @search
+    VulnOthers: Int @search
+    MeanTimeToRepair:  Int @search
+    Licenses: [String!] @search(by: [exact,regexp])
+    CreatedAt: DateTime
+    ScannedAt: DateTime
+    LastViewed: DateTime
+}
+
+type ComponentLicenses {
+    Id: ID!
+    Name: String! @search(by: [exact,regexp])
+    Category: String! @search(by: [exact,regexp])
 }
 
 enum Severity {

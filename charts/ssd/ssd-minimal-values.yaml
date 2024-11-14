@@ -1,4 +1,5 @@
 #################This file is used to Install SSD with Inbuilt Authentication##########################
+storageClass:
 #####################################################
 #k8sServiceType: LoadBalancer
 ####################################################

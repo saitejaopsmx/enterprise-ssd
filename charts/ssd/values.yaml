@@ -8,7 +8,7 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: quay.io/opsmxpublic
 
-#storageClass: standard
+storageClass:
 # noPvc is true, no PVCs will be created, suitable for minikube
 noPvc: false
 
@@ -21,10 +21,9 @@ installRedis: true
 # kubernetes services can be exposed to a web-UI based 3 modes
 # ClusterIP (will required Ingress or some other mechanism)
 # or LoadBalancer or NodePort
-# OES UI, OES Gate, Spinnaker Deck and Spinnaker Gate service type
 k8sServiceType: ClusterIP
-UIServiceType: ClusterIP
-RabbitServiceType: LoadBalancer  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
+UIServiceType: ClusterIP  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
+RabbitServiceType: LoadBalancer
 
 #################################################
 ## Change the Organisation name if user wants a different name in the UI
@@ -32,8 +31,6 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
-########################################
-SSDMode: kubernetes
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
@@ -67,13 +64,6 @@ global:
     #port: 8080
 
     ingress:
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
-        nginx.ingress.kubernetes.io/proxy-body-size: 500m
-        nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
-        nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
       tls:
         secretName: ssd-ui-ingress
 

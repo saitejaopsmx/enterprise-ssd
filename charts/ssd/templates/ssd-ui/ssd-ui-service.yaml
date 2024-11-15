@@ -16,9 +16,15 @@ spec:
   - name: "https"
     port: 443
     targetPort: 8080
+    {{- if eq  .Values.UIServiceType "NodePort" }}
+    nodePort: 30443
+    {{- end }}
   - name: "http"
     port: 8080
     targetPort: 8080
+    {{- if eq  .Values.UIServiceType "NodePort" }}
+    nodePort: 30080
+    {{- end }}
     {{- if eq .Values.UIServiceType "LoadBalancer" }}
   - name: "lbhttp"
     port: 80

@@ -8,6 +8,7 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: quay.io/opsmxpublic
 
+### The below parameter is used for SSD-DB,Tool Chain and Dgraph ####
 storageClass:
 # noPvc is true, no PVCs will be created, suitable for minikube
 noPvc: false
@@ -18,11 +19,13 @@ AESEncryptionKey: OKPQK0JWS2TVTW9E86IWWYN3VY4Z34WJ
 ## Set it to false only if SSD needs to be configured with external redis
 installRedis: true
 ###################################################
-# kubernetes services can be exposed to a web-UI based 3 modes
-# ClusterIP (will required Ingress or some other mechanism)
-# or LoadBalancer or NodePort
+### Default is ClusterIP can be changed to NodePort or LoadBalancer
+### Below parameter applies to SSD-OPA,API,Preprocessor,Tool chain,Token Machine and ZAP.
 k8sServiceType: ClusterIP
-UIServiceType: ClusterIP  # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP
+
+#### SSD-UI Service Type default is ClusterIP, can be changed to LoadBalancer,NodePort
+UIServiceType: ClusterIP
+#### Rabbit MQ Service Type , default is LB, can be changed to ClusterIP,NodePort
 RabbitServiceType: LoadBalancer
 
 #################################################
@@ -56,10 +59,12 @@ global:
   ## Set to true to expose ssd-ui over ingress
   createIngress: false
 
-  ## OES-UI url configuration, defaults to http://localhost:8080
+  ## SSD-UI url configuration, defaults to http://localhost:8080
   ssdUI:
     protocol: http
     host: localhost
+    ## PathType for Ingress Controller will be ImplementationSpecific, for AWS Ingress it will be Prefix
+    pathType: ImplementationSpecific
     # Use below port when hostname above is an external IP instead of a hostname
     #port: 8080
 
@@ -100,6 +105,8 @@ global:
     tolerations: []
     persistence:
       enabled: true
+      storageClass: ""
+      accessMode: ReadWriteOnce
       size: 10Gi
 #  redis:
 #    password:
@@ -220,7 +227,6 @@ toolchain:
 
   ## During the scanning if the repo need to clone only once set to true
   cloneRepoOnce: false
-
 
   # Supported values are info,debug
   logLevel: debug
@@ -399,6 +405,8 @@ redis:
     # password: ""
   nodeSelector: {}
   master:
+    persistence:
+      storageClass: ""
     affinity: {}
     tolerations: []
 

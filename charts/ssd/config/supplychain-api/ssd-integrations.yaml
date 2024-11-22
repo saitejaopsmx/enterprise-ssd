@@ -98,9 +98,6 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
-        featureConfigs:
-          viewPlugin:
-            default: active
   - stage: Artifact
     integrations:
       - integratorType: trivy

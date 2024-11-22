@@ -15,6 +15,7 @@
   - "/ssdservice/v1/spinnakerevents"
   - "/ssdservice/v1/setup"
   - "/ssdservice/v1/events"
+  - "/ssdservice/v1/ssdFirewall"
   baseUrl: supplychain-api:8099
   health_endpoint: /health
   log_traffic: true
@@ -103,10 +104,10 @@
 - name: minio
   path_prefixes:
   - "/minio"
-  baseUrl: ssd-minio:9000
+  baseUrl: {{ . Release.Namespace }}-minio:9000
   health_endpoint: ""
 - name: ssd-temporal-web
-  baseUrl: ssd-temporal-web:8080
+  baseUrl: {{ .Relase.Namespace }}-temporal-web:8080
   health_endpoint: ""
   path_prefixes:
   - "/namespaces/default/workflows"

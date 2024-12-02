@@ -1,7 +1,5 @@
-#################This file is used to Install SSD with Inbuilt Authentication##########################
-#####################################################
-#k8sServiceType: LoadBalancer
-####################################################
+##############################################################################################################################################
+#################This file is used to Install SSD with Nginx Ingress Controller and Login with Inbuilt Authentication#######################################################################################################################################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
@@ -37,6 +35,7 @@ toolchain:
     size: 50Gi
 ###############################################################################
 #####User doesn't need to change the below flags let it be the default one######################
+storageClass:
 ssdgate:
   installDex: false   # Default will be false, Set to true if dex need to be installed
   auth_type: poclogin  # saml, dex-oidc and poclogin are other valid values

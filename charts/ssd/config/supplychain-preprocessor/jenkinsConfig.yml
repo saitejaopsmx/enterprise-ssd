@@ -24,3 +24,7 @@ redis:
 supplychainapi:
   host: http://supplychain-api
   port: 8099
+
+ssdtoolchainsvc:
+  host: http://tool-chain
+  port: 8100

@@ -59,6 +59,10 @@ spec:
           readOnly: true
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs
+        - mountPath: /app/scanResult
+          name: scanresult
+        - mountPath: /app/grypeDB
+          name: grypedb
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -94,6 +98,10 @@ spec:
         name: ssd-public-keys
       - emptyDir: {}
         name: tmp
+      - emptyDir: {}
+        name: scanresult
+      - emptyDir: {}
+        name: grypedb
       - name: preprocessor-volume
         secret:
           secretName: supplychain-preprocessor

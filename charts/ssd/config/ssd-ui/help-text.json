@@ -906,6 +906,32 @@
                 }
             }
         },
+        "AWS": {
+            "HEADER": "AWS",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters"
+                }
+            },
+            "AWSACCESSKEY": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Access Key cannot be empty"
+                }
+            },
+            "AWSSECRETKEY": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Secret Access Key cannot be empty"
+                }
+            }
+        },
         "ACR": {
             "HEADER": "Azure Container Registry",
             "BODY": "",
@@ -974,6 +1000,59 @@
             "SPINNAKERTOGGLE": {
                 "TOOLTIP": "Toggle on to propagate the change into the CD Tool.",
                 "VALIDATION_MESSAGE": {}
+            }
+        },
+        "MOBSF": {
+            "HEADER": "MobSF",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters"
+                }
+            }
+        },
+        "JFROGARTIFACTORY": {
+            "HEADER": "JFrog Artifactory",
+            "BODY": "<p>JFrog Artifactory is a universal artifact repository manager designed to store, manage, and distribute binaries and artifacts produced during the software development process, including compiled code, libraries, dependencies, Docker images, and more.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>JFrog Artifactory notifies SSD of each pipeline execution. SSD identifies the image for every build and connects to the Artifactory repository to pull the newly built image.</li> <li>SSD then runs security scans on the pulled images. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>JFrog Artifactory helps collect metadata such as Artifact SHA for artifact integrity checks, ensuring security in the supply chain. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Host URL cannot be empty",
+                    "invalidValue": "Host URL is invalid"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "User Name cannot be empty"
+                }
+            },
+            "PASSWORD": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Password cannot be empty"
+                }
+            },
+            "TOKEN": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
             }
         },
         "GCR": {

@@ -241,6 +241,26 @@
                             "encrypt": true,
                             "helpText": "Authentiation Type",
                             "placeholderText": ""
+                        },
+                        "urlScan": {
+                            "dataType": "checkbox",
+                            "default": "inactive",
+                            "displayName": "URL Scan",
+                            "helpText": "",
+                            "placeholderText": "",
+                            "required": false,
+                            "encrypt": false,
+                            "featureConfig": true
+                        },
+                        "malwareDetection": {
+                            "dataType": "checkbox",
+                            "default": "inactive",
+                            "displayName": "Malware Detection",
+                            "helpText": "",
+                            "placeholderText": "",
+                            "required": false,
+                            "encrypt": false,
+                            "featureConfig": true
                         }
                     }
                 },
@@ -417,7 +437,33 @@
                             "helpText": "Password",
                             "placeholderText": "Password"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 }
             ]
         },
@@ -594,7 +640,33 @@
                             "helpText": "Password",
                             "placeholderText": "Password"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "acr",
@@ -644,7 +716,33 @@
                             "helpText": "Password",
                             "placeholderText": "Password"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "gcr",
@@ -677,7 +775,33 @@
                             "helpText": "select",
                             "placeholderText": "choose file"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "ecr",
@@ -735,7 +859,33 @@
                             "required": true,
                             "encrypt": false
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "quay",
@@ -785,7 +935,33 @@
                             "helpText": "Password",
                             "placeholderText": "Password"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "jfrog",
@@ -815,7 +991,7 @@
                             "displayName": "Host Url",
                             "helpText": "JFrog Host URL",
                             "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
-                            "placeholderText": "Example:https://jfrogartifactory.io",
+                            "placeholderText": "Example:jfrogartifactory.io",
                             "required": true,
                             "encrypt": false
                         },
@@ -835,7 +1011,33 @@
                             "helpText": "Password",
                             "placeholderText": "Password"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "google-artifact-registry",
@@ -890,6 +1092,74 @@
                             "encrypt": false
                         }
                     }
+                },
+                {
+                    "integratorType": "jfrogartifactory",
+                    "displayName": "JFrog Artifactory",
+                    "multiSupport": true,
+                    "deleteAccount": true,
+                    "category": "dockerregistry",
+                    "testConnectionFlag": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "url": {
+                            "dataType": "input",
+                            "displayName": "Host Url",
+                            "helpText": "JFrog Host URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "Example:jfrogartifactory.io",
+                            "required": true,
+                            "encrypt": false
+                        },
+                        "username": {
+                            "displayName": "Username",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "Authentiation Type",
+                            "placeholderText": "Example:opsmx-user"
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "Token",
+                            "placeholderText": "Token"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 }
             ]
         },
@@ -1031,7 +1301,81 @@
                             "helpText": "Regex to identify the logout success",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "serviceUrl",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stage": "Cloud Service Provider",
+            "integrations": [
+                {
+                    "integratorType": "aws",
+                    "displayName": "AWS",
+                    "multiSupport": true,
+                    "deleteAccount": true,
+                    "testConnectionFlag": true,
+                    "category": "cloudsecuritytool",
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "awsAccessKey": {
+                            "dataType": "input",
+                            "displayName": "Access Key ID",
+                            "helpText": "Mandatory to update the Access Key if the repo is Private",
+                            "placeholderText": "Example:rxdtfcgvhbj",
+                            "required": true,
+                            "encrypt": true
+                        },
+                        "awsSecretKey": {
+                            "dataType": "input",
+                            "displayName": "Secret Access Key",
+                            "helpText": "Mandatory to update the encrypt Key if the repo is Private",
+                            "placeholderText": "Example:qwertyuisdxcv",
+                            "required": true,
+                            "encrypt": true
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 }
             ]
         },
@@ -1171,6 +1515,35 @@
                             "placeholderText": "SSD-{Organization}-{Team}-{ApplicationName}-{Service}",
                             "required": true,
                             "encrypt": false
+                        }
+                    }
+                },
+                {
+                    "integratorType": "mobsf",
+                    "displayName": "MobSF",
+                    "category": "communications",
+                    "testConnectionFlag": false,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "staticScan": {
+                            "dataType": "checkbox",
+                            "default": "inactive",
+                            "displayName": "Static Scan",
+                            "helpText": "",
+                            "placeholderText": "",
+                            "required": false,
+                            "encrypt": false,
+                            "featureConfig": true
+                        },
+                        "dynamicScan": {
+                            "dataType": "checkbox",
+                            "default": "inactive",
+                            "displayName": "Dynamic Scan",
+                            "helpText": "",
+                            "placeholderText": "",
+                            "required": false,
+                            "encrypt": false,
+                            "featureConfig": true
                         }
                     }
                 },

@@ -764,6 +764,9 @@ type Vulnerability {
     priorityInt: Int @search
     epss: Float @search
     cisa_kev: String @search(by: [exact, regexp])
+    exploitation: String @search(by: [exact, regexp])
+    automatable: String @search(by: [exact, regexp])
+    technicalImpact: String @search(by: [exact, regexp])
     affects: [Component!] @hasInverse(field: vulnerabilities)
     policyEvaluation: [PolicyEvaluationData!] @hasInverse(field: vulnNode)
 }

@@ -268,3 +268,12 @@ integrationData:
             encrypt: false
           logoutIndicator:
             encrypt: false
+  - stage: Cloud Security Provider
+    integrations:
+      - integratorType: aws
+        category: cloudsecuritytool
+        integratorConfigs:
+          awsAccessKey:
+            encrypt: true
+          awsSecretKey:
+            encrypt: true

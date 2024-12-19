@@ -932,6 +932,14 @@
                 }
             }
         },
+        "SYFT": {
+            "HEADER": "Syft",
+            "BODY": ""
+        },
+        "SCOUTSUITE": {
+            "HEADER": "ScoutSuite",
+            "BODY": ""
+        },
         "ACR": {
             "HEADER": "Azure Container Registry",
             "BODY": "",

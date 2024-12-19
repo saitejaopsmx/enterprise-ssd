@@ -309,4 +309,4 @@ integrationData:
         category: scanningtool
         featureConfigs:
           cspmscan:
-            default: inactive 
+            default: inactive

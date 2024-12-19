@@ -206,6 +206,11 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: syft
+        category: scanningtool
+        featureConfigs:
+          vulnerabilityscan:
+            default: inactive
   - stage: Others
     integrations:
       - integratorType: chatgpt

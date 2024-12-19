@@ -57,6 +57,11 @@ integrationData:
         integratorConfigs:
           token:
             encrypt: true
+        featureConfigs:
+          urlScan:
+            default: inactive
+          malwareDetection:
+            default: inactive
       - integratorType: snyk
         category: sourcetool
         integratorConfigs:
@@ -180,6 +185,15 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
+      - integratorType: jfrogartifactory
+        category: dockerregistry
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          token:
+            encrypt: true
       - integratorType: google-artifact-registry
         category: aptregistry
         integratorConfigs:
@@ -233,6 +247,13 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: mobsf
+        category: scanningtool
+        featureConfigs:
+          staticScan:
+            default: inactive
+          dynamicScan:
+            default: inactive
   - stage: Post Deploy
     integrations:
       - integratorType: zap

@@ -1032,8 +1032,8 @@
             "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
+                    "required": "Repository URL cannot be empty",
+                    "invalidValue": "Repository URL is invalid"
                 }
             },
             "USERNAME": {

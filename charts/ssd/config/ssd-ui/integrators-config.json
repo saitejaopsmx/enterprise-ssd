@@ -988,10 +988,10 @@
                         },
                         "url": {
                             "dataType": "input",
-                            "displayName": "Host Url",
-                            "helpText": "JFrog Host URL",
+                            "displayName": "Repository Url",
+                            "helpText": "JFrog Repository URL",
                             "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
-                            "placeholderText": "Example:jfrogartifactory.io",
+                            "placeholderText": "Example: https://johndoe.jfrog.io/artifactory/my-repo",
                             "required": true,
                             "encrypt": false
                         },

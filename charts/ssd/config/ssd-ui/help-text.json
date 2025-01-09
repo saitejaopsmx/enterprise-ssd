@@ -758,6 +758,18 @@
                     "required": "Value cannot be empty",
                     "invalidValue": "Value is invalid"
                 }
+            },
+            "ASSIGNJIRATOOWNER": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": ""
+                }
+            },
+            "STATUSKEYWORD": {
+                "TOOLTIP": "Status Keyword",
+                "VALIDATION_MESSAGE": {
+                    "required": ""
+                }
             }
         },
         "SONARQUBE": {
@@ -1156,6 +1168,13 @@
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Name cannot be empty"
+                }
+            },
+            "TEAM_OWNER": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Email cannot be empty",
+                    "email": "Email Id is invalid"
                 }
             }
         }

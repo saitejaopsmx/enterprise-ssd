@@ -240,6 +240,16 @@ integrationData:
             encrypt: false
           value:
             encrypt: false
+          assignJiraToOwner:
+            encrypt: false
+          todo:
+            encrypt: false
+          inprogress:
+            encrypt: false
+          done:
+            encrypt: false
+          wontdo:
+            encrypt: false
         featureConfigs:
           jiraTicketTriggerType:
             default: deduplications

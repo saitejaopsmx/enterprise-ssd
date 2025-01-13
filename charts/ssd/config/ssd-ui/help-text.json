@@ -532,6 +532,19 @@
                 }
             }
         },
+        "TFSEC": {
+            "HEADER": "TFsec",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers"
+                }
+            }
+        },
         "CUSTOMPOLICY": {
             "HEADER": "Custom Policy",
             "BODY": "<p>Custom policy source refers to a mechanism or source from which CI systems can retrieve and apply custom policies or rules to the code being built or integrated. These policies or rules could be related to coding standards, security checks, compliance requirements, or any other guidelines that the development team wants to enforce as part of the process.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>Users can import existing security policies from their organization or create new policies using the custom policy source.</li> <li>SSD will periodically scan the custom policy repository to detect and import any changes. For more information, see Custom Policies.</li> </ul> </div>",

@@ -269,6 +269,21 @@ integrationData:
             default: inactive
           dynamicScan:
             default: inactive
+      - integratorType: tfsec
+        category: communications
+        integratorConfigs:
+          name:
+            encrypt: false
+          url:
+            encrypt: false
+          token:
+            encrypt: true
+          branch:
+            encrypt: false
+          scriptabsolutepath:
+            encrypt: false
+          application:
+            encrypt: false
   - stage: Post Deploy
     integrations:
       - integratorType: zap

@@ -139,6 +139,15 @@ Return the proper kube-detector image name
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
+{{/*
+Return the proper Mobsf image name
+*/}}
+{{- define "mobsf.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.mobsf.image.repository -}}
+{{- $tag := .Values.mobsf.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
 
 {{/* vim: set filetype=mustache: */}}
 {{/*

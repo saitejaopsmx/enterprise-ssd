@@ -161,7 +161,6 @@ type Team implements RBAC
     hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: team)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: team)
     AttachedJira: [Jira] @hasInverse(field: team)
-    scanHistory: [Scan!] @hasInverse(field: team)
 }
 
 type Application implements RBAC
@@ -465,6 +464,7 @@ type Jira {
     jiraId: String! @search(by: [exact, regexp])
     url: String!
     status: String! @search(by: [exact, regexp])
+    assignee: String @search(by: [exact, regexp])
     createdAt: DateTime!
     updatedAt: DateTime!
     affectsIndividualComponent: RunHistory @hasInverse(field: AttachedJira)
@@ -646,8 +646,7 @@ interface Scan{
     detailedStatus: String
     category: String @search(by: [exact,regexp])
     createdAt: DateTime @search
-	updatedAt: DateTime @search
-    team: Team @hasInverse(field:scanHistory)
+    updatedAt: DateTime @search
 }
 
 type ArtifactScanData {
@@ -797,7 +796,7 @@ type Exception implements RBAC
     delete:{
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"}
     ]}
             )
 {
@@ -955,29 +954,7 @@ enum ScanStatus{
     completed
 }
 
-type CSPMScan implements Scan @auth(
-    query: {
-        or: [
-            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryCSPMScan @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryCSPMScan @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryCSPMScan @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-    ]},
-    add: {
-        or: [
-            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryCSPMScan @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-    ]},
-    update: {
-        or: [
-            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryCSPMScan @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-    ]},
-     delete:
-        { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-    )
-
-{
+type CSPMScan implements Scan {
     id: String! @id
     status: String @search(by:[exact])
     detailedStatus: String
@@ -986,7 +963,6 @@ type CSPMScan implements Scan @auth(
     createdAt: DateTime @search
     updatedAt: DateTime @search
     associatedResourceScanGroup: [CSPMResourceScanGroup!] @hasInverse(field: cspmScan)
-    team: Team @hasInverse(field: scanHistory)
 }
 
 

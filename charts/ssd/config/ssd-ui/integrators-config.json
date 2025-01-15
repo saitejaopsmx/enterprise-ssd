@@ -2266,17 +2266,10 @@
                     "integratorType": "scoutsuite",
                     "displayName": "ScoutSuite",
                     "category": "scanningtool",
-                    "multiSupport": true,
+                    "multiSupport": false,
                     "testConnectionFlag": false,
                     "deleteAccount": false,
                     "integratorConfigs": {
-                        "name": {
-                            "displayName": "Account Name",
-                            "dataType": "input",
-                            "required": true,
-                            "helpText": "",
-                            "placeholderText": "opsmx-accountname"
-                        },
                         "cspmscan": {
                             "dataTypeOptions": [
                                 {
@@ -2297,57 +2290,7 @@
                             "required": false,
                             "encrypt": false
                         }
-                    },
-                    "gridConfigs": [
-                        {
-                            "name": "Account Name",
-                            "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Status",
-                            "prop": "status",
-                            "type": "toggleSwitch",
-                            "width": 80,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        }
-                    ]
+                    }
                 }
             ]
         },
@@ -2943,22 +2886,6 @@
                             "prop": "url",
                             "type": "default",
                             "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
                             "sortable": false,
                             "defatultVisibility": true
                         },

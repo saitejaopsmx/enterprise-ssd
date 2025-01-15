@@ -79,6 +79,11 @@ spec:
             - name: tool-chain-volume
               mountPath: /tools/config/tool-chain.yaml
               subPath: tool-chain.yaml
+            - mountPath: /tools/ssd-public-keys
+              name: ssd-public-keys
+            - mountPath: /tools/secrets/tool-chain
+              name: token
+              readOnly: true
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
           readinessProbe:
@@ -125,6 +130,15 @@ spec:
               path: ca.crt
             optional: true
             name: customer-custon-ca
+        - name: token
+          secret:
+            defaultMode: 420
+            optional: true
+            secretName: tool-chain-token
+        - name: ssd-public-keys
+          configMap:
+            defaultMode: 420
+            name: ssd-public-keys
         - name: scratch-volume
           ephemeral:
         {{- if .Values.noPvc }}

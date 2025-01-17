@@ -109,7 +109,8 @@ spec:
       {{- end }}
       volumes:
         - name: scanresult
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: tool-chain
         - name: tool-chain-volume
           configMap:
             name: tool-chain

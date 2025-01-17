@@ -412,7 +412,7 @@
                     "integratorType": "openssf",
                     "displayName": "OpenSSF",
                     "category": "scanningtool",
-                    "deleteAccount": false,
+                    "deleteAccount": true,
                     "multiSupport": true,
                     "integratorConfigs": {
                         "name": {
@@ -915,7 +915,7 @@
                 {
                     "integratorType": "trivy",
                     "displayName": "Trivy",
-                    "deleteAccount": false,
+                    "deleteAccount": true,
                     "multiSupport": true,
                     "category": "scanningtool",
                     "integratorConfigs": {
@@ -929,16 +929,6 @@
                         "vulnerabilityscan": {
                             "displayName": "Vulnerability Scan",
                             "dataType": "toggle",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
                             "default": "active",
                             "required": false,
                             "helpText": "Options",
@@ -948,16 +938,6 @@
                         "licensescanforsource": {
                             "displayName": "License Scan for Source",
                             "dataType": "toggle",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
                             "default": "active",
                             "required": false,
                             "featureConfig": true,
@@ -966,16 +946,7 @@
                         },
                         "licensescanforcontainers": {
                             "displayName": "License Scan for Containers",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
+                            "dataType": "toggle",
                             "default": "active",
                             "required": false,
                             "featureConfig": true,
@@ -985,16 +956,6 @@
                         "secretscanforcontainers": {
                             "displayName": "Secret Scan for Containers",
                             "dataType": "toggle",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
                             "default": "active",
                             "required": false,
                             "featureConfig": true,
@@ -1004,16 +965,6 @@
                         "secretscanforsource": {
                             "displayName": "Secret Scan for Source Code",
                             "dataType": "toggle",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
                             "default": "active",
                             "required": false,
                             "featureConfig": true,
@@ -1023,16 +974,6 @@
                         "helmscan": {
                             "displayName": "Helm Scan",
                             "dataType": "toggle",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "active",
-                                    "value": "active"
-                                },
-                                {
-                                    "name": "inactive",
-                                    "value": "inactive"
-                                }
-                            ],
                             "default": "active",
                             "featureConfig": true,
                             "required": false,
@@ -1573,7 +1514,7 @@
                     "category": "dockerregistry",
                     "testConnectionFlag": false,
                     "multiSupport": true,
-                    "deleteAccount": false,
+                    "deleteAccount": true,
                     "integratorConfigs": {
                         "name": {
                             "displayName": "Account Name",
@@ -1607,22 +1548,6 @@
                         {
                             "name": "Account Name",
                             "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,
@@ -1928,7 +1853,7 @@
                     "category": "scanningtool",
                     "testConnectionFlag": false,
                     "multiSupport": true,
-                    "deleteAccount": false,
+                    "deleteAccount": true,
                     "integratorConfigs": {
                         "name": {
                             "displayName": "Account Name",
@@ -2674,7 +2599,7 @@
                     "category": "communications",
                     "multiSupport": true,
                     "testConnectionFlag": false,
-                    "deleteAccount": false,
+                    "deleteAccount": true,
                     "integratorConfigs": {
                         "name": {
                             "displayName": "Account Name",
@@ -2814,22 +2739,6 @@
                             "defatultVisibility": true
                         },
                         {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
                             "name": "Status",
                             "prop": "status",
                             "type": "toggleSwitch",
@@ -2890,6 +2799,22 @@
                             "defatultVisibility": true
                         },
                         {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
                             "name": "Status",
                             "prop": "status",
                             "type": "toggleSwitch",
@@ -2905,7 +2830,8 @@
     "featureConfigs": {
         "vulnerabilityscan": [
             "trivy",
-            "grype"
+            "grype",
+            "syft"
         ]
     }
 }

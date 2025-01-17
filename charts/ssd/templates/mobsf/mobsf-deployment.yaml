@@ -39,9 +39,9 @@ spec:
             capabilities:
               drop:
               - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            runAsUser: 0
             runAsGroup: 1000
             seccompProfile:
               type: RuntimeDefault

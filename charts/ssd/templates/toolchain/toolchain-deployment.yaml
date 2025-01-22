@@ -62,8 +62,6 @@ spec:
               secretKeyRef:
                 key: AESEncryptionKey
                 name: ssdsecret
-          - name: TMPDIR
-            value: /scratch
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -72,8 +70,6 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
-            - mountPath: /scratch
-              name: scratch-volume
             - name: scanresult
               mountPath: /tools/scanResult
             - name: tool-chain-volume
@@ -140,23 +136,6 @@ spec:
           configMap:
             defaultMode: 420
             name: ssd-public-keys
-        - name: scratch-volume
-          ephemeral:
-        {{- if .Values.noPvc }}
-          emptyDir: {}
-        {{- else }}
-            volumeClaimTemplate:
-              spec:
-                {{- if .Values.storageClass }}
-                storageClassName: {{ .Values.storageClass }}
-                {{- end }}
-                accessModes:
-                - {{ .Values.toolchain.persistence.accessMode }}
-                resources:
-                  requests:
-                    storage: {{ .Values.toolchain.persistence.size }}
-                volumeMode: Filesystem
-        {{- end }}
       restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:

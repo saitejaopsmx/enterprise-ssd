@@ -657,6 +657,25 @@
                     "startingFromNumber": "Account Name cannot start with numbers",
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Repo URL cannot be empty",
+                    "invalidValue": "Repo URL is invalid"
+                }
+            },
+            "TOKEN": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Repo Token cannot be empty"
+                }
+            },
+            "SCRIPTABSOLUTEPATH": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Script Absolute Path cannot be empty"
+                }
             }
         },
         "CUSTOMPOLICY": {
@@ -681,8 +700,8 @@
             "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "Repo URL cannot be empty",
-                    "invalidValue": "REpo URL is invalid"
+                    "required": "URL cannot be empty",
+                    "invalidValue": "URL is invalid"
                 }
             }
         },
@@ -972,7 +991,7 @@
             "SERVICEURL": {
                 "TOOLTIP": "URL of the target application (zapIncludeUrl)",
                 "VALIDATION_MESSAGE": {
-                    "required": "URL cannot be empty"
+                    "required": "Service URL cannot be empty"
                 }
             },
             "USERNAME": {

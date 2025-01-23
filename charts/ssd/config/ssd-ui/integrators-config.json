@@ -1450,7 +1450,7 @@
                         "source": {
                             "dataType": "chipset",
                             "displayName": "Source",
-                            "helpText": "entire source",
+                            "helpText": "",
                             "invalidMessage": "Source cannot be empty",
                             "placeholderText": "deb https://<REGION>-apt.pkg.dev/projects/<PROJECTID> <REPONAME> main",
                             "required": true,

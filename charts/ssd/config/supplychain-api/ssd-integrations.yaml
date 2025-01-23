@@ -204,7 +204,7 @@ integrationData:
             encrypt: true
       - integratorType: jfrogartifactory
         category: dockerregistry
-        multiaccount: false
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false

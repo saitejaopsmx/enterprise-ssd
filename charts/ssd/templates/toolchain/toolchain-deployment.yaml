@@ -62,8 +62,11 @@ spec:
               secretKeyRef:
                 key: AESEncryptionKey
                 name: ssdsecret
-          - name: TMPDIR
-            value: /scratch
+          - name: MOBSF_APIKEY
+            valueFrom:
+              secretKeyRef:
+                key: MOBSF_API_KEY
+                name: mobsf-secret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -72,13 +75,16 @@ spec:
             - containerPort: 8100
               protocol: TCP
           volumeMounts:
-            - mountPath: /scratch
-              name: scratch-volume
             - name: scanresult
               mountPath: /tools/scanResult
             - name: tool-chain-volume
               mountPath: /tools/config/tool-chain.yaml
               subPath: tool-chain.yaml
+            - mountPath: /tools/ssd-public-keys
+              name: ssd-public-keys
+            - mountPath: /tools/secrets/tool-chain
+              name: token
+              readOnly: true
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
           readinessProbe:
@@ -104,7 +110,8 @@ spec:
       {{- end }}
       volumes:
         - name: scanresult
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: tool-chain
         - name: tool-chain-volume
           configMap:
             name: tool-chain
@@ -125,37 +132,29 @@ spec:
               path: ca.crt
             optional: true
             name: customer-custon-ca
-        - name: scratch-volume
-          ephemeral:
-        {{- if .Values.noPvc }}
-          emptyDir: {}
-        {{- else }}
-            volumeClaimTemplate:
-              spec:
-                {{- if .Values.storageClass }}
-                storageClassName: {{ .Values.storageClass }}
-                {{- end }}
-                accessModes:
-                - {{ .Values.toolchain.persistence.accessMode }}
-                resources:
-                  requests:
-                    storage: {{ .Values.toolchain.persistence.size }}
-                volumeMode: Filesystem
-        {{- end }}
+        - name: token
+          secret:
+            defaultMode: 420
+            optional: true
+            secretName: tool-chain-token
+        - name: ssd-public-keys
+          configMap:
+            defaultMode: 420
+            name: ssd-public-keys
       restartPolicy: Always
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.toolchain.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.toolchain.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.topologySpreadConstraints }}
+      {{- with .Values.toolchain.topologySpreadConstraints }}
       topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.toolchain.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

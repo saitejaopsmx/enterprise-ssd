@@ -41,6 +41,8 @@ spec:
               readOnly: true
             - mountPath: /app/scanFiles
               name: scanfilepath
+            - mountPath: /app/logs
+              name: logs
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
@@ -91,6 +93,8 @@ spec:
             secretName: ssdsecret
         - emptyDir: {}
           name: scanfilepath
+        - emptyDir: {}
+          name: logs
         - name: token
           secret:
             defaultMode: 420

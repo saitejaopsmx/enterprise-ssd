@@ -3,6 +3,7 @@ integrationData:
     integrations:
       - integratorType: gitlab
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -10,6 +11,7 @@ integrationData:
             encrypt: true
       - integratorType: github
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -17,6 +19,7 @@ integrationData:
             encrypt: true
       - integratorType: bitbucket
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -39,6 +42,7 @@ integrationData:
             default: Workspace
       - integratorType: sonarqube
         category: scanningtool
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -49,11 +53,13 @@ integrationData:
             default: inactive
       - integratorType: openssf
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           openssfcompliancescan:
             default: active
       - integratorType: virustotal
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           token:
             encrypt: true
@@ -64,6 +70,7 @@ integrationData:
             default: inactive
       - integratorType: snyk
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           snykOrgId:
             encrypt: false
@@ -76,6 +83,7 @@ integrationData:
             default: Local Mode
       - integratorType: semgrep
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           token:
             encrypt: true
@@ -84,6 +92,7 @@ integrationData:
             default: Local Mode
       - integratorType: codacy
         category: sourcetool
+        multiaccount: false
         integratorConfigs:
           token:
             encrypt: true
@@ -94,6 +103,7 @@ integrationData:
     integrations:
       - integratorType: jenkins
         category: citool
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -107,6 +117,7 @@ integrationData:
     integrations:
       - integratorType: trivy
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           vulnerabilityscan:
             default: active
@@ -122,6 +133,7 @@ integrationData:
             default: active
       - integratorType: docker
         category: dockerregistry
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -133,6 +145,7 @@ integrationData:
             encrypt: true
       - integratorType: acr
         category: dockerregistry
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -144,6 +157,7 @@ integrationData:
             encrypt: true
       - integratorType: gcr
         category: dockerregistry
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -153,6 +167,7 @@ integrationData:
             encrypt: true
       - integratorType: ecr
         category: dockerregistry
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -165,6 +180,7 @@ integrationData:
           awsSecretKey:
             encrypt: true
       - integratorType: quay
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -176,6 +192,7 @@ integrationData:
             encrypt: true
       - integratorType: jfrog
         category: dockerregistry
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -187,6 +204,7 @@ integrationData:
             encrypt: true
       - integratorType: jfrogartifactory
         category: dockerregistry
+        multiaccount: true
         integratorConfigs:
           url:
             encrypt: false
@@ -196,6 +214,7 @@ integrationData:
             encrypt: true
       - integratorType: google-artifact-registry
         category: aptregistry
+        multiaccount: false
         integratorConfigs:
           key:
             encrypt: true
@@ -203,11 +222,13 @@ integrationData:
             encrypt: false
       - integratorType: grype
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           vulnerabilityscan:
             default: inactive
       - integratorType: syft
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           vulnerabilityscan:
             default: inactive
@@ -215,11 +236,13 @@ integrationData:
     integrations:
       - integratorType: chatgpt
         category: communications
+        multiaccount: false
         integratorConfigs:
           token:
             encrypt: true
       - integratorType: slack
         category: communications
+        multiaccount: false
         integratorConfigs:
           channel:
             encrypt: false
@@ -227,6 +250,7 @@ integrationData:
             encrypt: true
       - integratorType: jira
         category: communications
+        multiaccount: false
         integratorConfigs:
           projectKey:
             encrypt: false
@@ -240,6 +264,16 @@ integrationData:
             encrypt: false
           value:
             encrypt: false
+          assignJiraToOwner:
+            encrypt: false
+          todo:
+            encrypt: false
+          inprogress:
+            encrypt: false
+          done:
+            encrypt: false
+          wontdo:
+            encrypt: false
         featureConfigs:
           jiraTicketTriggerType:
             default: deduplications
@@ -247,6 +281,7 @@ integrationData:
             default: vulnerability_policies
       - integratorType: custompolicy
         category: managementtool
+        multiaccount: false
         integratorConfigs:
           url:
             encrypt: false
@@ -254,15 +289,33 @@ integrationData:
             encrypt: true
       - integratorType: mobsf
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           staticScan:
             default: inactive
           dynamicScan:
             default: inactive
+      - integratorType: tfsec
+        category: communications
+        multiaccount: false
+        integratorConfigs:
+          name:
+            encrypt: false
+          url:
+            encrypt: false
+          token:
+            encrypt: true
+          branch:
+            encrypt: false
+          scriptabsolutepath:
+            encrypt: false
+          application:
+            encrypt: false
   - stage: Post Deploy
     integrations:
       - integratorType: zap
         category: scanningtool
+        multiaccount: true
         integratorConfigs:
           serviceUrl:
             encrypt: false
@@ -298,6 +351,7 @@ integrationData:
     integrations:
       - integratorType: aws
         category: cloudsecuritytool
+        multiaccount: true
         integratorConfigs:
           awsAccessKey:
             encrypt: true
@@ -307,6 +361,7 @@ integrationData:
     integrations:
       - integratorType: scoutsuite
         category: scanningtool
+        multiaccount: false
         featureConfigs:
           cspmscan:
             default: inactive

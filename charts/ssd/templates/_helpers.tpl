@@ -149,6 +149,16 @@ Return the proper Mobsf image name
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
+{{/*
+Return the proper ZAP image name
+*/}}
+{{- define "zap.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.zap.image.repository -}}
+{{- $tag := .Values.zap.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Renders a value that contains template.

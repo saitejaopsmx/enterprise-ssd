@@ -86,6 +86,8 @@ db:
 ####################################################
 toolchain:
   annotations: {}
+  nodeSelector: {}
+  tolerations: []
   serviceAnnotations: {}
 ####################################################
 supplychainpreprocessor:

@@ -1094,7 +1094,7 @@
                 }
             },
             "AWSSECRETKEY": {
-                "TOOLTIP": "",
+                "TOOLTIP": "Make sure the provided access key has read permission to AWS resources",
                 "VALIDATION_MESSAGE": {
                     "required": "Secret Access Key cannot be empty"
                 }

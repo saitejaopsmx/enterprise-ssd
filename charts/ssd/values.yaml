@@ -127,7 +127,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2024-10-00"
+    tag: "2024-12-00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -211,7 +211,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-10-00"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -248,7 +248,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-10-00"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -265,7 +265,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-10-00"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -280,7 +280,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-10-00"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -329,7 +329,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-10-00"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -346,7 +346,7 @@ ui:
 mobsf:
   image:
     repository: mobsf
-    tag: "v4.1.3"
+    tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
   annotations: {}

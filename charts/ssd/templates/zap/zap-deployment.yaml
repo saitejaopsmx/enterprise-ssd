@@ -15,9 +15,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: {{ (.Files.Glob "config/ssd-ui/app-config.json").AsConfig | sha256sum }}
-{{- if .Values.ui.annotations -}}
-        {{ toYaml .Values.ui.annotations | nindent 8 }}
+{{- if .Values.zap.annotations -}}
+        {{ toYaml .Values.zap.annotations | nindent 8 }}
 {{- end }}
       labels:
         app: ssd
@@ -27,7 +26,7 @@ spec:
 {{- end }}
     spec:
       containers:
-      - image: zaproxy/zap-stable
+      - image: {{ template "zap.image" . }}
         name: zap
         command:
           - /zap/zap.sh

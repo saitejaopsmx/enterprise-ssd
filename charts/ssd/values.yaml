@@ -357,6 +357,11 @@ mobsf:
 ##############################################################################
 ##
 zap:
+  image:
+    repository: zap
+    tag: "2024-12-00"
+    pullPolicy: IfNotPresent
+
   annotations: {}
 
   serviceAnnotations: {}

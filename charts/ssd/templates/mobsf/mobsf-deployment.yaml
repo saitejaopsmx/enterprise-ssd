@@ -27,8 +27,11 @@ spec:
         - name: mobsf
           image: {{ template "mobsf.image" . }}
           env:
-            - name: MOBSF_API_KEY
-              value: "{{ .Values.mobsf.apiKey }}"
+          - name: MOBSF_APIKEY
+            valueFrom:
+              secretKeyRef:
+                key: MOBSF_API_KEY
+                name: mobsf-secret
           ports:
             - containerPort: 8000
           securityContext:

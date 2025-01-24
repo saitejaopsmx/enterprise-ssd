@@ -231,6 +231,18 @@ toolchain:
   # Supported values are info,debug
   logLevel: debug
 
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: workload
+            operator: In
+            values:
+            - ssd
+  topologySpreadConstraints: []
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -332,7 +344,6 @@ ui:
     allowPrivilegeEscalation: false
 #############################################################################
 mobsf:
-  apiKey: d7bf5e5eaf31a764bddff2dd38ba87f6611d0e99b0a29f16a75d5dbc30b90651
   image:
     repository: mobsf
     tag: "v4.1.3"

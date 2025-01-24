@@ -3,6 +3,5 @@ graphQLAddr: http://dgraph-public:8080/graphql
 cloneRepoOnce: {{ .Values.toolchain.cloneRepoOnce }}
 logLevel: {{ .Values.toolchain.logLevel }}
 ossSvc: http://34.71.203.90:8070
-mobsfApiKey: {{ .Values.mobsf.apiKey }}
 mobsfClentAddr: http://mobsf-service:8000
 ossAnalayze: 60

@@ -109,12 +109,9 @@ type DeploymentTarget
     name: String! @search(by: [exact, regexp])
     "this would be the ip/server address of the target environment"
     ip: String! @search(by: [exact])
-    "expected value is kubernetes or non-kubernetes"
-    targetType: String
-    "Options are: self-hosted(default), aws"
-    hosting: String
-    "Account name from the cloud provider integrator is expected here"
     account: String
+    "this would be something like aws, gcp etc"
+    targetType: String
     "this would be something like us-east-1 etc"
     region: String
     kubescapeServiceConnected: String
@@ -504,7 +501,7 @@ type RunHistory  {
 
 type PolicyEvaluationData {
     """data Type is gonna help us identify if a DB record is used to evaluate or a json
-    current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
+   current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
     Id: ID!
     dataType: String! @search(by: [exact])
     rawData: String
@@ -660,7 +657,7 @@ type ArtifactScanData {
     tool: String! @search(by: [exact])
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
-    createdAt: DateTime @search
+	createdAt: DateTime @search
     vulnTrackingId: String
     vulnScanState: String @search(by: [exact])
     components: [Component!]
@@ -799,7 +796,7 @@ type Exception implements RBAC
     delete:{
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"}
     ]}
             )
 {

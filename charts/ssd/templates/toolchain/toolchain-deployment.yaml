@@ -110,8 +110,7 @@ spec:
       {{- end }}
       volumes:
         - name: scanresult
-          persistentVolumeClaim:
-            claimName: tool-chain
+          emptyDir: {}
         - name: tool-chain-volume
           configMap:
             name: tool-chain
@@ -142,19 +141,19 @@ spec:
             defaultMode: 420
             name: ssd-public-keys
       restartPolicy: Always
-      {{- with .Values.toolchain.nodeSelector }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.toolchain.affinity }}
+      {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.toolchain.topologySpreadConstraints }}
+      {{- with .Values.topologySpreadConstraints }}
       topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.toolchain.tolerations }}
+      {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

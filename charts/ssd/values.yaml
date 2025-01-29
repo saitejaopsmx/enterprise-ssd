@@ -220,21 +220,11 @@ toolchain:
 
   securityContext: {}
 
-  persistence:
-    ## Change the pvc size as per the cluster requirements
-    size: 50Gi
-    accessMode: ReadWriteOnce
-
   ## During the scanning if the repo need to clone only once set to true
   cloneRepoOnce: false
 
   # Supported values are info,debug
   logLevel: debug
-
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  topologySpreadConstraints: []
 ####################################################
 supplychainpreprocessor:
   ## Image specific details

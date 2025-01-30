@@ -1,15 +1,15 @@
 ---
-# Source: SSD/templates/supplychain-preprocessor/ssd-preprocessor-service.yaml
+# Source: ssd/templates/supplychain-preprocessor/ssd-preprocessor-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: supplychain-preprocessor
   labels:
-    app: oes
-    component: oes-supplychain-preprocessor
+    app: ssd
+    component: supplychain-preprocessor
     heritage: "Helm"
     release: "ssd"
-    chart: "SSD-4.0.9"
+    chart: "ssd-2024.12.00"
 spec:
   ports:
   - name: supplychain-preprocessor
@@ -17,5 +17,5 @@ spec:
     protocol: TCP
     targetPort: 8058
   selector:
-    app: oes
-    component: oes-supplychain-preprocessor
+    app: ssd
+    component: supplychain-preprocessor

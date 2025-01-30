@@ -1,0 +1,82 @@
+---
+# Source: ssd/templates/automation/automation-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: setup-job
+spec:
+  template:
+    spec:
+      containers:
+      - args:
+           - |-
+             schema_endpoint=http://dgraph-public:8080/admin/schema
+             setup_endpoint=http://supplychain-api:8099/ssdservice/v1/setup
+             echo "Checking the Pod Status of Dgraph,Supply Chain API and SSD DB"
+             wait_period=0
+             while true; do
+               kubectl get po -n argo-test -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
+               DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
+               SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
+               status=$(kubectl get pods -l component=db --field-selector=status.phase=Running --no-headers=true | awk '{print $2}')
+               wait_period=$(($wait_period+10))
+               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$status" == "1/1" ]; then
+               sleep 10
+               echo "############******Adding the Dgraph Schema*********#######################"
+               SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
+               echo $SCHEMA_CHECK | grep -i Success
+               if [ $? -eq 0 ]; then
+                   echo "##############***Successfully Updated the Dgraph Schema***########################"
+               else
+                   echo "##############***Failed to Updated the Dgraph Schema***#########################"
+                   exit 1
+               fi
+               sleep 30
+               echo "#################*****Executing the Setup API Schema****##########################"
+               RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
+               sleep 10
+               kubectl -n argo-test logs ssd-db-0 > logs.txt
+               echo "Checking the Schema is updation"
+               count=$(cat logs.txt | grep -i "UpdateSchemeTask done"| wc -l)
+               if [ "$count" == "2" ]; then
+                 kubectl -n argo-test delete pods -l app.kubernetes.io/name=temporal
+                 sleep 30
+                 frontendpod=$(kubectl get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
+                 kubectl -n argo-test exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
+                 kubectl -n argo-test rollout restart deploy tool-chain
+                 break
+               else
+                 echo "The Schema Updation if failed"
+                 sleep 10
+               fi
+             else
+               if [ $wait_period -gt 1000 ]; then
+                 echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
+                 break
+               else
+                 echo "############****Waiting for Dgraph,Supply chain and Token machine services to be ready*****#########"
+                 sleep 10
+               fi
+             fi
+             done
+        command:
+          - /bin/bash
+          - +x
+          - '-c'
+        image: quay.io/opsmxpublic/opsmx-custom-binaries:kubectl-spin-cli-git-bash-jq-yq
+        imagePullPolicy: IfNotPresent
+        name: setup-update
+        volumeMounts:
+        - mountPath: /tmp/schema
+          name: dgraph-schema
+        - mountPath: /tmp
+          name: setup-update
+      serviceAccountName: dgraph-schema-configure-argo-test
+      restartPolicy: OnFailure
+      volumes:
+      - name: dgraph-schema
+        configMap:
+          name: schema-cm
+      - name: setup-update
+        configMap:
+          name: setup-cm

@@ -1,14 +1,14 @@
 ---
-# Source: SSD/templates/roles/ssd-qa-spinnaker-spinnaker.yaml
+# Source: ssd/templates/roles/ssd-qa-spinnaker-spinnaker.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ssd-role-rb-argocd-ssd
+  name: ssd-role-rb-argo-test
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: ssd-role-argocd-ssd
+  name: ssd-role-argo-test
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: argocd-ssd
+  namespace: argo-test

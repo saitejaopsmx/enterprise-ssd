@@ -1,5 +1,5 @@
 ---
-# Source: SSD/charts/minio/templates/service.yaml
+# Source: ssd/charts/minio/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:

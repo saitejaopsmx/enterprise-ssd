@@ -1,5 +1,5 @@
 ---
-# Source: SSD/charts/minio/templates/post-install-prometheus-metrics-role.yaml
+# Source: ssd/charts/minio/templates/post-install-prometheus-metrics-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:

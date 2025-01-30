@@ -1,0 +1,15 @@
+---
+# Source: ssd/charts/temporal/templates/server-dynamicconfigmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "ssd-temporal-dynamic-config"
+  labels:
+    app.kubernetes.io/name: temporal
+    helm.sh/chart: temporal-0.22.1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: ssd
+    app.kubernetes.io/version: 1.20.3
+    app.kubernetes.io/part-of: temporal
+data:
+  dynamic_config.yaml: |-

@@ -1,29 +1,38 @@
 ---
-# Source: SSD/templates/dgraph/sts.yaml
+# Source: ssd/templates/dgraph/sts.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  labels:
+    app: ssd
+    component: dgraph
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
   name: dgraph
 spec:
   serviceName: "dgraph"
   replicas: 1
   selector:
       matchLabels:
-        app: dgraph
+        app: ssd
+        component: dgraph
   template:
     metadata:
       labels:
-        app: dgraph
+        app: ssd
+        component: dgraph
+      annotations:
     spec:
       containers:
       - name: ratel
-        image: dgraph/ratel:latest
+        image: quay.io/opsmxpublic/ratel:v21.12.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
           name: http-ratel
       - name: zero
-        image: dgraph/dgraph:latest
+        image: quay.io/opsmxpublic/dgraph:v23.1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5080
@@ -40,7 +49,7 @@ spec:
             set -ex
             dgraph zero --my=$(hostname -f):5080
       - name: alpha
-        image: dgraph/dgraph:latest
+        image: quay.io/opsmxpublic/dgraph:v23.1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -66,6 +75,14 @@ spec:
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir
-      volumes:
-      - name: datadir
-        emptyDir: {}
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.alpha.kubernetes.io/storage-class: anything
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: 5Gi

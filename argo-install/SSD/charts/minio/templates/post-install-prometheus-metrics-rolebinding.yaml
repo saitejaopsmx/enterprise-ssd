@@ -1,5 +1,5 @@
 ---
-# Source: SSD/charts/minio/templates/post-install-prometheus-metrics-rolebinding.yaml
+# Source: ssd/charts/minio/templates/post-install-prometheus-metrics-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -16,4 +16,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: ssd-minio-update-prometheus-secret
-    namespace: "argocd-ssd"
+    namespace: "argo-test"

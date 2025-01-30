@@ -1,5 +1,5 @@
 ---
-# Source: SSD/charts/minio/templates/configmap.yaml
+# Source: ssd/charts/minio/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -106,5 +106,4 @@ data:
     # Create the bucket
     
     # Create the buckets
-    createBucket spinnaker none false 
-    createBucket autopilot none false
+    createBucket ssd-temporal none false

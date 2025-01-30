@@ -1,416 +1,382 @@
 ---
-# Source: SSD/templates/supplychain-api/supplychain-api-cm.yaml
+# Source: ssd/templates/supplychain-api/supplychain-api-cm.yaml
 apiVersion: v1
 data:
   ssd-integrations.yaml: |
     integrationData:
       - stage: Source
         integrations:
+          - integratorType: gitlab
+            category: sourcetool
+            multiaccount: false
+            integratorConfigs:
+              url:
+                encrypt: false
+              token:
+                encrypt: true
           - integratorType: github
-            displayName: Github
-            multiSupport: false
             category: sourcetool
-            configurationFields:
+            multiaccount: false
+            integratorConfigs:
               url:
-                displayName: API URL
-                dataType: input
-                required: true
-                secret: false
-                helpText: GitHub Host URL
-                placeholderText: 'Example:https://github.com'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: false
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
+                encrypt: false
+              token:
+                encrypt: true
+          - integratorType: bitbucket
+            category: sourcetool
+            multiaccount: false
+            integratorConfigs:
+              url:
+                encrypt: false
+              token:
+                encrypt: true
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+              workspaceId:
+                encrypt: false
+              projectKey:
+                encrypt: false
+              repository:
+                encrypt: false
+            featureConfigs:
+              bitbucketAuthMode:
+                default: bearer
+              accessLevel:
+                default: Workspace
           - integratorType: sonarqube
-            displayName: Sonarqube
-            multiSupport: false
-            category: sourcetool
-            configurationFields:
-              url:
-                displayName: URL
-                dataType: input
-                required: true
-                secret: false
-                helpText: Sonarqube Host URL
-                placeholderText: 'Example:https://sonarqube.com'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
-          - integratorType: openssf
-            displayName: OpenSSF
-            multiSupport: false
             category: scanningtool
-            configurationFields:
-              compliancescan:
-                displayName: Compliance Scan
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Enable/Disable
-                placeholderText: 'Example:Compliance Scan'
-                data:
-                  - Compliance Scan
-          - integratorType: semgrep
-            displayName: SemGrep
-            multiSupport: false
+            multiaccount: false
+            integratorConfigs:
+              url:
+                encrypt: false
+              token:
+                encrypt: true
+            featureConfigs:
+              sonarqubeFileInsertion:
+                default: inactive
+          - integratorType: openssf
+            category: scanningtool
+            multiaccount: false
+            featureConfigs:
+              openssfcompliancescan:
+                default: active
+          - integratorType: virustotal
             category: sourcetool
-            configurationFields:
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
-              sastdastscan:
-                displayName: Sast/Dast scan
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Enable/Disable
-                placeholderText: 'Example:Helm Scan'
-                data:
-                  - Sast/Dast scan   
+            multiaccount: false
+            integratorConfigs:
+              token:
+                encrypt: true
+            featureConfigs:
+              urlScan:
+                default: inactive
+              malwareDetection:
+                default: inactive
+          - integratorType: snyk
+            category: sourcetool
+            multiaccount: false
+            integratorConfigs:
+              snykOrgId:
+                encrypt: false
+              token:
+                encrypt: true
+              url:
+                encrypt: false
+            featureConfigs:
+              sastsnykscan:
+                default: Local Mode
+          - integratorType: semgrep
+            category: sourcetool
+            multiaccount: false
+            integratorConfigs:
+              token:
+                encrypt: true
+            featureConfigs:
+              sastsemgrepscan:
+                default: Local Mode
+          - integratorType: codacy
+            category: sourcetool
+            multiaccount: false
+            integratorConfigs:
+              token:
+                encrypt: true
+            featureConfigs:
+              sastcodacyscan:
+                default: Local Mode
       - stage: Build
         integrations:
           - integratorType: jenkins
-            displayName: Jenkins
-            multiSupport: true
             category: citool
-            configurationFields:
+            multiaccount: true
+            integratorConfigs:
               url:
-                displayName: Host Url
-                dataType: input
-                required: true
-                secret: false
-                helpText: Jenkins Host URL
-                placeholderText: 'Example:https://org.myjenkin.com/jenkins'
-              builduser:
-                displayName: Approved Build User
-                dataType: chipset
-                required: true
-                secret: false
-                helpText: build_username
-                placeholderText: 'Example:approved_build_username'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:username-Password/username-Token'
-                authType:
-                  - basic
+                encrypt: false
+              approved_user:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
       - stage: Artifact
         integrations:
           - integratorType: trivy
-            displayName: Trivy
-            multiSupport: false
             category: scanningtool
-            configurationFields:
-              scantype:
-                displayName: Scan Type
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Scan Type
-                placeholderText: >-
-                  Example:License Scan/Helm Scan/Vulnerability Scan
-                data:
-                  - License Scan
-                  - Secret Scan for Source Code
-                  - Secret Scan for Containers
-                  - Vulnerability Scan
-                  - Helm Scan
-          - integratorType: docker
-            displayName: Docker
-            multiSupport: true
-            category: dockerregistry
-            configurationFields:
-              url:
-                displayName: Host Url
-                dataType: input
-                required: true
-                secret: false
-                helpText: Docker Host URL
-                placeholderText: 'Example:https://docker.io'
-              repo:
-                displayName: Approved Artifact Repo
-                dataType: chipset
-                required: false
-                secret: false
-                helpText: Repo Name
-                placeholderText: 'Example:dockerhub'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:username/password'
-                authType:
-                  - basic
-          - integratorType: quay
-            displayName: Quay
-            multiSupport: true
-            category: dockerregistry
-            configurationFields:
-              url:
-                displayName: Host Url
-                dataType: input
-                required: true
-                secret: false
-                helpText: Quay Host URL
-                placeholderText: 'Example:https://quay.io'
-              repo:
-                displayName: Approved Artifact Repo
-                dataType: chipset
-                required: false
-                secret: false
-                helpText: Repo Name
-                placeholderText: 'Example:quayrepo'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:username/password'
-                authType:
-                  - basic
-          - integratorType: jfrog
-            displayName: JFrog
-            multiSupport: true
-            category: dockerregistry
-            configurationFields:
-              url:
-                displayName: Host Url
-                dataType: input
-                required: true
-                secret: false
-                helpText: JFrog Host URL
-                placeholderText: 'Example:https://jfrogartifactory.io'
-              repo:
-                displayName: Approved Artifact Repo
-                dataType: chipset
-                required: false
-                secret: false
-                helpText: Repo Name
-                placeholderText: 'Example:jfrog'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:username/password'
-                authType:
-                  - basic
-          - integratorType: grype
-            displayName: Grype
-            multiSupport: false
-            category: dockerregistry
-            configurationFields:
-              vulnerabilityScan:
-                displayName: Vulnerability Scan
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Enable/Disable
-                placeholderText: 'Example:Vulnerability Scan'
-                data:
-                  - Vulnerability Scan
-          - integratorType: snyk
-            displayName: Snyk
-            multiSupport: false
-            category: scanningtool
-            configurationFields:
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: false
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
+            multiaccount: false
+            featureConfigs:
+              vulnerabilityscan:
+                default: active
               helmscan:
-                displayName: Helm Scan
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Enable/Disable
-                placeholderText: 'Example:Helm Scan'
-                data:
-                  - Helm Scan 
-      - stage: Deploy
-        integrations:
-          - integratorType: kubescape
-            displayName: KubeScape
-            multiSupport: false
+                default: active
+              secretscanforsource:
+                default: active
+              secretscanforcontainers:
+                default: active
+              licensescanforsource:
+                default: active
+              licensescanforcontainers:
+                default: active
+          - integratorType: docker
+            category: dockerregistry
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              repo:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+          - integratorType: acr
+            category: dockerregistry
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              repo:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+          - integratorType: gcr
+            category: dockerregistry
+            multiaccount: false
+            integratorConfigs:
+              url:
+                encrypt: false
+              fileName:
+                encrypt: false
+              fileData:
+                encrypt: true
+          - integratorType: ecr
+            category: dockerregistry
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              repo:
+                encrypt: false
+              region:
+                encrypt: false
+              awsAccessKey:
+                encrypt: true
+              awsSecretKey:
+                encrypt: true
+          - integratorType: quay
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              repo:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+          - integratorType: jfrog
+            category: dockerregistry
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              repo:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+          - integratorType: jfrogartifactory
+            category: dockerregistry
+            multiaccount: true
+            integratorConfigs:
+              url:
+                encrypt: false
+              username:
+                encrypt: false
+              token:
+                encrypt: true
+          - integratorType: google-artifact-registry
+            category: aptregistry
+            multiaccount: false
+            integratorConfigs:
+              key:
+                encrypt: true
+              source:
+                encrypt: false
+          - integratorType: grype
             category: scanningtool
-            configurationFields:
-              scantype:
-                displayName: Scan Type
-                dataType: checkbox
-                required: true
-                secret: false
-                helpText: Scan Type
-                placeholderText: >-
-                  Example:CIS Benchmark Scan/MITRE and ATT&CK Scan/NSA-CISA
-                  Scan/Helm Scan
-                data:
-                  - CIS Benchmark Scan
-                  - MITRE and ATT&CK Scan
-                  - NSA-CISA Scan
-                  - Helm Scan
-          - integratorType: argo
-            displayName: Argo CD
-            multiSupport: false
-            category: cdtool
-            configurationFields:
-              url:
-                displayName: Argo URL
-                dataType: input
-                required: true
-                secret: false
-                helpText: Argo Host URL
-                placeholderText: 'Example:https://argo.io'
-              name:
-                displayName: Account Name
-                dataType: input
-                required: true
-                secret: false
-                helpText: Argo Account Name
-                placeholderText: 'Example:argo'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey  
-          - integratorType: kubernetes
-            displayName: Kubernetes
-            multiSupport: true
-            category: deploymenttarget
-            configurationFields:
-              clustername:
-                displayName: Cluster Name
-                dataType: input
-                required: true
-                secret: false
-                helpText: Cluster name
-                placeholderText: 'Example:lncdcckjvfvsdz'
-              file:
-                displayName: File
-                dataType: file
-                required: true
-                secret: false
-                helpText: File name
-                placeholderText: 'Example:abc.txt'
-          - integratorType: spinnaker
-            displayName: Spinnaker
-            multiSupport: false
-            category: cdtool
-            configurationFields:
-              url:
-                displayName: Host Url
-                dataType: input
-                required: true
-                secret: false
-                helpText: Spinnaker Host URL
-                placeholderText: 'Example:https://spinnaker.io'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:username/password'
-                authType:
-                  - basic
+            multiaccount: false
+            featureConfigs:
+              vulnerabilityscan:
+                default: inactive
+          - integratorType: syft
+            category: scanningtool
+            multiaccount: false
+            featureConfigs:
+              vulnerabilityscan:
+                default: inactive
       - stage: Others
         integrations:
           - integratorType: chatgpt
-            displayName: ChatGPT
-            multiSupport: false
             category: communications
-            configurationFields:
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
+            multiaccount: false
+            integratorConfigs:
+              token:
+                encrypt: true
           - integratorType: slack
-            displayName: Slack
-            multiSupport: false
             category: communications
-            configurationFields:
+            multiaccount: false
+            integratorConfigs:
               channel:
-                displayName: Channel
-                dataType: input
-                required: true
-                secret: false
-                helpText: Slack Channel Name
-                placeholderText: 'Example:channel_name'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey
-          - integratorType: custompolicy
-            displayName: Custom Policy Source
-            multiSupport: false
-            category: managementtool
-            configurationFields:
+                encrypt: false
+              token:
+                encrypt: true
+          - integratorType: jira
+            category: communications
+            multiaccount: false
+            integratorConfigs:
+              projectKey:
+                encrypt: false
+              username:
+                encrypt: false
               url:
-                displayName: Repo URL & Path
-                dataType: input
-                required: true
-                secret: false
-                helpText: Custom Policy Source Path
-                placeholderText: 'Example:https://github.com/abc/def'
-              auth:
-                displayName: Auth Type
-                dataType: auth
-                required: true
-                secret: true
-                helpText: Authentiation Type
-                placeholderText: 'Example:knjnasjwokldjhse'
-                authType:
-                  - apiKey  
+                encrypt: false
+              token:
+                encrypt: true
+              field:
+                encrypt: false
+              value:
+                encrypt: false
+              assignJiraToOwner:
+                encrypt: false
+              todo:
+                encrypt: false
+              inprogress:
+                encrypt: false
+              done:
+                encrypt: false
+              wontdo:
+                encrypt: false
+            featureConfigs:
+              jiraTicketTriggerType:
+                default: deduplications
+              jiraTicketCreationScope:
+                default: vulnerability_policies
+          - integratorType: custompolicy
+            category: managementtool
+            multiaccount: false
+            integratorConfigs:
+              url:
+                encrypt: false
+              token:
+                encrypt: true
+          - integratorType: mobsf
+            category: scanningtool
+            multiaccount: false
+            featureConfigs:
+              staticScan:
+                default: inactive
+              dynamicScan:
+                default: inactive
+          - integratorType: tfsec
+            category: communications
+            multiaccount: false
+            integratorConfigs:
+              name:
+                encrypt: false
+              url:
+                encrypt: false
+              token:
+                encrypt: true
+              branch:
+                encrypt: false
+              scriptabsolutepath:
+                encrypt: false
+              application:
+                encrypt: false
+      - stage: Post Deploy
+        integrations:
+          - integratorType: zap
+            category: scanningtool
+            multiaccount: true
+            integratorConfigs:
+              serviceUrl:
+                encrypt: false
+              username:
+                encrypt: false
+              password:
+                encrypt: true
+              retries:
+                encrypt: false
+              threshold:
+                encrypt: false
+              delay:
+                encrypt: false
+              account:
+                encrypt: false
+              appName:
+                encrypt: false
+              serviceName:
+                encrypt: false
+              excludeUrls:
+                encrypt: false
+              loginUrl:
+                encrypt: false
+              usernameField:
+                encrypt: false
+              passwordField:
+                encrypt: false
+              loginIndicator:
+                encrypt: false
+              logoutIndicator:
+                encrypt: false
+      - stage: Cloud Security Provider
+        integrations:
+          - integratorType: aws
+            category: cloudsecuritytool
+            multiaccount: true
+            integratorConfigs:
+              awsAccessKey:
+                encrypt: true
+              awsSecretKey:
+                encrypt: true
+      - stage: Cloud Security Posture Management
+        integrations:
+          - integratorType: scoutsuite
+            category: scanningtool
+            multiaccount: false
+            featureConfigs:
+              cspmscan:
+                default: inactive
     
 kind: ConfigMap
 metadata:
   name: supplychain-api-cm
   labels:
     app: ssd
-    component: oes-supplychain-api
+    component: supplychain-api
     heritage: "Helm"
     release: "ssd"
-    chart: "SSD-4.0.9"
+    chart: "ssd-2024.12.00"

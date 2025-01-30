@@ -1,11 +1,12 @@
 ---
-# Source: SSD/templates/dgraph/svc.yaml
+# Source: ssd/templates/dgraph/svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: dgraph-public
   labels:
-    app: dgraph
+    app: ssd
+    component: dgraph
 spec:
   type: ClusterIP
   ports:
@@ -25,4 +26,5 @@ spec:
     targetPort: 8000
     name: http-ratel
   selector:
-    app: dgraph
+    app: ssd
+    component: dgraph

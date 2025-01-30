@@ -1,0 +1,21 @@
+---
+# Source: ssd/templates/toolchain/toolchain-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tool-chain
+  labels:
+    app: ssd
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+    component: toolchain
+data:
+  tool-chain.yaml: |
+    httpListenPort: 8100
+    graphQLAddr: http://dgraph-public:8080/graphql
+    cloneRepoOnce: false
+    logLevel: debug
+    ossSvc: http://34.71.203.90:8070
+    mobsfClentAddr: http://mobsf-service:8000
+    ossAnalayze: 60

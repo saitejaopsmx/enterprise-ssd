@@ -1,11 +1,11 @@
 ---
-# Source: SSD/templates/ssd-gate/ssd-gate-svc.yaml
+# Source: ssd/templates/ssd-gate/ssd-gate-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app: ssd
-    component: ssd-gate
+    component: gate
   name: ssd-gate
 spec:
   ports:
@@ -15,6 +15,6 @@ spec:
     targetPort: 8001
   selector:
     app: ssd
-    component: ssd-gate
+    component: gate
   sessionAffinity: None
   type: ClusterIP

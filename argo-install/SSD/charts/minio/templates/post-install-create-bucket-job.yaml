@@ -1,5 +1,5 @@
 ---
-# Source: SSD/charts/minio/templates/post-install-create-bucket-job.yaml
+# Source: ssd/charts/minio/templates/post-install-create-bucket-job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -31,7 +31,7 @@ spec:
       serviceAccountName: "ssd-minio"
       containers:
       - name: minio-mc
-        image: "minio/mc:RELEASE.2020-11-25T23-04-07Z"
+        image: "quay.io/opsmxpublic/minio-mc:RELEASE.2020-11-25T23-04-07Z"
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "/config/initialize"]
         env:

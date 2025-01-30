@@ -1,53 +1,66 @@
 ---
-# Source: SSD/templates/ssd-opa/ssd-opa-deployment.yaml
+# Source: ssd/templates/ssd-opa/ssd-opa-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ssd-opa
   labels:
-    app: oes
-    component: oes-ssd-opa
+    app: ssd
+    component: ssd-opa
     heritage: "Helm"
     release: "ssd"
-    chart: "SSD-4.0.9"
+    chart: "ssd-2024.12.00"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oes
-      component: oes-ssd-opa
+      app: ssd
+      component: ssd-opa
   template:
     metadata:
       labels:
-        app: oes
-        component: oes-ssd-opa
+        app: ssd
+        component: ssd-opa
         heritage: "Helm"
         release: "ssd"
-        chart: "SSD-4.0.9"
+        chart: "ssd-2024.12.00"
       annotations:
     spec:
       containers:
         - name: ssd-opa
-          image: genos1998/ssd-opa:v310
+          image: quay.io/opsmxpublic/ssd-opa:2024-12-00
           ports:
             - containerPort: 8200
               protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: ssd-proxy-certs
+              optional: true
           volumeMounts:
+            - mountPath: /app/ssd-public-keys
+              name: ssd-public-keys
             - mountPath: /app/secrets/
               name: ssdsecret
               readOnly: true
             - mountPath: /app/scanFiles
               name: scanfilepath
+            - mountPath: /app/logs
+              name: logs
             - name: ssd-opa-volume
               mountPath: /app/config/ssd-opa.yaml
               subPath: ssd-opa.yaml
+            - mountPath: /usr/local/share/ca-certificates
+              name: custom-certs
+            - mountPath: /app/secrets/ssd-opa-token/
+              name: token
+              readOnly: true
           readinessProbe:
-            failureThreshold: 6
+            failureThreshold: 20
             httpGet:
               path: /health
               port: 8200
               scheme: HTTP
-            periodSeconds: 20
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
           securityContext:
@@ -62,6 +75,10 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       volumes:
+        - configMap:
+            defaultMode: 420
+            name: ssd-public-keys
+          name: ssd-public-keys
         - name: ssdsecret
           secret:
             defaultMode: 420
@@ -71,6 +88,12 @@ spec:
             secretName: ssdsecret
         - emptyDir: {}
           name: scanfilepath
+        - emptyDir: {}
+          name: logs
+        - name: token
+          secret:
+            defaultMode: 420
+            secretName: ssd-opa-token
         - name: ssd-opa-volume
           secret:
             secretName: ssd-opa
@@ -78,3 +101,16 @@ spec:
               - key: ssd-opa.yaml
                 path: ssd-opa.yaml
             defaultMode: 420
+        - name: ssd-proxy-certs
+          configMap:
+            defaultMode: 420
+            optional: true
+            name: ssd-proxy-certs
+        - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
+          configMap:
+            defaultMode: 420
+            items:
+            - key: ca.crt
+              path: ca.crt
+            optional: true
+            name: customer-custon-ca

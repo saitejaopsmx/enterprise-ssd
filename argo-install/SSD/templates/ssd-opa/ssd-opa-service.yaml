@@ -1,19 +1,19 @@
 ---
-# Source: SSD/templates/ssd-opa/ssd-opa-service.yaml
+# Source: ssd/templates/ssd-opa/ssd-opa-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: ssd-opa
   labels:
-    app: oes
-    component: oes-ssd-opa
+    app: ssd
+    component: ssd-opa
 spec:
   selector:
-    app: oes
-    component: oes-ssd-opa
+    app: ssd
+    component: ssd-opa
     heritage: "Helm"
     release: "ssd"
-    chart: "SSD-4.0.9"
+    chart: "ssd-2024.12.00"
   ports:
     - name: ssd-opa
       protocol: TCP

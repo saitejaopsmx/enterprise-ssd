@@ -1,6 +1,0 @@
----
-# Source: ssd/templates/token-machine/token-machine-sa.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: token-machine

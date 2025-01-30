@@ -1,0 +1,14 @@
+---
+# Source: ssd/templates/token-machine/token-machine-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: token-machine-argo-test
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - "*"

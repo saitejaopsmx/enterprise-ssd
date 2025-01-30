@@ -1,0 +1,51 @@
+---
+# Source: ssd/templates/mobsf/mobsf-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mobsf
+  labels:
+    app: ssd
+    component: mobsf
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssd
+      component: mobsf
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: mobsf
+        heritage: "Helm"
+        release: "ssd"
+        chart: "ssd-2024.12.00"
+      annotations:
+    spec:
+      containers:
+        - name: mobsf
+          image: quay.io/opsmxpublic/mobsf:2024-12-00
+          env:
+          - name: MOBSF_APIKEY
+            valueFrom:
+              secretKeyRef:
+                key: MOBSF_API_KEY
+                name: mobsf-secret
+          ports:
+            - containerPort: 8000
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      restartPolicy: Always

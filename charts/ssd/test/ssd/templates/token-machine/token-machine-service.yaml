@@ -1,0 +1,21 @@
+---
+# Source: ssd/templates/token-machine/token-machine-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: token-machine
+  labels:
+    app: ssd
+    component: token-machine
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+spec:
+  ports:
+    - name: token-machine
+      protocol: TCP
+      port: 8050
+      targetPort: 8050
+  selector:
+    app: ssd
+    component: token-machine

@@ -1,0 +1,21 @@
+---
+# Source: ssd/templates/supplychain-api/supplychain-api-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supplychain-api
+  labels:
+    app: ssd
+    component: supplychain-api
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+spec:
+  ports:
+    - name: supplychain-api
+      protocol: TCP
+      port: 8099
+      targetPort: 8099
+  selector:
+    app: ssd
+    component: supplychain-api

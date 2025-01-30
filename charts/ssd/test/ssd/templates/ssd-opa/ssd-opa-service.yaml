@@ -1,0 +1,21 @@
+---
+# Source: ssd/templates/ssd-opa/ssd-opa-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssd-opa
+  labels:
+    app: ssd
+    component: ssd-opa
+spec:
+  selector:
+    app: ssd
+    component: ssd-opa
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+  ports:
+    - name: ssd-opa
+      protocol: TCP
+      port: 8200
+      targetPort: 8200

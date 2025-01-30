@@ -1,0 +1,25 @@
+---
+# Source: ssd/charts/temporal/templates/web-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssd-temporal-web
+  labels:
+    app.kubernetes.io/name: temporal
+    helm.sh/chart: temporal-0.22.1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: ssd
+    app.kubernetes.io/version: 1.20.3
+    app.kubernetes.io/component: web
+    app.kubernetes.io/part-of: temporal
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: temporal
+    app.kubernetes.io/instance: ssd
+    app.kubernetes.io/component: web

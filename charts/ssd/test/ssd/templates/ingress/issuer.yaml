@@ -1,0 +1,17 @@
+---
+# Source: ssd/templates/ingress/issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-argo-test-ssd
+spec:
+  acme:
+    email: srinivas@opsmx.io
+    preferredChain: ""
+    privateKeySecretRef:
+      name: demo-authtls
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: nginx

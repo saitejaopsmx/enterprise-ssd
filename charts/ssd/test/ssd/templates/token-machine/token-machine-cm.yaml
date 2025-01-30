@@ -1,0 +1,48 @@
+---
+# Source: ssd/templates/token-machine/token-machine-cm.yaml
+apiVersion: v1
+data:
+  secret-config.yaml: |
+    signingKeys:
+      publicKeyConfigmapName: ssd-public-keys
+      secretKeyNamePrefix: jwtrsa
+      regenerateInterval: 15768000
+      keyLengthBits: 2048
+    managedSecrets:
+      regenerateInterval: 10800 # seconds
+      secrets:
+        - name: ssd-gate-token # the k8s name for this token
+          serviceName: ssd-gate
+          authorizations:
+            - generate-user-token
+        - name: supplychain-api-token
+          serviceName: supplychain-api
+          authorizations:
+            - generate-serviceaccount-token
+            - access-dgraph
+        - name: ssd-opa-token
+          serviceName: ssd-opa
+          authorizations:
+            - access-dgraph
+        - name: tool-chain-token
+          serviceName: tool-chain
+          authorizations:
+            - access-dgraph
+        - name: iacscan-service-token
+          serviceName: iacscan-service
+          authorizations:
+            - access-dgraph
+        - name: supplychain-preprocessor-token
+          serviceName: supplychain-preprocessor
+          authorizations:
+            - access-dgraph
+    
+kind: ConfigMap
+metadata:
+  name: token-machine
+  labels:
+    app: ssd
+    component: token-machine
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"

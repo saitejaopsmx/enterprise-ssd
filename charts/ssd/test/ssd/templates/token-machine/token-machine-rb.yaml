@@ -1,0 +1,14 @@
+---
+# Source: ssd/templates/token-machine/token-machine-rb.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: token-machine-rb-argo-test
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: token-machine-argo-test
+subjects:
+- kind: ServiceAccount
+  name: token-machine
+  namespace: argo-test

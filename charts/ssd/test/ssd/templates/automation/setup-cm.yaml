@@ -1,0 +1,24 @@
+---
+# Source: ssd/templates/automation/setup-cm.yaml
+apiVersion: v1
+data:
+  setup.json: |
+    {
+        "organisationName": "opsmx",
+        "organisationRoles": [
+            {
+                "group": "admin",
+                "permission": "admin"
+            }
+        ]
+    }
+    
+kind: ConfigMap
+metadata:
+  name: setup-cm
+  labels:
+    app: ssd
+    component: automation
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"

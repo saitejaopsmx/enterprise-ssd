@@ -1,0 +1,21 @@
+---
+# Source: ssd/templates/supplychain-preprocessor/ssd-preprocessor-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: supplychain-preprocessor
+  labels:
+    app: ssd
+    component: supplychain-preprocessor
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+spec:
+  ports:
+  - name: supplychain-preprocessor
+    port: 8058
+    protocol: TCP
+    targetPort: 8058
+  selector:
+    app: ssd
+    component: supplychain-preprocessor

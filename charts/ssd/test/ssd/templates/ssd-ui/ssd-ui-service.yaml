@@ -1,0 +1,24 @@
+---
+# Source: ssd/templates/ssd-ui/ssd-ui-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ssd
+    component: ui
+    heritage: "Helm"
+    release: "ssd"
+    chart: "ssd-2024.12.00"
+  name: ssd-ui
+spec:
+  type: ClusterIP
+  ports:
+  - name: "https"
+    port: 443
+    targetPort: 8080
+  - name: "http"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: ssd
+    component: ui

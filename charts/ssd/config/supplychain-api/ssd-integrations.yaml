@@ -274,8 +274,6 @@ integrationData:
             encrypt: false
           wontdo:
             encrypt: false
-          autoTriggerJira:
-            encrypt: false
         featureConfigs:
           jiraTicketTriggerType:
             default: deduplications

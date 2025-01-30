@@ -51,18 +51,6 @@
                 "required": "Target Type cannot be empty"
             }
         },
-        "PROVIDER_TYPE": {
-            "TOOLTIP": "",
-            "VALIDATION_MESSAGE": {
-                "required": "Provider Type cannot be empty"
-            }
-        },
-        "ACCOUNT": {
-            "TOOLTIP": "",
-            "VALIDATION_MESSAGE": {
-                "required": "Account cannot be empty"
-            }
-        },
         "ACCOUNT_NAME": {
             "TOOLTIP": "Name of the account to operate on",
             "VALIDATION_MESSAGE": {
@@ -911,7 +899,7 @@
                 }
             },
             "FIELD": {
-                "TOOLTIP": "This field supports data similar to labels field only.",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Field cannot be empty"
                 }

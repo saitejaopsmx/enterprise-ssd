@@ -586,6 +586,15 @@
                             "default": "Local Mode",
                             "featureConfig": true
                         },
+                        "helmscan": {
+                            "displayName": "Helm Scan",
+                            "dataType": "toggle",
+                            "default": "active",
+                            "featureConfig": true,
+                            "required": false,
+                            "helpText": "Options",
+                            "placeholderText": ""
+                        },
                         "token": {
                             "displayName": "Token",
                             "dataType": "input",
@@ -2372,13 +2381,6 @@
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
                         },
-                        "autoTriggerJira": {
-                            "displayName": "Automatically create Jira tickets during the scan",
-                            "dataType": "toggle",
-                            "default": "active",
-                            "required": false,
-                            "featureConfig": true
-                        },
                         "jiraTicketTriggerType": {
                             "dataType": "dropdown",
                             "displayName": "Trigger Type",
@@ -2429,7 +2431,7 @@
                             "encrypt": false,
                             "mode": 6,
                             "default": "labels",
-                            "disabled": false
+                            "disabled": true
                         },
                         "value": {
                             "dataType": "input",

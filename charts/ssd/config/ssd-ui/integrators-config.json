@@ -586,6 +586,15 @@
                             "default": "Local Mode",
                             "featureConfig": true
                         },
+                        "helmscan": {
+                            "displayName": "Helm Scan",
+                            "dataType": "toggle",
+                            "default": "active",
+                            "featureConfig": true,
+                            "required": false,
+                            "helpText": "Options",
+                            "placeholderText": ""
+                        },
                         "token": {
                             "displayName": "Token",
                             "dataType": "input",

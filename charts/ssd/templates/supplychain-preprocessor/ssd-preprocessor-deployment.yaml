@@ -63,6 +63,15 @@ spec:
           name: scanresult
         - mountPath: /app/grypeDB
           name: grypedb
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8058
+            scheme: HTTP
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 6
           httpGet:

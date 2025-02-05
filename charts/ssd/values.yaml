@@ -206,6 +206,15 @@ db:
   ## storageMountSize is the size with which a PVC is to be created
   storageMountSize: 8Gi
 
+  readinessProbe:
+    failureThreshold: 3
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    successThreshold: 1
+    tcpSocket:
+      port: 5432
+    timeoutSeconds: 1
+
 ####################################################
 toolchain:
   ## Image specific details

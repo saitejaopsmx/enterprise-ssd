@@ -51,6 +51,15 @@ spec:
             - mountPath: /app/secrets/ssd-opa-token/
               name: token
               readOnly: true
+          livenessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /health
+              port: 8200
+              scheme: HTTP
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 20
             httpGet:

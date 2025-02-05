@@ -87,6 +87,15 @@ spec:
               readOnly: true
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /health
+              port: 8100
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 6
             httpGet:

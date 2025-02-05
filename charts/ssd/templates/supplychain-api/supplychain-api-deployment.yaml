@@ -46,6 +46,15 @@ spec:
           - configMapRef:
               name: ssd-proxy-certs
               optional: true
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8099
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 12
             httpGet:

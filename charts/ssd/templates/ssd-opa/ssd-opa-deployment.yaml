@@ -58,6 +58,7 @@ spec:
               port: 8200
               scheme: HTTP
             periodSeconds: 15
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
           readinessProbe:
@@ -67,6 +68,7 @@ spec:
               port: 8200
               scheme: HTTP
             periodSeconds: 15
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
           securityContext:

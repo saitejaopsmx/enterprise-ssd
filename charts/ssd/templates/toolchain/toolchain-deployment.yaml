@@ -94,6 +94,7 @@ spec:
               port: 8100
               scheme: HTTP
             periodSeconds: 20
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
           readinessProbe:
@@ -103,6 +104,7 @@ spec:
               port: 8100
               scheme: HTTP
             periodSeconds: 20
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
 

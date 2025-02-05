@@ -51,6 +51,10 @@ spec:
             tcpSocket:
               port: 8000
             timeoutSeconds: 1
+      {{- with .Values.mobsf.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
           securityContext:
       {{- if .Values.mobsf.securityContext }}
       {{- toYaml .Values.mobsf.securityContext | nindent 12 }}

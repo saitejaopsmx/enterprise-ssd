@@ -81,6 +81,10 @@ spec:
             - mountPath: /app/secrets/supplychain-api-token/
               name: token
               readOnly: true
+          {{- with .Values.supplychainapi.resources }}
+          resources:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
           securityContext:
       {{- if .Values.supplychainapi.securityContext }}
       {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}

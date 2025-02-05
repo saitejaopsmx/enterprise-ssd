@@ -173,6 +173,19 @@ ssdgate:
 
   annotations: {}
   serviceAnnotations: {}
+  requests:
+    memory: 500Mi
+    cpu: 500m
+  limits:
+    memory: 1500Mi
+    cpu: 1500m
+  #resources: {}
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -195,6 +208,13 @@ db:
   annotations: {}
 
   serviceAnnotations: {}
+
+  requests:
+    memory: 500Mi
+    cpu: 500m
+  limits:
+    memory: 1500Mi
+    cpu: 1500m
 
   ## Strategy to rollout statefulset pods
   podManagementPolicy: OrderedReady
@@ -227,6 +247,14 @@ toolchain:
 
   serviceAnnotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
   securityContext: {}
 
   ## During the scanning if the repo need to clone only once set to true
@@ -246,6 +274,23 @@ supplychainpreprocessor:
 
   serviceAnnotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
+
+
   securityContext: {}
 
   # Supported values are info,debug
@@ -263,6 +308,22 @@ ssdopa:
 
   securityContext: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
+
   # Supported values are info,debug
   loglevel: debug
 
@@ -278,6 +339,23 @@ supplychainapi:
 
   serviceAnnotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
+
   securityContext: {}
 
 ######################################################
@@ -289,6 +367,23 @@ tokenmachine:
     pullPolicy: IfNotPresent
 
   annotations: {}
+
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
 
   serviceAnnotations: {}
 
@@ -308,6 +403,22 @@ rabbitmq:
     repository: 3-management
   annotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
   serviceAnnotations: {}
 
   #Below block is for only for K8S
@@ -327,6 +438,23 @@ ui:
 
   serviceAnnotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
+
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
     setApplicationRefreshInterval: 300000
@@ -344,6 +472,22 @@ mobsf:
 
   serviceAnnotations: {}
 
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
+
   securityContext: {}
 ##############################################################################
 ##
@@ -356,6 +500,23 @@ zap:
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
+
+  #resources: {}
+
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
 
   securityContext: {}
 ##############################################################################

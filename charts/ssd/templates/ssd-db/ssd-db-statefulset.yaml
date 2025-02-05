@@ -64,6 +64,10 @@ spec:
           tcpSocket:
             port: 5432
           timeoutSeconds: 1
+      {{- with .Values.db.resources }}
+          resources:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
       securityContext:
       {{- if .Values.db.securityContext }}
       {{ toYaml .Values.db.securityContext | nindent 8 }}

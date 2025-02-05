@@ -38,7 +38,10 @@ spec:
         ports:
         - containerPort: {{ .Values.rabbitmq.port }}
           protocol: TCP
-        resources: {}
+        {{- with .Values.rabbitmq.resources }}
+        resources:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs

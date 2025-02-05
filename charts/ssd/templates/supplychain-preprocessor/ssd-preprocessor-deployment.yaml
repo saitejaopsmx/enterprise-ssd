@@ -81,6 +81,10 @@ spec:
           periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+      {{- with .Values.supplychainpreprocessor.resources }}
+        resources:
+      {{- toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.supplychainpreprocessor.securityContext }}
       {{ toYaml .Values.supplychainpreprocessor.securityContext | nindent 12 }}

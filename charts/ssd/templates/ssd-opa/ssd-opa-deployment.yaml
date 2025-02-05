@@ -71,6 +71,10 @@ spec:
             initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
+      {{- with .Values.ssdopa.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
           securityContext:
       {{- if .Values.ssdopa.securityContext }}
       {{ toYaml .Values.ssdopa.securityContext | nindent 12 }}

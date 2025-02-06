@@ -38,6 +38,9 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /opsmx/config/
+          {{- with .Values.tokenmachine.probes }}
+          {{- toYaml . | nindent 10 }}
+          {{- else }}
           livenessProbe:
             failureThreshold: 60
             periodSeconds: 10
@@ -45,7 +48,6 @@ spec:
             tcpSocket:
               port: 8050
             timeoutSeconds: 2
-
           readinessProbe:
             failureThreshold: 60
             periodSeconds: 10
@@ -53,6 +55,7 @@ spec:
             tcpSocket:
               port: 8050
             timeoutSeconds: 1
+          {{- end }}
       {{- with .Values.tokenmachine.resources }}
           resources:
       {{- toYaml . | nindent 12 }}

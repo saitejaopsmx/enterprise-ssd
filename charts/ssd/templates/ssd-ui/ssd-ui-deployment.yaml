@@ -55,6 +55,9 @@ spec:
           subPath: nginx.conf
         - mountPath: /usr/local/share/ca-certificates
           name: custom-certs
+      {{- with .Values.ui.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
         readinessProbe:
           tcpSocket:
             port: 8080
@@ -72,6 +75,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
+      {{- end }}
       {{- with .Values.ui.resources }}
         resources:
       {{- toYaml . | nindent 10 }}

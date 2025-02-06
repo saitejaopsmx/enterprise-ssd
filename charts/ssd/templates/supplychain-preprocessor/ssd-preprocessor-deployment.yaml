@@ -63,6 +63,9 @@ spec:
           name: scanresult
         - mountPath: /app/grypeDB
           name: grypedb
+        {{- with .Values.supplychainapi.probes }}
+        {{- toYaml . | nindent 8 }}
+        {{- else }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -81,6 +84,7 @@ spec:
           periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+        {{- end }}
       {{- with .Values.supplychainpreprocessor.resources }}
         resources:
       {{- toYaml . | nindent 10 }}

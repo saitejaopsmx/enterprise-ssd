@@ -46,6 +46,9 @@ spec:
           - configMapRef:
               name: ssd-proxy-certs
               optional: true
+          {{- with .Values.supplychainapi.probes }}
+          {{- toYaml . | nindent 10 }}
+          {{- else }}
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -64,6 +67,7 @@ spec:
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 1
+          {{- end }}
           volumeMounts:
             - mountPath: /app/ssd-public-keys
               name: ssd-public-keys

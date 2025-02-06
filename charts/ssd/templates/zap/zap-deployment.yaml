@@ -51,6 +51,9 @@ spec:
         - name: auth-script
           mountPath: /tmp/Form-Based-Auth.js
           subPath: Form-Based-Auth.js
+      {{- with .Values.zap.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
         livenessProbe:
           failureThreshold: 60
           initialDelaySeconds: 30
@@ -59,7 +62,6 @@ spec:
           tcpSocket:
             port: 8080
           timeoutSeconds: 2
-
         readinessProbe:
           failureThreshold: 60
           initialDelaySeconds: 30
@@ -68,7 +70,7 @@ spec:
           tcpSocket:
             port: 8080
           timeoutSeconds: 2
-
+      {{- end }}
       {{- with .Values.zap.resources }}
         resources:
       {{- toYaml . | nindent 10 }}

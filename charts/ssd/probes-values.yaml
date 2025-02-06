@@ -1,0 +1,292 @@
+###############################################################################
+ssdgate:
+  probes:
+    livenessProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /healthz
+        port: 8001
+        scheme: HTTP
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /healthz
+        port: 8001
+        scheme: HTTP
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+###############################################################################
+db:
+  probes:
+    livenessProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /healthz
+        port: 8001
+        scheme: HTTP
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /healthz
+        port: 8001
+        scheme: HTTP
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+####################################################
+toolchain:
+  probes:
+    livenessProbe:
+      failureThreshold: 6
+      httpGet:
+        path: /health
+        port: 8100
+        scheme: HTTP
+      periodSeconds: 20
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 6
+      httpGet:
+        path: /health
+        port: 8100
+        scheme: HTTP
+      periodSeconds: 20
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+####################################################
+supplychainpreprocessor:
+  probes:
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /healthz
+        port: 8058
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 6
+      httpGet:
+        path: /healthz
+        port: 8058
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 1
+####################################################
+ssdopa:
+  probes:
+    livenessProbe:
+      failureThreshold: 20
+      httpGet:
+        path: /health
+        port: 8200
+        scheme: HTTP
+      periodSeconds: 15
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 20
+      httpGet:
+        path: /health
+        port: 8200
+        scheme: HTTP
+      periodSeconds: 15
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+####################################################
+supplychainapi:
+  probes:
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /healthz
+        port: 8099
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 12
+      httpGet:
+        path: /healthz
+        port: 8099
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 1
+######################################################
+tokenmachine:
+  probes:
+    livenessProbe:
+      failureThreshold: 60
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8050
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 60
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8050
+      timeoutSeconds: 1
+###############################################################################
+rabbitmq:
+  probes:
+    livenessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 150
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 5672
+      timeoutSeconds: 1
+###############################################################################
+ui:
+  probes:
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+      failureThreshold: 3
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /ui/indexl.html
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+#############################################################################
+mobsf:
+  probes:
+    livenessProbe:
+      failureThreshold: 60
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8080
+      timeoutSecond   
+    readinessProbe:
+      failureThreshold: 60
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8080
+      timeoutSeconds: 2
+##############################################################################
+zap:
+  probes:
+    livenessProbe:
+      failureThreshold: 60
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8080
+      timeoutSecond   
+    readinessProbe:
+      failureThreshold: 60
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      tcpSocket:
+        port: 8080
+      timeoutSeconds: 2
+#########################################################################
+temporal:
+  server:
+    replicaCount: 1
+    resources: {}
+    config:
+      persistence:
+        default:
+          driver: "sql"
+
+          sql:
+            driver: "postgres"
+            host: ssd-db
+            port: "5432"
+            database: temporal
+            user: postgres
+            password: networks123
+          # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
+          # it has a single key called `password`
+          # existingSecret: temporal-default-store
+            maxConns: 20
+            maxConnLifetime: "1h"
+          # tls:
+          #  enabled: true
+          #  enableHostVerification: true
+          #  serverName: _HOST_ # this is strictly required when using serverless CRDB offerings
+
+        visibility:
+          driver: "sql"
+
+          sql:
+            driver: "postgres"
+            host: ssd-db
+            port: "5432"
+            database: temporal_visibility
+            user: postgres
+            password: networks123
+          # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
+          # it has a single key called `password`
+          # existingSecret: temporal-visibility-store
+            maxConns: 20
+            maxConnLifetime: "1h"
+          # tls:
+          #  enabled: true
+          #  enableHostVerification: true
+          #  serverName: _HOST_ # this is strictly required when using serverless CRDB offerings
+
+    frontend:
+      resources: {}
+      podDisruptionBudget: {}
+    history:
+      resources: {}
+      podDisruptionBudget: {}
+    worker:
+      resources: {}
+      podDisruptionBudget: {}
+    matching:
+      resources: {}
+      podDisruptionBudget: {}
+
+
+  web:
+    image:
+      repository: quay.io/opsmxpublic/temporal-ui
+      tag: 2.9.0
+    replicaCount: 1
+    resources: {}
+
+  admintools:
+    enabled: true
+    image:
+      repository: quay.io/opsmxpublic/temporal-admin-tools
+      tag: 1.20.3
+    resources: {}
+    podDisruptionBudget: {}
+

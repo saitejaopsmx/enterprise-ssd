@@ -79,8 +79,3 @@ redis:
 
 ###### Below parameter is used for StorageClass for SSD-DB,Tool Chain and Dgraph #####
 storageClass: gp2
-############## Storage Size for the Tool Chain #######################################
-toolchain:
-  persistence:
-    ## Change the pvc size as per the cluster requirements
-    size: 50Gi

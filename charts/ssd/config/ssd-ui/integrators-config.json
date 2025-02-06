@@ -586,6 +586,15 @@
                             "default": "Local Mode",
                             "featureConfig": true
                         },
+                        "helmscan": {
+                            "displayName": "Helm Scan",
+                            "dataType": "toggle",
+                            "default": "active",
+                            "featureConfig": true,
+                            "required": false,
+                            "helpText": "Options",
+                            "placeholderText": ""
+                        },
                         "token": {
                             "displayName": "Token",
                             "dataType": "input",
@@ -1191,14 +1200,6 @@
                             "defatultVisibility": true
                         },
                         {
-                            "name": "User Name",
-                            "prop": "username",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
                             "name": "Team",
                             "prop": "team",
                             "type": "chipSet",
@@ -1461,22 +1462,6 @@
                         {
                             "name": "Account Name",
                             "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,
@@ -2256,22 +2241,6 @@
                             "defatultVisibility": true
                         },
                         {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
                             "name": "Team",
                             "prop": "team",
                             "type": "chipSet",
@@ -2333,22 +2302,6 @@
                         {
                             "name": "Account Name",
                             "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,
@@ -2725,14 +2678,6 @@
                         {
                             "name": "Url",
                             "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Username",
-                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,

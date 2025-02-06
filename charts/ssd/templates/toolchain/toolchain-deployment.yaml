@@ -62,10 +62,10 @@ spec:
               secretKeyRef:
                 key: AESEncryptionKey
                 name: ssdsecret
-          - name: MOBSF_APIKEY
+          - name: MOBSF_API_KEY
             valueFrom:
               secretKeyRef:
-                key: MOBSF_API_KEY
+                key: mobsfapikey
                 name: mobsf-secret
           envFrom:
           - configMapRef:

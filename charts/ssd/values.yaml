@@ -173,20 +173,7 @@ ssdgate:
 
   annotations: {}
   serviceAnnotations: {}
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-  #resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -210,13 +197,7 @@ db:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
+  resources: {}
 
   ## Strategy to rollout statefulset pods
   podManagementPolicy: OrderedReady
@@ -250,13 +231,7 @@ toolchain:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
+  resources: {}
 
   securityContext: {}
 
@@ -278,22 +253,7 @@ supplychainpreprocessor:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
-
+  resources: {}
 
   securityContext: {}
 
@@ -313,21 +273,7 @@ ssdopa:
 
   securityContext: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   # Supported values are info,debug
   loglevel: debug
@@ -345,22 +291,7 @@ supplychainapi:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   securityContext: {}
 
@@ -374,22 +305,7 @@ tokenmachine:
 
   annotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   serviceAnnotations: {}
 
@@ -409,22 +325,7 @@ rabbitmq:
     repository: 3-management
   annotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
   serviceAnnotations: {}
 
   #Below block is for only for K8S
@@ -444,22 +345,7 @@ ui:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
@@ -479,21 +365,7 @@ mobsf:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   securityContext: {}
 ##############################################################################
@@ -509,22 +381,7 @@ zap:
 
   serviceAnnotations: {}
 
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1500Mi
-      cpu: 1500m
-
-  #resources: {}
-
-  #  requests:
-  #    memory: 500Mi
-  #    cpu: 500m
-  #  limits:
-  #    memory: 1500Mi
-  #    cpu: 1500m
+  resources: {}
 
   securityContext: {}
 ##############################################################################
@@ -598,11 +455,7 @@ redis:
       storageClass: ""
     affinity: {}
     tolerations: []
-    resources:
-      requests:
-        memory: 256Mi
-        cpu: 100m
-
+    resources: {}
 
   ## Redis config file
   ## ref: https://redis.io/topics/config
@@ -687,13 +540,6 @@ temporal:
       tag: 2.9.0
     replicaCount: 1
     resources: {}
-    # limits:
-    #  cpu: 100m
-    #  memory: 128Mi
-    # requests:
-    #  cpu: 100m
-    #  memory: 128Mi
-
 
   admintools:
     enabled: true

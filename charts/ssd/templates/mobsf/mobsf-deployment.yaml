@@ -27,7 +27,7 @@ spec:
         - name: mobsf
           image: {{ template "mobsf.image" . }}
           env:
-          - name: MOBSF_APIKEY
+          - name: MOBSF_API_KEY
             valueFrom:
               secretKeyRef:
                 key: MOBSF_API_KEY

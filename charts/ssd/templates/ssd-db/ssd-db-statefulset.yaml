@@ -65,7 +65,7 @@ spec:
             port: 5432
           timeoutSeconds: 1
       {{- with .Values.db.resources }}
-          resources:
+      resources:
       {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:

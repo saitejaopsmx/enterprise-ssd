@@ -173,12 +173,13 @@ ssdgate:
 
   annotations: {}
   serviceAnnotations: {}
-  requests:
-    memory: 500Mi
-    cpu: 500m
-  limits:
-    memory: 1500Mi
-    cpu: 1500m
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
   #resources: {}
   #  requests:
   #    memory: 500Mi
@@ -209,12 +210,13 @@ db:
 
   serviceAnnotations: {}
 
-  requests:
-    memory: 500Mi
-    cpu: 500m
-  limits:
-    memory: 1500Mi
-    cpu: 1500m
+  resources:
+    requests:
+      memory: 500Mi
+      cpu: 500m
+    limits:
+      memory: 1500Mi
+      cpu: 1500m
 
   ## Strategy to rollout statefulset pods
   podManagementPolicy: OrderedReady

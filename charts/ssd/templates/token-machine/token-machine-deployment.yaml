@@ -53,6 +53,10 @@ spec:
             tcpSocket:
               port: 8050
             timeoutSeconds: 1
+      {{- with .Values.tokenmachine.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
           securityContext:
       {{- if .Values.tokenmachine.securityContext }}
       {{- toYaml .Values.tokenmachine.securityContext | nindent 12 }}

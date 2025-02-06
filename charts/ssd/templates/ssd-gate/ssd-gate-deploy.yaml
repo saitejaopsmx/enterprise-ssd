@@ -62,6 +62,10 @@ spec:
         - secretRef:
             name: ssd-initial-password
             optional: true
+      {{- with .Values.ssdgate.resources }}
+        resources:
+      {{ toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.ssdgate.securityContext }}
       {{ toYaml .Values.ssdgate.securityContext | nindent 10 }}
@@ -101,10 +105,6 @@ spec:
         image: quay.io/opsmxpublic/k8s-decoder:hal
         imagePullPolicy: IfNotPresent
         name: replace-secrets
-        {{- with .Values.ssdgate.resources }}
-        resources:
-        {{ toYaml . | nindent 10 }}
-        {{- end }}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

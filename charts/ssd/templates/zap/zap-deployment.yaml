@@ -68,6 +68,11 @@ spec:
           tcpSocket:
             port: 8080
           timeoutSeconds: 2
+
+      {{- with .Values.zap.resources }}
+        resources:
+      {{- toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.zap.securityContext }}
       {{ toYaml .Values.zap.securityContext | nindent 10 }}

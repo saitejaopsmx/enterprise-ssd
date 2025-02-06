@@ -211,7 +211,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-12-00"
+    tag: "2024-12-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -230,7 +230,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-12-00"
+    tag: "2024-12-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -247,7 +247,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-12-00"
+    tag: "2024-12-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -262,7 +262,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-12-00"
+    tag: "2024-12-01"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -311,7 +311,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-12-00"
+    tag: "2024-12-01"
     pullPolicy: IfNotPresent
 
   annotations: {}

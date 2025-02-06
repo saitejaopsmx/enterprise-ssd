@@ -592,6 +592,11 @@ redis:
       storageClass: ""
     affinity: {}
     tolerations: []
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+
 
   ## Redis config file
   ## ref: https://redis.io/topics/config

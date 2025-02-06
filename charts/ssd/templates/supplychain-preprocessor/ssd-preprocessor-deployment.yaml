@@ -7,7 +7,7 @@ metadata:
     component: supplychain-preprocessor
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.supplychainpreprocessor.replicaCount }}
   selector:
     matchLabels:
       app: ssd

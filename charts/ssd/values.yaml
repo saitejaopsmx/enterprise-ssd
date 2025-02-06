@@ -245,6 +245,7 @@ toolchain:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
@@ -272,6 +273,7 @@ supplychainpreprocessor:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
@@ -306,6 +308,7 @@ ssdopa:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   securityContext: {}
@@ -337,6 +340,7 @@ supplychainapi:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
@@ -470,6 +474,7 @@ mobsf:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
@@ -499,6 +504,7 @@ zap:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
@@ -617,6 +623,8 @@ temporal:
     image:
       repository: quay.io/opsmxpublic/temporal-server
       tag: 1.20.3
+    replicaCount: 1
+    resources: {}
     config:
       persistence:
         default:
@@ -659,16 +667,42 @@ temporal:
           #  enableHostVerification: true
           #  serverName: _HOST_ # this is strictly required when using serverless CRDB offerings
 
+    frontend:
+      resources: {}
+      podDisruptionBudget: {}
+    history:
+      resources: {}
+      podDisruptionBudget: {}
+    worker:
+      resources: {}
+      podDisruptionBudget: {}
+    matching:
+      resources: {}
+      podDisruptionBudget: {}
+
+
   web:
     image:
       repository: quay.io/opsmxpublic/temporal-ui
       tag: 2.9.0
+    replicaCount: 1
+    resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
+
 
   admintools:
     enabled: true
     image:
       repository: quay.io/opsmxpublic/temporal-admin-tools
       tag: 1.20.3
+    resources: {}
+    podDisruptionBudget: {}
+
 
   cassandra:
     enabled: false

@@ -32,7 +32,7 @@ redis:
     tolerations: []
 
 ########################################################################################################
-############# Node Selectors,Affinity, Tolerations section for Redis Chart #############################
+############# Node Selectors,Affinity, Tolerations section for Temporal Chart #############################
 ########################################################################################################
 temporal:
   server:
@@ -86,8 +86,6 @@ db:
 ####################################################
 toolchain:
   annotations: {}
-  nodeSelector: {}
-  tolerations: []
   serviceAnnotations: {}
 ####################################################
 supplychainpreprocessor:

@@ -30,7 +30,7 @@ spec:
           - name: MOBSF_API_KEY
             valueFrom:
               secretKeyRef:
-                key: MOBSF_API_KEY
+                key: mobsfapikey
                 name: mobsf-secret
           ports:
             - containerPort: 8000

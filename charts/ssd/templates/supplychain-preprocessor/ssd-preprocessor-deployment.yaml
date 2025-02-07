@@ -63,7 +63,7 @@ spec:
           name: scanresult
         - mountPath: /app/grypeDB
           name: grypedb
-        {{- with .Values.supplychainapi.probes }}
+        {{- with .Values.supplychainpreprocessor.probes }}
         {{- toYaml . | nindent 8 }}
         {{- else }}
         livenessProbe:

@@ -43,10 +43,11 @@ spec:
           env:
           - name: GRAPHQL_URL
             value: http://dgraph-public:8080/graphql
-          - name: S3_ENDPOINT_URL
-            value: http://{{ .Release.Name }}-minio:9000/
           - name: TEMPORAL_HOSTPORT
             value: {{ .Release.Name }}-temporal-frontend:7233
+          {{- if .Values.global.minio.enabled }}
+          - name: S3_ENDPOINT_URL
+            value: http://{{ .Release.Name }}-minio:9000/
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -57,6 +58,22 @@ spec:
               secretKeyRef:
                 key: secretkey
                 name: {{ .Release.Name }}-minio
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: aws-s3-creds
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: aws-s3-creds
+          {{- end }}
           - name: Cypher_Key
             valueFrom:
               secretKeyRef:

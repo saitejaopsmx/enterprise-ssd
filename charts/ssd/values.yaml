@@ -34,6 +34,10 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
+################################################
+### If the Minio is set to false update the parameters
+s3region: awsregion
+s3bucketurl: https://s3.awsregion.amazonaws.com
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
@@ -236,6 +240,7 @@ toolchain:
 
   # Supported values are info,debug
   logLevel: debug
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details

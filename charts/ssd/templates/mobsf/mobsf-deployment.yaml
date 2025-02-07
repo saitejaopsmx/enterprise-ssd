@@ -34,6 +34,9 @@ spec:
                 name: mobsf-secret
           ports:
             - containerPort: 8000
+      {{- with .Values.mobsf.probes }}
+      {{- toYaml . | nindent 10 }}
+      {{- else }}
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 150
@@ -42,7 +45,6 @@ spec:
             tcpSocket:
               port: 8000
             timeoutSeconds: 1
-
           readinessProbe:
             failureThreshold: 3
             initialDelaySeconds: 150
@@ -51,6 +53,7 @@ spec:
             tcpSocket:
               port: 8000
             timeoutSeconds: 1
+      {{- end }}
       {{- with .Values.mobsf.resources }}
           resources:
       {{- toYaml . | nindent 12 }}

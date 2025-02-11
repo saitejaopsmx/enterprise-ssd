@@ -6,6 +6,8 @@ global:
   certManager:  # set to true if cert-manager is installed
     installed: true
   createIngress: true
+  minio:
+    enabled: true
 
   ssdUI: # URL used to access the application
     # Change to http if global.certManager.installed is false
@@ -28,6 +30,11 @@ organisationname: opsmx
 ### Admin groups in SSD for Rbac #############################################
 admingroups: admin
 
+##############################################################################
+### Update the below parameters only if global.minio.enabled is false ########
+### Update the S3 Bucket REGION in AWS #######################################
+s3region: UPDATE.S3BUCKETREGION
+s3bucketurl: https://s3.S3BUCKETREGION.amazonaws.com
 ###############################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 storageClass:

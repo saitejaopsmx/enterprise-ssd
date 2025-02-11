@@ -8,7 +8,7 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: supplychain-api
 spec:
-  replicas: 1
+  replicas: {{ .Values.supplychainapi.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -46,6 +46,18 @@ spec:
           - configMapRef:
               name: ssd-proxy-certs
               optional: true
+          {{- with .Values.supplychainapi.probes }}
+          {{- toYaml . | nindent 10 }}
+          {{- else }}
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8099
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 12
             httpGet:
@@ -55,6 +67,7 @@ spec:
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 1
+          {{- end }}
           volumeMounts:
             - mountPath: /app/ssd-public-keys
               name: ssd-public-keys
@@ -72,6 +85,10 @@ spec:
             - mountPath: /app/secrets/supplychain-api-token/
               name: token
               readOnly: true
+          {{- with .Values.supplychainapi.resources }}
+          resources:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
           securityContext:
       {{- if .Values.supplychainapi.securityContext }}
       {{ toYaml .Values.supplychainapi.securityContext | nindent 12 }}

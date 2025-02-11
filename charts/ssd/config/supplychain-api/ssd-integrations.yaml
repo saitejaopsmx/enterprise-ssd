@@ -212,6 +212,16 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: jfrogxray
+        category: dockerregistry
+        multiaccount: true
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
       - integratorType: google-artifact-registry
         category: aptregistry
         multiaccount: false

@@ -1,3 +1,4 @@
+jiraPollingInterval: 5
 integrationData:
   - stage: Source
     integrations:
@@ -81,6 +82,8 @@ integrationData:
         featureConfigs:
           sastsnykscan:
             default: Local Mode
+          helmscan:
+            default: inactive
       - integratorType: semgrep
         category: sourcetool
         multiaccount: false

@@ -1902,98 +1902,6 @@
                             "defatultVisibility": true
                         }
                     ]
-                },
-                {
-                    "integratorType": "jfrogxray",
-                    "displayName": "JFrog Xray",
-                    "multiSupport": true,
-                    "deleteAccount": true,
-                    "category": "dockerregistry",
-                    "testConnectionFlag": true,
-                    "integratorConfigs": {
-                        "name": {
-                            "displayName": "Account Name",
-                            "dataType": "input",
-                            "required": true,
-                            "helpText": "",
-                            "placeholderText": "opsmx-accountname"
-                        },
-                        "url": {
-                            "dataType": "input",
-                            "displayName": "Host Url",
-                            "helpText": "JFrog Host URL",
-                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
-                            "placeholderText": "",
-                            "required": true,
-                            "encrypt": false
-                        },
-                        "username": {
-                            "displayName": "Username",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": false,
-                            "helpText": "Authentiation Type",
-                            "placeholderText": "Example:opsmx-user"
-                        },
-                        "password": {
-                            "displayName": "Password",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "helpText": "Password",
-                            "placeholderText": "Password"
-                        }
-                    },
-                    "gridConfigs": [
-                        {
-                            "name": "Account Name",
-                            "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "User Name",
-                            "prop": "username",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Status",
-                            "prop": "status",
-                            "type": "toggleSwitch",
-                            "width": 80,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        }
-                    ]
                 }
             ]
         },
@@ -2473,6 +2381,13 @@
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
                         },
+                        "autoTriggerJira": {
+                            "displayName": "Automatically create Jira tickets during the scan",
+                            "dataType": "toggle",
+                            "default": "active",
+                            "required": false,
+                            "featureConfig": true
+                        },
                         "jiraTicketTriggerType": {
                             "dataType": "dropdown",
                             "displayName": "Trigger Type",
@@ -2523,7 +2438,7 @@
                             "encrypt": false,
                             "mode": 6,
                             "default": "labels",
-                            "disabled": true
+                            "disabled": false
                         },
                         "value": {
                             "dataType": "input",

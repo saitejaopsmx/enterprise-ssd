@@ -109,11 +109,14 @@ type DeploymentTarget
     name: String! @search(by: [exact, regexp])
     "this would be the ip/server address of the target environment"
     ip: String! @search(by: [exact])
-    account: String
-    "this would be something like aws, gcp etc"
-    targetType: String
+    "expected value is kubernetes or non-kubernetes"
+    targetType: String @search(by: [exact])
+    "Options are: self-hosted(default), aws"
+    hosting: String @search(by: [exact])
+    "Account name from the cloud provider integrator is expected here"
+    account: String @search(by: [exact])
     "this would be something like us-east-1 etc"
-    region: String
+    region: String @search(by: [exact])
     kubescapeServiceConnected: String
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
@@ -221,7 +224,6 @@ type ApplicationEnvironment @withSubscription {
     riskStatus: ApplicationRiskStatus @hasInverse(field: applicationEnvironment)
     metadata: [KeyValue!]
     hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: applicationEnvironment)
-    utilizedResources: [Resource] @hasInverse(field: applicationEnvironments)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: applicationEnvironment)
 }
 
@@ -298,6 +300,8 @@ type ApplicationDeployment {
     policyRunHistory: [RunHistory!] @hasInverse(field: applicationDeployment)
     deploymentTags: [KeyValue!]
     hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: currentDeployed)
+    utilizedResources: [AbstractResource] @hasInverse(field: applicationDeployments)
+    isNetworkExploitable: Boolean
 }
 
 type ToolsUsed {
@@ -467,9 +471,9 @@ type Jira {
     assignee: String @search(by: [exact, regexp])
     createdAt: DateTime!
     updatedAt: DateTime!
-    affectsIndividualComponent: RunHistory @hasInverse(field: AttachedJira)
+    affectsIndividualComponent: [RunHistory!] @hasInverse(field: AttachedJira)
     affectsSecurityissue: SecurityIssue @hasInverse(field: AttachedJira)
-    team: Team! @hasInverse(field: AttachedJira)
+    team: Team @hasInverse(field: AttachedJira)
 }
 
 type RunHistory  {
@@ -657,7 +661,7 @@ type ArtifactScanData {
     tool: String! @search(by: [exact])
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
-	createdAt: DateTime @search
+    createdAt: DateTime @search
     vulnTrackingId: String
     vulnScanState: String @search(by: [exact])
     components: [Component!]
@@ -758,6 +762,7 @@ type Vulnerability {
     modified: DateTime
     createdAt: DateTime @search
     cvss: Float @search
+    attackVector: String @search(by:[exact])
     priority: String @search(by: [exact, regexp])
     priorityInt: Int @search
     epss: Float @search
@@ -796,7 +801,7 @@ type Exception implements RBAC
     delete:{
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"}
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
     ]}
             )
 {
@@ -861,6 +866,7 @@ interface AbstractResource{
     parentResource: AbstractResource @hasInverse(field: childResources)
     associatedResources: [AbstractResource!] @hasInverse(field: associatedResources)
     enrichedFindings: [EnrichedFinding!] @hasInverse(field: affectedResource)
+    applicationDeployments: [ApplicationDeployment!] @hasInverse(field: utilizedResources)
 }
 
 type CSPMResourceScanGroup implements AbstractResource @auth(
@@ -897,8 +903,79 @@ type CSPMResourceScanGroup implements AbstractResource @auth(
     associatedResources: [AbstractResource!] @hasInverse(field: associatedResources)
     cspmScan: CSPMScan! @hasInverse(field: associatedResourceScanGroup)
     enrichedFindings: [EnrichedFinding!] @hasInverse(field: affectedResource)
+    applicationDeployments: [ApplicationDeployment!] @hasInverse(field: utilizedResources)
 }
 
+type NetworkResource implements AbstractResource @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { teams { applications { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+    ]},
+     delete:
+        { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    )
+    {
+    id: String! @id
+    resourceId: String  @search(by: [exact, regexp])
+    name: String  @search(by: [exact, regexp])
+    organization: Organization! @hasInverse(field: resources)
+    cloudAccountName: String! @search(by: [exact])
+    cloudProvider: String!  @search(by: [exact])
+    resourceType: String  @search(by: [exact, regexp])
+    childResources: [AbstractResource!] @hasInverse(field: parentResource)
+    parentResource: AbstractResource @hasInverse(field: childResources)
+    associatedResources: [AbstractResource!] @hasInverse(field: associatedResources)
+    details: String
+    enrichedFindings: [EnrichedFinding!] @hasInverse(field: affectedResource)
+    applicationDeployments: [ApplicationDeployment!] @hasInverse(field: utilizedResources)
+    networkResourceType: String! @search(by: [exact, regexp]) #switch, router, firewall
+    cidr: String @search(by: [exact, regexp])
+    networkInterface: [NetworkResource!] @hasInverse(field: networkInterface)
+    ingress: [FirewallRules!] #firewall
+    egress: [FirewallRules!] #firewall
+    routingTable: [Route!] #router/switch
+}
+
+type Route {
+    source: [RouteEntry!]
+    destination: [RouteEntry!]
+}
+
+interface NetworkEntry {
+    portRange: [String!] @search(by: [exact, regexp])
+    cidr: String! @search(by: [exact, regexp])
+    protocol: String! @search(by: [exact,regexp])
+    networkInterface: NetworkResource
+}
+
+type FirewallRules implements NetworkEntry{
+    portRange: [String!] @search(by: [exact, regexp])
+    cidr: String! @search(by: [exact, regexp])
+    protocol: String! @search(by: [exact, regexp])
+    networkInterface: NetworkResource
+    access: String! @search(by: [exact, regexp]) #allow/deny
+}
+
+type RouteEntry implements NetworkEntry{
+    portRange: [String!] @search(by: [exact, regexp])
+    cidr: String! @search(by: [exact, regexp])
+    protocol: String! @search(by: [exact, regexp])
+    networkInterface: NetworkResource
+    subnet: NetworkResource
+}
 
 
 type Resource implements AbstractResource @auth(
@@ -935,7 +1012,7 @@ type Resource implements AbstractResource @auth(
     associatedResources: [AbstractResource!] @hasInverse(field: associatedResources)
     details: String
     enrichedFindings: [EnrichedFinding!] @hasInverse(field: affectedResource)
-    applicationEnvironments: [ApplicationEnvironment!] @hasInverse(field: utilizedResources)
+    applicationDeployments: [ApplicationDeployment!] @hasInverse(field: utilizedResources)
 }
 
 type EnrichedFinding  {

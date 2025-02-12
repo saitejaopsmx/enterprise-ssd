@@ -216,7 +216,7 @@ integrationData:
           token:
             encrypt: true
       - integratorType: jfrogxray
-        category: dockerregistry
+        category: getsbom
         multiaccount: true
         integratorConfigs:
           url:

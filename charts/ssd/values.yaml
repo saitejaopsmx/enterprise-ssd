@@ -115,6 +115,8 @@ global:
 #  redis:
 #    password:
 dgraph:
+  HA:
+    enabled: false
   image:
     repository: dgraph
     tag: v23.1.0

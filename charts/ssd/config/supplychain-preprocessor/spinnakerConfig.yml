@@ -13,7 +13,11 @@ redis:
   password: {{ .Values.redis.password }}
   DB: 0
 graphql:
+  {{- if .Values.dgraph.HA.enabled }}
+  host: http://dgraph-alpha-public
+  {{- else }}
   host: http://dgraph-public
+  {{- end }}
   port: 8080
 supplychainapi:
   host: http://supplychain-api

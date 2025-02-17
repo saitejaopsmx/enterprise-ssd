@@ -9,7 +9,11 @@ rabbitmq:
   prefetchCount: 50
 
 graphql:
+  {{- if .Values.dgraph.HA.enabled }}
+  host: http://dgraph-alpha-public
+  {{- else }}
   host: http://dgraph-public
+  {{- end }}
   port: 8080
 
 ssdopasvc:

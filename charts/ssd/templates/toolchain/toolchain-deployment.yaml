@@ -41,8 +41,13 @@ spec:
         - name: tool-chain
           image: {{ template "toolchain.image" . }}
           env:
+          {{- if .Values.dgraph.HA.enabled }}
+          - name: GRAPHQL_URL
+            value: http://dgraph-alpha-public:8080/graphql
+          {{- else }}
           - name: GRAPHQL_URL
             value: http://dgraph-public:8080/graphql
+          {{- end }}
           - name: TEMPORAL_HOSTPORT
             value: {{ .Release.Name }}-temporal-frontend:7233
           {{- if .Values.global.minio.enabled }}

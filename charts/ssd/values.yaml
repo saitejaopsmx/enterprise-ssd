@@ -118,7 +118,7 @@ dgraph:
   HA:
     enabled: false
     replicas: 3
-    s3bucketurl: s3://ssd-temporal-1/dgraph.r84058387.u0212.0822
+    s3bucketurl: s3://BUCKETNAME/dgraph.r678679.u0223.123
   image:
     repository: dgraph
     tag: v23.1.0

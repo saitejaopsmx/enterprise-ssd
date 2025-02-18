@@ -25,6 +25,9 @@ spec:
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}
 {{- end }}
     spec:
+      {{- if not .Values.global.minio.enabled }}
+      serviceAccountName: s3-access
+      {{- end }}
       initContainers:
       - name: temporalfrontend-check
         image: {{ .Values.global.customImages.registry }}/pgchecker:v1
@@ -68,16 +71,6 @@ spec:
             value: {{ .Values.s3bucketurl }}
           - name: S3_Region
             value: {{ .Values.s3region }}
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                key: accesskey
-                name: aws-s3-creds
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secretkey
-                name: aws-s3-creds
           {{- end }}
           - name: Cypher_Key
             valueFrom:

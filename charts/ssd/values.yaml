@@ -117,13 +117,19 @@ global:
 dgraph:
   HA:
     enabled: false
+    replicas: 3
+    s3bucketurl: s3://ssd-temporal-1/dgraph.r84058387.u0212.0822
   image:
     repository: dgraph
     tag: v23.1.0
+  storageMountSize: 5Gi
+  probes: {}
+  resources: {}
 ratel:
   image:
     repository: ratel
     tag: v21.12.0
+  resources: {}
 curl:
   image:
     repository: curl

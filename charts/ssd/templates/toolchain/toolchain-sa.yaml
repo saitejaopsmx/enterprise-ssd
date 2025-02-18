@@ -1,0 +1,6 @@
+{{- if not .Values.global.minio.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: s3-access
+{{- end }}

@@ -26,7 +26,7 @@ spec:
 {{- end }}
     spec:
       {{- if not .Values.global.minio.enabled }}
-      serviceAccountName: s3-access
+      serviceAccountName: toolchain-sa
       {{- end }}
       initContainers:
       - name: temporalfrontend-check

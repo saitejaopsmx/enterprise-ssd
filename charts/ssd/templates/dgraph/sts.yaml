@@ -129,7 +129,7 @@ spec:
       labels:
         app: dgraph-alpha
     spec:
-      serviceAccountName: dgraph-s3
+      serviceAccountName: dgraph-sa
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

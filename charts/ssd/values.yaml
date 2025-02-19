@@ -118,6 +118,7 @@ dgraph:
   HA:
     enabled: false
     replicas: 3
+    migrateolddata: true
     s3bucketurl: s3:///BUCKETNAME/DGRAPHFOLDER
     saAnnotations: {}
 

@@ -2495,7 +2495,7 @@
                             ],
                             "default": "deduplications",
                             "requiredKey": "autoTriggerJira",
-                            "requiredValue": "inactive",
+                            "requiredValue": "active",
                             "featureConfig": true
                         },
                         "jiraTicketCreationScope": {
@@ -2513,7 +2513,7 @@
                             ],
                             "default": "vulnerability_policies",
                             "requiredKey": "autoTriggerJira",
-                            "requiredValue": "inactive",
+                            "requiredValue": "active",
                             "featureConfig": true
                         },
                         "assignJiraToOwner": {

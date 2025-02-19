@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: dgraph-s3
+  name: dgraph-sa
 {{- if .Values.dgraph.HA.saAnnotations }}
   annotations:
 {{ toYaml .Values.dgraph.HA.saAnnotations | indent 4 }}

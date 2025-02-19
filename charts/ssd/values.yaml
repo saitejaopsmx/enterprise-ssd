@@ -118,7 +118,9 @@ dgraph:
   HA:
     enabled: false
     replicas: 3
-    s3bucketurl: s3://BUCKETNAME/dgraph.r678679.u0223.123
+    s3bucketurl: s3://BUCKETNAME/DGRAPHFOLDER
+    saAnnotations: {}
+
   image:
     repository: dgraph
     tag: v23.1.0
@@ -236,6 +238,8 @@ toolchain:
   annotations: {}
 
   serviceAnnotations: {}
+
+  saAnnotations: {}
 
   resources: {}
 

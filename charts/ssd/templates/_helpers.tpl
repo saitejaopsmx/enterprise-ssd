@@ -210,7 +210,6 @@ Adding the New container to all Services
   volumeMounts:
     - name: otel-sidecar-volume
       mountPath: /etc/otel
-  serviceAccountName: otel-collector-{{ .Release.Namespace }}
   {{- if .Values.otel.securityContext }}
   securityContext:
   {{ toYaml .Values.otel.securityContext | nindent 12 }}

@@ -176,6 +176,10 @@ spec:
           configMap:
             defaultMode: 420
             name: ssd-public-keys
+        - name: otel-sidecar-volume
+          configMap:
+            name: otel-sidecar-config
+            defaultMode: 420
       restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:

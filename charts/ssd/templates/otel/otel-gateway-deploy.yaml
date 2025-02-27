@@ -10,7 +10,8 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: otel-gateway
+      app: ssd
+      component: otel-gateway
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -33,7 +34,7 @@ spec:
       containers:
         - args:
             - --config=/etc/otel/otel-gateway-config.yaml
-          image: {{ template "toolchain.image" . }}
+          image: {{ template "otel.image" . }}
           imagePullPolicy: Always
           name: otel-gateway
           ports:

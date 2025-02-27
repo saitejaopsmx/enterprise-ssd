@@ -93,5 +93,5 @@ service:
       exporters: [debug, prometheus]
     metrics/aggregate:
       receivers: [otlp]
-      processors: [k8sattributes/aggregate,metricstransform/aggregate,metricstransform/rename,resource/remove_label,filaggregate,batch/aggregate]
+      processors: [k8sattributes/aggregate,metricstransform/aggregate,metricstransform/rename,resource/remove_label,filter/aggregate,batch/aggregate]
       exporters: [debug, prometheus]

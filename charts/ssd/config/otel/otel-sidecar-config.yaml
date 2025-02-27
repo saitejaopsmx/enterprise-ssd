@@ -13,15 +13,15 @@ exporters:
     tls:
       insecure: true
 
-    debug:
-      verbosity: detailed
+  debug:
+    verbosity: detailed
 
-    prometheus:
-      endpoint: "0.0.0.0:9464"
-      enable_open_metrics: true
-      metric_expiration: 5m
-      resource_to_telemetry_conversion:
-        enabled: true
+  prometheus:
+    endpoint: "0.0.0.0:9464"
+    enable_open_metrics: true
+    metric_expiration: 5m
+    resource_to_telemetry_conversion:
+      enabled: true
 
 service:
   pipelines:

@@ -208,13 +208,8 @@ Adding the New container to all Services
     - '--config=/etc/otel/otel-sidecar-config.yaml'
   resources: {}
   volumeMounts:
-    - name: otel-config-volume
-      mountPath: /etc/otel
-  volumes:
     - name: otel-sidecar-volume
-      configMap:
-        name: otel-sidecar-config
-        defaultMode: 420
+      mountPath: /etc/otel
   serviceAccountName: otel-collector-{{ .Release.Namespace }}
   {{- if .Values.otel.securityContext }}
   securityContext:

@@ -129,3 +129,9 @@
   baseUrl: ssd-dex:5558
   health_endpoint: /healthz/ready
 {{- end }}
+- name: metrics
+  baseUrl: otel-gateway:9464
+  health_endpoint: ""
+  auth_required: false
+  path_prefixes:
+  - "/metrics"

@@ -430,6 +430,28 @@ zap:
 
   securityContext: {}
 ##############################################################################
+otel:
+  image:
+    repository: otel/opentelemetry-collector-contrib
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 10
+
+  LongInterval: 21600
+
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

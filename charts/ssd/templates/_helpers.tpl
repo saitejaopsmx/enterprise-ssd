@@ -186,3 +186,45 @@ Redis base URL for Spinnaker
 {{- printf "redis://%s:%s" .Values.redis.external.host (.Values.redis.external.port | toString) -}}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Return the proper OTEL image name
+*/}}
+{{- define "otel.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.otel.image.repository -}}
+{{- $tag := .Values.otel.image.tag | toString -}}
+{{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Adding the New container to all Services
+*/}}
+{{- define "otel.sidecar.container" }}
+- name: otel-sidecar
+  image: {{ template "otel.image" . }}
+  args:
+    - '--config=/etc/otel/otel-sidecar-config.yaml'
+  resources: {}
+  volumeMounts:
+    - name: otel-config-volume
+      mountPath: /etc/otel
+  volumes:
+    - name: otel-sidecar-volume
+      configMap:
+        name: otel-sidecar-config
+        defaultMode: 420
+  serviceAccountName: otel-collector-{{ .Release.Namespace }}
+  {{- if .Values.otel.securityContext }}
+  securityContext:
+  {{ toYaml .Values.otel.securityContext | nindent 12 }}
+  {{- else }}
+  securityContext: {{ default "{}" }}
+  {{- end }}
+  {{- with .Values.otel.resources }}
+  resources:
+  {{- toYaml . | nindent 12 }}
+  {{- end }}
+{{- end }}
+

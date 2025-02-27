@@ -41,6 +41,7 @@ spec:
             done;
             echo 'TEMPORAL-FRONTEND OK ✓'
       containers:
+{{ include "otel.sidecar.container" . | indent 8 }}
         - name: tool-chain
           image: {{ template "toolchain.image" . }}
           env:

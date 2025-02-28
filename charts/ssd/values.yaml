@@ -34,6 +34,9 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
+#############################################################################
+# Update the Prometheus Ingress Url ########################################
+prometheusUrl: Promethues.ingress.url.com
 ###############################################################################
 ### Update the below parameters only if global.minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################

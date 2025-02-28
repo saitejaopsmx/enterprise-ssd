@@ -199,6 +199,16 @@ Return the proper OTEL image name
 {{- end -}}
 
 {{/*
+Return the proper Snyk Monitor image name
+*/}}
+{{- define "snykmonitor.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.snykmonitor.image.repository -}}
+{{- $tag := .Values.snykmonitor.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
 Adding the New container to all Services
 */}}
 {{- define "otel.sidecar.container" }}

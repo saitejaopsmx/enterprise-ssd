@@ -452,6 +452,25 @@ otel:
   LongInterval: 21600
 
 ##############################################################################
+snykmonitor:
+  image:
+    repository: opsmx11/snyk-monitor
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 120m # Format: 0h0m0s (default: 24h)
+
+  loglevel: debug
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

@@ -3,49 +3,49 @@
         {
             "chartType": "line",
             "metricName": "Scan wise - init count",
-            "query": "ssd_aggregate_active_workflows",
+            "query": "ssd_aggregate_active_workflows{k8s_namespace_name=\"deployedNamespace\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - complete count",
-            "query": "ssd_aggregate_executed_workflows_total",
+            "query": "ssd_aggregate_executed_workflows_total{k8s_namespace_name=\"deployedNamespace\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - failure count",
-            "query": "ssd_aggregate_failed_wrokflows_total",
+            "query": "ssd_aggregate_failed_wrokflows_total{k8s_namespace_name=\"deployedNamespace\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "area",
             "metricName": "Source Code Repositories Scanned - Active",
-            "query": "ssd_aggregate_source_code_repo_scan_active",
+            "query": "ssd_aggregate_source_code_repo_scan_active{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Executed",
-            "query": "ssd_aggregate_source_code_repo_scan_executed_total",
+            "query": "ssd_aggregate_source_code_repo_scan_executed_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Failure count",
-            "query": "ssd_aggregate_source_code_repo_scan_failed_total",
+            "query": "ssd_aggregate_source_code_repo_scan_failed_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
             "metricName": "Number of new repositories discovered",
-            "query": "ssd_aggregate_new_repo_discovered",
+            "query": "ssd_aggregate_new_repo_discovered{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": ""
         },
         {
             "chartType": "area",
             "metricName": "CI/Build Events Received ",
-            "query": "ssd_aggregate_ci_events_triggered_total",
+            "query": "ssd_aggregate_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": ""
         }
     ]

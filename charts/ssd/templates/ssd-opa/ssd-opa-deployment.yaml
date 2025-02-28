@@ -23,7 +23,6 @@ spec:
         {{ toYaml .Values.ssdopa.annotations | nindent 8 }}
 {{- end }}
     spec:
-      serviceAccountName: otel-collector-{{ .Release.Namespace }} 
       containers:
 {{ include "otel.sidecar.container" . | indent 8 }}
         - name: ssd-opa

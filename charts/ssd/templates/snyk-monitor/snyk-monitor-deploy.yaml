@@ -23,7 +23,6 @@ spec:
         {{ toYaml .Values.snykmonitor.annotations | nindent 8 }}
 {{- end }}
     spec:
-      serviceAccountName: otel-collector-{{ .Release.Namespace }} 
       containers:
 {{ include "otel.sidecar.container" . | indent 8 }}
         - name: snyk-monitor

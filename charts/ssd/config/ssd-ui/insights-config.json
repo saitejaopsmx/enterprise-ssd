@@ -3,19 +3,19 @@
         {
             "chartType": "line",
             "metricName": "Scan wise - init count",
-            "query": "ssd_aggregate_active_workflows{k8s_namespace_name=\"deployedNamespace\"}",
+            "query": "ssd_aggregate_active_workflows{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - complete count",
-            "query": "ssd_aggregate_executed_workflows_total{k8s_namespace_name=\"deployedNamespace\"}",
+            "query": "ssd_aggregate_executed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - failure count",
-            "query": "ssd_aggregate_failed_wrokflows_total{k8s_namespace_name=\"deployedNamespace\"}",
+            "query": "ssd_aggregate_failed_wrokflows_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
             "plotAxisName": "ssd_workflow_type"
         },
         {

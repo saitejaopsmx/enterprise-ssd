@@ -9,6 +9,9 @@ dgraph:
   host: http://dgraph-public
   {{- end }}
   port: 8080
+tool-chain:
+  host: http://tool-chain
+  port: 8100
 ssdopasvc:
   host: http://ssd-opa
   port: 8200

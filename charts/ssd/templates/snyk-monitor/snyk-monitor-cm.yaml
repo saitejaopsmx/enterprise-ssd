@@ -7,4 +7,4 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
     component: snyk-monitor
 data:
-{{ (tpl (.Files.Glob "config/snyk-monitor/snyk-monitor.yaml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/snyk-monitor/config.yaml").AsConfig . ) | indent 2 }}

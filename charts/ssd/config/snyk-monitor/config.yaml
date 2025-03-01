@@ -12,7 +12,7 @@ dgraph:
 tool-chain:
   host: http://tool-chain
   port: 8100
-ssdopasvc:
+ssd-opa:
   host: http://ssd-opa
   port: 8200
 otelAddr: localhost:4317

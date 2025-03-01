@@ -44,7 +44,7 @@
         },
         {
             "chartType": "area",
-            "metricName": "CI/Build Events Received ",
+            "metricName": "CI/Build Events Received per Second",
             "query": "rate(ssd_aggregate_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
             "plotAxisName": ""
         }

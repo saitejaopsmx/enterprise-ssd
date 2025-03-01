@@ -34,6 +34,9 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
+#############################################################################
+# Update the Prometheus Ingress Url ########################################
+prometheusUrl: Promethues.ingress.url.com
 ###############################################################################
 ### Update the below parameters only if global.minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################
@@ -239,7 +242,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-12-02"
+    tag: "2024-12-03"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -292,7 +295,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-12-01"
+    tag: "2024-12-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -313,7 +316,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-12-01"
+    tag: "2024-12-04"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -376,7 +379,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-12-01"
+    tag: "2024-12-03"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -429,6 +432,47 @@ zap:
   probes: {}
 
   securityContext: {}
+##############################################################################
+otel:
+  image:
+    repository: otel/opentelemetry-collector-contrib
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 10
+
+  LongInterval: 21600
+
+##############################################################################
+snykmonitor:
+  image:
+    repository: snyk-monitor
+    tag: "2025-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 120m # Format: 0h0m0s (default: 24h)
+
+  loglevel: info
 ##############################################################################
 kubedetector:
   image:

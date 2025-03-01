@@ -67,8 +67,8 @@ spec:
           configMap:
             name: snyk-monitor-config
             items:
-              - key: snyk-monitor.yaml
-                path: snyk-monitor.yaml
+              - key: config.yaml
+                path: config.yaml
             defaultMode: 420
         - name: ssdsecret
           secret:

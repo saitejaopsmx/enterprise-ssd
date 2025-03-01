@@ -24,7 +24,6 @@ spec:
 {{- end }}
     spec:
       containers:
-{{ include "otel.sidecar.container" . | indent 8 }}
         - name: ssd-opa
           image: {{ template "ssdopa.image" . }}
           ports:
@@ -99,6 +98,7 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
+{{ include "otel.sidecar.container" . | indent 8 }}
       volumes:
         - configMap:
             defaultMode: 420

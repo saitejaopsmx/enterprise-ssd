@@ -457,7 +457,7 @@ otel:
 ##############################################################################
 snykmonitor:
   image:
-    repository: opsmx11/snyk-monitor
+    repository: snyk-monitor
     tag: "latest"
     pullPolicy: IfNotPresent
 

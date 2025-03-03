@@ -7,7 +7,7 @@ metadata:
     component: supplychain-preprocessor
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.supplychainpreprocessor.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -63,6 +63,18 @@ spec:
           name: scanresult
         - mountPath: /app/grypeDB
           name: grypedb
+        {{- with .Values.supplychainpreprocessor.probes }}
+        {{- toYaml . | nindent 8 }}
+        {{- else }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8058
+            scheme: HTTP
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -72,6 +84,11 @@ spec:
           periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+        {{- end }}
+      {{- with .Values.supplychainpreprocessor.resources }}
+        resources:
+      {{- toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.supplychainpreprocessor.securityContext }}
       {{ toYaml .Values.supplychainpreprocessor.securityContext | nindent 12 }}

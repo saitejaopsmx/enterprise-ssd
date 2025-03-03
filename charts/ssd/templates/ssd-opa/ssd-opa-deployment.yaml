@@ -7,7 +7,7 @@ metadata:
     component: ssd-opa
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.ssdopa.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -51,6 +51,19 @@ spec:
             - mountPath: /app/secrets/ssd-opa-token/
               name: token
               readOnly: true
+        {{- with .Values.ssdopa.probes }}
+        {{- toYaml . | nindent 10 }}
+        {{- else }}
+          livenessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /health
+              port: 8200
+              scheme: HTTP
+            periodSeconds: 15
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 20
             httpGet:
@@ -58,8 +71,14 @@ spec:
               port: 8200
               scheme: HTTP
             periodSeconds: 15
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
+        {{- end }}
+      {{- with .Values.ssdopa.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
           securityContext:
       {{- if .Values.ssdopa.securityContext }}
       {{ toYaml .Values.ssdopa.securityContext | nindent 12 }}

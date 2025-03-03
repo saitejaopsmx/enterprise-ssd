@@ -48,11 +48,30 @@ spec:
         volumeMounts:
         - mountPath: "/var/lib/pgsql-pv"
           name: ssd-db-postgresql
-        readinessProbe:
+      {{- with .Values.db.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          successThreshold: 1
           tcpSocket:
             port: 5432
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 3
           initialDelaySeconds: 10
           periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 5432
+          timeoutSeconds: 1
+      {{- end }}
+      {{- with .Values.db.resources }}
+      resources:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
       securityContext:
       {{- if .Values.db.securityContext }}
       {{ toYaml .Values.db.securityContext | nindent 8 }}

@@ -127,7 +127,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2024-12-00"
+    tag: "2025-01-00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -173,6 +173,8 @@ ssdgate:
 
   annotations: {}
   serviceAnnotations: {}
+  resources: {}
+  probes: {}
 ###############################################################################
 db:
   ## Set it to false if any external database is to be used
@@ -196,6 +198,8 @@ db:
 
   serviceAnnotations: {}
 
+  resources: {}
+
   ## Strategy to rollout statefulset pods
   podManagementPolicy: OrderedReady
 
@@ -206,17 +210,24 @@ db:
   ## storageMountSize is the size with which a PVC is to be created
   storageMountSize: 8Gi
 
+  probes: {}
 ####################################################
 toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-12-02"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   securityContext: {}
 
@@ -225,17 +236,24 @@ toolchain:
 
   # Supported values are info,debug
   logLevel: debug
+
 ####################################################
 supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   securityContext: {}
 
@@ -247,12 +265,18 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
   securityContext: {}
+
+  resources: {}
+
+  probes: {}
 
   # Supported values are info,debug
   loglevel: debug
@@ -262,12 +286,18 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   securityContext: {}
 
@@ -280,6 +310,10 @@ tokenmachine:
     pullPolicy: IfNotPresent
 
   annotations: {}
+
+  resources: {}
+
+  probes: {}
 
   serviceAnnotations: {}
 
@@ -301,6 +335,10 @@ rabbitmq:
 
   serviceAnnotations: {}
 
+  resources: {}
+
+  probes: {}
+
   #Below block is for only for K8S
   securityContext:
     fsGroup: 1000
@@ -311,12 +349,16 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   config:
     ## Interval, in millsecs, at which UI refreshes application dashboard
@@ -331,9 +373,15 @@ mobsf:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
+
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   securityContext: {}
 ##############################################################################
@@ -344,9 +392,14 @@ zap:
     tag: "2024-12-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
   annotations: {}
 
   serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
 
   securityContext: {}
 ##############################################################################
@@ -359,7 +412,8 @@ kubescape:
     repository: kubescape-service
     tag: v0.0.1
 #################################################################################
-
+### Below is the Node Selector,Tolerations,Affinity for all SSD Components ######
+#################################################################################
 nodeSelector: {}
 tolerations: []
 affinity: {}
@@ -420,6 +474,7 @@ redis:
       storageClass: ""
     affinity: {}
     tolerations: []
+    resources: {}
 
   ## Redis config file
   ## ref: https://redis.io/topics/config
@@ -440,6 +495,8 @@ temporal:
     image:
       repository: quay.io/opsmxpublic/temporal-server
       tag: 1.20.3
+    replicaCount: 1
+    resources: {}
     config:
       persistence:
         default:
@@ -482,16 +539,35 @@ temporal:
           #  enableHostVerification: true
           #  serverName: _HOST_ # this is strictly required when using serverless CRDB offerings
 
+    frontend:
+      resources: {}
+      podDisruptionBudget: {}
+    history:
+      resources: {}
+      podDisruptionBudget: {}
+    worker:
+      resources: {}
+      podDisruptionBudget: {}
+    matching:
+      resources: {}
+      podDisruptionBudget: {}
+
+
   web:
     image:
       repository: quay.io/opsmxpublic/temporal-ui
       tag: 2.9.0
+    replicaCount: 1
+    resources: {}
 
   admintools:
     enabled: true
     image:
       repository: quay.io/opsmxpublic/temporal-admin-tools
       tag: 1.20.3
+    resources: {}
+    podDisruptionBudget: {}
+
 
   cassandra:
     enabled: false

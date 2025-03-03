@@ -7,7 +7,7 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: tool-chain
 spec:
-  replicas: 1
+  replicas: {{ .Values.toolchain.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -43,10 +43,10 @@ spec:
           env:
           - name: GRAPHQL_URL
             value: http://dgraph-public:8080/graphql
-          - name: S3_ENDPOINT_URL
-            value: http://{{ .Release.Name }}-minio:9000/
           - name: TEMPORAL_HOSTPORT
             value: {{ .Release.Name }}-temporal-frontend:7233
+          - name: S3_ENDPOINT_URL
+            value: http://{{ .Release.Name }}-minio:9000/
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -87,6 +87,19 @@ spec:
               readOnly: true
             - mountPath: /usr/local/share/ca-certificates
               name: custom-certs
+          {{- with .Values.toolchain.probes }}
+          {{- toYaml . | nindent 10 }}
+          {{- else }}
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /health
+              port: 8100
+              scheme: HTTP
+            periodSeconds: 20
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             failureThreshold: 6
             httpGet:
@@ -94,8 +107,15 @@ spec:
               port: 8100
               scheme: HTTP
             periodSeconds: 20
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
+          {{- end }}
+
+      {{- with .Values.toolchain.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
 
       {{- if .Values.toolchain.securityContext }}
           securityContext:

@@ -6,6 +6,8 @@ global:
   certManager:  # set to true if cert-manager is installed
     installed: true
   createIngress: true
+  minio:
+    enabled: true
 
   ssdUI: # URL used to access the application
     # Change to http if global.certManager.installed is false

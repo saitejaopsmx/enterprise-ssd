@@ -7,7 +7,7 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: zap
 spec:
-  replicas: 1
+  replicas: {{ .Values.zap.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -51,6 +51,30 @@ spec:
         - name: auth-script
           mountPath: /tmp/Form-Based-Auth.js
           subPath: Form-Based-Auth.js
+      {{- with .Values.zap.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
+        livenessProbe:
+          failureThreshold: 60
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 60
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 2
+      {{- end }}
+      {{- with .Values.zap.resources }}
+        resources:
+      {{- toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.zap.securityContext }}
       {{ toYaml .Values.zap.securityContext | nindent 10 }}

@@ -61,6 +61,37 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
+      {{- with .Values.dgraph.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 240
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 7080
+          timeoutSeconds: 1
+      {{- end }}
         env:
           - name: POD_NAMESPACE
             valueFrom:

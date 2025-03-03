@@ -37,6 +37,18 @@ spec:
         ports:
         - containerPort: 8001
           protocol: TCP
+      {{- with .Values.ssdgate.probes }}
+      {{- toYaml . | nindent 8 }}
+      {{- else }}
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /healthz
+            port: 8001
+            scheme: HTTP
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 6
           httpGet:
@@ -46,6 +58,7 @@ spec:
           periodSeconds: 20
           successThreshold: 1
           timeoutSeconds: 1
+      {{- end }}
         envFrom:
         - configMapRef:
             name: ssd-proxy-certs
@@ -53,6 +66,10 @@ spec:
         - secretRef:
             name: ssd-initial-password
             optional: true
+      {{- with .Values.ssdgate.resources }}
+        resources:
+      {{ toYaml . | nindent 10 }}
+      {{- end }}
         securityContext:
       {{- if .Values.ssdgate.securityContext }}
       {{ toYaml .Values.ssdgate.securityContext | nindent 10 }}
@@ -92,7 +109,6 @@ spec:
         image: quay.io/opsmxpublic/k8s-decoder:hal
         imagePullPolicy: IfNotPresent
         name: replace-secrets
-        resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

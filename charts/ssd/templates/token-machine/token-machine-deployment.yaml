@@ -28,7 +28,7 @@ spec:
         - name: token-machine
           image: {{ template "tokenmachine.image" . }}
           ports:
-            - containerPort: 8099
+            - containerPort: 8050
               protocol: TCP
           env:
           - name: KUBERNETES_NAMESPACE
@@ -38,6 +38,28 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /opsmx/config/
+          {{- with .Values.tokenmachine.probes }}
+          {{- toYaml . | nindent 10 }}
+          {{- else }}
+          livenessProbe:
+            failureThreshold: 60
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8050
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 60
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8050
+            timeoutSeconds: 1
+          {{- end }}
+      {{- with .Values.tokenmachine.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
           securityContext:
       {{- if .Values.tokenmachine.securityContext }}
       {{- toYaml .Values.tokenmachine.securityContext | nindent 12 }}

@@ -68,11 +68,13 @@ spec:
               secretKeyRef:
                 key: accesskey
                 name: aws-s3-creds
+              optional: true
           - name: AWS_SECRET_ACCESS_KEY
             valueFrom:
               secretKeyRef:
                 key: secretkey
                 name: aws-s3-creds
+              optional: true
           {{- end }}
           - name: Cypher_Key
             valueFrom:

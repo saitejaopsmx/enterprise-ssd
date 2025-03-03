@@ -37,7 +37,7 @@ admingroups: admin
 ################################################
 ### If the Minio is set to false update the parameters
 s3region: awsregion
-s3bucketurl: https://s3.awsregion.amazonaws.com
+s3bucketurl: https://s3bucket.s3.awsregion.amazonaws.com
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
@@ -131,7 +131,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2024-12-00"
+    tag: "2025-01-00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -220,7 +220,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-12-02"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -246,7 +246,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -269,7 +269,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -290,7 +290,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -353,7 +353,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   annotations: {}

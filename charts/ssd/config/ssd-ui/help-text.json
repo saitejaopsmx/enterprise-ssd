@@ -717,6 +717,28 @@
                 }
             }
         },
+        "SYSDIG": {
+            "HEADER": "Sysdig",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "URL cannot be empty",
+                    "invalidValue": "URL is invalid"
+                }
+            }
+        },
         "JFROG": {
             "HEADER": "JFrog XRay Scanning",
             "BODY": "<p>JFrog Artifactory is a universal artifact repository manager designed to store, manage, and distribute binaries and artifacts produced during the software development process, including compiled code, libraries, dependencies, Docker images, and more.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>JFrog Artifactory notifies SSD of each pipeline execution. SSD identifies the image for every build and connects to the Artifactory repository to pull the newly built image.</li> <li>SSD then runs security scans on the pulled images. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>JFrog Artifactory helps collect metadata such as Artifact SHA for artifact integrity checks, ensuring security in the supply chain. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",

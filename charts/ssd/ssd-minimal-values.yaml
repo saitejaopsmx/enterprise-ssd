@@ -30,7 +30,31 @@ organisationname: opsmx
 ### Admin groups in SSD for Rbac #############################################
 admingroups: admin
 
-###############################################################################
+############ Update the Prometheus Ingress Url ###############################
+prometheusUrl: Promethues.ingress.url.com
+##############################################################################
+### Update the below parameters only if global.minio.enabled is false ########
+### Update the S3 Bucket REGION in AWS #######################################
+s3region: UPDATE.S3BUCKETREGION
+s3bucketurl: https://S3BUCKETNAME.s3.S3BUCKETREGION.amazonaws.com
+#######################################################################################################################
+#### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
+#######################################################################################################################
+dgraph:
+  HA:
+    enabled: false
+    replicas: 3
+    migrateolddata: true
+    ### Update the S3 Bucket Name where the existing Dgraph Data is stored  #########################################
+    s3bucketurl: s3:///S3BUCKETNAME/DGRAPHFOLDER
+    saAnnotations: {}
+
+###################################################################################################
+toolchain:
+  ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
+  saAnnotations: {}
+  #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
+################################################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 storageClass:
 ssdgate:

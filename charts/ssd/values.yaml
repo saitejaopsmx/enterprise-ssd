@@ -34,6 +34,7 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
+
 #############################################################################
 # Update the Prometheus Ingress Url ########################################
 prometheusUrl: Promethues.ingress.url.com
@@ -153,7 +154,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2024-12-00"
+    tag: "2025-01-00"
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -272,7 +273,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2024-12-01"
+    tag: "2025-01-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

@@ -96,7 +96,11 @@
   streaming: false
   strip_path: "/tool-chain"
 - name: dgraph
+  {{- if .Values.dgraph.HA.enabled }}
+  baseUrl: dgraph-alpha-public:8080
+  {{- else }}
   baseUrl: dgraph-public:8080
+  {{- end }}
   health_endpoint: /
   auth_required: true
   path_prefixes:
@@ -112,6 +116,12 @@
   - "/minio"
   baseUrl: {{ .Release.Name }}-minio:9000
   health_endpoint: ""
+- name: prometheus
+  baseUrl: {{ .Values.prometheusUrl }} #this is dependent on the localtion of the prometheus server
+  health_endpoint: ""
+  auth_required: false
+  path_prefixes:
+  - "/api/v1/query_range"
 - name: ssd-temporal-web
   baseUrl: {{ .Release.Name }}-temporal-web:8080
   health_endpoint: ""
@@ -125,3 +135,9 @@
   baseUrl: ssd-dex:5558
   health_endpoint: /healthz/ready
 {{- end }}
+- name: metrics
+  baseUrl: otel-gateway:9464
+  health_endpoint: ""
+  auth_required: false
+  path_prefixes:
+  - "/metrics"

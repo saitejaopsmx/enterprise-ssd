@@ -6,5 +6,6 @@
     "stageSecurityThresholdMinScore": 50,
     "stageSecurityThresholdMaxScore": 70,
     "dgraphToken": "",
-    "dgraphEndPointUrl": "/graphql"
+    "dgraphEndPointUrl": "/graphql",
+    "prometheusEndPointUrl": "/api/v1/query_range"
 }

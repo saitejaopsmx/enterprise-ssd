@@ -34,6 +34,15 @@ organisationname: default
 
 ## Admin Groups for Rbac #######################
 admingroups: admin
+
+#############################################################################
+# Update the Prometheus Ingress Url ########################################
+prometheusUrl: Promethues.ingress.url.com
+###############################################################################
+### Update the below parameters only if global.minio.enabled is false ########
+### Update the S3 Bucket REGION in AWS #######################################
+s3region: awsregion
+s3bucketurl: https://s3bucketname.s3.awsregion.amazonaws.com
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
@@ -110,14 +119,32 @@ global:
       size: 10Gi
 #  redis:
 #    password:
+#######################################################################################################################
+#### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
+#######################################################################################################################
 dgraph:
+  HA:
+    enabled: false
+    replicas: 3
+    migrateolddata: true
+    ### Update the S3 Bucket Name where the existing Dgraph Data is stored  ###########################################
+    s3bucketurl: s3:///BUCKETNAME/DGRAPHFOLDER
+    ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
+    saAnnotations: {}
+    #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
+
   image:
     repository: dgraph
     tag: v23.1.0
+  storageMountSize: 5Gi
+  probes: {}
+  resources: {}
+
 ratel:
   image:
     repository: ratel
     tag: v21.12.0
+  resources: {}
 curl:
   image:
     repository: curl
@@ -216,7 +243,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2025-01-00"
+    tag: "2024-12-03"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -224,6 +251,10 @@ toolchain:
   annotations: {}
 
   serviceAnnotations: {}
+
+  ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
+  saAnnotations: {}
+  #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
 
   resources: {}
 
@@ -265,7 +296,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-01-00"
+    tag: "2024-12-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -286,7 +317,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-01-00"
+    tag: "2024-12-04"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -349,7 +380,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-01-00"
+    tag: "2024-12-03"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -402,6 +433,47 @@ zap:
   probes: {}
 
   securityContext: {}
+##############################################################################
+otel:
+  image:
+    repository: otel/opentelemetry-collector-contrib
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 10
+
+  LongInterval: 21600
+
+##############################################################################
+snykmonitor:
+  image:
+    repository: snyk-monitor
+    tag: "2025-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 120m # Format: 0h0m0s (default: 24h)
+
+  loglevel: info
 ##############################################################################
 kubedetector:
   image:

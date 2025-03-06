@@ -82,6 +82,8 @@ integrationData:
         featureConfigs:
           sastsnykscan:
             default: Local Mode
+          cimonitoring:
+            default: inactive
           helmscan:
             default: inactive
       - integratorType: semgrep
@@ -245,6 +247,14 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: sysdig
+        category: scanningtool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
   - stage: Others
     integrations:
       - integratorType: chatgpt

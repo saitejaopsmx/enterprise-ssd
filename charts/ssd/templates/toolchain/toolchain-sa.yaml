@@ -1,0 +1,10 @@
+{{- if not .Values.global.minio.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: toolchain-sa
+{{- if .Values.toolchain.saAnnotations }}
+  annotations:
+{{ toYaml .Values.toolchain.saAnnotations | indent 4 }}
+{{- end }}
+{{- end }}

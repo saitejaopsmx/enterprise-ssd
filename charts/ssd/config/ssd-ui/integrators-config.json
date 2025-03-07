@@ -672,7 +672,7 @@
                     ]
                 },
                 {
-                    "integratorType": "helm",
+                    "integratorType": "helmchart",
                     "displayName": "Helm",
                     "category": "communications",
                     "testConnectionFlag": true,

@@ -255,6 +255,20 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: helmchart
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          name:
+            encrypt: false
+          url:
+            encrypt: false
+          token:
+            encrypt: true
+          branch:
+            encrypt: false
+          basepath:
+            encrypt: false
   - stage: Others
     integrations:
       - integratorType: chatgpt

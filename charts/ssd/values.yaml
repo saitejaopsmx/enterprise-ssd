@@ -475,6 +475,26 @@ snykmonitor:
 
   loglevel: info
 ##############################################################################
+githubcodescan:
+  image:
+    repository: ssd-github-code-scan
+    tag: "2025-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  maxConcurrentScans: 5
+
+  pollIntervalSeconds: 120
+
+  loglevel: info
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

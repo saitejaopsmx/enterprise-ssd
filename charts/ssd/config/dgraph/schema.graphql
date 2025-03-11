@@ -554,7 +554,7 @@ type SecurityIssueAffectsSummary {
 type ArtifactScanDataTS {
     id: ID!
     artifact: ArtifactScanData! @hasInverse(field: artifactScanTS)
-    timestamps: [DateTime!] @search 
+    timestamps: [DateTime!] @search
     summary: [SecurityIssueAffectsSummary!] @hasInverse(field: artifactScanTS)
 }
 
@@ -676,7 +676,7 @@ type ArtifactScanData {
     vulnUnknownCount: Int @search
     vulnNoneCount: Int @search
     vulnTotalCount: Int @search
-    scanFile: [ScanFileResult!] 
+    scanFile: [ScanFileResult!]
     artifactRisk: ArtifactRisk @hasInverse(field: artifactScanResult)
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
     artifactTags: [KeyValue!]
@@ -805,7 +805,7 @@ type Exception implements RBAC
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
-    ]}      
+    ]}
             )
 {
     id: ID!
@@ -838,7 +838,7 @@ type ExceptionAffects implements RBAC
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
-    ]}      
+    ]}
             )
 {
     id: ID!
@@ -858,7 +858,7 @@ type ExceptionAffects implements RBAC
 
 
 interface AbstractResource{
-    id: String! @id 
+    id: String! @id
     organization: Organization! @hasInverse(field: resources)
     cloudAccountName: String! @search(by: [exact])
     cloudProvider: String!  @search(by: [exact])
@@ -894,7 +894,7 @@ type CSPMResourceScanGroup implements AbstractResource @auth(
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
     )
     {
-    id: String! @id 
+    id: String! @id
     resourceId: String  @search(by: [exact, regexp])
     name: String  @search(by: [exact, regexp])
     organization: Organization! @hasInverse(field: resources)
@@ -931,7 +931,7 @@ type NetworkResource implements AbstractResource @auth(
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
     )
     {
-    id: String! @id 
+    id: String! @id
     resourceId: String  @search(by: [exact, regexp])
     name: String  @search(by: [exact, regexp])
     organization: Organization! @hasInverse(field: resources)
@@ -1003,7 +1003,7 @@ type Resource implements AbstractResource @auth(
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
     )
 {
-    id: String! @id 
+    id: String! @id
     resourceId: String  @search(by: [exact, regexp])
     name: String  @search(by: [exact, regexp])
     organization: Organization! @hasInverse(field: resources)

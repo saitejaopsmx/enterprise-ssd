@@ -62,7 +62,7 @@ spec:
         - name: ssd-public-keys
           configMap:
             name: ssd-public-keys
-            defaultMode: 420 
+            defaultMode: 420
         - name: cli-config
           configMap:
             name: snyk-monitor-config

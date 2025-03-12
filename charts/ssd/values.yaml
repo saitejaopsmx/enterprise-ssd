@@ -312,6 +312,9 @@ ssdopa:
   # Supported values are info,debug
   loglevel: debug
 
+  # Below flag is for the Cspm Reschduler
+  cspmReScheduler: true
+
 ####################################################
 supplychainapi:
   ## Image specific details

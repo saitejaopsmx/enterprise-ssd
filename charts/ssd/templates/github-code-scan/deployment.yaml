@@ -37,8 +37,8 @@ spec:
             - name: scanresult
               mountPath: /app/scanResult
             - name: ssd-github-code-scan-volume
-              mountPath: /app/config/github-code-scan.yaml
-              subPath: github-code-scan.yaml
+              mountPath: /app/config/ssd-github-code-scan.yaml
+              subPath: ssd-github-code-scan.yaml
             - name: custom-certs
               mountPath: /usr/local/share/ca-certificates
             - name: token
@@ -102,8 +102,8 @@ spec:
           configMap:
             name: ssd-github-code-scan
             items:
-              - key: github-code-scan.yaml
-                path: github-code-scan.yaml
+              - key: ssd-github-code-scan.yaml
+                path: ssd-github-code-scan.yaml
             defaultMode: 420
 
       {{- if .Values.imagePullSecret }}

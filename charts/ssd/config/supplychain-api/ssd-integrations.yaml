@@ -185,6 +185,7 @@ integrationData:
           awsSecretKey:
             encrypt: true
       - integratorType: quay
+        category: dockerregistry
         multiaccount: true
         integratorConfigs:
           url:

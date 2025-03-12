@@ -488,6 +488,8 @@ githubcodescan:
 
   annotations: {}
 
+  serviceAnnotations: {}
+
   resources: {}
 
   securityContext: {}

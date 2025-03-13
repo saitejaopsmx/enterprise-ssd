@@ -35,6 +35,12 @@ tokenmachine:
   image:
     tag: "99eb752-36"
 
+snykmonitor:
+  image:
+    repository: snyk-monitor
+    tag: "dbc7256-1"
+    pullPolicy: IfNotPresent
+
 mobsf:
   image:
     repository: mobsf

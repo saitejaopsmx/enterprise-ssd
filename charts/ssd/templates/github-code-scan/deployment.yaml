@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ssd-github-code-scan
   labels:
     app: ssd
     component: github-codescan
 {{ include "ssd.standard-labels" . | indent 4 }}
-  name: ssd-github-code-scan
 spec:
   replicas: {{ .Values.githubcodescan.replicaCount }}
   selector:

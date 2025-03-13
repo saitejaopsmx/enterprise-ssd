@@ -1,3 +1,4 @@
+securityIssueBatchSize: {{ .Values.supplychainapi.securityIssueBatchSize }}
 integrationData:
   - stage: Source
     integrations:

@@ -6,8 +6,8 @@
 global:
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   certManager:  # set to true if cert-manager is installed
-    installed: false
-  createIngress: false
+    installed: true
+  createIngress: true
 
   ssdUI: # URL used to access the application
     # Change to http if global.certManager.installed is false

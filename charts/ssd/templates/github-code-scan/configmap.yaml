@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ssd-github-code-scan
+  labels:
+    app: ssd
+    component: github-codescan
+{{ include "ssd.standard-labels" . | indent 4 }}
+data:
+  ssd-github-code-scan.yaml: |
+    {{- tpl (.Files.Get "config/github-code-scan/ssd-github-code-scan.yaml") . | nindent 4 }}

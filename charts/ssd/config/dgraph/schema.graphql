@@ -66,6 +66,7 @@ type Organization implements RBAC
     integrators: [Integrator!] @hasInverse(field: organization)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: organization)
     resources: [AbstractResource!] @hasInverse(field: organization)
+    projects: [Project!] @hasInverse(field: organization)
 }
 
 """
@@ -164,6 +165,7 @@ type Team implements RBAC
     hasSecurityIssues: [SecurityIssueAffectsSummary!] @hasInverse(field: team)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: team)
     AttachedJira: [Jira] @hasInverse(field: team)
+    projects: [Project!] @hasInverse(field: team)
 }
 
 type Application implements RBAC
@@ -403,6 +405,7 @@ type IntegratorConfigs
     team: Team @hasInverse(field: integratorConfigs)
     environment: Environment @hasInverse(field: integratorConfigs)
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
+    project: Project @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues {
@@ -1042,6 +1045,181 @@ type CSPMScan implements Scan {
     associatedResourceScanGroup: [CSPMResourceScanGroup!] @hasInverse(field: cspmScan)
 }
 
+
+type Project
+@auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}"},
+        ]
+    },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+        ]
+    },
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+        ]
+    },
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+        ]
+    })
+ {
+    id: ID!
+    name: String! @search(by:[exact,regexp])
+    platform: String @search(by:[exact,regexp])
+    organization: Organization! @hasInverse(field: projects)
+    team: Team @hasInverse(field: projects)
+    scanlevel: String @search(by: [exact,regexp])
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+    projectConfigs: [ProjectConfig!] @hasInverse(field: project)
+    integratorConfigs: IntegratorConfigs @hasInverse(field: project)
+    scans: [ScanTarget!] @hasInverse(field: projects)
+}
+
+type ProjectConfig
+@auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    })
+{
+    id: ID!
+    organization: String @search(by:[exact,regexp])
+    repository: String @search(by:[exact,regexp])
+    branch: [String!] @search(by:[exact,regexp])
+    branchPattern: String @search(by: [exact,regexp])
+    scheduleTime: Int @search
+    scheduledScan: Boolean! @search
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+    project: Project! @hasInverse(field: projectConfigs)
+}
+
+type ScanTarget
+@auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    },
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+        ]
+    })
+{
+    id: ID!
+    projects: [Project!] @hasInverse(field: scans)
+    organization: String @search(by:[exact,regexp])
+    repository: String @search(by:[exact,regexp])
+    branch: String @search(by:[exact,regexp])
+    lastTriggeredBy: String! @search(by:[exact,regexp])
+    lastScannedTime: DateTime! @search
+    lastAttemptedTime: DateTime! @search
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+    scanResults: [ScanResult!] @hasInverse(field: scanTarget)
+}
+
+type ScanResult
+@auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+        ]
+    },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+        ]
+    },
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+        ]
+    },
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+        ]
+    })
+{
+    id: ID!
+    group: String! @search(by:[exact,regexp])
+    headCommit: String @search(by:[exact])
+    triggerdBy: String! @search(by:[exact,regexp])
+    triggerType: String! @search(by:[exact,regexp])
+    scanType: String! @search(by:[exact])
+    resultFile: String! @search(by:[exact])
+    scanTool: String! @search(by:[exact,regexp])
+    scannedAt: DateTime! @search
+    scanDuration: DateTime! @search
+    scanTarget: ScanTarget! @hasInverse(field: scanResults)
+}
 
 # Dgraph.Allow-Origin "http://localhost:4200"
 # Dgraph.Authorization {"VerificationKey":"","Header":"X-OpsMx-Auth","jwkurl":"http://token-machine:8050/jwk","Namespace":"ssd.opsmx.io","Algo":"","Audience":["ssd.opsmx.io"],"ClosedByDefault":false}

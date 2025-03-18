@@ -9,6 +9,7 @@ dgraphQLAddr: http://dgraph-public:8080/query
 ssdUrl: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
 logLevel: {{ .Values.ssdopa.loglevel }}
 reScheduler: false
+cspmReScheduler: {{ .Values.ssdopa.cspmReScheduler }}
 redis:
   address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
   password: {{ .Values.redis.password }}

@@ -3,49 +3,49 @@
         {
             "chartType": "line",
             "metricName": "Scan wise - Active scans count",
-            "query": "ssd_aggregate_active_workflows{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_active_workflows{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
-            "metricName": "Scan wise - Scans completed per second",
-            "query": "rate(ssd_aggregate_executed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
+            "metricName": "Scan wise - Scans completed count",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_executed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
-            "metricName": "Scan wise - Scans failed per second",
-            "query": "rate(ssd_aggregate_failed_wrokflows_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
+            "metricName": "Scan wise - Scans failed count",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_failed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {
-            "chartType": "area",
+            "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Active count",
-            "query": "ssd_aggregate_source_code_repo_scan_active{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
+            "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_active{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
-            "metricName": "Source Code Repositories Scanned - Completed per second",
-            "query": "rate(ssd_aggregate_source_code_repo_scan_executed_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
+            "metricName": "Source Code Repositories Scanned - Completed count",
+            "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_executed_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
-            "metricName": "Source Code Repositories Scanned - Failed per second",
-            "query": "rate(ssd_aggregate_source_code_repo_scan_failed_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
+            "metricName": "Source Code Repositories Scanned - Failed count",
+            "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_failed_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": ""
         },
         {
             "chartType": "line",
             "metricName": "Number of new repositories discovered",
-            "query": "ssd_aggregate_new_repo_discovered{k8s_namespace_name=\"{{ .Release.Namespace}}\"}",
+            "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_new_repo_discovered{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": ""
         },
         {
-            "chartType": "area",
-            "metricName": "CI/Build Events Received per Second",
-            "query": "rate(ssd_aggregate_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace}}\"}[5m])",
+            "chartType": "line",
+            "metricName": "CI/Build Events Received count",
+            "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": ""
         }
     ]

@@ -312,6 +312,9 @@ ssdopa:
   # Supported values are info,debug
   loglevel: debug
 
+  # Below flag is for the Cspm Reschduler
+  cspmReScheduler: true
+
 ####################################################
 supplychainapi:
   ## Image specific details
@@ -472,6 +475,28 @@ snykmonitor:
   securityContext: {}
 
   interval: 120m # Format: 0h0m0s (default: 24h)
+
+  loglevel: info
+##############################################################################
+githubcodescan:
+  image:
+    repository: ssd-github-code-scan
+    tag: "2025-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  maxConcurrentScans: 5
+
+  pollIntervalSeconds: 120
 
   loglevel: info
 ##############################################################################

@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-github-code-scan
+  labels:
+    app: ssd
+    component: github-codescan
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.githubcodescan.replicaCount }}
+  selector:
+    matchLabels:
+      app: ssd
+      component: github-codescan
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: github-codescan
+{{- if .Values.customLabels }}
+{{ toYaml .Values.customLabels | indent 8}}
+{{- end }}
+      annotations:
+{{- if .Values.githubcodescan.annotations -}}
+        {{ toYaml .Values.githubcodescan.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: github-code-scan
+          image: {{ template "githubcodescan.image" . }}
+          volumeMounts:
+            - name: ssd-public-keys
+              mountPath: /app/ssd-public-keys
+            - name: ssdsecret
+              readOnly: true
+              mountPath: /app/secrets/
+            - name: scanresult
+              mountPath: /app/scanResult
+            - name: ssd-github-code-scan-volume
+              mountPath: /app/config/ssd-github-code-scan.yaml
+              subPath: ssd-github-code-scan.yaml
+            - name: custom-certs
+              mountPath: /usr/local/share/ca-certificates
+            - name: token
+              readOnly: true
+              mountPath: /app/secrets/ssd-github-code-scan-token
+            - name: tempdir
+              mountPath: /app/temp
+          {{- with .Values.githubcodescan.resources }}
+          resources:
+          {{ toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+      {{- if .Values.githubcodescan.securityContext }}
+      {{ toYaml .Values.githubcodescan.securityContext | nindent 12 }}
+      {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+      {{- end }}
+      volumes:
+        - name: ssdsecret
+          secret:
+            secretName: ssdsecret
+            items:
+              - key: AESEncryptionKey
+                path: ssdsecret/AESEncryptionKey
+            defaultMode: 420
+        - name: ssd-proxy-certs
+          configMap:
+            name: ssd-proxy-certs
+            defaultMode: 420
+            optional: true
+        - name: custom-certs
+          configMap:
+            name: customer-custon-ca
+            items:
+              - key: ca.crt
+                path: ca.crt
+            defaultMode: 420
+            optional: true
+        - name: ssd-public-keys
+          configMap:
+            name: ssd-public-keys
+            defaultMode: 420
+        - name: token
+          secret:
+            optional: true
+            secretName: ssd-github-code-scan-token
+        - name: scanresult
+          emptyDir: {}
+        - name: tempdir
+          emptyDir: {}
+        - name: ssd-github-code-scan-volume
+          configMap:
+            name: ssd-github-code-scan
+            items:
+              - key: ssd-github-code-scan.yaml
+                path: ssd-github-code-scan.yaml
+            defaultMode: 420
+
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      restartPolicy: Always
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

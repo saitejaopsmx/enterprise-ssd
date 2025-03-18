@@ -232,3 +232,13 @@ Adding the New container to all Services
   {{- end }}
 {{- end }}
 
+{{/*
+Return the proper Github Code Scan Image
+*/}}
+{{- define "githubcodescan.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.githubcodescan.image.repository -}}
+{{- $tag := .Values.githubcodescan.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+

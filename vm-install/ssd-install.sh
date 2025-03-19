@@ -42,19 +42,14 @@ echo "K3s node is in Ready state."
 sudo cp /etc/rancher/k3s/k3s.yaml k3s.yaml
 sudo chown $(whoami) k3s.yaml
 export KUBECONFIG=`pwd`/k3s.yaml
-kubectl create ns ssd
+kubectl get ns ssd || err_code=$?
+if [ $err_code!=0 ]; then 
+   kubectl create ns ssd
+fi
 
 # Define the path to the values.yaml file
-VALUES_FILE="enterprise-ssd/charts/ssd/ssd-minimal-values.yaml"
-if test -d "enterprise-ssd"; then
-  echo "enterprise-ssd Directory exists."
-#  cd enterprise-ssd
-#  git pull
-#  cd ..
-else
-  echo "Directory does not exist."
-  git clone https://github.com/OpsMx/enterprise-ssd.git
-fi
+curl -o ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-01/charts/ssd/ssd-minimal-values.yaml
+VALUES_FILE="ssd-minimal-values.yaml"
 
 #
 # Add your custom Helm repository
@@ -74,8 +69,17 @@ echo "Installing SSD with the modified values.yaml..."
 helm install ssd opsmxssd/ssd -f "$VALUES_FILE" -n ssd --timeout=600s
 echo "SSD installation complete."
 
+echo "Applying ingress rules"
+curl -o ssd-ingress.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-01/vm-install/ssd-ingress.yaml
+sed -i -e s/SSD-DNS-VALUE/$HOST/ ssd-ingress.yaml
+kubectl -n ssd apply -f ssd-ingress.yaml
+#kubectl -n kube-system patch svc traefik --type=merge --patch-file patch-traefik-svc.yaml
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 echo "set kubeconfig path using following command"
-echo "export KUBECONFIG=`pwd`/k3s.yaml"
+echo "${GREEN} export KUBECONFIG=`pwd`/k3s.yaml ${NC}"
 
 echo "Script execution complete."
 

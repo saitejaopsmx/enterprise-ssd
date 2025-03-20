@@ -143,7 +143,7 @@ spec:
           - /bin/bash
           - +x
           - '-c'
-        image: quay.io/opsmxpublic/opsmx-custom-binaries:kubectl-spin-cli-git-bash-jq-yq
+        image: {{ template "opsmxcustombinaries.image" . }}
         imagePullPolicy: IfNotPresent
         name: setup-update
         volumeMounts:

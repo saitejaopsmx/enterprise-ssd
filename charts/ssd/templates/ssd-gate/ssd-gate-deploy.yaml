@@ -106,7 +106,7 @@ spec:
         - /tmp/decoder/secret-decoder.sh # Replace secrets with the values from k8s secrets, use another script for vault, AWS-secrets, etc.
         - /tmp/config  # source
         - /app  # Destination
-        image: quay.io/opsmxpublic/k8s-decoder:hal
+        image: {{ template "k8sdecoder.image" . }}
         imagePullPolicy: IfNotPresent
         name: replace-secrets
         terminationMessagePath: /dev/termination-log

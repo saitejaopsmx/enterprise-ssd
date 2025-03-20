@@ -130,16 +130,6 @@ Return the proper Supplychain-api Image
  {{- end -}}
 
 {{/*
-Return the proper kube-detector image name
-*/}}
-{{- define "kubedetector.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.kubedetector.image.repository -}}
-{{- $tag := .Values.kubedetector.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
 Return the proper Mobsf image name
 */}}
 {{- define "mobsf.image" -}}
@@ -242,3 +232,42 @@ Return the proper Github Code Scan Image
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
+{{/*
+ Return the proper k8s-decoder Image
+*/}}
+ {{- define "k8sdecoder.image" -}}
+ {{- $registryName := .Values.imageCredentials.registry -}}
+ {{- $repositoryName := .Values.k8sdecoder.image.repository -}}
+ {{- $tag := .Values.k8sdecoder.image.tag | toString -}}
+ {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+ {{- end -}}
+
+{{/*
+Return the proper kubescape-service image name
+*/}}
+{{- define "kubescape.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.kubescape.image.repository -}}
+{{- $tag := .Values.kubescape.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper opsmx-custom-binaries image name
+*/}}
+{{- define "opsmxcustombinaries.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.opsmxcustombinaries.image.repository -}}
+{{- $tag := .Values.opsmxcustombinaries.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper kubernetes-detector image name
+*/}}
+{{- define "kubedetector.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.kubedetector.image.repository -}}
+{{- $tag := .Values.kubedetector.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

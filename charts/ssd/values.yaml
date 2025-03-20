@@ -352,6 +352,8 @@ tokenmachine:
   serviceAnnotations: {}
 
   securityContext: {}
+  ## Expiry of the Auto Generated Service Tokens ######
+  regenerateInterval: 10800
 ###############################################################################
 ## Details of rabbitmq message bus image for SSD
 ##

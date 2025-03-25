@@ -352,6 +352,8 @@ tokenmachine:
   serviceAnnotations: {}
 
   securityContext: {}
+  ## Expiry of the Auto Generated Service Tokens ######
+  regenerateInterval: 10800
 ###############################################################################
 ## Details of rabbitmq message bus image for SSD
 ##
@@ -503,11 +505,23 @@ githubcodescan:
 kubedetector:
   image:
     repository: kubernetes-detector
-    tag: v1.0.1
+    tag: v1.0.2
 kubescape:
   image:
     repository: kubescape-service
     tag: v0.0.1
+
+################################################
+k8sdecoder:
+  image:
+    repository: k8s-decoder
+    tag: hal
+
+################################################
+opsmxcustombinaries:
+  image:
+    repository: opsmx-custom-binaries
+    tag: kubectl-spin-cli-git-bash-jq-yq
 #################################################################################
 ### Below is the Node Selector,Tolerations,Affinity for all SSD Components ######
 #################################################################################

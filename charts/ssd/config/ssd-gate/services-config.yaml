@@ -45,8 +45,8 @@
   token_type: serviceToken
 - name: ssd-opa-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
-  - "/webhook/api/v1/dataCollection"   # Need code-change from Shradha?
-  - "/webhook/api/v1/opaPermission"
+  - "/webhook/api/v1/datacollection"   # Need code-change from Shradha?
+  - "/webhook/api/v1/opapermission"
   strip_path: "/webhook"  # Remove /webhook before sending to ssd-opa
   baseUrl: ssd-opa:8200
   health_endpoint: /health

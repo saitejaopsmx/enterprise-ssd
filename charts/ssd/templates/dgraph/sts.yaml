@@ -28,7 +28,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: zero
-        image: dgraph/dgraph:latest
+        image: {{ template "dgraph.image" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5080
@@ -144,7 +144,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: alpha
-        image: dgraph/dgraph:latest
+        image: {{ template "dgraph.image" . }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7080
@@ -266,7 +266,7 @@ spec:
     spec:
       containers:
       - name: ratel
-        image: dgraph/ratel:latest
+        image: {{ template "ratel.image" . }}
         ports:
         - containerPort: 8000
       {{- with .Values.ratel.resources }}

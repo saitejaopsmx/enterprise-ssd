@@ -73,7 +73,14 @@ echo "Applying ingress rules"
 curl -o ssd-ingress.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-01/vm-install/ssd-ingress.yaml
 sed -i -e s/SSD-DNS-VALUE/$HOST/ ssd-ingress.yaml
 kubectl -n ssd apply -f ssd-ingress.yaml
+
+echo "Applying ingress ports"
+curl -o patch-traefik-svc.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-01/vm-install/patch-traefik-svc.yaml
 #kubectl -n kube-system patch svc traefik --type=merge --patch-file patch-traefik-svc.yaml
+
+#Patch the system for adhoc scanning of .Net code
+kubectl set image deployment/supplychain-preprocessor supplychain-preprocessor=docker.io/opsmx11/supplychain-preprocessor:c50641e-87 -n ssd
+kubectl set image deployment/ssd-opa ssd-opa=docker.io/opsmx11/ssd-opa:c9bde07-115 -n ssd
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

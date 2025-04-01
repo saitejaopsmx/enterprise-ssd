@@ -5,6 +5,6 @@ spec:
     protocol: TCP
     targetPort: web
   - name: websecure
-    port: 443
+    port: 8443
     protocol: TCP
     targetPort: websecure

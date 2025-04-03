@@ -776,6 +776,24 @@
                 "VALIDATION_MESSAGE": {
                     "required": "Base Path cannot be empty"
                 }
+            },
+            "REPOSITORY": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Repository Name cannot be empty"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "User Name cannot be empty"
+                }
+            },
+            "PASSWORD": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Password cannot be empty"
+                }
             }
         },
         "CUSTOMPOLICY": {

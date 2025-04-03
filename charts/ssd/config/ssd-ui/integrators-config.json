@@ -702,13 +702,13 @@
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
-                        "chartName": {
-                            "displayName": "Chart Name",
+                        "repository": {
+                            "displayName": "Repository Name",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
                             "helpText": "",
-                            "placeholderText": ""
+                            "placeholderText": "Repository Name"
                         },
                         "url": {
                             "dataType": "input",
@@ -719,29 +719,35 @@
                             "required": true,
                             "encrypt": false
                         },
-                        "token": {
-                            "displayName": "Token",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "helpText": "",
+                        "isprivate": {
+                            "displayName": "Private Mode",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "required": false,
                             "placeholderText": ""
                         },
-                        "branch": {
-                            "displayName": "Branch",
+                        "username": {
+                            "displayName": "User Name",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
+                            "requiredKey": "isprivate",
+                            "requiredValue": "active",
                             "helpText": "",
-                            "placeholderText": ""
+                            "disabled": false,
+                            "placeholderText": "admin"
                         },
-                        "basePath": {
+                        "password": {
+                            "displayName": "Password",
                             "dataType": "input",
-                            "displayName": "Base Path",
-                            "helpText": "",
-                            "placeholderText": "",
                             "required": true,
-                            "encrypt": false
+                            "requiredKey": "isprivate",
+                            "requiredValue": "active",
+                            "encrypt": true,
+                            "disabled": false,
+                            "helpText": "",
+                            "placeholderText": "********"
                         }
                     },
                     "gridConfigs": [
@@ -756,6 +762,14 @@
                         {
                             "name": "Url",
                             "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,

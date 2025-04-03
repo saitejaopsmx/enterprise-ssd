@@ -407,7 +407,7 @@ type IntegratorConfigs
     team: Team @hasInverse(field: integratorConfigs)
     environment: Environment @hasInverse(field: integratorConfigs)
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
-    project: Project @hasInverse(field: integratorConfigs)
+    project: [Project] @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues {
@@ -518,7 +518,7 @@ type RunHistory  {
 
 type PolicyEvaluationData {
     """data Type is gonna help us identify if a DB record is used to evaluate or a json
-    current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
+   current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
     Id: ID!
     dataType: String! @search(by: [exact])
     rawData: String

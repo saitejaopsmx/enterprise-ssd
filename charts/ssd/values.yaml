@@ -243,7 +243,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2024-12-03"
+    tag: "2025-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -273,7 +273,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2025-01-00"
+    tag: "2025-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -296,7 +296,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2024-12-02"
+    tag: "205-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -320,7 +320,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2024-12-04"
+    tag: "2025-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -385,7 +385,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2024-12-03"
+    tag: "2025-02-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -464,7 +464,7 @@ otel:
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "2025-02-00"
+    tag: "2025-02-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

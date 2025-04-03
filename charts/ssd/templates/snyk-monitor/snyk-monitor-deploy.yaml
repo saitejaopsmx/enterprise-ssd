@@ -26,7 +26,7 @@ spec:
       containers:
 {{ include "otel.sidecar.container" . | indent 8 }}
         - name: snyk-monitor
-          image: {{ template "snykmonitor.image" . }} # Change this to your actual image in a registry
+          image: {{ template "snykmonitor.image" . }}
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /etc/ssd-public-keys

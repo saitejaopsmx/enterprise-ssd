@@ -702,13 +702,13 @@
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
-                        "chartName": {
-                            "displayName": "Chart Name",
+                        "repository": {
+                            "displayName": "Repository Name",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
                             "helpText": "",
-                            "placeholderText": ""
+                            "placeholderText": "Repository Name"
                         },
                         "url": {
                             "dataType": "input",
@@ -719,29 +719,35 @@
                             "required": true,
                             "encrypt": false
                         },
-                        "token": {
-                            "displayName": "Token",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "helpText": "",
+                        "isprivate": {
+                            "displayName": "Private Mode",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "required": false,
                             "placeholderText": ""
                         },
-                        "branch": {
-                            "displayName": "Branch",
+                        "username": {
+                            "displayName": "User Name",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
+                            "requiredKey": "isprivate",
+                            "requiredValue": "active",
                             "helpText": "",
-                            "placeholderText": ""
+                            "disabled": false,
+                            "placeholderText": "admin"
                         },
-                        "basePath": {
+                        "password": {
+                            "displayName": "Password",
                             "dataType": "input",
-                            "displayName": "Base Path",
-                            "helpText": "",
-                            "placeholderText": "",
                             "required": true,
-                            "encrypt": false
+                            "requiredKey": "isprivate",
+                            "requiredValue": "active",
+                            "encrypt": true,
+                            "disabled": false,
+                            "helpText": "",
+                            "placeholderText": "********"
                         }
                     },
                     "gridConfigs": [
@@ -756,6 +762,14 @@
                         {
                             "name": "Url",
                             "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "User Name",
+                            "prop": "username",
                             "type": "default",
                             "width": 160,
                             "sortable": false,
@@ -813,6 +827,65 @@
                             "requiredValue": "Cloud Mode",
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
+                    "integratorType": "opengrep",
+                    "displayName": "Opengrep",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "sastopengrepscan": {
+                            "displayName": "SAST Scan",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "required": false,
+                            "placeholderText": ""
                         }
                     },
                     "gridConfigs": [
@@ -1974,7 +2047,7 @@
                 {
                     "integratorType": "sysdig",
                     "displayName": "Sysdig",
-                    "category": "managementtool",
+                    "category": "scanningtool",
                     "multiSupport": true,
                     "testConnectionFlag": true,
                     "deleteAccount": true,
@@ -2004,50 +2077,50 @@
                             "encrypt": true,
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
                         },
-                        "gridConfigs": [
-                            {
-                                "name": "Account Name",
-                                "prop": "name",
-                                "type": "default",
-                                "width": 160,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Url",
-                                "prop": "url",
-                                "type": "default",
-                                "width": 160,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Team",
-                                "prop": "team",
-                                "type": "chipSet",
-                                "width": 130,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Environment",
-                                "prop": "environments",
-                                "type": "chipSet",
-                                "width": 130,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Status",
-                                "prop": "status",
-                                "type": "toggleSwitch",
-                                "width": 80,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            }
-                        ]
-                    }
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "syft",

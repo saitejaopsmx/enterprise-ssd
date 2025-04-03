@@ -1306,6 +1306,12 @@
                     "required": "URL cannot be empty",
                     "invalidValue": "URL is invalid"
                 }
+            },
+            "TOKEN": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
             }
         },
         "JFROGARTIFACTORY": {

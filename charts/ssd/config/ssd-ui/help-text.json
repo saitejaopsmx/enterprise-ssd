@@ -92,7 +92,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -159,7 +159,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -193,7 +193,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -214,7 +214,7 @@
             "NAME": {
                 "TOOLTIP": "User-defined account name for your BitBucket access.",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -288,7 +288,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -328,7 +328,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -370,7 +370,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -391,7 +391,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -412,7 +412,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -427,7 +427,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -438,11 +438,11 @@
         },
         "SYFT": {
             "HEADER": "Syft",
-            "BODY": "",
+            "BODY": "Generate a Software Bill of Materials (SBOM) with Syft to track open-source dependencies and detect vulnerabilities",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -453,11 +453,11 @@
         },
         "JFROGXRAY": {
             "HEADER": "JFrog XRay Scanning",
-            "BODY": "",
+            "BODY": "Manage and secure software artifacts and packages with JFrog for automated builds, deployments, and compliance",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -497,7 +497,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -514,11 +514,11 @@
         },
         "CODACY": {
             "HEADER": "Codacy",
-            "BODY": "",
+            "BODY": "Automate code reviews and analysis with Codacy to identify issues, improve quality, and ensure compliance.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -539,7 +539,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -554,7 +554,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -575,7 +575,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -629,7 +629,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -644,7 +644,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -674,7 +674,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -699,11 +699,11 @@
         },
         "TFSEC": {
             "HEADER": "TFsec",
-            "BODY": "",
+            "BODY": "Identify and address Terraform security vulnerabilities with TFsec's automated scanning and compliance checking.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -732,11 +732,11 @@
         },
         "HELMCHART": {
             "HEADER": "Helm",
-            "BODY": "",
+            "BODY": "Streamline Kubernetes deployments and management with Helm's pre-configured charts and automated upgrades.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -769,7 +769,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -796,7 +796,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -836,7 +836,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -866,7 +866,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -894,7 +894,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -922,7 +922,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1015,7 +1015,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1042,7 +1042,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1061,11 +1061,11 @@
         },
         "ZAP": {
             "HEADER": "ZAP",
-            "BODY": "",
+            "BODY": "Identify web app vulnerabilities with ZAP's automated scanning and penetration testing.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1160,11 +1160,11 @@
         },
         "AWS": {
             "HEADER": "AWS",
-            "BODY": "",
+            "BODY": "Leverage AWS's comprehensive cloud services and tools for scalable, secure, and compliant infrastructure.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1187,11 +1187,11 @@
         },
         "SCOUTSUITE": {
             "HEADER": "ScoutSuite",
-            "BODY": "",
+            "BODY": "Assess and improve cloud security posture with ScoutSuite's risk identification and compliance scanning.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1202,11 +1202,11 @@
         },
         "ACR": {
             "HEADER": "Azure Container Registry",
-            "BODY": "",
+            "BODY": "Securely store and manage container images with Azure Container Registry.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1273,11 +1273,11 @@
         },
         "MOBSF": {
             "HEADER": "MobSF",
-            "BODY": "",
+            "BODY": "Analyze and secure mobile apps with MobSF's automated scanning and vulnerability detection.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1288,11 +1288,11 @@
         },
         "SYSDIG": {
             "HEADER": "Sysdig",
-            "BODY": "",
+            "BODY": "Monitor and secure containers and cloud-native apps with Sysdig for real-time threat detection and compliance.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1306,12 +1306,6 @@
                     "required": "URL cannot be empty",
                     "invalidValue": "URL is invalid"
                 }
-            },
-            "TOKEN": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Token cannot be empty"
-                }
             }
         },
         "JFROGARTIFACTORY": {
@@ -1320,7 +1314,7 @@
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
@@ -1356,11 +1350,11 @@
         },
         "GCR": {
             "HEADER": "Google Container Registry",
-            "BODY": "",
+            "BODY": "Host and manage container images with Google Container Registry for scalable and secure deployments.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",

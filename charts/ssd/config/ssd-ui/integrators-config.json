@@ -15,6 +15,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -91,6 +93,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -167,6 +171,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -334,6 +340,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -419,6 +427,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -480,6 +490,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -559,6 +571,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -683,6 +697,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -767,6 +783,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -844,6 +862,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -924,6 +944,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1029,6 +1051,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1134,6 +1158,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1234,6 +1260,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1334,6 +1362,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1434,6 +1464,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1534,6 +1566,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1602,6 +1636,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1673,6 +1709,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1774,6 +1812,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1849,6 +1889,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1932,7 +1974,7 @@
                 {
                     "integratorType": "sysdig",
                     "displayName": "Sysdig",
-                    "category": "scanningtool",
+                    "category": "managementtool",
                     "multiSupport": true,
                     "testConnectionFlag": true,
                     "deleteAccount": true,
@@ -1941,6 +1983,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -1960,50 +2004,50 @@
                             "encrypt": true,
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
-                        }
-                    },
-                    "gridConfigs": [
-                        {
-                            "name": "Account Name",
-                            "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
                         },
-                        {
-                            "name": "Url",
-                            "prop": "url",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Status",
-                            "prop": "status",
-                            "type": "toggleSwitch",
-                            "width": 80,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        }
-                    ]
+                        "gridConfigs": [
+                            {
+                                "name": "Account Name",
+                                "prop": "name",
+                                "type": "default",
+                                "width": 160,
+                                "sortable": false,
+                                "defatultVisibility": true
+                            },
+                            {
+                                "name": "Url",
+                                "prop": "url",
+                                "type": "default",
+                                "width": 160,
+                                "sortable": false,
+                                "defatultVisibility": true
+                            },
+                            {
+                                "name": "Team",
+                                "prop": "team",
+                                "type": "chipSet",
+                                "width": 130,
+                                "sortable": false,
+                                "defatultVisibility": true
+                            },
+                            {
+                                "name": "Environment",
+                                "prop": "environments",
+                                "type": "chipSet",
+                                "width": 130,
+                                "sortable": false,
+                                "defatultVisibility": true
+                            },
+                            {
+                                "name": "Status",
+                                "prop": "status",
+                                "type": "toggleSwitch",
+                                "width": 80,
+                                "sortable": false,
+                                "defatultVisibility": true
+                            }
+                        ]
+                    }
                 },
                 {
                     "integratorType": "syft",
@@ -2017,6 +2061,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2088,6 +2134,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2185,6 +2233,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2377,6 +2427,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2484,6 +2536,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2543,6 +2597,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2610,6 +2666,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2834,6 +2892,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2905,6 +2965,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
@@ -2981,6 +3043,8 @@
                             "displayName": "Account Name",
                             "dataType": "input",
                             "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },

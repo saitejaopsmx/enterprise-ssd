@@ -851,6 +851,65 @@
                     ]
                 },
                 {
+                    "integratorType": "opengrep",
+                    "displayName": "Opengrep",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "sastopengrepscan": {
+                            "displayName": "SAST Scan",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "required": false,
+                            "placeholderText": ""
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "codacy",
                     "displayName": "Codacy",
                     "category": "sourcetool",

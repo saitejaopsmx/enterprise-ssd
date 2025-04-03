@@ -491,6 +491,21 @@
                 }
             }
         },
+        "OPENGREP": {
+            "HEADER": "Opengrep",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            }
+        },
         "SEMGREP": {
             "HEADER": "Semgrep",
             "BODY": "<p>Semgrep is an open-source static analysis tool designed for identifying and fixing security issues in source code. It uses a pattern-based approach to detect and address security vulnerabilities, coding errors, and other issues in code bases and integrates seamlessly into the development workflow.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD can mandate source code scanning and connect with Semgrep to ensure that scanning is performed on the repository. If scanning has not been done, SSD generates security issues.</li> <li>SSD collects and analyzes the scanned data to assess the overall image and application risk scoring.</li> <li>The scan results are displayed on the Vulnerability Management page, the Artifact section of the DBOM page, and the View Open Security Issues page.</li> <li>Users can create custom policies based on SAST scan results. For example, users can set policies to block images built from repositories containing critical SAST issues.</li> </ul> </div>",

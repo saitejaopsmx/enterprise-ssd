@@ -104,6 +104,21 @@ integrationData:
         featureConfigs:
           sastcodacyscan:
             default: Local Mode
+      - integratorType: helmchart
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          name:
+            encrypt: false
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+        featureConfigs:
+          isprivate:
+            default: false
   - stage: Build
     integrations:
       - integratorType: jenkins
@@ -256,20 +271,6 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
-      - integratorType: helmchart
-        category: sourcetool
-        multiaccount: false
-        integratorConfigs:
-          name:
-            encrypt: false
-          url:
-            encrypt: false
-          token:
-            encrypt: true
-          branch:
-            encrypt: false
-          basepath:
-            encrypt: false
   - stage: Others
     integrations:
       - integratorType: chatgpt

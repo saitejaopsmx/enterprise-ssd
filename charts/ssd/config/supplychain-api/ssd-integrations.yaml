@@ -95,6 +95,12 @@ integrationData:
         featureConfigs:
           sastsemgrepscan:
             default: Local Mode
+      - integratorType: opengrep
+        category: sourcetool
+        multiaccount: false
+        featureConfigs:
+          sastopengrepscan:
+            default: active
       - integratorType: codacy
         category: sourcetool
         multiaccount: false

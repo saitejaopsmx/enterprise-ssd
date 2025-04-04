@@ -405,7 +405,7 @@ type IntegratorConfigs
     team: Team @hasInverse(field: integratorConfigs)
     environment: Environment @hasInverse(field: integratorConfigs)
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
-    project: Project @hasInverse(field: integratorConfigs)
+    project: [Project] @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues {

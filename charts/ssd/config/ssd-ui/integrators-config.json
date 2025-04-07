@@ -2448,6 +2448,22 @@
                             "required": true,
                             "encrypt": false
                         },
+                        "mode": {
+                            "dataType": "dropdown",
+                            "displayName": "Mode",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Self Hosted",
+                                    "value": "selfhosted"
+                                },
+                                {
+                                    "name": "Cloud Mode",
+                                    "value": "cloud"
+                                }
+                            ],
+                            "default": "Cloud Mode",
+                            "featureConfig": true
+                        },
                         "url": {
                             "dataType": "input",
                             "displayName": "Jira URL",

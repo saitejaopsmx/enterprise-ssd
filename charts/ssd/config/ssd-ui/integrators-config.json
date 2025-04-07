@@ -1974,7 +1974,7 @@
                 {
                     "integratorType": "sysdig",
                     "displayName": "Sysdig",
-                    "category": "managementtool",
+                    "category": "scanningtool",
                     "multiSupport": true,
                     "testConnectionFlag": true,
                     "deleteAccount": true,
@@ -2004,50 +2004,50 @@
                             "encrypt": true,
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
                         },
-                        "gridConfigs": [
-                            {
-                                "name": "Account Name",
-                                "prop": "name",
-                                "type": "default",
-                                "width": 160,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Url",
-                                "prop": "url",
-                                "type": "default",
-                                "width": 160,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Team",
-                                "prop": "team",
-                                "type": "chipSet",
-                                "width": 130,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Environment",
-                                "prop": "environments",
-                                "type": "chipSet",
-                                "width": 130,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            },
-                            {
-                                "name": "Status",
-                                "prop": "status",
-                                "type": "toggleSwitch",
-                                "width": 80,
-                                "sortable": false,
-                                "defatultVisibility": true
-                            }
-                        ]
-                    }
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "syft",

@@ -288,6 +288,8 @@ integrationData:
           wontdo:
             encrypt: false
         featureConfigs:
+          mode:
+            default: cloud
           jiraTicketTriggerType:
             default: deduplications
           jiraTicketCreationScope:

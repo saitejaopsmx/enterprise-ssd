@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ssd-github-code-scan
+  name: source-scan
   labels:
     app: ssd
-    component: github-codescan
+    component: source-scan
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
-  replicas: {{ .Values.githubcodescan.replicaCount }}
+  replicas: {{ .Values.sourcescan.replicaCount }}
   selector:
     matchLabels:
       app: ssd
-      component: github-codescan
+      component: source-scan
   template:
     metadata:
       labels:
         app: ssd
-        component: github-codescan
+        component: source-scan
 {{- if .Values.customLabels }}
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}
       annotations:
-{{- if .Values.githubcodescan.annotations -}}
-        {{ toYaml .Values.githubcodescan.annotations | nindent 8 }}
+{{- if .Values.sourcescan.annotations -}}
+        {{ toYaml .Values.sourcescan.annotations | nindent 8 }}
 {{- end }}
     spec:
       containers:
-        - name: github-code-scan
-          image: {{ template "githubcodescan.image" . }}
+        - name: source-scan
+          image: {{ template "sourcescan.image" . }}
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys
@@ -36,23 +36,23 @@ spec:
               mountPath: /app/secrets/
             - name: scanresult
               mountPath: /app/scanResult
-            - name: ssd-github-code-scan-volume
-              mountPath: /app/config/ssd-github-code-scan.yaml
-              subPath: ssd-github-code-scan.yaml
+            - name: scan-config
+              mountPath: /app/config/source-scan.yaml
+              subPath: source-scan.yaml
             - name: custom-certs
               mountPath: /usr/local/share/ca-certificates
             - name: token
               readOnly: true
-              mountPath: /app/secrets/ssd-github-code-scan-token
+              mountPath: /app/secrets/source-scan-token
             - name: tempdir
               mountPath: /app/temp
-          {{- with .Values.githubcodescan.resources }}
+          {{- with .Values.sourcescan.resources }}
           resources:
           {{ toYaml . | nindent 12 }}
           {{- end }}
           securityContext:
-      {{- if .Values.githubcodescan.securityContext }}
-      {{ toYaml .Values.githubcodescan.securityContext | nindent 12 }}
+      {{- if .Values.sourcescan.securityContext }}
+      {{ toYaml .Values.sourcescan.securityContext | nindent 12 }}
       {{- else }}
             allowPrivilegeEscalation: false
             capabilities:
@@ -93,17 +93,17 @@ spec:
         - name: token
           secret:
             optional: true
-            secretName: ssd-github-code-scan-token
+            secretName: source-scan-token
         - name: scanresult
           emptyDir: {}
         - name: tempdir
           emptyDir: {}
-        - name: ssd-github-code-scan-volume
+        - name: scan-config
           configMap:
-            name: ssd-github-code-scan
+            name: source-scan-config
             items:
-              - key: ssd-github-code-scan.yaml
-                path: ssd-github-code-scan.yaml
+              - key: source-scan.yaml
+                path: source-scan.yaml
             defaultMode: 420
 
       {{- if .Values.imagePullSecret }}

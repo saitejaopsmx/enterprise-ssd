@@ -7,5 +7,5 @@ metadata:
     component: source-scan
 {{ include "ssd.standard-labels" . | indent 4 }}
 data:
-  ssd-github-code-scan.yaml: |
+  source-scan.yaml: |
     {{- tpl (.Files.Get "config/source-scan/source-scan.yaml") . | nindent 4 }}

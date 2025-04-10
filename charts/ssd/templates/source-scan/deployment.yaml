@@ -46,6 +46,9 @@ spec:
               mountPath: /app/secrets/source-scan-token
             - name: tempdir
               mountPath: /app/temp
+            - mountPath: /app/app-config.yaml
+              name: project-monitor-secret
+              subPath: app-config.yaml
           {{- with .Values.sourcescan.resources }}
           resources:
           {{ toYaml . | nindent 12 }}
@@ -53,17 +56,6 @@ spec:
           securityContext:
       {{- if .Values.sourcescan.securityContext }}
       {{ toYaml .Values.sourcescan.securityContext | nindent 12 }}
-      {{- else }}
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            seccompProfile:
-              type: RuntimeDefault
       {{- end }}
       volumes:
         - name: ssdsecret
@@ -105,7 +97,13 @@ spec:
               - key: source-scan.yaml
                 path: source-scan.yaml
             defaultMode: 420
-
+        - name: project-monitor-secret
+          secret:
+            defaultMode: 420
+            items:
+            - key: app-config.yaml
+              path: app-config.yaml
+            secretName: project-monitor
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

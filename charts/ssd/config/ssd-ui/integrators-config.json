@@ -1570,7 +1570,7 @@
                     "multiSupport": true,
                     "deleteAccount": true,
                     "category": "dockerregistry",
-                    "testConnectionFlag": true,
+                    "testConnectionFlag": false,
                     "integratorConfigs": {
                         "name": {
                             "displayName": "Account Name",
@@ -2920,9 +2920,10 @@
                         },
                         "username": {
                             "dataType": "input",
-                            "displayName": "Jira Username",
+                            "displayName": "Jira Email Id",
+                            "regexpValue": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
                             "helpText": "",
-                            "placeholderText": "Jira Username",
+                            "placeholderText": "Jira Email Id",
                             "required": true,
                             "encrypt": false
                         },

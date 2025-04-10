@@ -1156,10 +1156,8 @@
             "USERNAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
-                    "cannotContainSpace": "User Name cannot contain space",
-                    "required": "User Name cannot be empty",
-                    "startingFromNumber": "User Name cannot start with numbers"
+                    "required": "Jira Email Id cannot be empty",
+                    "invalidValue": "Jira Email Id is invalid"
                 }
             },
             "URL": {

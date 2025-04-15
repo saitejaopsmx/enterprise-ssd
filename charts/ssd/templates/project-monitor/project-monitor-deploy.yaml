@@ -32,7 +32,7 @@ spec:
             - name: ssdsecret
               mountPath: /app/secrets/
               readOnly: true
-            - name: project-config
+            - name: project-monitor-volume
               mountPath: /app/config/project-monitor.yaml
               subPath: project-monitor.yaml
             - name: custom-certs
@@ -40,7 +40,7 @@ spec:
             - name: token
               mountPath: /app/secrets/project-monitor-token/
               readOnly: true
-            - name: project-monitor-secret
+            - name: project-monitor-queue-volume
               mountPath: /app/app-config.yaml
               subPath: app-config.yaml
       {{- with .Values.projectmonitor.resources }}
@@ -67,9 +67,9 @@ spec:
               - key: AESEncryptionKey
                 path: ssdsecret/AESEncryptionKey
             defaultMode: 420
-        - name: project-monitor-secret
+        - name: project-monitor-queue-volume
           secret:
-            secretName: project-monitor
+            secretName: project-monitor-queue
             items:
               - key: app-config.yaml
                 path: app-config.yaml
@@ -95,7 +95,7 @@ spec:
           secret:
             secretName: project-monitor-token
             defaultMode: 420
-        - name: project-config
+        - name: project-monitor-volume
           configMap:
             name: project-monitor-config
             items:

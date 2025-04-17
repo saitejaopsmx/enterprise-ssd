@@ -32,7 +32,7 @@ curl -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterpris
 curl -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
 curl -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
 
-chmod +x opsmsssd/install.sh
+chmod +x opsmxssd/install.sh
 chmod +x opsmxssd/add-dns-entry-in-local.sh
 chmod +x opsmxssd/fetch-ssl-cert.sh
 chmod +x extract-images-list.sh

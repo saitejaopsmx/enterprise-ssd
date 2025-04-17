@@ -97,7 +97,7 @@ spec:
             defaultMode: 420
         - name: project-monitor-volume
           configMap:
-            name: project-monitor-config
+            name: project-monitor
             items:
               - key: project-monitor.yaml
                 path: project-monitor.yaml

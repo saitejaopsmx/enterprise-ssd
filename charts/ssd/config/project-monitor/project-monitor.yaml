@@ -10,7 +10,7 @@ ssdPublicKeysPath: /app/ssd-public-keys
 {{- if .Values.dgraph.HA.enabled }}
 graphQLAddr: http://dgraph-alpha-public:8080
 {{- else }}
-dgraphQLAddr: http://dgraph-public:8080
+graphQLAddr: http://dgraph-public:8080
 {{- end }}
 # Scan Configurations
 pollIntervalSeconds: 30

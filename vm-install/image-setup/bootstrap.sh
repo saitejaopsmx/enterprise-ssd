@@ -26,6 +26,9 @@ if [ "$#" -gt 2 ]; then
     cp "$FALLBACK_FILE" "$TARGET_FILE"
     echo "Fallback values copied to $TARGET_FILE"
   fi
+else
+  cp "$FALLBACK_FILE" "$TARGET_FILE"
+  echo "Default values copied to $TARGET_FILE"
 fi
 
 if [ ! -f "$INSTALL_SCRIPT" ]; then

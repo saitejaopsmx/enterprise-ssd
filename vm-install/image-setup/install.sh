@@ -51,7 +51,7 @@ if [ $err_code!=0 ]; then
 fi
 
 # Define the path to the values.yaml file
-VALUES_FILE="$HOME/opsmxsssd/ssd-minimal-values.yaml"
+VALUES_FILE="$HOME/opsmxssd/ssd-minimal-values.yaml"
 
 # Add OpsMx SSD Helm repository
 echo "Adding custom Helm repository for SSD..."

@@ -4,11 +4,16 @@
 set -e
 
 # Check if the correct number of arguments are passed (host and organisationname)
-if [ "$#" -ne 2 ]; then
+if [ "$#" -lt 2 ]; then
   echo "Usage: $0 <host> <organisationname> <optional initial-values file URL>"
   exit 1
 fi
 
+# Assign command-line arguments to variables
+DOMAIN=$1
+ORG=$2
+
+INSTALL_SCRIPT="$HOME/opsmxssd/install.sh"
 TARGET_FILE="$HOME/opsmxssd/ssd-minimal-values.yaml"
 FALLBACK_FILE="$HOME/opsmxssd/default-ssd-minimal-values.yaml"
 if [ "$#" -gt 2 ]; then
@@ -24,9 +29,15 @@ if [ "$#" -gt 2 ]; then
   fi
 fi
 
-# Assign command-line arguments to variables
-DOMAIN=$1
-ORG=$2
+if [ ! -f "$INSTALL_SCRIPT" ]; then
+  echo "Install script not found at $INSTALL_SCRIPT"
+  exit 1
+fi
+
+if [ ! -f "$TARGET_FILE" ]; then
+  echo "Values file not found at $TARGET_FILE"
+  exit 1
+fi
 
 sudo apt-get update
 
@@ -36,14 +47,14 @@ echo "Waiting for all kube-system pods to be ready..."
 sudo k3s kubectl wait --for=condition=Ready pods --all -n kube-system --timeout=120s
 
 # Ensure it's executable
-chmod +x "$STARTUP_SCRIPT"
-echo "Running startup script: $STARTUP_SCRIPT"
-bash "$STARTUP_SCRIPT" "$DOMAIN" "$ORG"
+chmod +x "$INSTALL_SCRIPT"
+echo "Running install script: $INSTALL_SCRIPT"
+bash "$INSTALL_SCRIPT" "$DOMAIN" "$ORG"
 STATUS=$?
 if [ $STATUS -eq 0 ]; then
-  echo "Startup script completed successfully."
+  echo "Install script completed successfully."
 else
-  echo "Startup script exited with status $STATUS"
+  echo "Install script exited with status $STATUS"
   exit $STATUS
 fi
 

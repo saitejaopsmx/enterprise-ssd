@@ -51,7 +51,7 @@ if [ $err_code!=0 ]; then
 fi
 
 # Define the path to the values.yaml file
-VALUES_FILE="ssd-minimal-values.yaml"
+VALUES_FILE="$HOME/opsmxsssd/ssd-minimal-values.yaml"
 
 # Add OpsMx SSD Helm repository
 echo "Adding custom Helm repository for SSD..."
@@ -65,6 +65,7 @@ yq e '.' "$VALUES_FILE" >/dev/null || {
   exit 1
 }
 
+# We override the values provided in ssd-minimal-values with the values supplied in arguments
 yq eval -i ".global.ssdUI.host = \"${HOST}\" | .organisationname = \"${ORG_NAME}\"" "$VALUES_FILE"
 yq eval -i ".global.certManager.installed = true" "$VALUES_FILE"
 yq eval -i ".global.createIngress = true" "$VALUES_FILE"

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 # Check if the correct number of arguments are passed (host and organisationname)
 if [ "$#" -lt 2 ]; then
   echo "Usage: $0 <host> <organisationname> <optional initial-values file URL>"
@@ -61,7 +59,7 @@ else
 fi
 
 echo "Waiting for all ssd pods to be ready..."
-sudo k3s kubectl wait --for=condition=Ready pods --all -n ssd --timeout=30s
+sudo k3s kubectl wait --for=condition=Ready pods --all -n ssd --timeout=60s
 sudo kubectl get pods -n ssd
 ADMIN_PASS=$(sudo kubectl get secret -n ssd ssd-initial-password -o jsonpath="{.data.ADMIN_PASSWORD}" | base64 --decode)
 

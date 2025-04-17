@@ -43,7 +43,7 @@ chmod +x pull-images.sh
 chmod +x clean-before-build.sh
 
 # Replace CHARTVERSION in install.sh with actual value
-sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmsssd/install.sh
+sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmxssd/install.sh
 
 helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
 helm repo update
@@ -61,16 +61,19 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-name=ssd-primary --docke
 sudo k3s kubectl wait --for=condition=Ready nodes --all --timeout=90s
 sudo k3s kubectl get nodes
 
+# Set coordonates for Kubernetes access
+sudo cp /etc/rancher/k3s/k3s.yaml k3s.yaml
+sudo chown $(whoami) k3s.yaml
+export KUBECONFIG=$(pwd)/k3s.yaml
+
 # Set up kubeconfig and install nginx ingress and cert-manager
 # below commands are clubbed and run as root user
-sudo bash -c ' \
-  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml && \
-  helm repo add jetstack https://charts.jetstack.io && \
-  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && \
-  helm repo update && \
-  helm install cert-manager jetstack/cert-manager \
-    --namespace cert-manager --create-namespace --set installCRDs=true && \
-  helm install ingress-nginx ingress-nginx/ingress-nginx \
-    --namespace ingress-nginx --create-namespace '
+helm repo add jetstack https://charts.jetstack.io
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager --create-namespace --set installCRDs=true
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 
 ./pull-images.sh image-list.txt

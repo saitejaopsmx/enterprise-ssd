@@ -296,7 +296,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-02-00"
+    tag: "2025-02-01"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -385,7 +385,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-02-00"
+    tag: "2025-02-01"
     pullPolicy: IfNotPresent
 
   annotations: {}

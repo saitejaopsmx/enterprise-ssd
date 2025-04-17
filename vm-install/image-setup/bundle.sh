@@ -17,6 +17,7 @@ RELEASETAG=$2
 sudo apt-get update
 sudo apt install -y docker.io
 sudo apt install -y git
+sudo apt install -y sed
 sudo snap install helm --classic
 sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
   -O /usr/local/bin/yq

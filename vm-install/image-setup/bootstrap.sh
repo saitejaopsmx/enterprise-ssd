@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Ensure the script stops if any command fails (optional but recommended for debugging)
 set -e
 
 # Check if the correct number of arguments are passed (host and organisationname)

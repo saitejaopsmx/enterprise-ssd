@@ -1,9 +1,8 @@
 #!/bin/bash
+set -e
 
-# Set the path to your version file
 VERSION_FILE="./version.env"
 
-# Check if the file exists
 if [[ -f "$VERSION_FILE" ]]; then
   source "$VERSION_FILE"
 else
@@ -11,27 +10,30 @@ else
   exit 1
 fi
 
-CHARTVERSION=$1
-RELEASETAG=$2
+# Optional overrides from CLI arguments
+[[ -n "$1" ]] && CHARTVERSION="$1"
+[[ -n "$2" ]] && RELEASETAG="$2"
+
+echo "Using CHARTVERSION=$CHARTVERSION"
+echo "Using RELEASETAG=$RELEASETAG"
 
 sudo apt-get update
 sudo apt install -y docker.io
 sudo apt install -y git
-sudo apt install -y sed
 sudo snap install helm --classic
 sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
   -O /usr/local/bin/yq
 sudo chmod 755 /usr/local/bin/yq
 
-mkdir opsmxssd
+mkdir -p opsmxssd
 
-curl -fsSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/charts/ssd/ssd-minimal-values.yaml
-curl -fsSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh
-curl -fsSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/add-dns-entry-in-local.sh
-curl -fsSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/fetch-ssl-cert.sh
-curl -fsSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
-curl -fsSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
-curl -fsSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
+curl -fSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/charts/ssd/ssd-minimal-values.yaml
+curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh
+curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/add-dns-entry-in-local.sh
+curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/fetch-ssl-cert.sh
+curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
+curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
+curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
 
 chmod +x opsmxssd/install.sh
 chmod +x opsmxssd/add-dns-entry-in-local.sh

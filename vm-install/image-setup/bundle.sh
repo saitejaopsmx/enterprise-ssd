@@ -71,9 +71,20 @@ export KUBECONFIG=$(pwd)/k3s.yaml
 helm repo add jetstack https://charts.jetstack.io
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace --set installCRDs=true
-helm install ingress-nginx ingress-nginx/ingress-nginx \
-  --namespace ingress-nginx --create-namespace
+if helm status cert-manager -n cert-manager &>/dev/null; then
+  echo "cert-manager already installed. Skipping install."
+else
+  echo "Installing cert-manager"
+  helm install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace --set installCRDs=true
+fi
+
+if helm status ingress-nginx -n ingress-nginx &>/dev/null; then
+  echo "ingress-nginx already installed. Skipping install."
+else
+  echo "Installing ingress-nginx"
+  helm install ingress-nginx ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx --create-namespace
+fi
 
 ./pull-images.sh image-list.txt

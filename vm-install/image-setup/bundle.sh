@@ -22,7 +22,7 @@ sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd6
   -O /usr/local/bin/yq
 sudo chmod 755 /usr/local/bin/yq
 
-sudo mkdir opsmxssd
+mkdir opsmxssd
 
 curl -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/charts/ssd/ssd-minimal-values.yaml
 curl -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh

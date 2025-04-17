@@ -36,6 +36,7 @@ curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/ente
 curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
 curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
 
+chmod +x opsmxssd/bootstrap.sh
 chmod +x opsmxssd/install.sh
 chmod +x opsmxssd/add-dns-entry-in-local.sh
 chmod +x opsmxssd/fetch-ssl-cert.sh

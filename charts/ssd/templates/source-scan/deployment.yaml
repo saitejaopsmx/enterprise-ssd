@@ -47,7 +47,7 @@ spec:
             - name: tempdir
               mountPath: /app/temp
             - mountPath: /app/app-config.yaml
-              name: project-monitor-secret
+              name: project-monitor-queue-volume
               subPath: app-config.yaml
           {{- with .Values.sourcescan.resources }}
           resources:
@@ -97,13 +97,13 @@ spec:
               - key: source-scan.yaml
                 path: source-scan.yaml
             defaultMode: 420
-        - name: project-monitor-secret
+        - name: project-monitor-queue-volume
           secret:
             defaultMode: 420
             items:
             - key: app-config.yaml
               path: app-config.yaml
-            secretName: project-monitor
+            secretName: project-monitor-queue
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

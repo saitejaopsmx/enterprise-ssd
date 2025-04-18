@@ -1,0 +1,5 @@
+iso_url      = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+iso_checksum = "sha256:a0a48bb10ce5e94f7ebd3e8121bc429ba2be7bc1d77d010af5e2a8613851674c"
+release_tag  = "ami_image_creation_v1"
+memory       = "8192"
+cpu_cores    = "4"

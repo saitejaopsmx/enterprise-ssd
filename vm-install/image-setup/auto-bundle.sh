@@ -25,4 +25,5 @@ sudo docker images
 
 # Clean cloud-init and shutdown the instance
 sudo cloud-init clean
-sudo shutdown -h now
+# Shutdown after this manually or use the below command
+#sudo shutdown -h now

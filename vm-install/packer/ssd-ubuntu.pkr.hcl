@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     qemu = {
-      version = ">= 1.0.0"
+      version = ">= 1.1.1"
       source  = "github.com/hashicorp/qemu"
     }
   }
@@ -22,56 +22,58 @@ variable "iso_checksum" {
 
 variable "memory" {
   type    = string
-  default = "4096"
+  default = "16384"
 }
 
 variable "cpu_cores" {
   type    = string
-  default = "2"
+  default = "4"
 }
 
 locals {
   image_name = "ubuntu-ssd"
 }
 
+
+
 source "qemu" "ubuntu_prebake" {
   iso_url            = var.iso_url
   iso_checksum       = var.iso_checksum
-  iso_checksum_type  = "sha256"
   output_directory   = "output-qcow2"
   format             = "qcow2"
   accelerator        = "none"
   vm_name            = local.image_name
-  ssh_username       = "ubuntu"
-  ssh_password       = "ubuntu"
-  disk_size          = 4096
+  communicator       = "none"
+  #ssh_username       = "ubuntu"
+  #ssh_password       = "ubuntu"
+  #ssh_host           = "127.0.0.1"
+  #host_port_min    = 2222         # force it to use this
+  #host_port_max    = 2222         # and only this
+  #ssh_port           = 2222
+  #ssh_wait_timeout   = "5m"
+  disk_size          = 32768
   headless           = true
+  disk_image         = true
+  shutdown_timeout = "60m"
 
+  floppy_label = "cidata"
+  floppy_files = [
+	"user-data",
+	"meta-data",
+	"network-config"]
+  
   qemuargs = [
     ["-m", "${var.memory}M"],
-    ["-smp", var.cpu_cores]
+    ["-smp", var.cpu_cores],
+    ["-netdev", "user,id=net0,hostfwd=tcp::2222-:22"],
+    ["-device", "virtio-net,netdev=net0"],
+    ["-serial", "file:build-console.log"]
   ]
 }
 
 build {
   name    = "ubuntu-prebake-build"
   sources = ["source.qemu.ubuntu_prebake"]
-
-  provisioner "shell" {
-    inline = [
-      "set -euo pipefail",
-      "RELEASETAG=${var.release_tag}",
-      "curl -fSL -o bundle.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${var.release_tag}/vm-install/image-setup/bundle.sh",
-      "curl -fSL -o version.env https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${var.release_tag}/vm-install/image-setup/version.env",
-      "chmod +x bundle.sh",
-      "sed -i \"s/^RELEASETAG=.*/RELEASETAG=${var.release_tag}/\" version.env",
-      "./bundle.sh",
-      "sudo docker images",
-      "./clean-before-build.sh",
-      "sudo cloud-init clean",
-      "sudo shutdown -h now"
-    ]
-  }
 
   post-processor "shell-local" {
     inline = [

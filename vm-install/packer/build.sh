@@ -2,8 +2,6 @@
 set -e
 
 # This can be Release tag (recommended) or a branch name
-RELEASETAG=ami_image_creation_v2
-export RELEASETAG
 
 sudo apt update
 sudo apt install -y unzip curl

@@ -67,6 +67,7 @@ source "qemu" "ubuntu_prebake" {
     ["-smp", var.cpu_cores],
     ["-netdev", "user,id=net0,hostfwd=tcp::2222-:22"],
     ["-device", "virtio-net,netdev=net0"],
+    ["-virtfs", "local,path=./images,mount_tag=host_images,security_model=passthrough,id=images"],
     ["-serial", "file:build-console.log"]
   ]
 }

@@ -10,7 +10,7 @@ users:
 
 runcmd:
   - echo "RELEASETAG=${RELEASETAG}"
-  - curl -fSL -o bundle.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/bundle.sh"
+  - curl -fSL -o bundle.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/bundle-lite.sh"
   - curl -fSL -o version.env "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/version.env"
   - chmod +x bundle.sh
   - sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env

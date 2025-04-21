@@ -36,17 +36,11 @@ curl -fSL -o opsmxssd/bootstrap.sh https://raw.githubusercontent.com/OpsMx/enter
 curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh
 curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/add-dns-entry-in-local.sh
 curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/fetch-ssl-cert.sh
-curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
-curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
-curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
 
 chmod +x opsmxssd/bootstrap.sh
 chmod +x opsmxssd/install.sh
 chmod +x opsmxssd/add-dns-entry-in-local.sh
 chmod +x opsmxssd/fetch-ssl-cert.sh
-chmod +x extract-images-list.sh
-chmod +x pull-images.sh
-chmod +x clean-before-build.sh
 
 # Replace CHARTVERSION in install.sh with actual value
 sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmxssd/install.sh

@@ -22,7 +22,6 @@ runcmd:
   - sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env
   - mkdir -p /opt/opsmx/images
   - mount -t 9p -o trans=virtio,version=9p2000.L,cache=loose,access=any host_images /opt/opsmx/images
-  - chmod -R a+r /opt/opsmx/images
   - ./bundle-lite.sh
   - sudo docker images
   - rm -f bundle-lite.sh version.env

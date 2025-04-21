@@ -41,7 +41,7 @@ source "qemu" "ubuntu_prebake" {
   iso_checksum       = var.iso_checksum
   output_directory   = "output-qcow2"
   format             = "qcow2"
-  accelerator        = "none"
+  accelerator        = "kvm"
   vm_name            = local.image_name
   communicator       = "none"
   #ssh_username       = "ubuntu"

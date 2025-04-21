@@ -44,6 +44,9 @@ echo "✅ Rendered user-data with RELEASETAG=$RELEASETAG"
 # (when not dealing with version tags) Update release tag in version.env with what value is in enviornment variable
 sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env
 
+chmod +x bundle-lite-prefetch.sh
+./bundle-lite-prefetch.sh
+
 #IMG="jammy-server-cloudimg-amd64.img"
 #IMG_URL="https://cloud-images.ubuntu.com/jammy/current/$IMG"
 #CHECKSUM=$(curl -s https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS | grep "$IMG" | awk '{print $1}')

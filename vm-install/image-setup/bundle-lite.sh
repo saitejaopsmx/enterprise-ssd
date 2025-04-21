@@ -54,19 +54,14 @@ sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmxssd/install.sh
 helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
 helm repo update
 
-# dry run of helm install
-helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
-
-./extract-images-list.sh rendered.yaml image-list.txt
-
-cat image-list.txt
-
 echo "installing k3s..."
 # Install k3s (in Docker mode for image reuse)
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-name=ssd-primary --docker --disable=traefik" sh -
 
+pwd
 echo "loading the images from tar files into docker.."
 IMAGES_DIR="./images"
+ls $IMAGES_DIR
 for tarfile in "$IMAGES_DIR"/*.tar; do
   echo "Loading image from $tarfile"
   sudo docker load -i "$tarfile"

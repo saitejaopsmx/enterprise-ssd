@@ -16,6 +16,8 @@ runcmd:
   - curl -fSL -o version.env "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/version.env"
   - chmod +x bundle-lite.sh
   - sed -i "s/^RELEASETAG=.*/RELEASETAG=ami_image_creation_v2/" version.env
+  - echo "current pwd..."
+  - pwd
   - mkdir -p /opt/opsmx/images
   - mount -t 9p -o trans=virtio host_images /opt/opsmx/images
   - ./bundle-lite.sh

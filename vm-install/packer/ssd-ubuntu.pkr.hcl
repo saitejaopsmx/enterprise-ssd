@@ -22,12 +22,12 @@ variable "iso_checksum" {
 
 variable "memory" {
   type    = string
-  default = "26782"
+  default = "30720"
 }
 
 variable "cpu_cores" {
   type    = string
-  default = "12"
+  default = "14"
 }
 
 locals {
@@ -41,7 +41,7 @@ source "qemu" "ubuntu_prebake" {
   iso_checksum       = var.iso_checksum
   output_directory   = "output-qcow2"
   format             = "qcow2"
-  accelerator        = "kvm"
+  accelerator        = "none"
   vm_name            = local.image_name
   communicator       = "none"
   #ssh_username       = "ubuntu"
@@ -51,7 +51,7 @@ source "qemu" "ubuntu_prebake" {
   #host_port_max    = 2222         # and only this
   #ssh_port           = 2222
   #ssh_wait_timeout   = "5m"
-  disk_size          = 32768
+  disk_size          = 65536
   headless           = true
   disk_image         = true
   shutdown_timeout = "120m"

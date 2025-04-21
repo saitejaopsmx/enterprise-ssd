@@ -25,7 +25,7 @@ curl -fSL -o ssd-ubuntu.pkrvars.hcl https://raw.githubusercontent.com/OpsMx/ente
 
 curl -fSL -o bundle-lite-prefetch.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/bundle-lite-prefetch.sh
 
-curl -fSL -o version.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/version.sh
+curl -fSL -o version.env https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/version.env
 
 curl -fSL -o user-data.tpl https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/packer/user-data.tpl
 

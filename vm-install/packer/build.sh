@@ -55,4 +55,4 @@ sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env
 #EOF
 
 packer init .
-packer build -var-file=ssd-ubuntu.pkrvars.hcl .
+PACKER_LOG=1 packer build -var-file=ssd-ubuntu.pkrvars.hcl .

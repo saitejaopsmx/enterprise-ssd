@@ -19,7 +19,8 @@ runcmd:
   - echo "current pwd..."
   - pwd
   - mkdir -p /opt/opsmx/images
-  - mount -t 9p -o trans=virtio host_images /opt/opsmx/images
+  - mount -t 9p -o trans=virtio,version=9p2000.L,cache=loose,access=any host_images /opt/opsmx/images
+  - ls -l /opt/opsmx/images
   - ./bundle-lite.sh
   - sudo docker images
   - ./clean-before-build.sh

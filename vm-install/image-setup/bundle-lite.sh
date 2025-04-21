@@ -54,7 +54,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-name=ssd-primary --docke
 
 pwd
 echo "loading the images from tar files into docker.."
-IMAGES_DIR="/opt/opsmx/images"
+IMAGES_DIR="/opt/opsmx/temp-images"
 ls $IMAGES_DIR
 for tarfile in "$IMAGES_DIR"/*.tar; do
   echo "Loading image from $tarfile"

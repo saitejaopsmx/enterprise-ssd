@@ -11,7 +11,7 @@ users:
 runcmd:
   - mkdir -p /opt/opsmx
   - cd /opt/opsmx
-  - echo "RELEASETAG=ami_image_creation_v2"
+  - echo "RELEASETAG=${RELEASETAG}"
   - curl -fSL -o bundle-lite.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/bundle-lite.sh"
   - curl -fSL -o version.env "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/version.env"
   - chmod +x bundle-lite.sh

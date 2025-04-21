@@ -9,12 +9,18 @@ users:
     lock_passwd: true
 
 runcmd:
+  - mkdir -p /opt/opsmx
+  - cd /opt/opsmx
   - echo "RELEASETAG=${RELEASETAG}"
-  - curl -fSL -o bundle.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/bundle-lite.sh"
+  - curl -fSL -o bundle-lite.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/bundle-lite.sh"
   - curl -fSL -o version.env "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/${RELEASETAG}/vm-install/image-setup/version.env"
-  - chmod +x bundle.sh
+  - chmod +x bundle-lite.sh
   - sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env
-  - ./bundle.sh
+  - echo "current pwd..."
+  - pwd
+  - mkdir -p /opt/opsmx/images
+  - mount -t 9p -o trans=virtio host_images /opt/opsmx/images
+  - ./bundle-lite.sh
   - sudo docker images
   - ./clean-before-build.sh
   - rm -f bundle.sh version.env clean-before-build.sh

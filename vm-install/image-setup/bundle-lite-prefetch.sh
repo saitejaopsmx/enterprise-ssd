@@ -35,6 +35,8 @@ helm repo update
 # dry run of helm install
 helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
 
+chmod +x extract-images-list.sh
+
 ./extract-images-list.sh rendered.yaml image-list.txt
 
 cat image-list.txt

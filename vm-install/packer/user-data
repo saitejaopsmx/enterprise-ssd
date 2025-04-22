@@ -9,12 +9,19 @@ users:
     lock_passwd: true
 
 runcmd:
-  - echo "RELEASETAG=ami_image_creation_v2"
-  - curl -fSL -o bundle.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/bundle.sh"
+  - mkdir -p /opt/opsmx
+  - cd /opt/opsmx
+  - echo "RELEASETAG=${RELEASETAG}"
+  - curl -fSL -o bundle-lite.sh "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/bundle-lite.sh"
   - curl -fSL -o version.env "https://raw.githubusercontent.com/OpsMx/enterprise-ssd/ami_image_creation_v2/vm-install/image-setup/version.env"
-  - chmod +x bundle.sh
+  - chmod +x bundle-lite.sh
   - sed -i "s/^RELEASETAG=.*/RELEASETAG=ami_image_creation_v2/" version.env
-  - ./bundle.sh
+  - echo "current pwd..."
+  - pwd
+  - mkdir -p /opt/opsmx/images
+  - mount -t 9p -o trans=virtio,version=9p2000.L,cache=loose,access=any host_images /opt/opsmx/images
+  - ls -l /opt/opsmx/images
+  - ./bundle-lite.sh
   - sudo docker images
   - ./clean-before-build.sh
   - rm -f bundle.sh version.env clean-before-build.sh

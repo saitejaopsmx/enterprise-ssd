@@ -2,8 +2,6 @@
 set -e
 
 # This can be Release tag (recommended) or a branch name
-RELEASETAG=ami_image_creation_v2
-export RELEASETAG
 
 sudo apt update
 sudo apt install -y unzip curl
@@ -21,11 +19,11 @@ packer plugins install github.com/hashicorp/qemu
 sudo apt install -y qemu-system-x86 qemu-utils
 sudo apt install xorriso -y
 
-curl -fSL -o ssd-ubuntu.pkr.hcl https://raw.githubusercontent.com/OpsMx/enterprise-ssd/refs/heads/$RELEASETAG/vm-install/packer/ssd-ubuntu.pkr.hcl
+curl -fSL -o bundle-lite-prefetch.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/bundle-lite-prefetch.sh
 
-curl -fSL -o ssd-ubuntu.pkrvars.hcl https://raw.githubusercontent.com/OpsMx/enterprise-ssd/refs/heads/$RELEASETAG/vm-install/packer/ssd-ubuntu.pkrvars.hcl
+curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
 
-curl -fSL -o auto-bundle.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/auto-bundle.sh
+curl -fSL -o version.env https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/version.env
 
 curl -fSL -o user-data.tpl https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/packer/user-data.tpl
 
@@ -41,6 +39,12 @@ curl -fSL -o ssd-ubuntu.pkrvars.hcl https://raw.githubusercontent.com/OpsMx/ente
 envsubst '${RELEASETAG}' <user-data.tpl >user-data
 echo "✅ Rendered user-data with RELEASETAG=$RELEASETAG"
 
+# (when not dealing with version tags) Update release tag in version.env with what value is in enviornment variable
+sed -i "s/^RELEASETAG=.*/RELEASETAG=${RELEASETAG}/" version.env
+
+chmod +x bundle-lite-prefetch.sh
+./bundle-lite-prefetch.sh
+
 #IMG="jammy-server-cloudimg-amd64.img"
 #IMG_URL="https://cloud-images.ubuntu.com/jammy/current/$IMG"
 #CHECKSUM=$(curl -s https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS | grep "$IMG" | awk '{print $1}')
@@ -52,4 +56,4 @@ echo "✅ Rendered user-data with RELEASETAG=$RELEASETAG"
 #EOF
 
 packer init .
-packer build -var-file=ssd-ubuntu.pkrvars.hcl .
+PACKER_LOG=1 packer build -var-file=ssd-ubuntu.pkrvars.hcl .

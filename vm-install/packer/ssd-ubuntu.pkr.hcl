@@ -22,12 +22,12 @@ variable "iso_checksum" {
 
 variable "memory" {
   type    = string
-  default = "16384"
+  default = "26624"
 }
 
 variable "cpu_cores" {
   type    = string
-  default = "4"
+  default = "12"
 }
 
 locals {
@@ -51,10 +51,10 @@ source "qemu" "ubuntu_prebake" {
   #host_port_max    = 2222         # and only this
   #ssh_port           = 2222
   #ssh_wait_timeout   = "5m"
-  disk_size          = 32768
+  disk_size          = 65536
   headless           = true
   disk_image         = true
-  shutdown_timeout = "60m"
+  shutdown_timeout = "120m"
 
   floppy_label = "cidata"
   floppy_files = [
@@ -67,6 +67,7 @@ source "qemu" "ubuntu_prebake" {
     ["-smp", var.cpu_cores],
     ["-netdev", "user,id=net0,hostfwd=tcp::2222-:22"],
     ["-device", "virtio-net,netdev=net0"],
+    ["-virtfs", "local,path=./images,mount_tag=host_images,security_model=none,id=images"],
     ["-serial", "file:build-console.log"]
   ]
 }

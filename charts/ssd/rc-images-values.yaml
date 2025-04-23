@@ -10,7 +10,7 @@ ui:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "d33b6a2-91"
+    tag: "680e5e6-93"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000

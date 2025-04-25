@@ -208,6 +208,8 @@ integrationData:
         integratorConfigs:
           url:
             encrypt: false
+          repo:
+            encrypt: false
           fileName:
             encrypt: false
           fileData:

@@ -119,6 +119,7 @@ type DeploymentTarget
     "this would be something like us-east-1 etc"
     region: String @search(by: [exact])
     kubescapeServiceConnected: String
+    kubescapeLatestFileTS: String
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
     defaultEnvironment: Environment!
@@ -1077,6 +1078,7 @@ type Project
     projectConfigs: [ProjectConfig!] @hasInverse(field: project)
     integratorConfigs: IntegratorConfigs @hasInverse(field: project)
     scans: [ScanTarget!] @hasInverse(field: projects)
+    type: String @search(by: [exact,regexp])
 }
 
 type ProjectConfig

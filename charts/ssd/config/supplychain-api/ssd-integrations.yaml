@@ -292,6 +292,14 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: s3
+        category: dockerregistry
+        multiaccount: false
+        integratorConfigs:
+          awsAccessKey:
+            encrypt: true
+          awsSecretKey:
+            encrypt: true
       - integratorType: sysdig
         category: scanningtool
         multiaccount: false

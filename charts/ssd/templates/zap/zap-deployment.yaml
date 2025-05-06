@@ -70,8 +70,8 @@ spec:
                     echo "Attempt $i httpsender not ready yet..."
                     sleep 2
                   done
-                  load_session_url='http://localhost:8080/JSON/script/actionload/?scriptName=Zap-Api-Session-Script.js&scriptType=session&scriptEngine=Graal.js&fileName=/tmpZap-Api-Session-Script.js&charset=UTF-8'
-                  load_api_url='http://localhost:8080/JSON/script/action/load/?scriptName=Zap-Api-Auth-Script.js&scritType=authentication&scriptEngine=Graal.js&fileName=/tmp/Zap-Api-Auth-Script.js&charset=UTF-8'
+                  load_session_url='http://localhost:8080/JSON/script/action/load/?scriptName=Zap-Api-Session-Script.js&scriptType=session&scriptEngine=Graal.js&fileName=/tmp/Zap-Api-Session-Script.js&charset=UTF-8'
+                  load_api_url='http://localhost:8080/JSON/script/action/load/?scriptName=Zap-Api-Auth-Script.js&scriptType=authentication&scriptEngine=Graal.js&fileName=/tmp/Zap-Api-Auth-Script.js&charset=UTF-8'
                   retry() {
                     local url=$1
                     local tries=0

@@ -42,6 +42,24 @@ spec:
           ports:
             - containerPort: 8099
               protocol: TCP
+          env:
+          - name: S3_ENDPOINT_URL
+            value: http://{{ .Release.Name }}-minio:9000/
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: {{ .Release.Name }}-minio
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: {{ .Release.Name }}-minio
+          - name: Cypher_Key
+            valueFrom:
+              secretKeyRef:
+                key: AESEncryptionKey
+                name: ssdsecret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -85,6 +103,8 @@ spec:
             - mountPath: /app/secrets/supplychain-api-token/
               name: token
               readOnly: true
+            - mountPath: /app/zapOpenApiSpec
+              name: zap-openapi-spec
           {{- with .Values.supplychainapi.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
@@ -97,8 +117,8 @@ spec:
             capabilities:
               drop:
               - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
             runAsUser: 1000
             runAsGroup: 1000
             seccompProfile:
@@ -127,6 +147,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+        - emptyDir: {}
+          name: zap-openapi-spec
         - configMap:
             defaultMode: 420
             name: ssd-public-keys

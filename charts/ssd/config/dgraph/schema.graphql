@@ -282,6 +282,7 @@ type ApplicationDeployment {
     "platform will help us identify which image was actually deployed helping us identify the accurate sha"
     platform: String @search
     serviceUrl: String @search
+    attempt: Int @search
     "artifact that is deployed"
     artifact: [Artifact!] @hasInverse(field: artifactDeployment)
     applicationEnvironment: ApplicationEnvironment!
@@ -412,6 +413,7 @@ type IntegratorConfigs
 }
 
 type IntegratorKeyValues {
+    id: ID!
     feat: Boolean! @search
     key: String! @search(by: [exact])
     value: String! @search(by: [exact])
@@ -494,7 +496,12 @@ type RunHistory  {
     ArtifactSha: String! @search(by: [exact,regexp])
     ArtifactNameTag: String! @search(by: [exact,regexp])
     DatasourceTool: String! @search(by: [exact,regexp])
+    ToolAccountName: String @search(by: [exact])
     DeploymentID: String @search(by: [exact,regexp])
+    BuildTool: String @search(by: [exact,regexp])
+    SourceTool: String @search(by: [exact,regexp])
+    ArtifactTool: String @search(by: [exact,regexp])
+    DeployTool: String @search(by: [exact,regexp])
     SbomTool: String @search(by: [exact,regexp])
     Namespace: String @search(by: [exact,regexp])
     Account: String @search(by: [exact,regexp])
@@ -581,11 +588,11 @@ type SourceCodeTool {
     id: String! @id
     createdAt: DateTime!
     "scm is the scm tool github/gitlab etc"
-    scm: String!
+    scm: String! @search(by: [exact,regexp])
     "repository is the git remote repository"
     repository: String! @search(by: [exact,regexp])
     "branch is the git branch on which the artifact was built"
-    branch: String!
+    branch: String! @search(by: [exact,regexp])
     "headCommit is the checkout out head commit"
     headCommit: String
     "diffCommits is a comma separated string of the commits between the previous built artifact and the current"
@@ -625,6 +632,7 @@ type CommitMetaData {
 
 type Artifact {
     id: String! @id
+    attempt: Int @search
     artifactType: String! @search(by: [exact])
     artifactName: String! @search(by: [exact, regexp])
     artifactTag: String! @search(by: [exact, regexp])
@@ -657,6 +665,7 @@ type ArtifactScanData {
     createdAt: DateTime @search
     vulnTrackingId: String
     vulnScanState: String @search(by: [exact])
+    scanState: String @search(by: [exact])
     components: [Component!]
     vulnCriticalCount: Int @search
     vulnHighCount: Int @search

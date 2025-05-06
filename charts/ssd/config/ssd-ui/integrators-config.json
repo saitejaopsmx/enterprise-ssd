@@ -2031,6 +2031,14 @@
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
+                        "repo": {
+                            "dataType": "chipset",
+                            "displayName": "Approved Artifact Repo",
+                            "helpText": "GCR Repo Name",
+                            "placeholderText": "Example:http://gcr.io/<PROJECT_NAME>/<REPO_NAME>",
+                            "required": false,
+                            "encrypt": false
+                        },
                         "url": {
                             "dataType": "input",
                             "displayName": "Host Url",

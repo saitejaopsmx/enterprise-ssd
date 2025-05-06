@@ -30,3 +30,6 @@ spinnaker:
       #queue: isd-to-preview-saas
       exchange: echo.events
       bindingKey: preview-saas-ssd
+projectMonitor:
+    host: http://project-monitor-service
+    port: 9090

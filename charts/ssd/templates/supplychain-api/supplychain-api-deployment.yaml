@@ -105,6 +105,8 @@ spec:
               readOnly: true
             - mountPath: /app/zapOpenApiSpec
               name: zap-openapi-spec
+            - mountPath: /app/policy
+              name: policy
           {{- with .Values.supplychainapi.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
@@ -149,6 +151,8 @@ spec:
       volumes:
         - emptyDir: {}
           name: zap-openapi-spec
+        - emptyDir: {}
+          name: policy
         - configMap:
             defaultMode: 420
             name: ssd-public-keys

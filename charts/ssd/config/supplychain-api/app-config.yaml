@@ -33,3 +33,10 @@ spinnaker:
 projectMonitor:
     host: http://project-monitor-service
     port: 9090
+policy:
+    repoURL: "https://github.com/OpsMx/ssd-policies.git"
+    pullReferenceName: "main"
+    pullReferenceType: "branch"
+    pollingTime: 1
+    gitUserName: "git_username"
+    gitToken: "git_token"

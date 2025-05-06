@@ -34,10 +34,10 @@
   log_traffic: true
   auth_required: true
   token_type: serviceToken
-- name: ssd-opa-service-auth # Authenticated service apis for ssd-opa
+- name: tool-chain-service-auth # Authenticated service apis for ssd-opa
   path_prefixes:
   - "/webhook/api/v1/kubescape"
-  baseUrl: ssd-opa:8200
+  baseUrl: tool-chain:8100
   health_endpoint: /health
   log_traffic: true
   auth_required: true

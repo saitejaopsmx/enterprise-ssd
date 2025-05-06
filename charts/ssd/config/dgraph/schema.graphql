@@ -119,6 +119,7 @@ type DeploymentTarget
     "this would be something like us-east-1 etc"
     region: String @search(by: [exact])
     kubescapeServiceConnected: String
+    kubescapeLatestFileTS: String
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
     defaultEnvironment: Environment!
@@ -407,7 +408,7 @@ type IntegratorConfigs
     team: Team @hasInverse(field: integratorConfigs)
     environment: Environment @hasInverse(field: integratorConfigs)
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
-    project: Project @hasInverse(field: integratorConfigs)
+    project: [Project] @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues {
@@ -518,7 +519,7 @@ type RunHistory  {
 
 type PolicyEvaluationData {
     """data Type is gonna help us identify if a DB record is used to evaluate or a json
-    current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
+   current scope json is for generic policies & vuln policies will attach VulnNode -> pending redis data & other inprogram policies"""
     Id: ID!
     dataType: String! @search(by: [exact])
     rawData: String
@@ -1077,6 +1078,7 @@ type Project
     projectConfigs: [ProjectConfig!] @hasInverse(field: project)
     integratorConfigs: IntegratorConfigs @hasInverse(field: project)
     scans: [ScanTarget!] @hasInverse(field: projects)
+    type: String @search(by: [exact,regexp])
 }
 
 type ProjectConfig

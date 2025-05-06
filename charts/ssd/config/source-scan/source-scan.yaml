@@ -1,12 +1,12 @@
 # HTTP Server config
-httpListenPort: 8080
+httpListenPort: 9090
 # Logging config
-logLevel: {{ .Values.githubcodescan.loglevel }}
+logLevel: {{ .Values.sourcescan.loglevel }}
 # Path configs
-scanResultPath: /app/scanResult
-tempDir: /app/temp
+scanResultPath: /app/ScanResult
+tempDir: /app/Temp
 aesEncryptionKeyPath: /app/secrets/ssdsecret/AESEncryptionKey
-internalTokenPath: /app/secrets/ssd-github-code-scan-token/token
+internalTokenPath: /app/secrets/source-scan-token/token
 ssdPublicKeysPath: /app/ssd-public-keys
 # GraphQL configs
 {{- if .Values.dgraph.HA.enabled }}
@@ -15,6 +15,6 @@ graphQLAddr: http://dgraph-alpha-public:8080
 graphQLAddr: http://dgraph-public:8080
 {{- end }}
 # Scan configs
-maxConcurrentScans: {{ .Values.githubcodescan.maxConcurrentScans }}
-pollIntervalSeconds: {{ .Values.githubcodescan.pollIntervalSeconds }}
+maxConcurrentScans: {{ .Values.sourcescan.maxConcurrentScans }}
+pollIntervalSeconds: {{ .Values.sourcescan.pollIntervalSeconds }}
 toolChainAddr: http://tool-chain:8100

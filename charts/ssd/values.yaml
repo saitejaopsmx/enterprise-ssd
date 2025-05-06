@@ -480,9 +480,9 @@ snykmonitor:
 
   loglevel: info
 ##############################################################################
-githubcodescan:
+sourcescan:
   image:
-    repository: ssd-github-code-scan
+    repository: source-scan
     tag: "2025-02-00"
     pullPolicy: IfNotPresent
 
@@ -496,11 +496,34 @@ githubcodescan:
 
   securityContext: {}
 
-  maxConcurrentScans: 5
+  maxConcurrentScans: 10
 
-  pollIntervalSeconds: 120
+  pollIntervalSeconds: 60
 
   loglevel: info
+##############################################################################
+projectmonitor:
+  image:
+    repository: project-monitor
+    tag: "2025-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  maxConcurrentScans: 10
+         
+  pollIntervalSeconds: 60
+         
+  loglevel: info
+
 ##############################################################################
 kubedetector:
   image:

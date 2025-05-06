@@ -223,12 +223,12 @@ Adding the New container to all Services
 {{- end }}
 
 {{/*
-Return the proper Github Code Scan Image
+Return the proper Source Scan Image
 */}}
-{{- define "githubcodescan.image" -}}
+{{- define "sourcescan.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.githubcodescan.image.repository -}}
-{{- $tag := .Values.githubcodescan.image.tag | toString -}}
+{{- $repositoryName := .Values.sourcescan.image.repository -}}
+{{- $tag := .Values.sourcescan.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
@@ -269,5 +269,15 @@ Return the proper kubernetes-detector image name
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.kubedetector.image.repository -}}
 {{- $tag := .Values.kubedetector.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper Project Monitor Image
+*/}}
+{{- define "projectmonitor.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.projectmonitor.image.repository -}}
+{{- $tag := .Values.projectmonitor.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

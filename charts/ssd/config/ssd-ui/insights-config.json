@@ -3,19 +3,19 @@
         {
             "chartType": "line",
             "metricName": "Scan wise - Active scans count",
-            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_active_workflows{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_active_workflows{k8s_namespace_name=\"{{ .Release.Namespace }}\",k8s_deployment_name=\"tool-chain\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - Scans completed count",
-            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_executed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_executed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\",k8s_deployment_name=\"tool-chain\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {
             "chartType": "line",
             "metricName": "Scan wise - Scans failed count",
-            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_failed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
+            "query": "sum by (k8s_namespace_name,ssd_workflow_type,k8s_deployment_name) (ssd_failed_workflows_total{k8s_namespace_name=\"{{ .Release.Namespace }}\",k8s_deployment_name=\"tool-chain\"})",
             "plotAxisName": "ssd_workflow_type"
         },
         {

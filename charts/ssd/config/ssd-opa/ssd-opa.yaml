@@ -10,6 +10,9 @@ ssdUrl: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
 logLevel: {{ .Values.ssdopa.loglevel }}
 reScheduler: false
 cspmReScheduler: {{ .Values.ssdopa.cspmReScheduler }}
+temporalHostPort: {{ .Release.Name }}-temporal-frontend:7233
+maxConcurrentActivityExecutionSize: 0 # optional field; default is 0 which means maximum
+maxConcurrentWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 redis:
   address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
   password: {{ .Values.redis.password }}

@@ -41,6 +41,27 @@ integrationData:
             default: bearer
           accessLevel:
             default: Workspace
+      - integratorType: bitbucket-server
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          projectKey:
+            encrypt: false
+          repository:
+            encrypt: false
+        featureConfigs:
+          bitbucketAuthMode:
+            default: bearer
+          accessLevel:
+            default: Project
       - integratorType: sonarqube
         category: scanningtool
         multiaccount: false
@@ -187,6 +208,8 @@ integrationData:
         integratorConfigs:
           url:
             encrypt: false
+          repo:
+            encrypt: false
           fileName:
             encrypt: false
           fileData:
@@ -320,6 +343,8 @@ integrationData:
           wontdo:
             encrypt: false
         featureConfigs:
+          mode:
+            default: cloud
           jiraTicketTriggerType:
             default: deduplications
           jiraTicketCreationScope:

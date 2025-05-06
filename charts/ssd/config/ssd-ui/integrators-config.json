@@ -924,6 +924,147 @@
                     ]
                 },
                 {
+                    "integratorType": "bitbucket-server",
+                    "displayName": "BitBucket Server",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "url": {
+                            "dataType": "input",
+                            "displayName": "API URL",
+                            "helpText": "BitBucket Host URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "Example:https://api.bitbucket.org",
+                            "required": true,
+                            "secret": false
+                        },
+                        "accessLevel": {
+                            "displayName": "Access Level",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Project",
+                                    "value": "Project"
+                                },
+                                {
+                                    "name": "Repository",
+                                    "value": "Repository"
+                                }
+                            ],
+                            "default": "Project",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "----------",
+                            "featureConfig": true
+                        },
+                        "projectKey": {
+                            "displayName": "Project key",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "",
+                            "placeholderText": "ProjectKey"
+                        },
+                        "bitbucketAuthMode": {
+                            "dataType": "dropdown",
+                            "displayName": "Auth Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Token",
+                                    "value": "Token"
+                                },
+                                {
+                                    "name": "Password",
+                                    "value": "Password"
+                                }
+                            ],
+                            "default": "Token",
+                            "featureConfig": true
+                        },
+                        "username": {
+                            "displayName": "Username",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "Authentiation Type",
+                            "placeholderText": "Example:opsmx-user"
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "requiredKey": "bitbucketAuthMode",
+                            "requiredValue": "Password",
+                            "helpText": "Password",
+                            "placeholderText": "Password"
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "requiredKey": "bitbucketAuthMode",
+                            "requiredValue": "Token",
+                            "encrypt": true,
+                            "helpText": "Authentiation Type",
+                            "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "codacy",
                     "displayName": "Codacy",
                     "category": "sourcetool",
@@ -1429,7 +1570,7 @@
                     "multiSupport": true,
                     "deleteAccount": true,
                     "category": "dockerregistry",
-                    "testConnectionFlag": true,
+                    "testConnectionFlag": false,
                     "integratorConfigs": {
                         "name": {
                             "displayName": "Account Name",
@@ -2752,6 +2893,22 @@
                             "required": true,
                             "encrypt": false
                         },
+                        "mode": {
+                            "dataType": "dropdown",
+                            "displayName": "Mode",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Self Hosted",
+                                    "value": "selfhosted"
+                                },
+                                {
+                                    "name": "Cloud Mode",
+                                    "value": "cloud"
+                                }
+                            ],
+                            "default": "Cloud Mode",
+                            "featureConfig": true
+                        },
                         "url": {
                             "dataType": "input",
                             "displayName": "Jira URL",
@@ -2763,9 +2920,10 @@
                         },
                         "username": {
                             "dataType": "input",
-                            "displayName": "Jira Username",
+                            "displayName": "Jira Email Id",
+                            "regexpValue": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
                             "helpText": "",
-                            "placeholderText": "Jira Username",
+                            "placeholderText": "Jira Email Id",
                             "required": true,
                             "encrypt": false
                         },

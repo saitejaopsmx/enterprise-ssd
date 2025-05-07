@@ -11,3 +11,4 @@ graphQLAddr: "http://dgraph-public:8080/graphql"
 {{- end }}
 ssdOpaAddr: "http://ssd-opa:8200"
 logLevel: "{{ .Values.ssdrescheduler.logLevel }}"
+httpListenPort: 8010 #default & optional

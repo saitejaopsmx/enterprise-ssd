@@ -7,4 +7,4 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
     component: ssd-rescheduler
 data:
-{{ (tpl (.Files.Glob "config/ssd-reschduler/ssd-rescheduler.yaml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/ssd-rescheduler/ssd-rescheduler.yaml").AsConfig . ) | indent 2 }}

@@ -2525,15 +2525,15 @@
                             "displayName": "Zap Integration Type",
                             "dataTypeOptions": [
                                 {
-                                    "name": "Service URL only",
-                                    "value": "Service URL only"
+                                    "name": "Zap Dast Scan",
+                                    "value": "zapDastScan"
                                 },
                                 {
-                                    "name": "OpenApi Spec",
-                                    "value": "OpenApi Spec"
+                                    "name": "Zap Api Scan",
+                                    "value": "zapApiScan"
                                 }
                             ],
-                            "default": "Service URL only",
+                            "default": "zapDastScan",
                             "featureConfig": true,
                             "required": false
                         },
@@ -2554,7 +2554,7 @@
                             "placeholderText": "https://openapi-ns.opsmx.org/",
                             "required": true,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "OpenApi Spec",
+                            "requiredValue": "zapApiScan",
                             "encrypt": false
                         },
                         "openApiAuthType": {
@@ -2575,7 +2575,7 @@
                                 }
                             ],
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "OpenApi Spec",
+                            "requiredValue": "zapApiScan",
                             "featureConfig": true
                         },
                         "openApiAuthApikeyName": {
@@ -2682,7 +2682,7 @@
                             "required": false,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -2692,7 +2692,7 @@
                             "required": false,
                             "encrypt": true,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -2726,7 +2726,7 @@
                             "required": false,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": "account-name"
                         },
@@ -2760,7 +2760,7 @@
                             "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "URL of the login page",
                             "placeholderText": ""
                         },
@@ -2770,7 +2770,7 @@
                             "required": false,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": "user1"
                         },
@@ -2780,7 +2780,7 @@
                             "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -2791,7 +2791,7 @@
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\Qadmin\\\\E"
                         },
                         "logoutIndicator": {
@@ -2801,7 +2801,7 @@
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
                             "requiredKey": "zapIntegrationType",
-                            "requiredValue": "Service URL only",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
                     },

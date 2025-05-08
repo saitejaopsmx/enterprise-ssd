@@ -335,6 +335,10 @@ supplychainapi:
 
   securityContext: {}
 
+  gitusername: GITUSERNAME
+
+  gittoken: asdsdasdasdASDA
+
 ######################################################
 tokenmachine:
   ## Image specific details

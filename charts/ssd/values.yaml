@@ -553,6 +553,9 @@ ssdrescheduler:
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
   analysisRescheduler: true
 
+  ## Indicates the count of batches for retrying deployments
+  deploymentRetryBatchCount: 5
+
   loglevel: info
 ##############################################################################
 kubedetector:

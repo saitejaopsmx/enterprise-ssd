@@ -3,6 +3,7 @@ deploymentRetryInterval: {{ .Values.ssdrescheduler.deploymentRetryInterval }} # 
 maxRetryOfDeployment: {{ .Values.ssdrescheduler.maxRetryOfDeployment }} #max number of times deployment is to be retried
 analysisRescheduler: {{ .Values.ssdrescheduler.analysisRescheduler }} # Rescheduler to reanalyze images in current deployment
 analysisReScheduleDays: 1
+deploymentRetryBatchCount: {{ .Values.ssdrescheduler.deploymentRetryBatchCount }}
 analysisReScheduleTime: "15:41"
 {{- if .Values.dgraph.HA.enabled }}
 graphQLAddr: "http://dgraph-alpha-public:8080/graphql"

@@ -88,7 +88,106 @@
     "SOURCE_SCAN_CREATION": {
         "CREATE_HEADER": "Create Project",
         "UPDATE_HEADER": "Update Project",
-        "BODY": "<p>This page allows you to add/update the source scan configurations for your projects. You can specify the name, platform and account of the file related to the project. </p>",
+        "BODY": "<p>This page allows you to add/update the Source Scan configurations for your projects. You can specify the name, platform and account of the file related to the project. </p>",
+        "NAME": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Name cannot be empty",
+                "cannotContainSpace": "Project name cannot contain space",
+                "noSpecialCharacters": "Allowed special character is '-'",
+                "startingFromNumber": "Project Name cannot start with numbers"
+            }
+        },
+        "TYPE": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Scan Type cannot be empty"
+            }
+        },
+        "PLATFORM": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Platform Type cannot be empty"
+            }
+        },
+        "HOST_URL": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "HostURL Type cannot be empty"
+            }
+        },
+        "ACCOUNT": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Account cannot be empty"
+            }
+        },
+        "ORGANISATION": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Organisation / Workspace cannot be empty"
+            }
+        },
+        "TOKEN": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Token cannot be empty"
+            }
+        },
+        "SCAN_LEVEL": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Scan Level cannot be empty"
+            }
+        },
+        "REPO": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Repo cannot be empty"
+            }
+        },
+        "BRANCH": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Branch cannot be empty"
+            }
+        },
+        "BRANCH_PATTERN": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Branch Pattern cannot be empty"
+            }
+        },
+        "TAG": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Tag cannot be empty"
+            }
+        },
+        "TAG_PATTERN": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Tag Pattern cannot be empty"
+            }
+        },
+        "SCAN_UPTO": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Scan upto cannot be empty"
+            }
+        },
+        "SCHEDULE": {
+            "TOOLTIP": "",
+            "VALIDATION_MESSAGE": {
+                "required": "Schedule Time cannot be empty",
+                "minValue": "Schedule Time cannot be less then 5 min"
+            }
+        }
+    },
+    "ARTIFACT_SCAN_CREATION": {
+        "CREATE_HEADER": "Create Project",
+        "UPDATE_HEADER": "Update Project",
+        "BODY": "<p>This page allows you to add/update the Artifact Scan configurations for your projects. You can specify the name, platform and account of the file related to the project. </p>",
         "NAME": {
             "TOOLTIP": "",
             "VALIDATION_MESSAGE": {

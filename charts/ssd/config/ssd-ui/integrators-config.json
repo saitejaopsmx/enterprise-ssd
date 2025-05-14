@@ -2204,9 +2204,9 @@
                         "name": {
                             "displayName": "Account Name",
                             "dataType": "input",
-                            "required": true,
                             "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
                             "regexType": "noSpecialCharacters",
+                            "required": true,
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },

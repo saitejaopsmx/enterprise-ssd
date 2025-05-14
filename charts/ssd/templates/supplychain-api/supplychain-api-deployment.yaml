@@ -24,6 +24,9 @@ spec:
         {{ toYaml .Values.supplychainapi.annotations | nindent 8 }}
 {{- end }}
     spec:
+      {{- if not .Values.global.minio.enabled }}
+      serviceAccountName: ssd-storage-sa
+      {{- end }}
       initContainers:
       - name: rabbitmq-check
         image: {{ .Values.global.customImages.registry }}/pgchecker:v1
@@ -43,6 +46,7 @@ spec:
             - containerPort: 8099
               protocol: TCP
           env:
+          {{- if .Values.global.minio.enabled }}
           - name: S3_ENDPOINT_URL
             value: http://{{ .Release.Name }}-minio:9000/
           - name: AWS_ACCESS_KEY_ID
@@ -55,6 +59,12 @@ spec:
               secretKeyRef:
                 key: secretkey
                 name: {{ .Release.Name }}-minio
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
+          {{- end }}
           - name: Cypher_Key
             valueFrom:
               secretKeyRef:

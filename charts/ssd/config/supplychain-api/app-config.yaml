@@ -39,5 +39,3 @@ policy:
     pullReferenceName: "main"
     pullReferenceType: "branch"
     pollingTime: 1
-    gitUserName: "{{ .Values.supplychainapi.gitusername }}"
-    gitToken: "{{ .Values.supplychainapi.gittoken }}"

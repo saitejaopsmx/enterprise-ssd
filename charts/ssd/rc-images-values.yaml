@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "34635ec-723"
+    tag: "4bd0c86-729"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -55,3 +55,8 @@ projectmonitor:
   image:
     repository: project-monitor
     tag: "20b3822-5"
+
+ssdrescheduler:
+  image:
+    repository: ssd-rescheduler
+    tag: "626cbde-1"

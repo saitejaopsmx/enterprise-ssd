@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: toolchain-sa
+  name: ssd-storage-sa
 {{- if .Values.toolchain.saAnnotations }}
   annotations:
 {{ toYaml .Values.toolchain.saAnnotations | indent 4 }}

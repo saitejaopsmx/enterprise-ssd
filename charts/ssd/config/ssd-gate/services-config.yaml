@@ -128,10 +128,12 @@
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
+{{- if .Values.global.minio.enabled }}
 - name: minio
   path_prefixes:
   - "/minio"
   baseUrl: {{ .Release.Name }}-minio:9000
+{{- end }}
   health_endpoint: ""
 - name: prometheus
   baseUrl: {{ .Values.prometheusUrl }} #this is dependent on the localtion of the prometheus server

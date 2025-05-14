@@ -10,7 +10,7 @@ ui:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "d4e3cca-100"
+    tag: "5a706a0-102"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
@@ -21,7 +21,7 @@ ssdgate:
     tag: "e3acfc6-106"
 ssdopa:
   image:
-    tag: "956c2be-151"
+    tag: "6c9dae7-153"
 supplychainpreprocessor:
   image:
     tag: "73c0294-94"
@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "4bd0c86-729"
+    tag: "e496296-735"
 tokenmachine:
   image:
     tag: "99eb752-36"

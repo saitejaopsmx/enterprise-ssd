@@ -243,7 +243,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -273,7 +273,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -296,7 +296,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "205-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -320,7 +320,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -389,7 +389,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -468,7 +468,7 @@ otel:
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "2025-02-02"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -487,7 +487,7 @@ snykmonitor:
 sourcescan:
   image:
     repository: source-scan
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -509,7 +509,7 @@ sourcescan:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -548,7 +548,7 @@ ssdrescheduler:
   deploymentRetryInterval: 10
 
   ## Number of times the Deployment to be retried
-  maxRetryOfDeployment: 100
+  maxRetryOfDeployment: 10
 
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
   analysisRescheduler: true

@@ -281,3 +281,13 @@ Return the proper Project Monitor Image
 {{- $tag := .Values.projectmonitor.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper SSD Reschduler Image
+*/}}
+{{- define "ssdrescheduler.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.ssdrescheduler.image.repository -}}
+{{- $tag := .Values.ssdrescheduler.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

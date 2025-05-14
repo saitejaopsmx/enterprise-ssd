@@ -292,6 +292,14 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: s3
+        category: dockerregistry
+        multiaccount: false
+        integratorConfigs:
+          awsAccessKey:
+            encrypt: true
+          awsSecretKey:
+            encrypt: true
       - integratorType: sysdig
         category: scanningtool
         multiaccount: false
@@ -386,6 +394,10 @@ integrationData:
       - integratorType: zap
         category: scanningtool
         multiaccount: true
+        featureConfigs:
+          openApiAuthType:
+          openApiAuthHttpScheme:
+          openApiAuthApikeyIn:
         integratorConfigs:
           serviceUrl:
             encrypt: false
@@ -417,6 +429,18 @@ integrationData:
             encrypt: false
           logoutIndicator:
             encrypt: false
+          openApiSpecUrl:
+            encrypt: false
+          openApiAuthHttpBearerToken:
+            encrypt: true
+          openApiAuthHttpBasicUsername:
+            encrypt: false
+          openApiAuthHttpBasicPassword:
+            encrypt: true
+          openApiAuthApikeyName:
+            encrypt: false
+          openApiAuthApikey:
+            encrypt: true
   - stage: Cloud Security Provider
     integrations:
       - integratorType: aws

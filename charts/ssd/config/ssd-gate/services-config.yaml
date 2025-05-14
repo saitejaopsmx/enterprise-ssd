@@ -24,6 +24,14 @@
   path_prefixes:
   - "/webhook/v1/ssd"
   strip_path: "/webhook"
+- name: supplychain-api-team-auth
+  path_prefixes:
+  - "/ssdservice/v1/findbuildid"
+  baseUrl: supplychain-api:8099
+  health_endpoint: /health
+  log_traffic: true
+  auth_required: true
+  token_type: teamToken
 - name: supplychain-api-auth # Authenticated service apis for supplychain-api
   path_prefixes:
   - "/ssdservice/v1/ssd-kubernetes-info"
@@ -51,6 +59,15 @@
   baseUrl: ssd-opa:8200
   health_endpoint: /health
   log_traffic: true
+- name: ssd-opa-team-auth  # Authenticated end-point for web-hook posts
+  path_prefixes:
+  - "/webhook/api/v1/scandiff"
+  strip_path: "/webhook"
+  baseUrl: ssd-opa:8200
+  health_endpoint: /health
+  log_traffic: true
+  auth_required: true
+  token_type: teamToken
 - name: tool-chain-team-auth  # Authenticated end-point for web-hook posts
   path_prefixes:
   - "/webhook/api/v1/sbom"
@@ -111,10 +128,12 @@
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
+{{- if .Values.global.minio.enabled }}
 - name: minio
   path_prefixes:
   - "/minio"
   baseUrl: {{ .Release.Name }}-minio:9000
+{{- end }}
   health_endpoint: ""
 - name: prometheus
   baseUrl: {{ .Values.prometheusUrl }} #this is dependent on the localtion of the prometheus server

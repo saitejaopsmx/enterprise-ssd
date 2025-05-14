@@ -24,6 +24,9 @@ spec:
         {{ toYaml .Values.supplychainapi.annotations | nindent 8 }}
 {{- end }}
     spec:
+      {{- if not .Values.global.minio.enabled }}
+      serviceAccountName: ssd-storage-sa
+      {{- end }}
       initContainers:
       - name: rabbitmq-check
         image: {{ .Values.global.customImages.registry }}/pgchecker:v1
@@ -42,6 +45,31 @@ spec:
           ports:
             - containerPort: 8099
               protocol: TCP
+          env:
+          {{- if .Values.global.minio.enabled }}
+          - name: S3_ENDPOINT_URL
+            value: http://{{ .Release.Name }}-minio:9000/
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: {{ .Release.Name }}-minio
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: {{ .Release.Name }}-minio
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
+          {{- end }}
+          - name: Cypher_Key
+            valueFrom:
+              secretKeyRef:
+                key: AESEncryptionKey
+                name: ssdsecret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -85,6 +113,10 @@ spec:
             - mountPath: /app/secrets/supplychain-api-token/
               name: token
               readOnly: true
+            - mountPath: /app/zapOpenApiSpec
+              name: zap-openapi-spec
+            - mountPath: /app/policy
+              name: policy
           {{- with .Values.supplychainapi.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
@@ -97,8 +129,8 @@ spec:
             capabilities:
               drop:
               - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
             runAsUser: 1000
             runAsGroup: 1000
             seccompProfile:
@@ -127,6 +159,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+        - emptyDir: {}
+          name: zap-openapi-spec
+        - emptyDir: {}
+          name: policy
         - configMap:
             defaultMode: 420
             name: ssd-public-keys

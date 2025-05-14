@@ -335,6 +335,10 @@ supplychainapi:
 
   securityContext: {}
 
+  gitusername: GITUSERNAME
+
+  gittoken: asdsdasdasdASDA
+
 ######################################################
 tokenmachine:
   ## Image specific details
@@ -525,10 +529,39 @@ projectmonitor:
   loglevel: info
 
 ##############################################################################
+ssdrescheduler:
+  image:
+    repository: ssd-reschduler
+    tag: "2025-04-00"
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  ## Default will be true. Change to false If user don't want to retry the failed deployment
+  deploymentRetry: true
+
+  ## Retry the failed deployments . Default will be 10mins
+  deploymentRetryInterval: 10
+
+  ## Number of times the Deployment to be retried
+  maxRetryOfDeployment: 100
+
+  ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
+  analysisRescheduler: true
+
+  ## Indicates the count of batches for retrying deployments
+  deploymentRetryBatchCount: 5
+
+  loglevel: info
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector
-    tag: v1.0.2
+    tag: v1.0.3
 kubescape:
   image:
     repository: kubescape-service

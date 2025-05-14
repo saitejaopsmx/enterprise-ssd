@@ -1,0 +1,15 @@
+deploymentRetry: {{ .Values.ssdrescheduler.deploymentRetry }} # Param to determine whether a failed deployment is to be retried
+deploymentRetryInterval: {{ .Values.ssdrescheduler.deploymentRetryInterval }} # unit is minutes. Example if 10 given every 10mins it will retry failed deployments. 5 deployment to be retired a time
+maxRetryOfDeployment: {{ .Values.ssdrescheduler.maxRetryOfDeployment }} #max number of times deployment is to be retried
+analysisRescheduler: {{ .Values.ssdrescheduler.analysisRescheduler }} # Rescheduler to reanalyze images in current deployment
+analysisReScheduleDays: 1
+deploymentRetryBatchCount: {{ .Values.ssdrescheduler.deploymentRetryBatchCount }}
+analysisReScheduleTime: "15:41"
+{{- if .Values.dgraph.HA.enabled }}
+graphQLAddr: "http://dgraph-alpha-public:8080/graphql"
+{{- else }}
+graphQLAddr: "http://dgraph-public:8080/graphql"
+{{- end }}
+ssdOpaAddr: "http://ssd-opa:8200"
+logLevel: "{{ .Values.ssdrescheduler.logLevel }}"
+httpListenPort: 8010 #default & optional

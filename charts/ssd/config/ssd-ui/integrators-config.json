@@ -2031,6 +2031,14 @@
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
+                        "repo": {
+                            "dataType": "chipset",
+                            "displayName": "Approved Artifact Repo",
+                            "helpText": "GCR Repo Name",
+                            "placeholderText": "Example:http://gcr.io/<PROJECT_NAME>/<REPO_NAME>",
+                            "required": false,
+                            "encrypt": false
+                        },
                         "url": {
                             "dataType": "input",
                             "displayName": "Host Url",
@@ -2264,6 +2272,75 @@
                     ]
                 },
                 {
+                    "integratorType": "s3",
+                    "displayName": "S3 bucket",
+                    "multiSupport": true,
+                    "deleteAccount": true,
+                    "testConnectionFlag": true,
+                    "category": "dockerregistry",
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "awsAccessKey": {
+                            "dataType": "input",
+                            "displayName": "Access Key ID",
+                            "helpText": "Mandatory to update the Access Key if the repo is Private",
+                            "placeholderText": "Example:rxdtfcgvhbj",
+                            "required": true,
+                            "encrypt": true
+                        },
+                        "awsSecretKey": {
+                            "dataType": "input",
+                            "displayName": "Secret Access Key",
+                            "helpText": "Mandatory to update the encrypt Key if the repo is Private",
+                            "placeholderText": "Example:qwertyuisdxcv",
+                            "required": true,
+                            "encrypt": true
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "syft",
                     "displayName": "Syft (CMD)",
                     "category": "scanningtool",
@@ -2443,6 +2520,23 @@
                     "multiSupport": true,
                     "deleteAccount": true,
                     "integratorConfigs": {
+                        "zapIntegrationType": {
+                            "dataType": "dropdown",
+                            "displayName": "Zap Integration Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Zap Dast Scan",
+                                    "value": "zapDastScan"
+                                },
+                                {
+                                    "name": "Zap Api Scan",
+                                    "value": "zapApiScan"
+                                }
+                            ],
+                            "default": "zapDastScan",
+                            "featureConfig": true,
+                            "required": false
+                        },
                         "name": {
                             "displayName": "Account Name",
                             "dataType": "input",
@@ -2451,6 +2545,128 @@
                             "regexType": "noSpecialCharacters",
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
+                        },
+                        "openApiSpecUrl": {
+                            "dataType": "input",
+                            "displayName": "OpenAPI spec URL",
+                            "helpText": "URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "https://openapi-ns.opsmx.org/",
+                            "required": true,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapApiScan",
+                            "encrypt": false
+                        },
+                        "openApiAuthType": {
+                            "dataType": "dropdown",
+                            "displayName": "Authentication Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "none",
+                                    "value": "none"
+                                },
+                                {
+                                    "name": "http",
+                                    "value": "http"
+                                },
+                                {
+                                    "name": "apiKey",
+                                    "value": "apiKey"
+                                }
+                            ],
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapApiScan",
+                            "featureConfig": true
+                        },
+                        "openApiAuthApikeyName": {
+                            "displayName": "Apikey Name",
+                            "dataType": "input",
+                            "required": false,
+                            "encrypt": false,
+                            "helpText": "",
+                            "requiredKey": "openApiAuthType",
+                            "requiredValue": "apiKey",
+                            "placeholderText": ""
+                        },
+                        "openApiAuthApikey": {
+                            "displayName": "Apikey",
+                            "dataType": "input",
+                            "required": false,
+                            "encrypt": true,
+                            "helpText": "",
+                            "requiredKey": "openApiAuthType",
+                            "requiredValue": "apiKey",
+                            "placeholderText": ""
+                        },
+                        "openApiAuthApikeyIn": {
+                            "dataType": "dropdown",
+                            "displayName": "Apikey In",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "query",
+                                    "value": "query"
+                                },
+                                {
+                                    "name": "header",
+                                    "value": "header"
+                                },
+                                {
+                                    "name": "cookie",
+                                    "value": "cookie"
+                                }
+                            ],
+                            "requiredKey": "openApiAuthType",
+                            "requiredValue": "apiKey",
+                            "featureConfig": true
+                        },
+                        "openApiAuthHttpScheme": {
+                            "dataType": "dropdown",
+                            "displayName": "Scheme",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "basic",
+                                    "value": "basic"
+                                },
+                                {
+                                    "name": "bearer",
+                                    "value": "bearer"
+                                }
+                            ],
+                            "requiredKey": "openApiAuthType",
+                            "requiredValue": "http",
+                            "default": "",
+                            "featureConfig": true
+                        },
+                        "openApiAuthHttpBasicUsername": {
+                            "displayName": "User Name",
+                            "id": "",
+                            "dataType": "input",
+                            "required": false,
+                            "encrypt": false,
+                            "helpText": "",
+                            "requiredKey": "openApiAuthHttpScheme",
+                            "requiredValue": "basic",
+                            "placeholderText": ""
+                        },
+                        "openApiAuthHttpBasicPassword": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": false,
+                            "encrypt": true,
+                            "helpText": "",
+                            "placeholderText": "",
+                            "requiredKey": "openApiAuthHttpScheme",
+                            "requiredValue": "basic"
+                        },
+                        "openApiAuthHttpBearerToken": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": false,
+                            "encrypt": true,
+                            "helpText": "",
+                            "placeholderText": "",
+                            "requiredKey": "openApiAuthHttpScheme",
+                            "requiredValue": "bearer"
                         },
                         "serviceUrl": {
                             "dataType": "input",
@@ -2465,14 +2681,18 @@
                             "dataType": "input",
                             "required": false,
                             "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
-                            "placeholderText": "admin"
+                            "placeholderText": ""
                         },
                         "password": {
                             "displayName": "Password",
                             "dataType": "input",
                             "required": false,
                             "encrypt": true,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -2505,6 +2725,8 @@
                             "dataType": "input",
                             "required": false,
                             "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": "account-name"
                         },
@@ -2537,6 +2759,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "URL of the login page",
                             "placeholderText": ""
                         },
@@ -2545,6 +2769,8 @@
                             "dataType": "input",
                             "required": false,
                             "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": "user1"
                         },
@@ -2553,6 +2779,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -2562,6 +2790,8 @@
                             "required": false,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\Qadmin\\\\E"
                         },
                         "logoutIndicator": {
@@ -2570,6 +2800,8 @@
                             "required": false,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
                     },

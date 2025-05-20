@@ -38,7 +38,7 @@ spec:
               mountPath: /app/scanResult
             - name: artifact-scan
               mountPath: /app/config/artifact-scan.yaml
-              subPath: /app/config/artifact-scan.yaml
+              subPath: artifact-scan.yaml
             - name: custom-certs
               mountPath: /usr/local/share/ca-certificates
             - name: token

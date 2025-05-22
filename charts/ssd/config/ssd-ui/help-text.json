@@ -1596,6 +1596,86 @@
                 }
             }
         },
+        "AZURE": {
+            "HEADER": "Azure",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "ACCESSLEVELNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Name cannot contain special characters other than -,/,@,.",
+                    "cannotContainSpace": "Name cannot contain space",
+                    "required": "Name cannot be empty"
+                }
+            },
+            "ORGANISATION": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Organisation cannot be empty"
+                }
+            },
+            "PROJECT": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Project cannot be empty"
+                }
+            },
+            "TOKEN": {
+                "TOOLTIP": "GitLab token",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            }
+        },
+        "AZURE-SERVER": {
+            "HEADER": "Azure Server",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "ACCESSLEVELNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Name cannot contain special characters other than -,/,@,.",
+                    "cannotContainSpace": "Name cannot contain space",
+                    "required": "Name cannot be empty"
+                }
+            },
+            "ORGANISATION": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Organisation cannot be empty"
+                }
+            },
+            "PROJECT": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Project cannot be empty"
+                }
+            },
+            "TOKEN": {
+                "TOOLTIP": "GitLab token",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            }
+        },
         "SYSDIG": {
             "HEADER": "Sysdig",
             "BODY": "Monitor and secure containers and cloud-native apps with Sysdig for real-time threat detection and compliance.",

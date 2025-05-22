@@ -558,6 +558,18 @@ ssdrescheduler:
 
   loglevel: info
 ##############################################################################
+artifactscan:
+  image:
+    repository: artifact-scan
+    tag: "2025-04-00"
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  resources: {}
+
+  securityContext: {}
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

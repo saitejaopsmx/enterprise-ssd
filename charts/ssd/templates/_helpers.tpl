@@ -291,3 +291,13 @@ Return the proper SSD Reschduler Image
 {{- $tag := .Values.ssdrescheduler.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper Artifact Scan Image
+*/}}
+{{- define "artifactscan.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.artifactscan.image.repository -}}
+{{- $tag := .Values.artifactscan.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

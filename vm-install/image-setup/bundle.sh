@@ -49,13 +49,15 @@ chmod +x pull-images.sh
 chmod +x clean-before-build.sh
 
 # Replace CHARTVERSION in install.sh with actual value
-sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmxssd/install.sh
+#sed -i "s/--version CHARTVERSION/--version ${CHARTVERSION}/" opsmxssd/install.sh
 
-helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
-helm repo update
+git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
+#helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
+#helm repo update
 
 # dry run of helm install
-helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
+helm template ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd >rendered.yaml
+#helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
 
 ./extract-images-list.sh rendered.yaml image-list.txt
 

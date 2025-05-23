@@ -1065,6 +1065,226 @@
                     ]
                 },
                 {
+                    "integratorType": "azure",
+                    "displayName": "Azure",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "organisation": {
+                            "displayName": "Organisation",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "accessLevel": {
+                            "displayName": "Access Level",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Project",
+                                    "value": "Project"
+                                },
+                                {
+                                    "name": "Repository",
+                                    "value": "Repository"
+                                }
+                            ],
+                            "default": "Project",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "----------",
+                            "featureConfig": true
+                        },
+                        "project": {
+                            "displayName": "Project",
+                            "dataType": "input",
+                            "required": true,
+                            "requiredKey": "accessLevel",
+                            "requiredValue": "Repository",
+                            "encrypt": false,
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "",
+                            "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
+                    "integratorType": "azure-server",
+                    "displayName": "Azure Server",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "url": {
+                            "dataType": "input",
+                            "displayName": "Host Url",
+                            "helpText": "Host URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "Example:https://org.myjenkin.com/jenkins",
+                            "required": true,
+                            "encrypt": false
+                        },
+                        "collectionName": {
+                            "displayName": "Collection Name",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "default": "DefaultCollection",
+                            "placeholderText": ""
+                        },
+                        "accessLevel": {
+                            "displayName": "Access Level",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Project",
+                                    "value": "Project"
+                                },
+                                {
+                                    "name": "Repository",
+                                    "value": "Repository"
+                                }
+                            ],
+                            "default": "Project",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "----------",
+                            "featureConfig": true
+                        },
+                        "project": {
+                            "displayName": "Project",
+                            "dataType": "input",
+                            "required": true,
+                            "requiredKey": "accessLevel",
+                            "requiredValue": "Repository",
+                            "encrypt": false,
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "",
+                            "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "codacy",
                     "displayName": "Codacy",
                     "category": "sourcetool",

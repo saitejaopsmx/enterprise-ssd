@@ -62,6 +62,40 @@ integrationData:
             default: bearer
           accessLevel:
             default: Project
+      - integratorType: azure
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          organisation:
+            encrypt: false
+          project:
+            encrypt: false
+          token:
+            encrypt: true
+        featureConfigs:
+          accessLevel:
+            default: Project
+      - integratorType: azure-server
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          collectionName:
+            encrypt: false
+          project:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+        featureConfigs:
+          authMode:
+            default: token
+          accessLevel:
+            default: Project
       - integratorType: sonarqube
         category: scanningtool
         multiaccount: false

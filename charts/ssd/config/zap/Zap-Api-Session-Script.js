@@ -19,7 +19,7 @@ function extractWebSession(sessionWrapper) {
         key_in === "query"  ? defaultQuery  :
         key_in === "cookie" ? defaultCookie :
                               defaultHeader
-    
+
     // Store everything in the Session
     sess.setValue("auth_type",   auth_type);
     sess.setValue("http_scheme", http_scheme);
@@ -105,7 +105,7 @@ function clearWebSessionIdentifiers(sessionWrapper) {
         var reC = new RegExp("(^|;\\s*)" + defaultCookie + "=[^;]*;?\\s*");
         ck = ck.replace(reC, "").trim();
         msg.getRequestHeader().setHeader("Cookie", ck || null);
-   
+
     // Remove query param
     var uri = msg.getRequestHeader().getURI();
     var q   = uri.getEscapedQuery();

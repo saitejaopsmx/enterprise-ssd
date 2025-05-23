@@ -53,10 +53,11 @@ fi
 # Define the path to the values.yaml file
 VALUES_FILE="$HOME/opsmxssd/ssd-minimal-values.yaml"
 
-# Add OpsMx SSD Helm repository
-echo "Adding custom Helm repository for SSD..."
-helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
-helm repo update
+# Cloning the Helm repository
+echo "Cloning the Helm repository for SSD..."
+git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
+#helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
+#helm repo update
 
 # Use yq to modify the values.yaml file dynamically based on the command-line arguments
 echo "Modifying values.yaml with host ($HOST) and organisationname ($ORG_NAME) parameters..."
@@ -72,7 +73,7 @@ yq eval -i ".global.createIngress = true" "$VALUES_FILE"
 
 # Install OpsMx SSD with the modified values.yaml
 echo "Installing OpsMx SSD with the modified values.yaml..."
-helm install ssd opsmxssd/ssd --version CHARTVERSION -f "$VALUES_FILE" -n ssd --timeout=600s
+helm install ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/$VALUES_FILE -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd -n ssd --timeout=600s
 echo "SSD installation complete."
 
 RED='\033[0;31m'

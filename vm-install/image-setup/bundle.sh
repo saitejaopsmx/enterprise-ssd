@@ -97,6 +97,8 @@ if helm status ingress-nginx -n ingress-nginx &>/dev/null; then
   echo "ingress-nginx already installed. Skipping install."
 else
   echo "Installing ingress-nginx"
-  helm install ingress-nginx ingress-nginx/ingress-nginx \
-    --namespace ingress-nginx --create-namespace --wait
+  helm install ingress-nginx ingress-nginx/ingress-nginx --version=4.12.1 \
+	--namespace ingress-nginx \
+	--set controller.progressDeadlineSeconds=120 \
+	--set controller.minReadySeconds=10
 fi

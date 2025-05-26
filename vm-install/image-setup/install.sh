@@ -55,7 +55,7 @@ VALUES_FILE="$HOME/opsmxssd/ssd-minimal-values.yaml"
 
 # Cloning the Helm repository
 #echo "Cloning the Helm repository for SSD..."
-#git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
+git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
 #helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
 #helm repo update
 

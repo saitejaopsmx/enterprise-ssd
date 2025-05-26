@@ -56,7 +56,7 @@ git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
 #helm repo update
 
 # dry run of helm install
-helm template ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd >rendered.yaml
+helm template ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/ssd-minimal-values.yaml -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd >rendered.yaml
 #helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
 
 ./extract-images-list.sh rendered.yaml image-list.txt

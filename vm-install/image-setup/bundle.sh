@@ -15,7 +15,7 @@ fi
 [[ -n "$2" ]] && RELEASETAG="$2"
 
 echo "Using CHARTVERSION=$CHARTVERSION"
-echo "Using RELEASETAG=$RELEASETAG"
+echo "Using RELEASETAG=2025-05"
 
 sudo apt-get update
 sudo apt install -y docker.io
@@ -31,14 +31,14 @@ sudo systemctl start docker
 
 mkdir -p opsmxssd
 
-curl -fSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/charts/ssd/ssd-minimal-values.yaml
-curl -fSL -o opsmxssd/bootstrap.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/bootstrap.sh
-curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh
-curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/add-dns-entry-in-local.sh
-curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/fetch-ssl-cert.sh
-curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
-curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
-curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
+curl -fSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/charts/ssd/ssd-minimal-values.yaml
+curl -fSL -o opsmxssd/bootstrap.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/bootstrap.sh
+curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/install.sh
+curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/add-dns-entry-in-local.sh
+curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/fetch-ssl-cert.sh
+curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/extract-images-list.sh
+curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/pull-images.sh
+curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/clean-before-build.sh
 
 chmod +x opsmxssd/bootstrap.sh
 chmod +x opsmxssd/install.sh
@@ -56,7 +56,7 @@ git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
 #helm repo update
 
 # dry run of helm install
-helm template ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd >rendered.yaml
+helm template ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/ssd-minimal-values.yaml -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd >rendered.yaml
 #helm template opsmxssd opsmxssd/ssd --version $CHARTVERSION >rendered.yaml
 
 ./extract-images-list.sh rendered.yaml image-list.txt

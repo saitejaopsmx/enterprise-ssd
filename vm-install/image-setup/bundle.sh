@@ -15,7 +15,7 @@ fi
 [[ -n "$2" ]] && RELEASETAG="$2"
 
 echo "Using CHARTVERSION=$CHARTVERSION"
-echo "Using RELEASETAG=$RELEASETAG"
+echo "Using RELEASETAG=2025-05"
 
 sudo apt-get update
 sudo apt install -y docker.io

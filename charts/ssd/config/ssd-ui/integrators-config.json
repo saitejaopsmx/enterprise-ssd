@@ -1232,13 +1232,51 @@
                             "helpText": "",
                             "placeholderText": ""
                         },
+                        "authMode": {
+                            "dataType": "dropdown",
+                            "displayName": "Auth Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Token",
+                                    "value": "Token"
+                                },
+                                {
+                                    "name": "Password",
+                                    "value": "Password"
+                                }
+                            ],
+                            "default": "Token",
+                            "featureConfig": true
+                        },
                         "token": {
                             "displayName": "Token",
                             "dataType": "input",
                             "required": true,
                             "encrypt": true,
                             "helpText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "Token",
                             "placeholderText": "Example:knjnasjwokldjhse"
+                        },
+                        "username": {
+                            "displayName": "User Name",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "Password",
+                            "placeholderText": ""
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "Password",
+                            "placeholderText": ""
                         }
                     },
                     "gridConfigs": [

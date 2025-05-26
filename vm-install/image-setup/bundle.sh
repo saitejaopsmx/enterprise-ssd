@@ -31,14 +31,14 @@ sudo systemctl start docker
 
 mkdir -p opsmxssd
 
-curl -fSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/charts/ssd/ssd-minimal-values.yaml
-curl -fSL -o opsmxssd/bootstrap.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/bootstrap.sh
-curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/install.sh
-curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/add-dns-entry-in-local.sh
-curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/fetch-ssl-cert.sh
-curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/extract-images-list.sh
-curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/pull-images.sh
-curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/$RELEASETAG/vm-install/image-setup/clean-before-build.sh
+curl -fSL -o opsmxssd/default-ssd-minimal-values.yaml https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/charts/ssd/ssd-minimal-values.yaml
+curl -fSL -o opsmxssd/bootstrap.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/bootstrap.sh
+curl -fSL -o opsmxssd/install.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/install.sh
+curl -fSL -o opsmxssd/add-dns-entry-in-local.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/add-dns-entry-in-local.sh
+curl -fSL -o opsmxssd/fetch-ssl-cert.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/fetch-ssl-cert.sh
+curl -fSL -o extract-images-list.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/extract-images-list.sh
+curl -fSL -o pull-images.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/pull-images.sh
+curl -fSL -o clean-before-build.sh https://raw.githubusercontent.com/OpsMx/enterprise-ssd/2025-05/vm-install/image-setup/clean-before-build.sh
 
 chmod +x opsmxssd/bootstrap.sh
 chmod +x opsmxssd/install.sh

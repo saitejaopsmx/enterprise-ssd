@@ -5,7 +5,7 @@ imageCredentials:
 
 ui:
   image:
-    tag: "3bae1be8a-797"
+    tag: "73f36bd72-809"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "5927bff-794"
+    tag: "51c3303-803"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -38,7 +38,7 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "0af9b87-4"
+    tag: "ee0c3c2-28"
 
 snykmonitor:
   image:
@@ -54,7 +54,7 @@ mobsf:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "824745d-1"
+    tag: "61324b0-13"
 
 ssdrescheduler:
   image:

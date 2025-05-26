@@ -54,8 +54,8 @@ fi
 VALUES_FILE="$HOME/opsmxssd/ssd-minimal-values.yaml"
 
 # Cloning the Helm repository
-echo "Cloning the Helm repository for SSD..."
-git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
+#echo "Cloning the Helm repository for SSD..."
+#git clone https://github.com/opsmx/enterprise-ssd.git -b 2025-05
 #helm repo add opsmxssd https://opsmx.github.io/enterprise-ssd/
 #helm repo update
 
@@ -73,7 +73,7 @@ yq eval -i ".global.createIngress = true" "$VALUES_FILE"
 
 # Install OpsMx SSD with the modified values.yaml
 echo "Installing OpsMx SSD with the modified values.yaml..."
-helm install ssd enterprise-ssd/charts/ssd/ -f enterprise-ssd/charts/ssd/$VALUES_FILE -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd -n ssd --timeout=600s
+helm install ssd enterprise-ssd/charts/ssd/ -f $VALUES_FILE -f enterprise-ssd/charts/ssd/rc-images-values.yaml -n ssd -n ssd --timeout=600s
 echo "SSD installation complete."
 
 RED='\033[0;31m'

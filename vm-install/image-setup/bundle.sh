@@ -99,6 +99,7 @@ else
   echo "Installing ingress-nginx"
   helm install ingress-nginx ingress-nginx/ingress-nginx --version=4.12.1 \
 	--namespace ingress-nginx \
+	--create-namespace \
 	--set controller.progressDeadlineSeconds=120 \
 	--set controller.minReadySeconds=10
 fi

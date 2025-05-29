@@ -5,12 +5,12 @@ imageCredentials:
 
 ui:
   image:
-    tag: "73f36bd72-809"
+    tag: "e7258b3dc-815"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "7e38bcf-110"
+    tag: "8203461-116"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "51c3303-803"
+    tag: "69a118f-830"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -54,7 +54,7 @@ mobsf:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "61324b0-13"
+    tag: "c9af78c-14"
 
 ssdrescheduler:
   image:
@@ -64,4 +64,4 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "f759bfe-2"
+    tag: "b1fff2b-48"

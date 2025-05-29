@@ -2937,7 +2937,7 @@
                         "username": {
                             "displayName": "User Name",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -2947,7 +2947,7 @@
                         "password": {
                             "displayName": "Password",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": true,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -3007,7 +3007,7 @@
                         "excludeUrls": {
                             "displayName": "Exclude Urls",
                             "dataType": "chipset",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"
@@ -3025,7 +3025,7 @@
                         "usernameField": {
                             "displayName": "Username Field",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -3045,7 +3045,7 @@
                         "loginIndicator": {
                             "displayName": "Login Indicator",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
                             "requiredKey": "zapIntegrationType",
@@ -3055,7 +3055,7 @@
                         "logoutIndicator": {
                             "displayName": "Logout Indicator",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
                             "requiredKey": "zapIntegrationType",

@@ -551,12 +551,12 @@ ssdrescheduler:
   maxRetryOfDeployment: 10
 
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
-  analysisRescheduler: true
+  analysisRescheduler: false
 
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5
 
-  loglevel: info
+  logLevel: info
 ##############################################################################
 kubedetector:
   image:

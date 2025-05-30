@@ -64,4 +64,4 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "b1fff2b-48"
+    tag: "9057a9c-78"

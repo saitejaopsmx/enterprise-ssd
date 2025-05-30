@@ -531,7 +531,7 @@ projectmonitor:
 ##############################################################################
 ssdrescheduler:
   image:
-    repository: ssd-reschduler
+    repository: ssd-rescheduler
     tag: "2025-04-00"
     pullPolicy: IfNotPresent
 

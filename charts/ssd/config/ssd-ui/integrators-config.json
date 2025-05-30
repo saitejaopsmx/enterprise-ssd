@@ -1191,7 +1191,7 @@
                             "displayName": "Host Url",
                             "helpText": "Host URL",
                             "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
-                            "placeholderText": "Example:https://org.myjenkin.com/jenkins",
+                            "placeholderText": "",
                             "required": true,
                             "encrypt": false
                         },
@@ -1262,7 +1262,7 @@
                             "displayName": "User Name",
                             "dataType": "input",
                             "required": true,
-                            "encrypt": false,
+                            "encrypt": true,
                             "helpText": "",
                             "requiredKey": "authMode",
                             "requiredValue": "Password",
@@ -2530,6 +2530,103 @@
                     ]
                 },
                 {
+                    "integratorType": "gitlab-registry",
+                    "displayName": "Gitlab Container Registry",
+                    "category": "dockerregistry",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "url": {
+                            "dataType": "input",
+                            "displayName": "Registry URL",
+                            "helpText": "Gitlab Host URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "Example:https://gitlab.com",
+                            "required": true,
+                            "encrypt": false
+                        },
+                        "clienturl": {
+                            "dataType": "input",
+                            "displayName": "Client URL",
+                            "helpText": "Gitlab Host Url",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "",
+                            "required": true,
+                            "encrypt": false
+                        },
+                        "username": {
+                            "displayName": "User Name",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "",
+                            "disabled": false,
+                            "placeholderText": "admin"
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "disabled": false,
+                            "helpText": "",
+                            "placeholderText": "********"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "s3",
                     "displayName": "S3 bucket",
                     "multiSupport": true,
@@ -2937,7 +3034,7 @@
                         "username": {
                             "displayName": "User Name",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -2947,7 +3044,7 @@
                         "password": {
                             "displayName": "Password",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": true,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -3007,7 +3104,7 @@
                         "excludeUrls": {
                             "displayName": "Exclude Urls",
                             "dataType": "chipset",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"
@@ -3025,7 +3122,7 @@
                         "usernameField": {
                             "displayName": "Username Field",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "requiredKey": "zapIntegrationType",
                             "requiredValue": "zapDastScan",
@@ -3045,7 +3142,7 @@
                         "loginIndicator": {
                             "displayName": "Login Indicator",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
                             "requiredKey": "zapIntegrationType",
@@ -3055,7 +3152,7 @@
                         "logoutIndicator": {
                             "displayName": "Logout Indicator",
                             "dataType": "input",
-                            "required": false,
+                            "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
                             "requiredKey": "zapIntegrationType",

@@ -224,6 +224,16 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
+      - integratorType: gitlab-registry
+        category: dockerregistry
+        multiaccount: true
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
       - integratorType: acr
         category: dockerregistry
         multiaccount: true

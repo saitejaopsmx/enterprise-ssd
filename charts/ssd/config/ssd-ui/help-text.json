@@ -814,6 +814,39 @@
                 }
             }
         },
+        "GITLAB-REGISTRY": {
+            "HEADER": "GitLab",
+            "BODY": "<p>GitLab is a platform that enables developers to create, store, manage, and share their code.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis</strong>: SSD runs security analyses on GitLab repositories to identify git security posture.</li><li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li><li><strong>Security Scans</strong>: SSD can execute various security scans on GitLab repositories, such as:<ul><li>SAST (Static Application Security Testing)</li><li>Secret Scan</li><li>License Scan</li></ul></li></ul></div>",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "URL cannot be empty",
+                    "invalidValue": "URL is invalid"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "User Name cannot be empty"
+                }
+            },
+            "PASSWORD": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Password cannot be empty"
+                }
+            }
+        },
         "SYFT": {
             "HEADER": "Syft",
             "BODY": "Generate a Software Bill of Materials (SBOM) with Syft to track open-source dependencies and detect vulnerabilities",

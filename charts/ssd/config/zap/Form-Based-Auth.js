@@ -18,7 +18,7 @@ function authenticate(helper, paramsValues, credentials) {
     print("Authenticating via JavaScript script...");
     // Make sure any Java classes used explicitly are imported
     var HttpRequestHeader = Java.type("org.parosproxy.paros.network.HttpRequestHeader");
-    var HttpHeader = Java.type("org.parosproxy.paros.network.HttpHeader");git add 
+    var HttpHeader = Java.type("org.parosproxy.paros.network.HttpHeader");
     var URI = Java.type("org.apache.commons.httpclient.URI");
     // Prepare the login request details
     var requestUri = new URI(paramsValues.get("Target_URL"), false);

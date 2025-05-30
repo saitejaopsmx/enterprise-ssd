@@ -52,7 +52,9 @@ spec:
                       sleep 30
                       frontendpod=$(kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
+                      kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                       break
                    else
                       echo "###########**** Waiting for the SSD-DB Pod to come up ******###########"
@@ -65,6 +67,7 @@ spec:
                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
+                 kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                  {{- end }}
                else
                  if [ $wait_period -gt 1000 ]; then
@@ -117,6 +120,7 @@ spec:
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
+                      kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                       break
                     else
                       echo "###########**** Waiting for the SSD-DB Pod to come up ******###########"
@@ -129,6 +133,7 @@ spec:
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
+                  kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                   {{- end }}
 
                else

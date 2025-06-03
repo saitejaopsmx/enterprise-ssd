@@ -14,3 +14,7 @@ artifact-scan:
   queue: artifact-scan
   exchange: echo.events
   bindingKey: artifact-scan
+  platformQueues:
+    docker: artifact-scan-docker
+    gitlab-registry: artifact-scan-gitlab
+    general: artifact-scan-general

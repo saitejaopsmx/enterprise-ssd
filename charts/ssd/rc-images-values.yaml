@@ -5,7 +5,7 @@ imageCredentials:
 
 ui:
   image:
-    tag: "3d32a37b5-829"
+    tag: "1c6ba844e-842"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
@@ -21,16 +21,16 @@ ssdgate:
     tag: "e3acfc6-106"
 ssdopa:
   image:
-    tag: "fa07246-156"
+    tag: "338ce85-157"
 supplychainpreprocessor:
   image:
-    tag: "1d92cb1-97"
+    tag: "ff84d74-98"
   #securityContext:
   #  readOnlyRootFilesystem: false
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "7531e3a-839"
+    tag: "eb97688-8"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -38,7 +38,7 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "ee0c3c2-28"
+    tag: "253bc52-31"
 
 snykmonitor:
   image:

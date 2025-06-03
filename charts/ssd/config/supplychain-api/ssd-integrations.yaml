@@ -10,6 +10,14 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: gitlab-server
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
       - integratorType: github
         category: sourcetool
         multiaccount: false

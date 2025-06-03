@@ -1065,6 +1065,84 @@
                     ]
                 },
                 {
+                    "integratorType": "gitlab-server",
+                    "displayName": "Gitlab Server",
+                    "category": "sourcetool",
+                    "multiSupport": true,
+                    "testConnectionFlag": true,
+                    "deleteAccount": true,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "url": {
+                            "dataType": "input",
+                            "displayName": "Host URL",
+                            "helpText": "Gitlab Host URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
+                            "placeholderText": "Example:https://gitlab.com",
+                            "required": true,
+                            "encrypt": false
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "Authentiation Type",
+                            "placeholderText": "Example:knjnasjwokldjhse"
+                        }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Url",
+                            "prop": "url",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 120,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
+                },
+                {
                     "integratorType": "azure",
                     "displayName": "Azure",
                     "category": "sourcetool",
@@ -3104,7 +3182,7 @@
                         "excludeUrls": {
                             "displayName": "Exclude Urls",
                             "dataType": "chipset",
-                            "required": true,
+                            "required": false,
                             "encrypt": false,
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"

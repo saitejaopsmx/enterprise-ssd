@@ -736,6 +736,41 @@
                 }
             }
         },
+        "GITLAB-SERVER": {
+            "HEADER": "GitLab Server",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "GitLab's host address, such as https://gitlab.com",
+                "VALIDATION_MESSAGE": {
+                    "required": "Host URL cannot be empty",
+                    "invalidValue": "Host URL is invalid"
+                }
+            },
+            "AUTHENTICATIONTYPE": {
+                "TOOLTIP": "Select how the external resource confirms the user credentials",
+                "VALIDATION_MESSAGE": {}
+            },
+            "TOKEN": {
+                "TOOLTIP": "GitLab token",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
+                "VALIDATION_MESSAGE": {}
+            }
+        },
         "OPENSSF": {
             "HEADER": "OpenSSF",
             "BODY": "<p>OpenSSF Scorecard is a security assessment tool designed to evaluate the security posture of open-source projects. It provides a set of metrics to assess the security practices and vulnerabilities associated with projects.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis:</strong> SSD utilizes OpenSSF Scorecard to run security analysis on repositories. It assesses the security posture of GitHub repositories by checking various security practices and metrics.</li><li><strong>Metadata Collection:</strong> SSD collects metadata such as repository name, branch, list of commits, and approvers to perform supply chain security-related analysis.</li><li><strong>Results Display:</strong> The results of the security analysis are available on the DBOM page for audit purposes, providing insights into the security posture and helping to identify areas for improvement.</li><li>OpenSSF Scorecard is available out of the box with SSD. You can enable or disable this feature using the setting below.</li></ul></div>",

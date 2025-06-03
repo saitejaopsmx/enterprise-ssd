@@ -320,7 +320,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-04-00"
+    tag: "2025-04-01"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

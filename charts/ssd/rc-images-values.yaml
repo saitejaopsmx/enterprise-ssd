@@ -54,7 +54,7 @@ mobsf:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "c9af78c-14"
+    tag: "4269e4e-16"
 
 ssdrescheduler:
   image:
@@ -64,4 +64,4 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "9057a9c-78"
+    tag: "4db12cd-83"

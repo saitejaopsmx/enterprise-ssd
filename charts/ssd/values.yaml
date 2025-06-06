@@ -212,8 +212,6 @@ db:
   #url: jdbc:postgresql://ssd-db:5432
   host: ssd-db
   port: 5432
-  username: postgres
-  password: networks123
 
   ## Image specific details
   image:
@@ -334,11 +332,6 @@ supplychainapi:
   probes: {}
 
   securityContext: {}
-
-  gitusername: GITUSERNAME
-
-  gittoken: asdsdasdasdASDA
-
 ######################################################
 tokenmachine:
   ## Image specific details
@@ -366,8 +359,6 @@ rabbitmq:
   ## Change this to custom URL if installRedis is set to false
   url: rabbitmq-service
   port: 5672
-  username: rabbitmq
-  password: Networks123
   image:
     registry: quay.io/opsmxpublic/rabbitmq
     repository: 3-management
@@ -686,11 +677,9 @@ temporal:
             host: ssd-db
             port: "5432"
             database: temporal
-            user: postgres
-            password: networks123
           # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
           # it has a single key called `password`
-          # existingSecret: temporal-default-store
+            existingSecret: temporal-default-store
             maxConns: 20
             maxConnLifetime: "1h"
           # tls:
@@ -706,11 +695,9 @@ temporal:
             host: ssd-db
             port: "5432"
             database: temporal_visibility
-            user: postgres
-            password: networks123
           # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
           # it has a single key called `password`
-          # existingSecret: temporal-visibility-store
+            existingSecret: temporal-visibility-store
             maxConns: 20
             maxConnLifetime: "1h"
           # tls:

@@ -65,11 +65,30 @@ spec:
           - name: S3_Region
             value: {{ .Values.s3region }}
           {{- end }}
+          - name: RABBITMQ_HOST
+            value: rabbitmq-service
+          - name: RABBITMQ_PORT
+            value: "5672"
           - name: Cypher_Key
             valueFrom:
               secretKeyRef:
                 key: AESEncryptionKey
                 name: ssdsecret
+          - name: RABBITMQ_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: rabbitmq-secret
+          - name: RABBITMQ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: rabbitmq-secret
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: redis-secret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs

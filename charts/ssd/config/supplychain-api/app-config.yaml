@@ -7,7 +7,7 @@ tokenMachine:
     port: 8050
 opsMxSvc: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}
 ssdOpa: http://ssd-opa:8200
-redis: {{ template "ssd.redisBaseURL" . }}
+#redis: {{ template "ssd.redisBaseURL" . }}
 graphqlsvc:
     {{- if .Values.dgraph.HA.enabled }}
     host: http://dgraph-alpha-public
@@ -15,20 +15,12 @@ graphqlsvc:
     host: http://dgraph-public
     {{- end }}
     port: 8080
-postgresql:
-    ssd:
-      connectString: host={{ .Values.db.host }} user='{{ .Values.db.username }}'  password='{{ .Values.db.password }}' database=ssddb port={{ .Values.db.port }}
 toolchain:
     host: http://tool-chain
     port: 8100
 spinnaker:
     rabbitmq:
-      username: '{{ .Values.rabbitmq.username }}'
-      password: '{{ .Values.rabbitmq.password }}'
-      host: rabbitmq-service
-      port: 5672
       queue: preview-saas-ssd
-      #queue: isd-to-preview-saas
       exchange: echo.events
       bindingKey: preview-saas-ssd
 projectMonitor:

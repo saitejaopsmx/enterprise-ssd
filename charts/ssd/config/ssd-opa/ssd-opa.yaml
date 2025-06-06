@@ -15,7 +15,6 @@ maxConcurrentActivityExecutionSize: 0 # optional field; default is 0 which means
 maxConcurrentWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 redis:
   address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
-  password: {{ .Values.redis.password }}
   db: 0
 otelAddr: localhost:4317
 otelInterval: {{ .Values.otel.interval }}

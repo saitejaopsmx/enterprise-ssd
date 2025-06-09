@@ -1340,7 +1340,7 @@
                             "displayName": "User Name",
                             "dataType": "input",
                             "required": true,
-                            "encrypt": true,
+                            "encrypt": false,
                             "helpText": "",
                             "requiredKey": "authMode",
                             "requiredValue": "Password",

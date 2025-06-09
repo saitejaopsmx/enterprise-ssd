@@ -38,7 +38,7 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "253bc52-31"
+    tag: "931a92d-33"
 
 snykmonitor:
   image:
@@ -64,4 +64,4 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "4db12cd-83"
+    tag: "781aa8b-107"

@@ -128,7 +128,7 @@
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
-{{- if .Values.global.minio.enabled }}
+{{- if .Values.minio.enabled }}
 - name: minio
   path_prefixes:
   - "/minio"

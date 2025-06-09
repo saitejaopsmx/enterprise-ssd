@@ -46,7 +46,7 @@ spec:
         - name: RABBITMQ_PORT
           value: "5672"
         - name: REDIS_ADDRESS
-          value: {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
+          value: {{ .Release.Name }}-redis-master:6379
         - name: REDIS_DB
           value: "0"
         - name: RABBITMQ_USERNAME

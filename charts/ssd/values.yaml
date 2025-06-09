@@ -296,7 +296,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-02-00"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

@@ -12,8 +12,6 @@ imageCredentials:
 storageClass:
 # noPvc is true, no PVCs will be created, suitable for minikube
 noPvc: false
-
-AESEncryptionKey: OKPQK0JWS2TVTW9E86IWWYN3VY4Z34WJ
 ####################################################
 ## Redis configuration
 ## Set it to false only if SSD needs to be configured with external redis

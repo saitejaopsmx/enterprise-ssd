@@ -32,9 +32,9 @@ spec:
           env:
           - name: REDIS_PASSWORD
             valueFrom:
-            secretKeyRef:
-              key: password
-              name: redis-secret
+              secretKeyRef:
+                key: password
+                name: redis-secret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs

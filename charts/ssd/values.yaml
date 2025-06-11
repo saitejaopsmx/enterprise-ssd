@@ -260,7 +260,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2025-04-00"
+    tag: "2025-04-01"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -283,7 +283,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-04-00"
+    tag: "2025-04-01"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -307,7 +307,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-04-00"
+    tag: "2025-04-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -662,10 +662,9 @@ temporal:
             port: "5432"
             database: temporal
             user: postgres
-            password: networks123
           # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
           # it has a single key called `password`
-          # existingSecret: temporal-default-store
+            existingSecret: temporal-default-store
             maxConns: 20
             maxConnLifetime: "1h"
           # tls:
@@ -682,10 +681,9 @@ temporal:
             port: "5432"
             database: temporal_visibility
             user: postgres
-            password: networks123
           # for a production deployment use this instead of `password` and provision the secret beforehand e.g. with a sealed secret
           # it has a single key called `password`
-          # existingSecret: temporal-visibility-store
+            existingSecret: temporal-visibility-store
             maxConns: 20
             maxConnLifetime: "1h"
           # tls:

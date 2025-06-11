@@ -14,7 +14,7 @@ temporalHostPort: {{ .Release.Name }}-temporal-frontend:7233
 maxConcurrentActivityExecutionSize: 0 # optional field; default is 0 which means maximum
 maxConcurrentWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 redis:
-  address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
+  address : {{ .Release.Name }}-redis-master:6379
   db: 0
 otelAddr: localhost:4317
 otelInterval: {{ .Values.otel.interval }}

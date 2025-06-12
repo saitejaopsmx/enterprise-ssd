@@ -18,8 +18,12 @@ dependencies:
     version: 0.15.3
     condition: ssdgate.installDex
   - name: minio
-    version: 8.0.9
+    version: 16.0.10
     condition: global.minio.enabled
   - name: redis
-    version: 10.5.3
+    version: 21.1.11
     condition: installRedis
+  - name: temporal
+    version: 0.63.0
+    condition: temporal.enabled
+

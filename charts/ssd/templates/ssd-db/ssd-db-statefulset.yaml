@@ -33,7 +33,7 @@ spec:
       - name: {{ .Values.imagePullSecret}}
       {{- end }}
       containers:
-      - image: {{ template "db.image" . }} 
+      - image: {{ template "db.image" . }}
         imagePullPolicy: {{ .Values.db.image.pullPolicy }}
         name: ssd-db
         ports:

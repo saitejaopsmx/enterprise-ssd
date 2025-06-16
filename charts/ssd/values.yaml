@@ -556,7 +556,10 @@ ssdrescheduler:
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5
 
-  loglevel: info
+  ### Interval minutes default is 30minutes
+  ossSchedulerInterval: 600
+
+  logLevel: info
 ##############################################################################
 artifactscan:
   image:

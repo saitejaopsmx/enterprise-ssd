@@ -461,7 +461,7 @@ type PolicyEnforcement {
     enforcedApplication: Application @hasInverse(field: policyEnforcements)
     status: Boolean! @search
     forceApply: Boolean @search
-    severity: Severity!
+    severity: Severity! @search(by: [exact,regexp])
     datasourceTool: String! @search(by: [exact])
     action: String! @search(by: [exact])
     conditionValue: String @search(by: [exact])
@@ -705,7 +705,7 @@ type Component {
     licenses: [String!]
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
-    scannedAt: DateTime
+    scannedAt: DateTime @search
     analysisRequired: Boolean @search
     analysis: ComponentAnalysis @hasInverse(field: Components)
     vulnerabilities: [Vulnerability!] @hasInverse(field: affects)
@@ -853,7 +853,6 @@ type ExceptionAffects implements RBAC
     exception: Exception! @hasInverse(field: affects)
     runHistories: [RunHistory!] @hasInverse(field: exception)
 }
-
 
 interface AbstractResource{
     id: String! @id
@@ -1043,7 +1042,6 @@ type CSPMScan implements Scan {
     associatedResourceScanGroup: [CSPMResourceScanGroup!] @hasInverse(field: cspmScan)
 }
 
-
 type Project
 @auth(
     query: {
@@ -1224,7 +1222,6 @@ type ScanResult
     scanDuration: DateTime! @search
     riskStatus: RiskStatus @search(by: [exact,regexp])
     scanTarget: ScanTarget! @hasInverse(field: scanResults)
-    # runHistories: [RunHistory!] @hasInverse(field: scanResults)
 }
 
 # Dgraph.Allow-Origin "http://localhost:4200"

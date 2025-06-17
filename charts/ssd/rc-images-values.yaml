@@ -10,7 +10,7 @@ ui:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "8203461-116"
+    tag: "5728b5d-6"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
@@ -21,16 +21,16 @@ ssdgate:
     tag: "e3acfc6-106"
 ssdopa:
   image:
-    tag: "338ce85-157"
+    tag: "3c6ba3d-10"
 supplychainpreprocessor:
   image:
-    tag: "ff84d74-98"
+    tag: "53afcb6-8"
   #securityContext:
   #  readOnlyRootFilesystem: false
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "eb97688-8"
+    tag: "12f8a2-872"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -38,13 +38,12 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "931a92d-33"
+    tag: "931a92d-5"
 
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "e89fbfb-2"
-    pullPolicy: IfNotPresent
+    tag: "e5ca965-2"
 
 mobsf:
   image:
@@ -54,14 +53,14 @@ mobsf:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "4269e4e-16"
+    tag: "034e0ad-2"
 
 ssdrescheduler:
   image:
     repository: ssd-rescheduler
-    tag: "946b56e-1"
+    tag: "1bdf3e7-2"
 
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "781aa8b-107"
+    tag: "e109988-3"

@@ -44,11 +44,11 @@ spec:
                 key: secretkey
           {{- else }}
           - name: S3_BUCKET
-            value: {{ .Values.s3bucketname }}
+            value: {{ template "s3.bucketname" . }}
           - name: S3_Region
             value: {{ .Values.s3region }}
           - name: S3_Secure
-            value: false
+            value: {{ template "s3.protocolcheck" . }}
           {{- end }}
           envFrom:
           - configMapRef:

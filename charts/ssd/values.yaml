@@ -43,7 +43,6 @@ prometheusUrl: Promethues.ingress.url.com
 ### Update the S3 Bucket REGION in AWS #######################################
 s3region: awsregion
 s3bucketurl: https://s3bucketname.s3.awsregion.amazonaws.com
-s3bucketname: s3bucketname
 ####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:

@@ -155,6 +155,7 @@ ssdgate:
   image:
     repository: ssdgate
     tag: "2025-01-00"
+  replicaCount: 1
   installDex: true
   createGateDexSecret: true
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
@@ -371,6 +372,8 @@ rabbitmq:
   image:
     registry: quay.io/opsmxpublic/rabbitmq
     repository: 3-management
+  replicaCount: 1
+
   annotations: {}
 
   serviceAnnotations: {}
@@ -391,6 +394,8 @@ ui:
     repository: ssd-ui
     tag: "2025-05-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
@@ -535,6 +540,8 @@ ssdrescheduler:
     tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
+  replicaCount: 1
+
   annotations: {}
 
   resources: {}
@@ -566,6 +573,8 @@ artifactscan:
     repository: artifact-scan
     tag: "2025-05-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 

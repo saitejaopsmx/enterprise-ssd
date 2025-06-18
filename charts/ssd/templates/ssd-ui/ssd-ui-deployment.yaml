@@ -7,7 +7,7 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: ssd-ui
 spec:
-  replicas: 1
+  replicas: {{ .Values.ui.replicaCount }}
   selector:
     matchLabels:
       app: ssd

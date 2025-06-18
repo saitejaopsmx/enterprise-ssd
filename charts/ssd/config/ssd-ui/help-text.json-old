@@ -444,116 +444,10 @@
                     "required": "Host URL cannot be empty",
                     "invalidValue": "Host URL is invalid"
                 }
-            }
-        },
-        "ACR": {
-            "HEADER": "Azure Container Registry",
-            "BODY": "Securely store and manage container images with Azure Container Registry.",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
             },
-            "URL": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            },
-            "EMAIL": {
-                "TOOLTIP": "Users azure container registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used."
-            },
-            "REPO": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Repositories URL cannot be empty",
-                    "invalidValue": "Repositories URL is invalid"
-                }
-            },
-            "GROUPMEMBERSHIP": {
-                "TOOLTIP": ""
-            },
-            "AUTHENTICATIONTYPE": {
-                "TOOLTIP": "Select an authentication type that corresponds to the connection credential parameter.",
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Toggle on to propagate the change into the CD Tool.",
                 "VALIDATION_MESSAGE": {}
-            },
-            "TOKEN": {
-                "TOOLTIP": "The token of the Azure Container Registry user to authenticate as",
-                "VALIDATION_MESSAGE": {
-                    "required": "Token cannot be empty"
-                }
-            },
-            "USERNAME": {
-                "TOOLTIP": "The username of the Azure Container Registry user to authenticate as",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
-                    "cannotContainSpace": "User Name cannot contain space",
-                    "required": "User Name cannot be empty",
-                    "startingFromNumber": "User Name cannot start with numbers"
-                }
-            },
-            "PASSWORD": {
-                "TOOLTIP": "The password of the Azure Container Registry user to authenticate as",
-                "VALIDATION_MESSAGE": {
-                    "required": "Password cannot be empty"
-                }
-            },
-            "HOSTURL": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            }
-        },
-        "GCR": {
-            "HEADER": "Google Container Registry",
-            "BODY": "Host and manage container images with Google Container Registry for scalable and secure deployments.",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
-            },
-            "URL": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            },
-            "FILEDATA": {
-                "VALIDATION_MESSAGE": {
-                    "required": "File cannot be empty",
-                    "invalidValue": "File is invalid"
-                }
-            }
-        },
-        "MOBSF": {
-            "HEADER": "MobSF",
-            "BODY": "Analyze and secure mobile apps with MobSF's automated scanning and vulnerability detection.",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
             }
         },
         "QUAY": {
@@ -570,13 +464,6 @@
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             },
-            "URL": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            },
             "USERNAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -587,6 +474,13 @@
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Password cannot be empty"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Host URL cannot be empty",
+                    "invalidValue": "Host URL is invalid"
                 }
             }
         },
@@ -624,13 +518,6 @@
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             },
-            "HOSTURL": {
-                "TOOLTIP": "BitBucket Web URL. It is usually https://bitbucket.org",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            },
             "ACCESSLEVELNAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -657,12 +544,11 @@
                     "required": "Workspace ID cannot be empty"
                 }
             },
-            "USERNAME": {
-                "TOOLTIP": "",
+            "HOSTURL": {
+                "TOOLTIP": "BitBucket Web URL. It is usually https://bitbucket.org",
                 "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
-                    "cannotContainSpace": "User Name cannot contain space",
-                    "required": "User Name cannot be empty"
+                    "required": "Host URL cannot be empty",
+                    "invalidValue": "Host URL is invalid"
                 }
             },
             "URL": {
@@ -682,6 +568,14 @@
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Token cannot be empty"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
+                    "cannotContainSpace": "User Name cannot contain space",
+                    "required": "User Name cannot be empty"
                 }
             }
         },
@@ -773,6 +667,10 @@
                     "required": "User Name cannot be empty",
                     "startingFromNumber": "User Name cannot start with numbers"
                 }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
+                "VALIDATION_MESSAGE": {}
             }
         },
         "GITLAB": {
@@ -811,6 +709,10 @@
                 "VALIDATION_MESSAGE": {
                     "required": "Token cannot be empty"
                 }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
+                "VALIDATION_MESSAGE": {}
             }
         },
         "VIRUSTOTAL": {
@@ -832,6 +734,41 @@
                 "VALIDATION_MESSAGE": {
                     "required": "Token cannot be empty"
                 }
+            }
+        },
+        "GITLAB-SERVER": {
+            "HEADER": "GitLab Server",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "GitLab's host address, such as https://gitlab.com",
+                "VALIDATION_MESSAGE": {
+                    "required": "Host URL cannot be empty",
+                    "invalidValue": "Host URL is invalid"
+                }
+            },
+            "AUTHENTICATIONTYPE": {
+                "TOOLTIP": "Select how the external resource confirms the user credentials",
+                "VALIDATION_MESSAGE": {}
+            },
+            "TOKEN": {
+                "TOOLTIP": "GitLab token",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
+                "VALIDATION_MESSAGE": {}
             }
         },
         "OPENSSF": {
@@ -882,6 +819,66 @@
                     "startingFromNumber": "Account Name cannot start with numbers",
                     "minlength": "Account Name should be more than 2 characters",
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            }
+        },
+        "S3": {
+            "HEADER": "S3 bucket",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "AWSACCESSKEY": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Access Key cannot be empty"
+                }
+            },
+            "AWSSECRETKEY": {
+                "TOOLTIP": "Make sure the provided access key has read permission to AWS resources",
+                "VALIDATION_MESSAGE": {
+                    "required": "Secret Access Key cannot be empty"
+                }
+            }
+        },
+        "GITLAB-REGISTRY": {
+            "HEADER": "GitLab",
+            "BODY": "<p>GitLab is a platform that enables developers to create, store, manage, and share their code.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis</strong>: SSD runs security analyses on GitLab repositories to identify git security posture.</li><li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li><li><strong>Security Scans</strong>: SSD can execute various security scans on GitLab repositories, such as:<ul><li>SAST (Static Application Security Testing)</li><li>Secret Scan</li><li>License Scan</li></ul></li></ul></div>",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "URL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "URL cannot be empty",
+                    "invalidValue": "URL is invalid"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "User Name cannot be empty"
+                }
+            },
+            "PASSWORD": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Password cannot be empty"
                 }
             }
         },
@@ -1081,6 +1078,10 @@
                 "VALIDATION_MESSAGE": {
                     "required": "Password cannot be empty"
                 }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Switch On this toggle to configure the resource in a gitops enabled Spinnaker instance",
+                "VALIDATION_MESSAGE": {}
             }
         },
         "HARBOR": {
@@ -1141,6 +1142,12 @@
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             },
+            "TOKEN": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            },
             "CHANNEL": {
                 "TOOLTIP": "Slack Bot Name",
                 "VALIDATION_MESSAGE": {
@@ -1148,12 +1155,6 @@
                     "required": "Channel cannot be empty",
                     "startingFromNumber": "Channel cannot start with numbers",
                     "minlength": "Channel should be more than 2 characters"
-                }
-            },
-            "TOKEN": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Token cannot be empty"
                 }
             }
         },
@@ -1308,46 +1309,6 @@
                 }
             }
         },
-        "JFROGARTIFACTORY": {
-            "HEADER": "JFrog Artifactory",
-            "BODY": "<p>JFrog Artifactory is a universal artifact repository manager designed to store, manage, and distribute binaries and artifacts produced during the software development process, including compiled code, libraries, dependencies, Docker images, and more.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>JFrog Artifactory notifies SSD of each pipeline execution. SSD identifies the image for every build and connects to the Artifactory repository to pull the newly built image.</li> <li>SSD then runs security scans on the pulled images. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>JFrog Artifactory helps collect metadata such as Artifact SHA for artifact integrity checks, ensuring security in the supply chain. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
-            },
-            "URL": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Repository URL cannot be empty",
-                    "invalidValue": "Repository URL is invalid"
-                }
-            },
-            "USERNAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "User Name cannot be empty"
-                }
-            },
-            "PASSWORD": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Password cannot be empty"
-                }
-            },
-            "TOKEN": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Token cannot be empty"
-                }
-            }
-        },
         "KUBERNETES": {
             "HEADER": "",
             "BODY": "",
@@ -1455,12 +1416,6 @@
                     "invalidValue": "Host URL is invalid"
                 }
             },
-            "SNYKORGID": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "required": "Snyk Org Id cannot be empty"
-                }
-            },
             "TOKEN": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -1472,17 +1427,6 @@
         "JIRA": {
             "HEADER": "Jira",
             "BODY": "<p>JIRA is a project management and issue tracking tool used to manage and track work within teams.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>SSD allows users to generate JIRA tickets directly from the Security Issues screen.</li> <li>The “Create JIRA Ticket” button is available for each security issue, enabling the creation of a JIRA ticket with all relevant details. This facilitates the efficient resolution of issues by developers.</li> </ul> </div>",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "minlength": "Account Name should be more than 2 characters",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
-            },
             "PROJECTKEY": {
                 "TOOLTIP": "User defined name for the Jira account",
                 "VALIDATION_MESSAGE": {
@@ -1536,7 +1480,7 @@
                 }
             },
             "STATUSKEYWORD": {
-                "TOOLTIP": "Map the below statuses with the Jira working statuses. For example, 'In Progress' can be mapped to 'In Progress'.",
+                "TOOLTIP": "Status Keyword",
                 "VALIDATION_MESSAGE": {
                     "required": ""
                 }
@@ -1733,9 +1677,9 @@
                 }
             }
         },
-        "QUALYS": {
-            "HEADER": "Qualys",
-            "BODY": "",
+        "ACR": {
+            "HEADER": "Azure Container Registry",
+            "BODY": "Securely store and manage container images with Azure Container Registry.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -1750,8 +1694,72 @@
             "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "URL cannot be empty",
-                    "invalidValue": "URL is invalid"
+                    "required": "Host URL cannot be empty",
+                    "invalidUrl": "Host URL is invalid"
+                }
+            },
+            "EMAIL": {
+                "TOOLTIP": "Users azure container registry email. If no value is specified, the default value of fake.email@spinnaker.io will be used."
+            },
+            "REPO": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Repositories URL cannot be empty",
+                    "invalidUrl": "Repositories URL is invalid"
+                }
+            },
+            "GROUPMEMBERSHIP": {
+                "TOOLTIP": ""
+            },
+            "AUTHENTICATIONTYPE": {
+                "TOOLTIP": "Select an authentication type that corresponds to the connection credential parameter.",
+                "VALIDATION_MESSAGE": {}
+            },
+            "TOKEN": {
+                "TOOLTIP": "The token of the Azure Container Registry user to authenticate as",
+                "VALIDATION_MESSAGE": {
+                    "required": "Token cannot be empty"
+                }
+            },
+            "USERNAME": {
+                "TOOLTIP": "The username of the Azure Container Registry user to authenticate as",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "User Name cannot contain special characters other than - and _",
+                    "cannotContainSpace": "User Name cannot contain space",
+                    "required": "User Name cannot be empty",
+                    "startingFromNumber": "User Name cannot start with numbers"
+                }
+            },
+            "PASSWORD": {
+                "TOOLTIP": "The password of the Azure Container Registry user to authenticate as",
+                "VALIDATION_MESSAGE": {
+                    "required": "Password cannot be empty"
+                }
+            },
+            "HOSTURL": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Host URL cannot be empty",
+                    "invalidUrl": "Host URL is invalid"
+                }
+            },
+            "SPINNAKERTOGGLE": {
+                "TOOLTIP": "Toggle on to propagate the change into the CD Tool.",
+                "VALIDATION_MESSAGE": {}
+            }
+        },
+        "MOBSF": {
+            "HEADER": "MobSF",
+            "BODY": "Analyze and secure mobile apps with MobSF's automated scanning and vulnerability detection.",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             }
         },
@@ -1835,9 +1843,9 @@
                 }
             }
         },
-        "S3": {
-            "HEADER": "S3 bucket",
-            "BODY": "",
+        "SYSDIG": {
+            "HEADER": "Sysdig",
+            "BODY": "Monitor and secure containers and cloud-native apps with Sysdig for real-time threat detection and compliance.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -1849,22 +1857,23 @@
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             },
-            "AWSACCESSKEY": {
+            "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "Access Key cannot be empty"
+                    "required": "URL cannot be empty",
+                    "invalidValue": "URL is invalid"
                 }
             },
-            "AWSSECRETKEY": {
-                "TOOLTIP": "Make sure the provided access key has read permission to AWS resources",
+            "TOKEN": {
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "Secret Access Key cannot be empty"
+                    "required": "Token cannot be empty"
                 }
             }
         },
-        "GITLAB-REGISTRY": {
-            "HEADER": "GitLab",
-            "BODY": "<p>GitLab is a platform that enables developers to create, store, manage, and share their code.</p><div class='usage-section'><p><strong>Usage in SSD</strong></p><ul><li><strong>Security Analysis</strong>: SSD runs security analyses on GitLab repositories to identify git security posture.</li><li><strong>Metadata Collection</strong>: SSD collects metadata, including repository name, branch, list of commits, and approvers, to perform supply chain security analyses and populate this data in the DBOM for auditing.</li><li><strong>Security Scans</strong>: SSD can execute various security scans on GitLab repositories, such as:<ul><li>SAST (Static Application Security Testing)</li><li>Secret Scan</li><li>License Scan</li></ul></li></ul></div>",
+        "JFROGARTIFACTORY": {
+            "HEADER": "JFrog Artifactory",
+            "BODY": "<p>JFrog Artifactory is a universal artifact repository manager designed to store, manage, and distribute binaries and artifacts produced during the software development process, including compiled code, libraries, dependencies, Docker images, and more.</p> <div> <p><strong>Usage in SSD</strong></p> <ul> <li>JFrog Artifactory notifies SSD of each pipeline execution. SSD identifies the image for every build and connects to the Artifactory repository to pull the newly built image.</li> <li>SSD then runs security scans on the pulled images. The scan results are available on the Vulnerability Management page and the Artifact section of the DBOM page.</li> <li>JFrog Artifactory helps collect metadata such as Artifact SHA for artifact integrity checks, ensuring security in the supply chain. This information is populated in the DBOM page for audit purposes.</li> </ul> </div>",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -1872,14 +1881,15 @@
                     "cannotContainSpace": "Account Name cannot contain space",
                     "required": "Account Name cannot be empty",
                     "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
                     "invalidName": "Please choose another account name; User generated account can't be named `default`"
                 }
             },
             "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "URL cannot be empty",
-                    "invalidValue": "URL is invalid"
+                    "required": "Repository URL cannot be empty",
+                    "invalidValue": "Repository URL is invalid"
                 }
             },
             "USERNAME": {
@@ -1893,34 +1903,9 @@
                 "VALIDATION_MESSAGE": {
                     "required": "Password cannot be empty"
                 }
-            }
-        },
-        "GITLAB-SERVER": {
-            "HEADER": "GitLab Server",
-            "BODY": "",
-            "NAME": {
-                "TOOLTIP": "",
-                "VALIDATION_MESSAGE": {
-                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
-                    "cannotContainSpace": "Account Name cannot contain space",
-                    "required": "Account Name cannot be empty",
-                    "startingFromNumber": "Account Name cannot start with numbers",
-                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
-                }
-            },
-            "URL": {
-                "TOOLTIP": "GitLab's host address, such as https://gitlab.com",
-                "VALIDATION_MESSAGE": {
-                    "required": "Host URL cannot be empty",
-                    "invalidValue": "Host URL is invalid"
-                }
-            },
-            "AUTHENTICATIONTYPE": {
-                "TOOLTIP": "Select how the external resource confirms the user credentials",
-                "VALIDATION_MESSAGE": {}
             },
             "TOKEN": {
-                "TOOLTIP": "GitLab token",
+                "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
                     "required": "Token cannot be empty"
                 }
@@ -1947,9 +1932,9 @@
                 }
             }
         },
-        "SYSDIG": {
-            "HEADER": "Sysdig",
-            "BODY": "Monitor and secure containers and cloud-native apps with Sysdig for real-time threat detection and compliance.",
+        "GCR": {
+            "HEADER": "Google Container Registry",
+            "BODY": "Host and manage container images with Google Container Registry for scalable and secure deployments.",
             "NAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
@@ -1964,14 +1949,90 @@
             "URL": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "URL cannot be empty",
-                    "invalidValue": "URL is invalid"
+                    "required": "Host URL cannot be empty",
+                    "invalidUrl": "Host URL is invalid"
                 }
             },
-            "TOKEN": {
+            "FILEDATA": {
+                "VALIDATION_MESSAGE": {
+                    "required": "File cannot be empty",
+                    "invalidUrl": "File is invalid"
+                }
+            }
+        }
+    },
+    "UNCHANGED_FORM": "Form is unchanged. Please make modifications in the form to enable the button.",
+    "INVALID_FORM": "Few fields are mandatory or invalid. Please fill the form to enable the button.",
+    "NO_WRITE_ACCESS": "You have only read permission. Please check with your administrator for updating permissions.",
+    "ACCESS_MANAGEMENT": {
+        "ADMINISTRATOR": {
+            "INFO": "Super Administrator Groups will not appear in the dropdown since their Access Permissions cannot be modified. Administrators will have full Access to all Resources.",
+            "TOOLTIP": "Groups with Administration Permissions"
+        },
+        "USER_ROLE_LISTING": {
+            "HEADER": "ROLE MANAGEMENT",
+            "BODY": "Users should be assigned user roles only if they need global access to one or more resources."
+        },
+        "USER_ROLE_CREATION": {
+            "ROLENAME": {
                 "TOOLTIP": "",
                 "VALIDATION_MESSAGE": {
-                    "required": "Token cannot be empty"
+                    "required": "Role Name cannot be empty",
+                    "cannotContainSpace": "Role Name cannot contain space",
+                    "noSpecialCharacters": "Role Name cannot contain special character",
+                    "startingFromNumber": "Role Name should not start with number"
+                }
+            },
+            "USER_GROUPS": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Groups cannot be empty"
+                }
+            },
+            "PERMISSIONS": {
+                "VALIDATION_MESSAGE": {
+                    "required": "Atleast one feature has to be enabled with permissions"
+                }
+            }
+        },
+        "FEATURE_VISIBILTY_LISTING": {
+            "HEADER": "FEATURE FLAG MANAGEMENT",
+            "BODY": "Feature Visibility is used for scenarios where one or more user groups need exclusive access to a specific feature. For example, the 'Compliance Team' should only access the Policy Management feature. Administrators can enable the feature flag for the compliance team user group. The feature visibility function will ensure that the policy management feature is not visible for all other user groups."
+        },
+        "FEATURE_VISIBILTY_CREATION": {
+            "ROLENAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Role Name cannot be empty",
+                    "cannotContainSpace": "Role Name cannot contain space",
+                    "noSpecialCharacters": "Role Name cannot contain special character",
+                    "startingFromNumber": "Role Name should not start with number"
+                }
+            },
+            "USER_GROUPS": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Groups cannot be empty"
+                }
+            },
+            "PERMISSIONS": {
+                "VALIDATION_MESSAGE": {
+                    "required": "Atleast one feature has to be enabled"
+                }
+            }
+        },
+        "TEAM_CREATION": {
+            "TEAM_NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Name cannot be empty"
+                }
+            },
+            "TEAM_OWNER": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "required": "Email cannot be empty",
+                    "email": "Email Id is invalid"
                 }
             }
         }

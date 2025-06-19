@@ -158,8 +158,8 @@ ssdgate:
   replicaCount: 1
   installDex: true
   createGateDexSecret: true
+  session_timeout: 2880   # OPTIONAL login session timeout, it should match the authenticator timeout
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
-  #session_timeout: 7200   # OPTIONAL login session timeout, it should match the authenticator timeout
   #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
@@ -558,7 +558,7 @@ ssdrescheduler:
   maxRetryOfDeployment: 100
 
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
-  analysisRescheduler: true
+  analysisRescheduler: false
 
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5

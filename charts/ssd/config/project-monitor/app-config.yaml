@@ -1,16 +1,8 @@
 source-scan:
-  username: 'rabbitmq'
-  password: 'Networks123'
-  host: rabbitmq-service
-  port: 5672
   queue: source-scan
   exchange: echo.events
   bindingKey: source-scan
 artifact-scan:
-  username: 'rabbitmq'
-  password: 'Networks123'
-  host: rabbitmq-service
-  port: 5672
   queue: artifact-scan
   exchange: echo.events
   bindingKey: artifact-scan

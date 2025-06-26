@@ -45,9 +45,6 @@ spec:
           mountPath: /var/www/html/ui/assets/config/app-config.json
           subPath: app-config.json
         - name: config-dir
-          mountPath: /var/www/html/ui/assets/config/help-text.json
-          subPath: help-text.json
-        - name: config-dir
           mountPath: /var/www/html/ui/assets/config/integrators-config.json
           subPath: integrators-config.json
         - name: config-dir

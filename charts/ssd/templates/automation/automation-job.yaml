@@ -67,6 +67,7 @@ spec:
                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
+                 break
                  {{- end }}
                else
                  if [ $wait_period -gt 1000 ]; then
@@ -87,9 +88,8 @@ spec:
                kubectl get pods -n {{ .Release.Namespace }} -o jsonpath='{range .items[*]}{..metadata.name}{"\t"}{..containerStatuses..ready}{"\n"}{end}' > live.status
                DGRAPH=$(grep dgraph-0 live.status | awk '{print $2}')
                SUPPLYCHAINAPI=$(grep supplychain-api live.status | awk '{print $2}')
-               status=$(kubectl get pods -n {{ .Release.Namespace }} -l component=db --field-selector=status.phase=Running --no-headers=true | awk '{print $2}')
                wait_period=$(($wait_period+10))
-               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ] && [ "$status" == "1/1" ]; then
+               if [ "$DGRAPH" == "true" ] && [ "$SUPPLYCHAINAPI" == "true" ]; then
                   sleep 10
                   echo "############******Adding the Dgraph Schema*********#######################"
                   SCHEMA_CHECK=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/schema/schema.graphql)" $schema_endpoint`
@@ -133,6 +133,7 @@ spec:
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
+                  break
                   {{- end }}
 
                else

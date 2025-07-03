@@ -468,7 +468,7 @@ otel:
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "2025-02-02"
+    tag: "2025-04-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -551,7 +551,7 @@ ssdrescheduler:
   maxRetryOfDeployment: 100
 
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
-  analysisRescheduler: true
+  analysisRescheduler: false
 
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5

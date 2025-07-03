@@ -6,7 +6,7 @@ graphQLAddr: http://dgraph-public:8080/graphql
 {{- end }}
 cloneRepoOnce: {{ .Values.toolchain.cloneRepoOnce }}
 logLevel: {{ .Values.toolchain.logLevel }}
-ossSvc: http://34.60.164.173:8071
+ossSvc: http://34.60.164.173:8070
 mobsfClentAddr: http://mobsf-service:8000
 ossAnalayze: 60
 otelAddr: localhost:4317

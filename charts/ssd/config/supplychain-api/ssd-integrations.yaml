@@ -10,6 +10,14 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: gitlab-server
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
       - integratorType: github
         category: sourcetool
         multiaccount: false
@@ -60,6 +68,40 @@ integrationData:
         featureConfigs:
           bitbucketAuthMode:
             default: bearer
+          accessLevel:
+            default: Project
+      - integratorType: azure
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          organisation:
+            encrypt: false
+          project:
+            encrypt: false
+          token:
+            encrypt: true
+        featureConfigs:
+          accessLevel:
+            default: Project
+      - integratorType: azure-server
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          collectionName:
+            encrypt: false
+          project:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+        featureConfigs:
+          authMode:
+            default: token
           accessLevel:
             default: Project
       - integratorType: sonarqube
@@ -185,6 +227,16 @@ integrationData:
           url:
             encrypt: false
           repo:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+      - integratorType: gitlab-registry
+        category: dockerregistry
+        multiaccount: true
+        integratorConfigs:
+          url:
             encrypt: false
           username:
             encrypt: false

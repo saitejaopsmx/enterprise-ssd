@@ -24,8 +24,8 @@ function authenticate(helper, paramsValues, credentials) {
     var requestUri = new URI(paramsValues.get("Target_URL"), false);
     var requestMethod = HttpRequestHeader.POST;
     // Build the request body using the credentials values
-    var requestBody = paramsValues.get("Username_field") + "=" + encodeURIComponentcredentials.getParam("Username"));
-    requestBody += "&" + paramsValues.get("Password_field") + "=" + encodeURIComponentcredentials.getParam("Password"));
+    var requestBody = paramsValues.get("Username_field") + "=" + encodeURIComponent(credentials.getParam("Username"));
+    requestBody += "&" + paramsValues.get("Password_field") + "=" + encodeURIComponent(credentials.getParam("Password"));
     // Build the actual message to be sent
     print("Sending " + requestMethod + " request to " + requestUri);
     var msg = helper.prepareMessage();

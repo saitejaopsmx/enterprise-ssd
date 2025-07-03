@@ -556,7 +556,7 @@ ssdrescheduler:
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5
 
-  loglevel: info
+  logLevel: info
 ##############################################################################
 artifactscan:
   image:

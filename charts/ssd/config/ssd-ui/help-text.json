@@ -1664,6 +1664,27 @@
                 }
             }
         },
+        "GCS": {
+            "HEADER": "Google Container Storage",
+            "BODY": "",
+            "NAME": {
+                "TOOLTIP": "",
+                "VALIDATION_MESSAGE": {
+                    "noSpecialCharacters": "Account Name cannot contain special characters other than _ and -",
+                    "cannotContainSpace": "Account Name cannot contain space",
+                    "required": "Account Name cannot be empty",
+                    "startingFromNumber": "Account Name cannot start with numbers",
+                    "minlength": "Account Name should be more than 2 characters",
+                    "invalidName": "Please choose another account name; User generated account can't be named `default`"
+                }
+            },
+            "FILEDATA": {
+                "VALIDATION_MESSAGE": {
+                    "required": "File cannot be empty",
+                    "invalidValue": "File is invalid"
+                }
+            }
+        },
         "GCR": {
             "HEADER": "Google Container Registry",
             "BODY": "Host and manage container images with Google Container Registry for scalable and secure deployments.",

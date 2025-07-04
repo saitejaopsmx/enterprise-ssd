@@ -214,6 +214,16 @@ integrationData:
             encrypt: false
           fileData:
             encrypt: true
+      - integratorType: gcs
+        category: dockerregistry
+        multiaccount: false
+        integratorConfigs:
+          repo:
+            encrypt: false
+          fileName:
+            encrypt: false
+          fileData:
+            encrypt: true
       - integratorType: ecr
         category: dockerregistry
         multiaccount: true

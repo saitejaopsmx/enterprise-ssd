@@ -42,6 +42,8 @@ spec:
               secretKeyRef:
                 name: {{ .Release.Name }}-minio
                 key: secretkey
+          - name: S3_BUCKET
+            value: ssd-temporal
           {{- else }}
           - name: S3_BUCKET
             value: {{ template "s3.bucketname" . }}

@@ -7,7 +7,7 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
   name: ssd-ui
 spec:
-  replicas: 1
+  replicas: {{ .Values.ui.replicaCount }}
   selector:
     matchLabels:
       app: ssd
@@ -44,9 +44,6 @@ spec:
         - name: config-dir
           mountPath: /var/www/html/ui/assets/config/app-config.json
           subPath: app-config.json
-        - name: config-dir
-          mountPath: /var/www/html/ui/assets/config/help-text.json
-          subPath: help-text.json
         - name: config-dir
           mountPath: /var/www/html/ui/assets/config/integrators-config.json
           subPath: integrators-config.json

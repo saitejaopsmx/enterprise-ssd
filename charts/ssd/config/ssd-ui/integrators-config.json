@@ -2046,7 +2046,41 @@
                             "helpText": "select",
                             "placeholderText": "choose file"
                         }
-                    }
+                    },
+                    "gridConfigs": [
+                        {
+                            "name": "Account Name",
+                            "prop": "name",
+                            "type": "default",
+                            "width": 160,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Team",
+                            "prop": "team",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Environment",
+                            "prop": "environments",
+                            "type": "chipSet",
+                            "width": 130,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        },
+                        {
+                            "name": "Status",
+                            "prop": "status",
+                            "type": "toggleSwitch",
+                            "width": 80,
+                            "sortable": false,
+                            "defatultVisibility": true
+                        }
+                    ]
                 },
                 {
                     "integratorType": "gcr",

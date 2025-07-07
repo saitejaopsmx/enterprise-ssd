@@ -238,6 +238,7 @@ enum RiskStatus {
     scanning
     completed
     fail
+    pending
 }
 
 """
@@ -703,6 +704,9 @@ type Component {
     name: String! @search(by: [exact, regexp])
     version: String! @search(by: [exact, regexp])
     licenses: [String!]
+    omittedLicenses: [String!]
+    copyrights: [String!]
+    webURL: String
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
     scannedAt: DateTime @search
@@ -729,6 +733,7 @@ type ComponentAnalysis {
     VulnOthers: Int @search
     MeanTimeToRepair:  Float @search
     Licenses: [String!] @search(by: [exact,regexp])
+    OmittedLicenses: [String!] @search(by: [exact,regexp])
     CreatedAt: DateTime
     ScannedAt: DateTime
     LastViewed: DateTime @search
@@ -853,6 +858,7 @@ type ExceptionAffects implements RBAC
     exception: Exception! @hasInverse(field: affects)
     runHistories: [RunHistory!] @hasInverse(field: exception)
 }
+
 
 interface AbstractResource{
     id: String! @id
@@ -1042,6 +1048,7 @@ type CSPMScan implements Scan {
     associatedResourceScanGroup: [CSPMResourceScanGroup!] @hasInverse(field: cspmScan)
 }
 
+
 type Project
 @auth(
     query: {
@@ -1086,6 +1093,8 @@ type Project
     integratorConfigs: IntegratorConfigs @hasInverse(field: project)
     scans: [ScanTarget!] @hasInverse(field: projects)
     type: String @search(by: [exact,regexp])
+    error: String @search(by: [exact,regexp])
+    riskStatus: RiskStatus @search(by: [exact,regexp])
 }
 
 type ProjectConfig
@@ -1177,6 +1186,8 @@ type ScanTarget
     updatedAt: DateTime! @search
     scanResults: [ScanResult!] @hasInverse(field: scanTarget)
     artifact: Artifact @hasInverse(field: scanTarget)
+    error: String @search(by: [exact,regexp])
+    riskStatus: RiskStatus @search(by: [exact,regexp])
 }
 
 type ScanResult
@@ -1222,6 +1233,7 @@ type ScanResult
     scanDuration: DateTime! @search
     riskStatus: RiskStatus @search(by: [exact,regexp])
     scanTarget: ScanTarget! @hasInverse(field: scanResults)
+    error: String @search(by: [exact,regexp])
 }
 
 # Dgraph.Allow-Origin "http://localhost:4200"

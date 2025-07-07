@@ -18,7 +18,7 @@ toolchain:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "e3acfc6-106"
+    tag: "383b27f-119"
 ssdopa:
   image:
     tag: "f50dc03-15"
@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "a1eeb69-942"
+    tag: "65c60c0-957"
 tokenmachine:
   image:
     tag: "99eb752-36"

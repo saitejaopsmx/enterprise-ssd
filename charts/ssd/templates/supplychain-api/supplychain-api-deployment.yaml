@@ -136,7 +136,33 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       {{- end }}
-
+        - name: gotenberg
+          image: gotenberg/gotenberg:8.7.0
+          command: ["gotenberg"]
+          args: ["--api-port=3000"]
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

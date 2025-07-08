@@ -706,7 +706,7 @@ type Component {
     licenses: [String!]
     omittedLicenses: [String!]
     copyrights: [String!]
-    webURL: String
+    webURL: String @search(by: [exact, regexp])
     purl: String @search(by: [exact])
     cpe: String @search(by: [exact])
     scannedAt: DateTime @search

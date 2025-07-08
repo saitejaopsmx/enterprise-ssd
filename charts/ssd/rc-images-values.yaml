@@ -38,7 +38,7 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "da7186f-49"
+    tag: "b1a6213-50"
 
 snykmonitor:
   image:

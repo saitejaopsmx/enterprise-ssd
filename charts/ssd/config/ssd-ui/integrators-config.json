@@ -3158,25 +3158,17 @@
                             "required": true,
                             "encrypt": false
                         },
-                        "username": {
-                            "displayName": "User Name",
-                            "dataType": "input",
+                        "scanPolicy": {
+                            "displayName": "Scan Policy",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [],
+                            "default": "",
+                            "loadFromApi": true,
+                            "multiselection": false,
                             "required": true,
-                            "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
                             "helpText": "",
-                            "placeholderText": ""
-                        },
-                        "password": {
-                            "displayName": "Password",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
-                            "helpText": "",
-                            "placeholderText": ""
+                            "placeholderText": "",
+                            "featureConfig": false
                         },
                         "retries": {
                             "displayName": "Retries",
@@ -3236,13 +3228,43 @@
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"
                         },
+                        "isAuthenticated": {
+                            "displayName": "Authentication Mode",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
+                            "required": false,
+                            "placeholderText": ""
+                        },
+                        "username": {
+                            "displayName": "User Name",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
                         "loginUrl": {
                             "displayName": "Login Url",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "URL of the login page",
                             "placeholderText": ""
                         },
@@ -3251,8 +3273,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "",
                             "placeholderText": "user1"
                         },
@@ -3261,8 +3283,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -3272,8 +3294,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "placeholderText": "Ex: \\\\Qadmin\\\\E"
                         },
                         "logoutIndicator": {
@@ -3282,8 +3304,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
                     },

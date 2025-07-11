@@ -30,7 +30,7 @@ supplychainpreprocessor:
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "05168fe-1000"
+    tag: "f4f61b2-1002"
 tokenmachine:
   image:
     tag: "99eb752-36"

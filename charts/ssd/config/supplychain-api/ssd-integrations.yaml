@@ -223,6 +223,9 @@ integrationData:
       - integratorType: docker
         category: dockerregistry
         multiaccount: true
+        featureConfigs:
+          authMode:
+            default: token
         integratorConfigs:
           url:
             encrypt: false
@@ -231,6 +234,8 @@ integrationData:
           username:
             encrypt: false
           password:
+            encrypt: true
+          token:
             encrypt: true
       - integratorType: gitlab-registry
         category: dockerregistry
@@ -460,6 +465,8 @@ integrationData:
           openApiAuthType:
           openApiAuthHttpScheme:
           openApiAuthApikeyIn:
+          isAuthenticated:
+            default: inactive
         integratorConfigs:
           serviceUrl:
             encrypt: false

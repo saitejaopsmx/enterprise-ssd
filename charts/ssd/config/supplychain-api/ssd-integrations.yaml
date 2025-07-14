@@ -240,12 +240,17 @@ integrationData:
       - integratorType: gitlab-registry
         category: dockerregistry
         multiaccount: true
+        featureConfigs:
+          authMode:
+            default: token
         integratorConfigs:
           url:
             encrypt: false
           username:
             encrypt: false
           password:
+            encrypt: true
+          token:
             encrypt: true
       - integratorType: acr
         category: dockerregistry

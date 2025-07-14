@@ -2732,9 +2732,9 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "",
+                            "disabled": false,
                             "requiredKey": "authMode",
                             "requiredValue": "Password",
-                            "disabled": false,
                             "placeholderText": "admin"
                         },
                         "password": {

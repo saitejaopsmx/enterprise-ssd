@@ -1340,7 +1340,7 @@
                             "displayName": "User Name",
                             "dataType": "input",
                             "required": true,
-                            "encrypt": true,
+                            "encrypt": false,
                             "helpText": "",
                             "requiredKey": "authMode",
                             "requiredValue": "Password",
@@ -2351,6 +2351,40 @@
                     ]
                 },
                 {
+                    "integratorType": "gcs",
+                    "displayName": "GCS",
+                    "multiSupport": true,
+                    "deleteAccount": true,
+                    "category": "dockerregistry",
+                    "testConnectionFlag": false,
+                    "integratorConfigs": {
+                        "name": {
+                            "displayName": "Account Name",
+                            "dataType": "input",
+                            "required": true,
+                            "regexpValue": "^[^`~!@#$%\\^&*()+={}|[\\]\\:';\\\\\"<>?,./]*$",
+                            "regexType": "noSpecialCharacters",
+                            "helpText": "",
+                            "placeholderText": "opsmx-accountname"
+                        },
+                        "repo": {
+                            "dataType": "chipset",
+                            "displayName": "Approved Artifact Repo",
+                            "helpText": "GCS Repo Name",
+                            "placeholderText": "Example:GCS HOSTURL/<PROJECT_NAME>/<REPO_NAME>",
+                            "required": false,
+                            "encrypt": false
+                        },
+                        "fileData": {
+                            "displayName": "Upload File",
+                            "dataType": "file",
+                            "required": true,
+                            "helpText": "select",
+                            "placeholderText": "choose file"
+                        }
+                    }
+                },
+                {
                     "integratorType": "gcr",
                     "displayName": "GCR",
                     "multiSupport": true,
@@ -2642,6 +2676,32 @@
                             "required": true,
                             "encrypt": false
                         },
+                        "authMode": {
+                            "dataType": "dropdown",
+                            "displayName": "Auth Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Token",
+                                    "value": "Token"
+                                },
+                                {
+                                    "name": "Password",
+                                    "value": "Password"
+                                }
+                            ],
+                            "default": "Token",
+                            "featureConfig": true
+                        },
+                        "token": {
+                            "displayName": "Token",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "helpText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "Token",
+                            "placeholderText": "Example:knjnasjwokldjhse"
+                        },
                         "username": {
                             "displayName": "User Name",
                             "dataType": "input",
@@ -2649,6 +2709,8 @@
                             "encrypt": false,
                             "helpText": "",
                             "disabled": false,
+                            "requiredKey": "authMode",
+                            "requiredValue": "Password",
                             "placeholderText": "admin"
                         },
                         "password": {
@@ -2658,6 +2720,8 @@
                             "encrypt": true,
                             "disabled": false,
                             "helpText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "Password",
                             "placeholderText": "********"
                         }
                     },
@@ -3104,30 +3168,23 @@
                         "serviceUrl": {
                             "dataType": "input",
                             "displayName": "Service URL",
+                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
                             "helpText": "URL",
                             "placeholderText": "https://test-ns.opsmx.org/",
                             "required": true,
                             "encrypt": false
                         },
-                        "username": {
-                            "displayName": "User Name",
-                            "dataType": "input",
+                        "scanPolicy": {
+                            "displayName": "Scan Policy",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [],
+                            "default": "",
+                            "loadFromApi": true,
+                            "multiselection": false,
                             "required": true,
-                            "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
                             "helpText": "",
-                            "placeholderText": ""
-                        },
-                        "password": {
-                            "displayName": "Password",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
-                            "helpText": "",
-                            "placeholderText": ""
+                            "placeholderText": "",
+                            "featureConfig": false
                         },
                         "retries": {
                             "displayName": "Retries",
@@ -3187,13 +3244,43 @@
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"
                         },
+                        "isAuthenticated": {
+                            "displayName": "Authentication Mode",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "featureConfig": true,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
+                            "required": false,
+                            "placeholderText": ""
+                        },
+                        "username": {
+                            "displayName": "User Name",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
                         "loginUrl": {
                             "displayName": "Login Url",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "URL of the login page",
                             "placeholderText": ""
                         },
@@ -3202,8 +3289,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "",
                             "placeholderText": "user1"
                         },
@@ -3212,8 +3299,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -3223,8 +3310,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "placeholderText": "Ex: \\\\Qadmin\\\\E"
                         },
                         "logoutIndicator": {
@@ -3233,8 +3320,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
+                            "requiredKey": "isAuthenticated",
+                            "requiredValue": "active",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
                     },

@@ -1,4 +1,4 @@
-{{- if not .Values.global.minio.enabled }}
+{{- if and (eq .Values.toolchain.iamrole false) (not .Values.global.minio.enabled) }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:

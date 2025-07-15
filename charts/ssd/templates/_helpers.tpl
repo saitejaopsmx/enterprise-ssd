@@ -320,8 +320,8 @@ Return the proper Artifact Scan Image
 {{- $parts := regexSplit "://" $fullurl -1 }}
 {{- $scheme := index $parts 0 }}
 {{- if eq $scheme "https" -}}
-true
+"true"
 {{- else -}}
-false
+"false"
 {{- end }}
 {{- end }}

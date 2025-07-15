@@ -32,16 +32,6 @@ spec:
           {{- if .Values.global.minio.enabled }}
           - name: S3_ENDPOINT_HOST
             value: {{ .Release.Name }}-minio:9000
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Release.Name }}-minio
-                key: accesskey
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Release.Name }}-minio
-                key: secretkey
           - name: S3_BUCKET
             value: ssd-temporal
           {{- else }}
@@ -51,6 +41,29 @@ spec:
             value: {{ .Values.s3region }}
           - name: S3_Secure
             value: {{ template "s3.protocolcheck" . }}
+          {{- end }}
+          {{- if .Values.global.minio.enabled }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: {{ .Release.Name }}-minio
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: {{ .Release.Name }}-minio
+          {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.global.minio.enabled) }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: ssd-storage-secret
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: ssd-storage-secret
           {{- end }}
           envFrom:
           - configMapRef:

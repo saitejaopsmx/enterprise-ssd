@@ -561,7 +561,7 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-04-02"
+    tag: "2025-04-03"
     pullPolicy: IfNotPresent
 
   annotations: {}

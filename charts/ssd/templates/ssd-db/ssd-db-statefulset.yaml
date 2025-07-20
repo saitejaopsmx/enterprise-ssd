@@ -36,18 +36,24 @@ spec:
       - image: {{ template "db.image" . }}
         imagePullPolicy: {{ .Values.db.image.pullPolicy }}
         name: ssd-db
-        lifecycle:
-          preStop:
-            exec:
-              command:
-              - /bin/sh
-              - /opt/opsmx/bin/stop.sh
         ports:
         - containerPort: 5432
           protocol: TCP
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: db-secret
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: db-secret
         volumeMounts:
-        - mountPath: "/var/lib/pgsql-pv"
+        - mountPath: "/var/lib/postgresql/data"
           name: ssd-db-postgresql
+          subPath: postgres
       {{- with .Values.db.probes }}
       {{- toYaml . | nindent 8 }}
       {{- else }}

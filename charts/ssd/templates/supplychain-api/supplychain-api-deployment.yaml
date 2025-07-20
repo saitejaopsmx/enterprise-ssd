@@ -24,7 +24,7 @@ spec:
         {{ toYaml .Values.supplychainapi.annotations | nindent 8 }}
 {{- end }}
     spec:
-      {{- if not .Values.global.minio.enabled }}
+      {{- if not .Values.minio.enabled }}
       serviceAccountName: ssd-storage-sa
       {{- end }}
       initContainers:
@@ -46,43 +46,49 @@ spec:
             - containerPort: 8099
               protocol: TCP
           env:
-          {{- if .Values.global.minio.enabled }}
+          {{- if .Values.minio.enabled }}
           - name: S3_ENDPOINT_URL
-            value: http://{{ .Release.Name }}-minio:9000/
+            value: http://{{ .Release.Name }}-minio:9000
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: minio-secret
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: minio-secret
           {{- else }}
           - name: S3_ENDPOINT_URL
             value: {{ .Values.s3bucketurl }}
           - name: S3_Region
             value: {{ .Values.s3region }}
           {{- end }}
-          {{- if .Values.global.minio.enabled }}
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                key: accesskey
-                name: {{ .Release.Name }}-minio
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secretkey
-                name: {{ .Release.Name }}-minio
-          {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.global.minio.enabled) }}
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                key: accesskey
-                name: ssd-storage-secret
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secretkey
-                name: ssd-storage-secret
-          {{- end }}
+          - name: RABBITMQ_HOST
+            value: rabbitmq-service
+          - name: RABBITMQ_PORT
+            value: "5672"
           - name: Cypher_Key
             valueFrom:
               secretKeyRef:
                 key: AESEncryptionKey
                 name: ssdsecret
+          - name: RABBITMQ_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: rabbitmq-secret
+          - name: RABBITMQ_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: rabbitmq-secret
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: redis-secret
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -149,33 +155,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       {{- end }}
-        - name: gotenberg
-          image: gotenberg/gotenberg:8.7.0
-          command: ["gotenberg"]
-          args: ["--api-port=3000"]
-          ports:
-            - containerPort: 3000
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            periodSeconds: 30
-            successThreshold: 1
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            periodSeconds: 30
-            successThreshold: 1
-            failureThreshold: 3
+
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

@@ -301,3 +301,27 @@ Return the proper Artifact Scan Image
 {{- $tag := .Values.artifactscan.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+
+{{/*
+Return the proper Artifact Scan Image
+*/}}
+{{- define "s3.bucketname" -}}
+{{- $fullurl := .Values.s3bucketurl }}
+{{- $value := regexSplit "\\.s3\\." $fullurl -1 }}
+{{- $protocol := index $value 0 }}
+{{- $https := regexSplit "//" $protocol -1 }}
+{{- $bucketname := index $https 1 }}
+{{- printf "%s" $bucketname -}}
+{{- end }}
+
+{{- define "s3.protocolcheck" -}}
+{{- $fullurl := .Values.s3bucketurl }}
+{{- $parts := regexSplit "://" $fullurl -1 }}
+{{- $scheme := index $parts 0 }}
+{{- if eq $scheme "https" -}}
+"true"
+{{- else -}}
+"false"
+{{- end }}
+{{- end }}

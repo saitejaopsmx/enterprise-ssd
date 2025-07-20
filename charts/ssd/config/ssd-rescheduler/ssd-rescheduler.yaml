@@ -5,6 +5,8 @@ analysisRescheduler: {{ .Values.ssdrescheduler.analysisRescheduler }} # Reschedu
 analysisReScheduleDays: 1
 deploymentRetryBatchCount: {{ .Values.ssdrescheduler.deploymentRetryBatchCount }}
 analysisReScheduleTime: "15:41"
+ossScheduler: true
+ossSchedulerInterval: {{ .Values.ssdrescheduler.ossSchedulerInterval }} #interval minutes default is 30minutes
 {{- if .Values.dgraph.HA.enabled }}
 graphQLAddr: "http://dgraph-alpha-public:8080/graphql"
 {{- else }}

@@ -2192,6 +2192,16 @@
                             "placeholderText": "opsmx-accountname"
                         },
                         "vulnerabilityscan": {
+                            "dataTypeOptions": [
+                                {
+                                    "name": "active",
+                                    "value": "active"
+                                },
+                                {
+                                    "name": "inactive",
+                                    "value": "inactive"
+                                }
+                            ],
                             "default": "inactive",
                             "featureConfig": true,
                             "dataType": "toggle",
@@ -2372,41 +2382,7 @@
                             "helpText": "select",
                             "placeholderText": "choose file"
                         }
-                    },
-                    "gridConfigs": [
-                        {
-                            "name": "Account Name",
-                            "prop": "name",
-                            "type": "default",
-                            "width": 160,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Team",
-                            "prop": "team",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Environment",
-                            "prop": "environments",
-                            "type": "chipSet",
-                            "width": 130,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        },
-                        {
-                            "name": "Status",
-                            "prop": "status",
-                            "type": "toggleSwitch",
-                            "width": 80,
-                            "sortable": false,
-                            "defatultVisibility": true
-                        }
-                    ]
+                    }
                 },
                 {
                     "integratorType": "gcr",
@@ -2700,32 +2676,6 @@
                             "required": true,
                             "encrypt": false
                         },
-                        "authMode": {
-                            "dataType": "dropdown",
-                            "displayName": "Auth Type",
-                            "dataTypeOptions": [
-                                {
-                                    "name": "Token",
-                                    "value": "Token"
-                                },
-                                {
-                                    "name": "Password",
-                                    "value": "Password"
-                                }
-                            ],
-                            "default": "Token",
-                            "featureConfig": true
-                        },
-                        "token": {
-                            "displayName": "Token",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "helpText": "",
-                            "requiredKey": "authMode",
-                            "requiredValue": "Token",
-                            "placeholderText": "Example:knjnasjwokldjhse"
-                        },
                         "username": {
                             "displayName": "User Name",
                             "dataType": "input",
@@ -2733,8 +2683,6 @@
                             "encrypt": false,
                             "helpText": "",
                             "disabled": false,
-                            "requiredKey": "authMode",
-                            "requiredValue": "Password",
                             "placeholderText": "admin"
                         },
                         "password": {
@@ -2744,8 +2692,6 @@
                             "encrypt": true,
                             "disabled": false,
                             "helpText": "",
-                            "requiredKey": "authMode",
-                            "requiredValue": "Password",
                             "placeholderText": "********"
                         }
                     },
@@ -2879,6 +2825,16 @@
                             "placeholderText": "opsmx-accountname"
                         },
                         "vulnerabilityscan": {
+                            "dataTypeOptions": [
+                                {
+                                    "name": "active",
+                                    "value": "active"
+                                },
+                                {
+                                    "name": "inactive",
+                                    "value": "inactive"
+                                }
+                            ],
                             "default": "inactive",
                             "featureConfig": true,
                             "dataType": "toggle",
@@ -3182,23 +3138,30 @@
                         "serviceUrl": {
                             "dataType": "input",
                             "displayName": "Service URL",
-                            "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
                             "helpText": "URL",
                             "placeholderText": "https://test-ns.opsmx.org/",
                             "required": true,
                             "encrypt": false
                         },
-                        "scanPolicy": {
-                            "displayName": "Scan Policy",
-                            "dataType": "dropdown",
-                            "dataTypeOptions": [],
-                            "default": "",
-                            "loadFromApi": true,
-                            "multiselection": false,
+                        "username": {
+                            "displayName": "User Name",
+                            "dataType": "input",
                             "required": true,
+                            "encrypt": false,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
-                            "placeholderText": "",
-                            "featureConfig": false
+                            "placeholderText": ""
+                        },
+                        "password": {
+                            "displayName": "Password",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": true,
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
+                            "helpText": "",
+                            "placeholderText": ""
                         },
                         "retries": {
                             "displayName": "Retries",
@@ -3258,43 +3221,13 @@
                             "helpText": "",
                             "placeholderText": "http://example.com/logout"
                         },
-                        "isAuthenticated": {
-                            "displayName": "Authentication Mode",
-                            "dataType": "toggle",
-                            "default": "inactive",
-                            "featureConfig": true,
-                            "requiredKey": "zapIntegrationType",
-                            "requiredValue": "zapDastScan",
-                            "required": false,
-                            "placeholderText": ""
-                        },
-                        "username": {
-                            "displayName": "User Name",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": false,
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
-                            "helpText": "",
-                            "placeholderText": ""
-                        },
-                        "password": {
-                            "displayName": "Password",
-                            "dataType": "input",
-                            "required": true,
-                            "encrypt": true,
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
-                            "helpText": "",
-                            "placeholderText": ""
-                        },
                         "loginUrl": {
                             "displayName": "Login Url",
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "URL of the login page",
                             "placeholderText": ""
                         },
@@ -3303,8 +3236,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": "user1"
                         },
@@ -3313,8 +3246,8 @@
                             "dataType": "input",
                             "required": true,
                             "encrypt": false,
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "helpText": "",
                             "placeholderText": ""
                         },
@@ -3324,8 +3257,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the login success",
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\Qadmin\\\\E"
                         },
                         "logoutIndicator": {
@@ -3334,8 +3267,8 @@
                             "required": true,
                             "encrypt": false,
                             "helpText": "Regex to identify the logout success",
-                            "requiredKey": "isAuthenticated",
-                            "requiredValue": "active",
+                            "requiredKey": "zapIntegrationType",
+                            "requiredValue": "zapDastScan",
                             "placeholderText": "Ex: \\\\QSign in\\\\E"
                         }
                     },
@@ -3474,11 +3407,20 @@
                     "displayName": "ScoutSuite",
                     "category": "scanningtool",
                     "multiSupport": false,
-                    "updateEnabled": true,
                     "testConnectionFlag": false,
                     "deleteAccount": false,
                     "integratorConfigs": {
                         "cspmscan": {
+                            "dataTypeOptions": [
+                                {
+                                    "name": "active",
+                                    "value": "active"
+                                },
+                                {
+                                    "name": "inactive",
+                                    "value": "inactive"
+                                }
+                            ],
                             "default": "inactive",
                             "featureConfig": true,
                             "dataType": "toggle",
@@ -3487,23 +3429,6 @@
                             "placeholderText": "",
                             "required": false,
                             "encrypt": false
-                        },
-                        "triggerCspm": {
-                            "displayName": "Trigger CSPM",
-                            "dataType": "button",
-                            "style": "btnPrimary",
-                            "color": "blue",
-                            "iconName": "SubmitIcon",
-                            "text": "Trigger CSPM Scan",
-                            "width": "150px",
-                            "requiredKey": "cspmscan",
-                            "requiredValue": "active",
-                            "title": "Please update it to trigger the cspm scan",
-                            "disabled": true,
-                            "disableCondition": {
-                                "key": "agreeTerms",
-                                "value": false
-                            }
                         }
                     }
                 }
@@ -3758,7 +3683,6 @@
                             "displayName": "Assign the Jira ticket to the Team owner",
                             "helpText": "",
                             "placeholderText": "",
-                            "featureConfig": false,
                             "required": false,
                             "encrypt": false
                         },
@@ -4008,18 +3932,6 @@
                             "placeholderText": "",
                             "required": true,
                             "encrypt": false
-                        },
-                        "application": {
-                            "displayName": "Application",
-                            "dataType": "dropdown",
-                            "dataTypeOptions": [],
-                            "default": "",
-                            "loadFromApi": true,
-                            "multiselection": true,
-                            "required": true,
-                            "helpText": "",
-                            "placeholderText": "",
-                            "featureConfig": true
                         }
                     },
                     "gridConfigs": [

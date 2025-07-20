@@ -9,7 +9,7 @@ metadata:
   name: ssd-db
 spec:
   podManagementPolicy: {{ .Values.db.podManagementPolicy }}
-  replicas: 1
+  replicas: {{ .Values.db.replicaCount }}
   serviceName: ssd-db
   selector:
     matchLabels:

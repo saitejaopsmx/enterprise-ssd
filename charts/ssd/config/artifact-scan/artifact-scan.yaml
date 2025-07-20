@@ -16,5 +16,6 @@ graphQLAddr: http://dgraph-public:8080
 {{- end }}
 # Scan Configurations
 maxConcurrentScans: 5
+registryCallDelayMs: 1000
 pollIntervalSeconds: 120
 toolChainAddr: http://tool-chain:8100

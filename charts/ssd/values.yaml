@@ -145,10 +145,11 @@ ssdgate:
   image:
     repository: ssdgate
     tag: "2025-01-00"
+  replicaCount: 1
   installDex: true
   createGateDexSecret: true
+  session_timeout: 2880   # OPTIONAL login session timeout, it should match the authenticator timeout
   #home_page: "/ui/index.html" # OPTIONAL default redirect page
-  #session_timeout: 7200   # OPTIONAL login session timeout, it should match the authenticator timeout
   #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
@@ -230,7 +231,9 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
+
     tag: "2025-04-00"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -239,6 +242,8 @@ toolchain:
 
   serviceAnnotations: {}
 
+  ### Change to true if user wants IAM role to use the Kubernetes service accounts to Access S3 Buckets ##################
+  iamrole: false
   ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
   saAnnotations: {}
   #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
@@ -260,7 +265,9 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
+
     tag: "2025-04-01"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -283,7 +290,9 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
+
     tag: "2025-04-01"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -307,7 +316,9 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
+
     tag: "2025-04-02"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -351,6 +362,8 @@ rabbitmq:
   image:
     registry: quay.io/opsmxpublic/rabbitmq
     repository: 3-management
+  replicaCount: 1
+
   annotations: {}
 
   serviceAnnotations: {}
@@ -370,7 +383,10 @@ ui:
   image:
     repository: ssd-ui
     tag: "2025-04-00"
+
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
@@ -468,6 +484,7 @@ sourcescan:
   image:
     repository: source-scan
     tag: "2025-04-00"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -490,6 +507,7 @@ projectmonitor:
   image:
     repository: project-monitor
     tag: "2025-04-00"
+
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -514,6 +532,8 @@ ssdrescheduler:
     repository: ssd-rescheduler
     tag: "2025-04-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 
@@ -541,8 +561,10 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-04-00"
+    tag: "2025-05-00"
     pullPolicy: IfNotPresent
+
+  replicaCount: 1
 
   annotations: {}
 

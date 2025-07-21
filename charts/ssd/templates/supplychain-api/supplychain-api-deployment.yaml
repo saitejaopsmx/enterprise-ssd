@@ -49,6 +49,13 @@ spec:
           {{- if .Values.minio.enabled }}
           - name: S3_ENDPOINT_URL
             value: http://{{ .Release.Name }}-minio:9000
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
+          {{- end }}
+          {{- if .Values.minio.enabled }}
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -59,11 +66,17 @@ spec:
               secretKeyRef:
                 key: password
                 name: minio-secret
-          {{- else }}
-          - name: S3_ENDPOINT_URL
-            value: {{ .Values.s3bucketurl }}
-          - name: S3_Region
-            value: {{ .Values.s3region }}
+          {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.minio.enabled) }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: ssd-storage-secret
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: ssd-storage-secret
           {{- end }}
           - name: RABBITMQ_HOST
             value: rabbitmq-service
@@ -156,6 +169,33 @@ spec:
               type: RuntimeDefault
       {{- end }}
 
+        - name: gotenberg
+          image: gotenberg/gotenberg:8.7.0
+          command: ["gotenberg"]
+          args: ["--api-port=3000"]
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

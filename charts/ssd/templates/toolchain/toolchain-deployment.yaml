@@ -25,7 +25,7 @@ spec:
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}
 {{- end }}
     spec:
-      {{- if not .Values.minio.enabled }}
+      {{- if and (not .Values.minio.enabled) .Values.toolchain.iamrole }}
       serviceAccountName: ssd-storage-sa
       {{- end }}
       initContainers:
@@ -56,6 +56,13 @@ spec:
           {{- if .Values.minio.enabled }}
           - name: S3_ENDPOINT_URL
             value: http://{{ .Release.Name }}-minio:9000
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
+          {{- end }}
+          {{- if .Values.minio.enabled }}
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -66,11 +73,17 @@ spec:
               secretKeyRef:
                 key: password
                 name: minio-secret
-          {{- else }}
-          - name: S3_ENDPOINT_URL
-            value: {{ .Values.s3bucketurl }}
-          - name: S3_Region
-            value: {{ .Values.s3region }}
+          {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.minio.enabled) }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: ssd-storage-secret
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: ssd-storage-secret
           {{- end }}
           - name: Cypher_Key
             valueFrom:

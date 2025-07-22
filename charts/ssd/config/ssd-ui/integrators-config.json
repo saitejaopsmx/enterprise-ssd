@@ -3605,6 +3605,35 @@
                             "encrypt": true,
                             "helpText": "Authentiation Type",
                             "placeholderText": "Example:knjnasjwokldjhse"
+                        },
+                        "autoTriggerSlack": {
+                            "displayName": "Auto-Trigger Slack Alert",
+                            "dataType": "toggle",
+                            "default": "inactive",
+                            "required": false,
+                            "featureConfig": true
+                        },
+                        "slackTriggerType": {
+                            "dataType": "dropdown",
+                            "displayName": "Trigger Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Critical",
+                                    "value": "critical"
+                                },
+                                {
+                                    "name": "Criritcal and High",
+                                    "value": "critical_high"
+                                },
+                                {
+                                    "name": "All",
+                                    "value": "all"
+                                }
+                            ],
+                            "default": "critical",
+                            "requiredKey": "autoTriggerSlack",
+                            "requiredValue": "active",
+                            "featureConfig": true
                         }
                     },
                     "gridConfigs": [

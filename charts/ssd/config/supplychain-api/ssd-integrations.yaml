@@ -386,6 +386,9 @@ integrationData:
       - integratorType: slack
         category: communications
         multiaccount: false
+        featureConfigs:
+          slackTriggerType:
+            default: critical
         integratorConfigs:
           channel:
             encrypt: false

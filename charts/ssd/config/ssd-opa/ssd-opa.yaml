@@ -16,8 +16,7 @@ maxConcurrentWorkflowTaskExecutionSize: 0 # optional field; default is 0 which m
 maxConcurrentActivityExecutionSizeForAdhoc: 0
 maxConcurrentWorkflowTaskExecutionSizeForAdhoc: 0
 redis:
-  address : {{ .Release.Name }}-redis-master:{{ .Values.redis.port }}
-  password: {{ .Values.redis.password }}
+  address : {{ .Release.Name }}-redis-master:6379
   db: 0
 otelAddr: localhost:4317
 otelInterval: {{ .Values.otel.interval }}

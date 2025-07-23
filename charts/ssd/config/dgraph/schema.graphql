@@ -667,6 +667,9 @@ type ArtifactScanData {
     vulnTrackingId: String
     vulnScanState: String @search(by: [exact])
     scanState: String @search(by: [exact])
+    directDeps: [Component!] # Direct dependencies explicitly declared in the source code or configuration.
+    indirectDeps: [Component!] # Indirect dependencies installed to support direct dependencies (e.g., sub-dependencies).
+    transitiveDeps: [Component!] # Dependencies present in the built artifact but not declared in the source code; typically include OS-level or environment-specific packages.
     components: [Component!]
     vulnCriticalCount: Int @search
     vulnHighCount: Int @search
@@ -680,6 +683,7 @@ type ArtifactScanData {
     artifactRisk: ArtifactRisk @hasInverse(field: artifactScanResult)
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
     artifactTags: [KeyValue!]
+    team: Team
 }
 
 type ArtifactRisk {
@@ -707,7 +711,7 @@ type Component {
     omittedLicenses: [String!]
     copyrights: [String!]
     webURL: String @search(by: [exact, regexp])
-    purl: String @search(by: [exact])
+    purl: String @search(by: [exact, regexp])
     cpe: String @search(by: [exact])
     scannedAt: DateTime @search
     analysisRequired: Boolean @search

@@ -223,9 +223,6 @@ integrationData:
       - integratorType: docker
         category: dockerregistry
         multiaccount: true
-        featureConfigs:
-          authMode:
-            default: token
         integratorConfigs:
           url:
             encrypt: false
@@ -235,17 +232,20 @@ integrationData:
             encrypt: false
           password:
             encrypt: true
-          token:
-            encrypt: true
       - integratorType: gitlab-registry
         category: dockerregistry
         multiaccount: true
+        featureConfigs:
+          authMode:
+            default: token
         integratorConfigs:
           url:
             encrypt: false
           username:
             encrypt: false
           password:
+            encrypt: true
+          token:
             encrypt: true
       - integratorType: acr
         category: dockerregistry
@@ -386,6 +386,9 @@ integrationData:
       - integratorType: slack
         category: communications
         multiaccount: false
+        featureConfigs:
+          slackTriggerType:
+            default: critical
         integratorConfigs:
           channel:
             encrypt: false

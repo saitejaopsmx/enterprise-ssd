@@ -24,7 +24,7 @@ spec:
         {{ toYaml .Values.supplychainapi.annotations | nindent 8 }}
 {{- end }}
     spec:
-      {{- if not .Values.minio.enabled }}
+      {{- if and (not .Values.minio.enabled) .Values.toolchain.iamrole }}
       serviceAccountName: ssd-storage-sa
       {{- end }}
       initContainers:

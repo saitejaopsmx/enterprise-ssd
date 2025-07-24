@@ -144,7 +144,7 @@ customLabels: {}
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2025-01-00"
+    tag: "2025-06-00"
   replicaCount: 1
   installDex: true
   createGateDexSecret: true
@@ -231,9 +231,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-
-    tag: "2025-04-00"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -265,9 +263,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-
-    tag: "2025-04-01"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -290,9 +286,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-
-    tag: "2025-04-01"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -316,9 +310,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-
-    tag: "2025-04-02"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -382,8 +374,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-04-00"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -464,7 +455,7 @@ otel:
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "2025-04-00"
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -483,8 +474,7 @@ snykmonitor:
 sourcescan:
   image:
     repository: source-scan
-    tag: "2025-04-00"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -506,8 +496,7 @@ sourcescan:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "2025-04-00"
-
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -530,7 +519,7 @@ projectmonitor:
 ssdrescheduler:
   image:
     repository: ssd-rescheduler
-    tag: "2025-04-00"
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -561,7 +550,7 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-05-00"
+    tag: "2025-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

@@ -34,11 +34,6 @@ global:
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
 
-  ####### Storage Class for Minio ##############################################
-  minio:
-    persistence:
-      storageClass: gp2
-
 #################################################################################
 rabbitmq:
   serviceAnnotations:
@@ -70,6 +65,12 @@ UIServiceType: NodePort
 
 # Type for the Rabbit MQ, default is LB, can be changed to ClusterIP,NodePort
 RabbitServiceType: LoadBalancer
+
+#### Storage Class for the Minio ############################################
+minio:
+  persistence:
+    storageClass: "gp2"
+    size: 20Gi
 
 ### Storage Class for the Redis ##############################################
 redis:

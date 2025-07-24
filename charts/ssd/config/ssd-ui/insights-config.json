@@ -22,31 +22,31 @@
             "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Active count",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_active{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
-            "plotAxisName": ""
+            "plotAxisName": "Active Count"
         },
         {
             "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Completed count",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_executed_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
-            "plotAxisName": ""
+            "plotAxisName": "Completed Count"
         },
         {
             "chartType": "line",
             "metricName": "Source Code Repositories Scanned - Failed count",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_source_code_repo_scan_failed_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
-            "plotAxisName": ""
+            "plotAxisName": "Failed Count"
         },
         {
             "chartType": "line",
             "metricName": "Number of new repositories discovered",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_new_repo_discovered{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
-            "plotAxisName": ""
+            "plotAxisName": "Discovered"
         },
         {
             "chartType": "line",
             "metricName": "CI/Build Events Received count",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
-            "plotAxisName": ""
+            "plotAxisName": "Received Count"
         }
     ]
 }

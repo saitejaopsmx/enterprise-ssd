@@ -6,17 +6,15 @@ global:
   certManager:  # set to true if cert-manager is installed
     installed: true
   createIngress: true
-  minio:
-    enabled: true
 
   ssdUI: # URL used to access the application
     # Change to http if global.certManager.installed is false
     protocol: https
+    ingressClass: nginx
     ## Update the host value with proper dns entry to access the SSD UI
     host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
     ingress:
       annotations:
-        kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
         nginx.ingress.kubernetes.io/proxy-body-size: 500m
         nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
@@ -51,6 +49,8 @@ dgraph:
 
 ###################################################################################################
 toolchain:
+  ### Change to true if user wants IAM role to use the Kubernetes service accounts to Access S3 Buckets ##################
+  iamrole: false
   ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
   saAnnotations: {}
   #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
@@ -64,3 +64,9 @@ ssdgate:
   - admin
   saml:
     saml_initiated_login: false
+
+#### Change to false if user want to Use AWS S3 bucket to store the scan data ##################
+minio:
+  enabled: true
+  persistence:
+    storageClass: ""

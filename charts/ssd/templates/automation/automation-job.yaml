@@ -46,7 +46,7 @@ spec:
                    sleep 10
                    kubectl -n {{ .Release.Namespace }} logs ssd-db-0 > logs.txt
                    echo "Checking the Schema is updation"
-                   count=$(cat logs.txt | grep -i "PostgreSQL Database directory appears to contain a database; Skipping initialization"| wc -l)
+                   count=$(grep -Ei "PostgreSQL Database directory appears to contain a database|PostgreSQL init process complete" logs.txt | wc -l)
                    if [ "$count" == "1" ]; then
                       kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
                       sleep 30
@@ -112,7 +112,7 @@ spec:
                     sleep 10
                     kubectl -n {{ .Release.Namespace }} logs ssd-db-0 > logs.txt
                     echo "Checking the Schema is updation"
-                    count=$(cat logs.txt | grep -i "PostgreSQL Database directory appears to contain a database; Skipping initialization"| wc -l)
+                    count=$(grep -Ei "PostgreSQL Database directory appears to contain a database|PostgreSQL init process complete" logs.txt | wc -l)
                     if [ "$count" == "1" ]; then
                       kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
                       sleep 30

@@ -14,6 +14,7 @@ metadata:
 {{- end }}
   name: ssd-ui-ingress
 spec:
+  ingressClassName: {{ .Values.global.ssdUI.ingressClass }}
   rules:
   - host: {{ .Values.global.ssdUI.host }}
     http:

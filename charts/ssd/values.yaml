@@ -243,7 +243,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2025-04-01"
+    tag: "2025-04-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -267,6 +267,9 @@ toolchain:
 
   # Supported values are info,debug
   logLevel: debug
+
+  ## Fetching the SonarQube data for last 90days while doing the scan
+  fetchsonardata: 90d
 
 ####################################################
 supplychainpreprocessor:

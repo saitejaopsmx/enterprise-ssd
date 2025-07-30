@@ -1,3 +1,4 @@
+cachePollingInterval: 5
 jiraPollingInterval: 5
 integrationData:
   - stage: Source
@@ -267,6 +268,8 @@ integrationData:
             encrypt: false
           repo:
             encrypt: false
+          region:
+            encrypt: false
           fileName:
             encrypt: false
           fileData:
@@ -276,6 +279,22 @@ integrationData:
         multiaccount: false
         integratorConfigs:
           repo:
+            encrypt: false
+          fileName:
+            encrypt: false
+          region:
+            encrypt: false
+          fileData:
+            encrypt: true
+      - integratorType: gar
+        category: dockerregistry
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          repo:
+            encrypt: false
+          region:
             encrypt: false
           fileName:
             encrypt: false

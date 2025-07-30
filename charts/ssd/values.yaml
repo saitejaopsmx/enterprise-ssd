@@ -323,7 +323,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-04-05"
+    tag: "2025-04-06"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -392,7 +392,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-04-01"
+    tag: "2025-04-02"
     pullPolicy: IfNotPresent
 
   annotations: {}
@@ -564,7 +564,7 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-04-03"
+    tag: "2025-04-04"
     pullPolicy: IfNotPresent
 
   annotations: {}

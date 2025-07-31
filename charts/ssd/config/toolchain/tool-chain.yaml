@@ -11,3 +11,4 @@ ssdVuln: http://212.2.244.234:8900
 mobsfClentAddr: http://mobsf-service:8000
 otelAddr: localhost:4317
 otelInterval: {{ .Values.otel.interval }}
+sonarQubeCreated: {{ .Values.toolchain.fetchsonardata }}

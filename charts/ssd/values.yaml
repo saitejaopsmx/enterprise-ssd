@@ -256,7 +256,7 @@ toolchain:
   cloneRepoOnce: false
 
   # Supported values are info,debug
-  logLevel: info
+  logLevel: debug
 
   ## Fetching the SonarQube data for while doing the scan
   fetchsonardata: 90d
@@ -282,7 +282,7 @@ supplychainpreprocessor:
   securityContext: {}
 
   # Supported values are info,debug
-  loglevel: debug
+  loglevel: info
 
 ####################################################
 ssdopa:

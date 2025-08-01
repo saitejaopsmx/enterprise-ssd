@@ -21,6 +21,7 @@ spec:
 {{ include "ssd.standard-labels" . | indent 8 }}
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/supplychain-api/supplychain-api-cm.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/supplychain-api/supplychain-api-secret.yaml") . | sha256sum }}
 {{- if .Values.supplychainapi.annotations -}}
         {{ toYaml .Values.supplychainapi.annotations | nindent 8 }}
 {{- end }}

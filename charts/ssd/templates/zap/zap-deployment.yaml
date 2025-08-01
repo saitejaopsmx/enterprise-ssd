@@ -15,6 +15,9 @@ spec:
   template:
     metadata:
       annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/zap/zap-api-auth-script.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/zap/zap-api-session-script.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/zap/zap-confimap.yaml") . | sha256sum }}
 {{- if .Values.zap.annotations -}}
         {{ toYaml .Values.zap.annotations | nindent 8 }}
 {{- end }}

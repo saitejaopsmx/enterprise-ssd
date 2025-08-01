@@ -22,6 +22,7 @@ spec:
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}
       annotations:
+        checksum/secrets: {{ include (print $.Template.BasePath "/ssd-gate/ssd-initial-password.yaml") . | sha256sum }}
 {{- if .Values.ssdgate.annotations -}}
         {{ toYaml .Values.ssdgate.annotations | nindent 8 }}
 {{- end }}

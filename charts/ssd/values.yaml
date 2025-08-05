@@ -26,6 +26,8 @@ UIServiceType: ClusterIP
 #### Rabbit MQ Service Type , default is LB, can be changed to ClusterIP,NodePort
 RabbitServiceType: LoadBalancer
 
+#########Installation Modes Supported are Helm and ArgoCD #####################
+installationMode: Helm
 #################################################
 ## Change the Organisation name if user wants a different name in the UI
 organisationname: default

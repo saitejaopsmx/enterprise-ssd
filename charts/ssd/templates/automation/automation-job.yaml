@@ -1,3 +1,4 @@
+{{- if .Release.IsInstall -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -71,7 +72,7 @@ spec:
                  break
                  {{- end }}
                else
-                 if [ $wait_period -gt 1000 ]; then
+                 if [ $wait_period -gt 10000 ]; then
                    echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
                    break
                  else
@@ -138,7 +139,7 @@ spec:
                   {{- end }}
 
                else
-                 if [ $wait_period -gt 1000 ]; then
+                 if [ $wait_period -gt 10000 ]; then
                    echo "#############****Script is timed out as the Dgraph and Supply chain is not ready yet****########"
                    break
                  else
@@ -185,3 +186,4 @@ spec:
       - name: setup-update
         configMap:
           name: setup-cm
+{{- end }}

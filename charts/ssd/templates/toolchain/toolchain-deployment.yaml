@@ -21,7 +21,6 @@ spec:
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}
       annotations:
-        checksum/secret: {{ include (print $.Template.BasePath "/mobsf/mobsf-secret.yaml") . | sha256sum }}
         checksum/configmap: {{ include (print $.Template.BasePath "/toolchain/toolchain-configmap.yaml") . | sha256sum }}
 {{- if .Values.toolchain.annotations -}}
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}

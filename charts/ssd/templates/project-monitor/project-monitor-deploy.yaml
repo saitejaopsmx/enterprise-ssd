@@ -19,6 +19,8 @@ spec:
         component: project-monitor
 {{ include "ssd.standard-labels" . | indent 8 }}
       annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/project-monitor/project-monitor-secret.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/project-monitor/project-monitor-cm.yaml") . | sha256sum }}
 {{- if .Values.projectmonitor.annotations -}}
         {{ toYaml .Values.projectmonitor.annotations | nindent 8 }}
 {{- end }}

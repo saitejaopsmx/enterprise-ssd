@@ -21,6 +21,7 @@ spec:
 {{ toYaml .Values.customLabels | indent 8}}
 {{- end }}
       annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/toolchain/toolchain-configmap.yaml") . | sha256sum }}
 {{- if .Values.toolchain.annotations -}}
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}
 {{- end }}

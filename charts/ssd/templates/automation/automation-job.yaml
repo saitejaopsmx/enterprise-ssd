@@ -1,4 +1,3 @@
-{{- if .Release.IsInstall -}}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -186,4 +185,3 @@ spec:
       - name: setup-update
         configMap:
           name: setup-cm
-{{- end }}

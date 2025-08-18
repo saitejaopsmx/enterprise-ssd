@@ -1,12 +1,10 @@
 apiVersion: v2
 name: ssd
-version: "2025.04.01"
-appVersion: "2025.04.00"
+version: "2025.06.00"
+appVersion: "2025.06.00"
 description: "OpsMx Secure Software Delivery for CI/CD"
 icon: https://raw.githubusercontent.com/OpsMx/enterprise-spinnaker/master/img/opsmx.png
 maintainers:
-- email: srinivas@opsmx.io
-  name: Srinivas K
 - email: saiteja.katabhatina@opsmx.io
   name: Sai Teja K
 keywords:
@@ -19,7 +17,7 @@ dependencies:
     condition: ssdgate.installDex
   - name: minio
     version: 16.0.10
-    condition: global.minio.enabled
+    condition: minio.enabled
   - name: redis
     version: 21.1.11
     condition: installRedis

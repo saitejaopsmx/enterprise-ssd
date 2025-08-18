@@ -231,7 +231,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2025-06-01"
+    tag: "2025-06-03"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -266,7 +266,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2025-06-00"
+    tag: "2025-06-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -289,7 +289,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-06-01"
+    tag: "2025-06-03"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -313,7 +313,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-06-01"
+    tag: "2025-06-05"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -377,7 +377,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-06-02"
+    tag: "2025-06-04"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -553,7 +553,7 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-06-00"
+    tag: "2025-06-02"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

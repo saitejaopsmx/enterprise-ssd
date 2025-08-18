@@ -336,3 +336,14 @@ Return the proper InitContainer Images
 {{- $tag := .Values.initContainer.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+
+{{/*
+Return the proper Rabbitmq Images
+*/}}
+{{- define "rabbitmq.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.rabbitmq.image.repository -}}
+{{- $tag := .Values.rabbitmq.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

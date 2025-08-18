@@ -24,7 +24,7 @@ spec:
 {{ include "ssd.standard-labels" . | indent 8 }}
     spec:
       containers:
-      - image: {{ .Values.rabbitmq.image.registry }}:{{ .Values.rabbitmq.image.repository }}
+      - image: {{ template "rabbitmq.image" . }}
         imagePullPolicy: IfNotPresent
         name: rabbitmq
         env:

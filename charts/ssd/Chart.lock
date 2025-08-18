@@ -3,13 +3,13 @@ dependencies:
   repository: ""
   version: 0.15.3
 - name: minio
-  repository: https://charts.bitnami.com/bitnami
+  repository: ""
   version: 16.0.10
 - name: redis
-  repository: https://charts.bitnami.com/bitnami
+  repository: ""
   version: 21.1.11
 - name: temporal
-  repository: https://temporalio.github.io/helm-charts
+  repository: ""
   version: 0.63.0
-digest: sha256:463b9042308ea40cf6ad394c6da513f8dedbcb6f8114531b37cb4423b852fd21
-generated: "2025-06-09T22:09:30.56249698+05:30"
+digest: sha256:aca52ee31e14c82559d3a667a231a644ba738736668b97bae11f61863ed9ff96
+generated: "2025-08-18T15:09:10.436281683+05:30"

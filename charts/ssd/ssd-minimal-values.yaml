@@ -70,3 +70,4 @@ minio:
   enabled: true
   persistence:
     storageClass: ""
+    size: 10Gi

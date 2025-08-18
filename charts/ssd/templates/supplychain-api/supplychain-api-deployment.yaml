@@ -31,7 +31,7 @@ spec:
       {{- end }}
       initContainers:
       - name: rabbitmq-check
-        image: {{ .Values.global.customImages.registry }}/pgchecker:v1
+        image: {{ template "initcontainer.images" . }}
         command:
           - sh
           - -c

@@ -355,8 +355,8 @@ rabbitmq:
   url: rabbitmq-service
   port: 5672
   image:
-    registry: quay.io/opsmxpublic/rabbitmq
-    repository: 3-management
+    repository: rabbitmq
+    tag: "3-management"
   replicaCount: 1
 
   annotations: {}

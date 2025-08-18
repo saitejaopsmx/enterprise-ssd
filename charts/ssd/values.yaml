@@ -47,11 +47,6 @@ global:
   #imageRegistry: quay.io
   security:
     allowInsecureImages: true
-  # Custom Images registry where all the OSS and customized images used in the helm chart are stored
-  # Only update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
-  customImages:
-    registry: quay.io/opsmxpublic
-
   # when this flag is set to false; UI will be accessible over http instead of https
   # This does not appear to be used at all
   #ssl:
@@ -140,6 +135,11 @@ curl:
     repository: curl
     tag: 8.6.0
 customLabels: {}
+
+initContainer:
+  image:
+    repository: pgchecker
+    tag: v1
 ###############################################################################
 ssdgate:
   image:

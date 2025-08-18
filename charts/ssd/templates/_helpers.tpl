@@ -304,7 +304,7 @@ Return the proper Artifact Scan Image
 
 
 {{/*
-Return the proper Artifact Scan Image
+Return the proper S3 details
 */}}
 {{- define "s3.bucketname" -}}
 {{- $fullurl := .Values.s3bucketurl }}
@@ -325,3 +325,14 @@ Return the proper Artifact Scan Image
 "false"
 {{- end }}
 {{- end }}
+
+
+{{/*
+Return the proper InitContainer Images
+*/}}
+{{- define "initcontainer.images" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.initContainer.image.repository -}}
+{{- $tag := .Values.initContainer.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

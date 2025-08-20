@@ -1,4 +1,4 @@
-cachePollingInterval: 5
+cachePollingInterval: {{ .Values.supplychainapi.cachePollingInterval }}
 jiraPollingInterval: 5
 integrationData:
   - stage: Source

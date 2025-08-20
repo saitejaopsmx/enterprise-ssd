@@ -327,6 +327,9 @@ supplychainapi:
   probes: {}
 
   securityContext: {}
+
+  ## Below is the parameter to load the data in the UI
+  cachePollingInterval: 6
 ######################################################
 tokenmachine:
   ## Image specific details

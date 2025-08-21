@@ -248,6 +248,36 @@ integrationData:
             encrypt: true
           token:
             encrypt: true
+      - integratorType: nexus-registry
+        category: dockerregistry
+        multiaccount: true
+        featureConfigs:
+          authMode:
+            default: password
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+      - integratorType: nexus
+        category: dockerregistry
+        multiaccount: true
+        featureConfigs:
+          authMode:
+            default: password
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
       - integratorType: acr
         category: dockerregistry
         multiaccount: true

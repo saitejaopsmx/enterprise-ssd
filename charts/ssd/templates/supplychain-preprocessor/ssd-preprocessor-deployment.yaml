@@ -26,6 +26,9 @@ spec:
         {{ toYaml .Values.supplychainpreprocessor.annotations | nindent 8 }}
 {{- end }}
     spec:
+      {{- if .Values.global.gkeworkload }}
+      serviceAccountName: ssd-workload-sa
+      {{- end }}
       initContainers:
       - name: rabbitmq-check
         image: {{ template "initcontainer.images" . }}
@@ -88,6 +91,9 @@ spec:
           name: scanresult
         - mountPath: /app/grypeDB
           name: grypedb
+        - name: service-account
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         {{- with .Values.supplychainpreprocessor.probes }}
         {{- toYaml . | nindent 8 }}
         {{- else }}
@@ -171,6 +177,14 @@ spec:
             path: ca.crt
           optional: true
           name: customer-custon-ca
+      - name: service-account
+        projected:
+          sources:
+            - serviceAccountToken:
+                audience: ssdopsmxadmin
+                expirationSeconds: 3600
+                path: token
+          defaultMode: 420
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

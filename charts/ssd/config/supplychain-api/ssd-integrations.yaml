@@ -293,6 +293,9 @@ integrationData:
       - integratorType: gcr
         category: dockerregistry
         multiaccount: false
+        featureConfigs:
+          authMode:
+            default: serviceAccount
         integratorConfigs:
           url:
             encrypt: false
@@ -319,6 +322,9 @@ integrationData:
       - integratorType: gar
         category: dockerregistry
         multiaccount: false
+        featureConfigs:
+          authMode:
+            default: serviceAccount
         integratorConfigs:
           url:
             encrypt: false

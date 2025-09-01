@@ -3,6 +3,9 @@ detectorImage: {{ template "kubedetector.image" . }}
 kubescapeImage: {{ template "kubescape.image" . }}
 ssdRescheduler: http://ssd-rescheduler:8010
 gotenberg: http://localhost:3000
+ssdIssuer: {{ .Values.supplychainapi.ssdIssuer }}
+jwkPath: {{ .Values.supplychainapi.jwkPath }}
+namespace: {{ .Release.Namespace }}
 zapService: http://zap-service:8080
 tokenMachine:
     host: http://token-machine

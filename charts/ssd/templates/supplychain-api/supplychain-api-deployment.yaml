@@ -28,6 +28,8 @@ spec:
     spec:
       {{- if and (not .Values.minio.enabled) .Values.toolchain.iamrole }}
       serviceAccountName: ssd-storage-sa
+      {{- else if .Values.global.gkeworkload }}
+      serviceAccountName: ssd-workload-sa
       {{- end }}
       initContainers:
       - name: rabbitmq-check
@@ -151,6 +153,9 @@ spec:
               name: zap-openapi-spec
             - mountPath: /app/policy
               name: policy
+            - name: service-account
+              readOnly: true
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           {{- with .Values.supplychainapi.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
@@ -266,3 +271,12 @@ spec:
               path: ca.crt
             optional: true
             name: customer-custon-ca
+        - name: service-account
+          projected:
+            sources:
+              - serviceAccountToken:
+                  audience: ssdopsmxadmin
+                  expirationSeconds: 3600
+                  path: token
+            defaultMode: 420
+

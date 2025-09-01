@@ -107,13 +107,40 @@
                             "required": true,
                             "encrypt": false
                         },
+                        "authType": {
+                            "dataType": "dropdown",
+                            "displayName": "Authentication Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "App",
+                                    "value": "app"
+                                },
+                                {
+                                    "name": "Token",
+                                    "value": "token"
+                                }
+                            ],
+                            "featureConfig": true
+                        },
                         "token": {
                             "displayName": "Token",
                             "dataType": "input",
                             "required": true,
                             "encrypt": true,
-                            "helpText": "Authentiation Type",
-                            "placeholderText": "Example:knjnasjwokldjhse"
+                            "helpText": "",
+                            "placeholderText": "Example:knjnasjwokldjhse",
+                            "requiredKey": "authType",
+                            "requiredValue": "token"
+                        },
+                        "installationId": {
+                            "displayName": "Installation ID",
+                            "dataType": "input",
+                            "required": true,
+                            "encrypt": false,
+                            "helpText": "",
+                            "placeholderText": "",
+                            "requiredKey": "authType",
+                            "requiredValue": "app"
                         }
                     },
                     "gridConfigs": [
@@ -2632,6 +2659,25 @@
                             "helpText": "",
                             "placeholderText": "opsmx-accountname"
                         },
+                        "authMode": {
+                            "dataType": "dropdown",
+                            "displayName": "Authentication Type",
+                            "dataTypeOptions": [
+                                {
+                                    "name": "Workload Identity Federation",
+                                    "value": "workloadIdentityFederation"
+                                },
+                                {
+                                    "name": "Service Account",
+                                    "value": "serviceAccount"
+                                }
+                            ],
+                            "default": "serviceAccount",
+                            "required": true,
+                            "featureConfig": true,
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
                         "repo": {
                             "dataType": "chipset",
                             "displayName": "Approved Artifact Repo",
@@ -2640,14 +2686,162 @@
                             "required": false,
                             "encrypt": false
                         },
+                        "projectId": {
+                            "displayName": "Project ID",
+                            "dataType": "input",
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "",
+                            "requiredKey": "authMode",
+                            "requiredValue": "workloadIdentityFederation"
+                        },
+                        "command": {
+                            "displayName": "GCommand  ",
+                            "dataType": "textArea",
+                            "required": true,
+                            "helpText": "After adding project id, run the below command to fetch the project number and org id",
+                            "placeholderText": "",
+                            "copyToClipboard": true,
+                            "readonly": true,
+                            "height": "40px",
+                            "ignorePostRequest": true,
+                            "requiredKey": "authMode",
+                            "requiredValue": "workloadIdentityFederation",
+                            "default": "gcloud projects describe <GOOGLE_PROJECT_ID> --format=\"json(projectNumber,parent.id)\"",
+                            "placeholderReplacements": {
+                                "<GOOGLE_PROJECT_ID>": "projectId"
+                            }
+                        },
+                        "commandResponse": {
+                            "displayName": "Command Response",
+                            "dataType": "textArea",
+                            "required": true,
+                            "helpText": "",
+                            "height": "40px",
+                            "ignorePostRequest": true,
+                            "placeholderText": "Area to paste the response. We collect the org information too., this is linked to the pool id in the next screen",
+                            "requiredKey": "authMode",
+                            "requiredValue": "workloadIdentityFederation",
+                            "default": ""
+                        },
+                        "workloadTrigger": {
+                            "displayName": "Next",
+                            "dataType": "button",
+                            "style": "btnPrimary",
+                            "color": "blue",
+                            "iconName": "SubmitIcon",
+                            "text": "Next",
+                            "width": "150px",
+                            "requiredKey": "authMode",
+                            "requiredValue": "workloadIdentityFederation",
+                            "title": "fetch workload info",
+                            "disabled": true,
+                            "disableCondition": {
+                                "key": "commandResponse",
+                                "value": ""
+                            },
+                            "showOnResponse": [
+                                "poolId",
+                                "displayName",
+                                "exisitngPoolIdCommand"
+                            ]
+                        },
+                        "poolId": {
+                            "displayName": "Pool Id",
+                            "dataType": "dropdown",
+                            "dataTypeOptions": [],
+                            "default": "",
+                            "loadFromApi": true,
+                            "addNewItemOnFilter": true,
+                            "searchFilter": true,
+                            "multiselection": false,
+                            "hiddenStatus": true,
+                            "required": true,
+                            "helpText": "",
+                            "placeholderText": "",
+                            "featureConfig": true
+                        },
+                        "displayName": {
+                            "displayName": "Display Name",
+                            "dataType": "input",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "placeholderText": ""
+                        },
+                        "s2command1": {
+                            "displayName": "",
+                            "dataType": "textArea",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "copyToClipboard": true,
+                            "ignorePostRequest": true,
+                            "readonly": true,
+                            "height": "110px",
+                            "placeholderText": "",
+                            "default": ""
+                        },
+                        "s2command2": {
+                            "displayName": "",
+                            "dataType": "textArea",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "copyToClipboard": true,
+                            "ignorePostRequest": true,
+                            "readonly": true,
+                            "height": "110px",
+                            "placeholderText": "",
+                            "default": ""
+                        },
+                        "s2command3": {
+                            "displayName": "",
+                            "dataType": "textArea",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "copyToClipboard": true,
+                            "ignorePostRequest": true,
+                            "readonly": true,
+                            "height": "110px",
+                            "placeholderText": "",
+                            "default": ""
+                        },
+                        "s2command4": {
+                            "displayName": "",
+                            "dataType": "textArea",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "copyToClipboard": true,
+                            "ignorePostRequest": true,
+                            "readonly": true,
+                            "height": "110px",
+                            "placeholderText": "",
+                            "default": ""
+                        },
+                        "exisitngPoolIdCommand": {
+                            "displayName": "Command Response",
+                            "dataType": "textArea",
+                            "hiddenStatus": true,
+                            "helpText": "",
+                            "copyToClipboard": true,
+                            "ignorePostRequest": true,
+                            "readonly": true,
+                            "height": "110px",
+                            "placeholderText": "Area to paste the response. We collect the org information too., this is linked to the pool id in the next screen",
+                            "default": "",
+                            "placeholderReplacements": {
+                                "<GOOGLE_PROJECT_ID>": "projectId"
+                            }
+                        },
                         "url": {
                             "dataType": "input",
                             "displayName": "Host Url",
                             "helpText": "GAR Host URL",
                             "regexpValue": "^(?:https?:\/\/|s?ftps?:\/\/)?(?!www | www\\.)[A-Za-z0-9_-]+\\.+[A-Za-z0-9.\/%&=\\?_:;-]+$|https?:\/\/(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\/\\w+>|\/?>))",
-                            "placeholderText": "Example:https://gar.io",
+                            "placeholderText": "Example:docker.pkg.dev",
+                            "default": "docker.pkg.dev",
                             "required": true,
-                            "encrypt": false
+                            "encrypt": false,
+                            "requiredKey": "authMode",
+                            "requiredValue": "serviceAccount"
                         },
                         "region": {
                             "dataType": "chipset",

@@ -27,6 +27,11 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+          installationId:
+            encrypt: false
+        featureConfigs:
+          authType:
+            default: token
       - integratorType: bitbucket
         category: sourcetool
         multiaccount: false

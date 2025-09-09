@@ -141,6 +141,9 @@ spec:
             - mountPath: /app/ssd-integrations.yaml
               name: supplychain-api-cm
               subPath: ssd-integrations.yaml
+            - mountPath: /app/project.yaml
+              name: adhoc-project-cm
+              subPath: project.yaml
             - mountPath: /app/secrets/
               name: ssdsecret
               readOnly: true
@@ -177,7 +180,7 @@ spec:
       {{- end }}
 
         - name: gotenberg
-          image: gotenberg/gotenberg:8.7.0
+          image: gotenberg/gotenberg:8.22.0
           command: ["gotenberg"]
           args: ["--api-port=3000"]
           ports:

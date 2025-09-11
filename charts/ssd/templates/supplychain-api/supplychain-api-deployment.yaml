@@ -111,6 +111,7 @@ spec:
               secretKeyRef:
                 key: oauth-private-key
                 name: oauth-bridge-client-secrets
+                optional: true
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
@@ -289,4 +290,11 @@ spec:
                   expirationSeconds: 3600
                   path: token
             defaultMode: 420
-
+        - name: adhoc-project-cm
+          configMap:
+            defaultMode: 420
+            items:
+            - key: project.yaml
+              path: project.yaml
+            optional: true
+            name: adhoc-project-cm

@@ -50,6 +50,7 @@ spec:
               secretKeyRef:
                 key: oauth-private-key
                 name: oauth-bridge-client-secrets
+                optional: true
           envFrom:
             - configMapRef:
                 name: oauth-bridge-client-config

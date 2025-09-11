@@ -45,6 +45,14 @@ spec:
               secretKeyRef:
                 key: password
                 name: rabbitmq-secret
+            - name: OAUTH_BRIDGE_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: oauth-private-key
+                  name: oauth-bridge-client-secrets
+          envFrom:
+            - configMapRef:
+                name: oauth-bridge-client-config
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys

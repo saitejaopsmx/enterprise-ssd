@@ -106,10 +106,17 @@ spec:
               secretKeyRef:
                 key: password
                 name: redis-secret
+          - name: OAUTH_BRIDGE_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                key: oauth-private-key
+                name: oauth-bridge-client-secrets
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
               optional: true
+          - configMapRef:
+              name: oauth-bridge-client-config
           {{- with .Values.supplychainapi.probes }}
           {{- toYaml . | nindent 10 }}
           {{- else }}

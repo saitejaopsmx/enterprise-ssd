@@ -85,12 +85,6 @@
   auth_required: true # Default false. Note that if the backend does not need auth i.e it will not get the user who requested this
   health_endpoint: /healthz
   log_traffic: true
-- name: rabbitmq
-  path_prefixes:
-  - "/rabbit"
-  baseUrl: rabbitmq-service:15672
-  health_endpoint: /
-  strip_prefix: true
 - name: ssd-opa
   path_prefixes:
   - "/ssd-opa"
@@ -144,6 +138,7 @@
 - name: ssd-temporal-web
   baseUrl: {{ .Release.Name }}-temporal-web:8080
   health_endpoint: ""
+  auth_required: true
   path_prefixes:
   - "/namespaces/default/workflows"
   - "/_app"

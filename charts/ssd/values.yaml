@@ -157,7 +157,6 @@ ssdgate:
   admin_groups:
     - admin
   auth2_oidc:
-    client_id: ssd-gate
     # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET
     #client_secret: "encrypted:gate-dex-client-secret:client-secret" # Create a secret called gate-dex-client-secret with key client-secret
     entity_map:        # DEPENDS on the provider
@@ -599,14 +598,38 @@ topologySpreadConstraints: []
 #### The values below this line are best not changed except in rare situations
 ###############################################################################################
 dex:
+  rbac:
+    create: false
+    createClusterScoped: false
   configSecret:
     create: false
     name: "gate-dex-config"
+  volumeMounts:
+  - mountPath: /okta
+    name: dex-okta-pem
+    readOnly: true
+  - mountPath: /google
+    name: google-json
+    readOnly: true
   volumes:
     - name: gate-dex-client-secret
       secret:
         defaultMode: 420
         secretName: gate-dex-client-secret
+        optional: true
+    - name: dex-okta-pem
+      secret:
+        defaultMode: 420
+        secretName: dex-okta-pem
+        optional: true
+    - name: google-json
+      secret:
+        defaultMode: 420
+        items:
+        - key: googleAuth.json
+          path: googleAuth.json
+        secretName: dex-google-groups-auth
+        optional: true
   env:
     - name: GATE_CLIENT_SECRET
       valueFrom:

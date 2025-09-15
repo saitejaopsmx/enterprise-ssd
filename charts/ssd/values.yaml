@@ -144,7 +144,7 @@ initContainer:
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2025-06-00"
+    tag: "2025-06-01"
   replicaCount: 1
   installDex: true
   createGateDexSecret: true

@@ -312,7 +312,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-06-06"
+    tag: "2025-06-07"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

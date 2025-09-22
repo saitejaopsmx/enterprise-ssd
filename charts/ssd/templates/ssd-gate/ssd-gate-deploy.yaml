@@ -60,6 +60,21 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
       {{- end }}
+      {{- if eq .Values.ssdgate.auth_type "dex_oidc" }}
+        env:
+        - name: DEX_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: gate-dex-client-secret
+              key: client-secret
+            optional: true
+        - name: DEX_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: dex-client-id
+              key: client-id
+            optional: true
+      {{- end }}
         envFrom:
         - configMapRef:
             name: ssd-proxy-certs

@@ -22,13 +22,13 @@ auth2_oidc:
   {{- if .Values.ssdgate.auth2_oidc.client_id }}
   client_id: {{.Values.ssdgate.auth2_oidc.client_id }}
   {{- else }}
-  client_id: ssd-gate
+  client_id_env: DEX_CLIENT_ID
   {{- end }}
-  client_secret: "encrypted:gate-dex-client-secret:client-secret"
+  client_secret_env: DEX_CLIENT_SECRET
   {{- if .Values.ssdgate.auth2_oidc.well_known_url }}
-  well_known_url: "{{.Values.ssdgate.auth2_oidc.well_known_url}}"
+  well_known_url: "{{.Values.ssdgate.auth2_oidc.well_known_url }}"
   {{- else }}
-  well_known_url: "{{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}/dex/.well-known/openid-configuration"
+  well_known_url: "http://{{.Release.Name }}-dex:5556/dex/.well-known/openid-configuration"
   {{- end }}
   {{- if .Values.ssdgate.auth2_oidc.userinfo_url }}
   userinfo_url: "{{.Values.ssdgate.auth2_oidc.userinfo_url }}

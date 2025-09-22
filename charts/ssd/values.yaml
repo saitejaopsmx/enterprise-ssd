@@ -64,6 +64,9 @@ global:
   ## Set to true to expose ssd-ui over ingress
   createIngress: false
 
+  ##
+  gkeworkload: false
+
   ## SSD-UI url configuration, defaults to http://localhost:8080
   ssdUI:
     protocol: http

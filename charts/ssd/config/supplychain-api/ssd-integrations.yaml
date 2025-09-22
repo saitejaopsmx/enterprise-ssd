@@ -27,6 +27,11 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+          installationId:
+            encrypt: false
+        featureConfigs:
+          authType:
+            default: token
       - integratorType: bitbucket
         category: sourcetool
         multiaccount: false
@@ -248,6 +253,36 @@ integrationData:
             encrypt: true
           token:
             encrypt: true
+      - integratorType: nexus-registry
+        category: dockerregistry
+        multiaccount: true
+        featureConfigs:
+          authMode:
+            default: password
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+      - integratorType: nexus
+        category: dockerregistry
+        multiaccount: true
+        featureConfigs:
+          authMode:
+            default: password
+        integratorConfigs:
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
       - integratorType: acr
         category: dockerregistry
         multiaccount: true
@@ -263,6 +298,9 @@ integrationData:
       - integratorType: gcr
         category: dockerregistry
         multiaccount: false
+        featureConfigs:
+          authMode:
+            default: serviceAccount
         integratorConfigs:
           url:
             encrypt: false
@@ -289,6 +327,9 @@ integrationData:
       - integratorType: gar
         category: dockerregistry
         multiaccount: false
+        featureConfigs:
+          authMode:
+            default: serviceAccount
         integratorConfigs:
           url:
             encrypt: false

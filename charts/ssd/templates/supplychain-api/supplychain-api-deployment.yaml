@@ -28,6 +28,8 @@ spec:
     spec:
       {{- if and (not .Values.minio.enabled) .Values.toolchain.iamrole }}
       serviceAccountName: ssd-storage-sa
+      {{- else if .Values.global.gkeworkload }}
+      serviceAccountName: ssd-workload-sa
       {{- end }}
       initContainers:
       - name: rabbitmq-check
@@ -104,10 +106,18 @@ spec:
               secretKeyRef:
                 key: password
                 name: redis-secret
+          - name: OAUTH_BRIDGE_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                key: oauth-private-key
+                name: oauth-bridge-client-secrets
+                optional: true
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
               optional: true
+          - configMapRef:
+              name: oauth-bridge-client-config
           {{- with .Values.supplychainapi.probes }}
           {{- toYaml . | nindent 10 }}
           {{- else }}
@@ -139,6 +149,9 @@ spec:
             - mountPath: /app/ssd-integrations.yaml
               name: supplychain-api-cm
               subPath: ssd-integrations.yaml
+            - mountPath: /app/project.yaml
+              name: adhoc-project-cm
+              subPath: project.yaml
             - mountPath: /app/secrets/
               name: ssdsecret
               readOnly: true
@@ -151,6 +164,9 @@ spec:
               name: zap-openapi-spec
             - mountPath: /app/policy
               name: policy
+            - name: service-account
+              readOnly: true
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount
           {{- with .Values.supplychainapi.resources }}
           resources:
             {{ toYaml . | nindent 12 }}
@@ -172,7 +188,7 @@ spec:
       {{- end }}
 
         - name: gotenberg
-          image: gotenberg/gotenberg:8.7.0
+          image: gotenberg/gotenberg:8.22.0
           command: ["gotenberg"]
           args: ["--api-port=3000"]
           ports:
@@ -266,3 +282,19 @@ spec:
               path: ca.crt
             optional: true
             name: customer-custon-ca
+        - name: service-account
+          projected:
+            sources:
+              - serviceAccountToken:
+                  audience: ssdopsmxadmin
+                  expirationSeconds: 3600
+                  path: token
+            defaultMode: 420
+        - name: adhoc-project-cm
+          configMap:
+            defaultMode: 420
+            items:
+            - key: project.yaml
+              path: project.yaml
+            optional: true
+            name: adhoc-project-cm

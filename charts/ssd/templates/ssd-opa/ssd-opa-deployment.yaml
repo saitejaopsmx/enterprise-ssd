@@ -24,6 +24,9 @@ spec:
         {{ toYaml .Values.ssdopa.annotations | nindent 8 }}
 {{- end }}
     spec:
+      {{- if .Values.global.gkeworkload }}
+      serviceAccountName: ssd-workload-sa
+      {{- end }}
       containers:
         - name: ssd-opa
           image: {{ template "ssdopa.image" . }}
@@ -36,9 +39,18 @@ spec:
               secretKeyRef:
                 key: password
                 name: redis-secret
+          - name: OAUTH_BRIDGE_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                key: oauth-private-key
+                name: oauth-bridge-client-secrets
+                optional: true
           envFrom:
           - configMapRef:
               name: ssd-proxy-certs
+              optional: true
+          - configMapRef:
+              name: oauth-bridge-client-config
               optional: true
           volumeMounts:
             - mountPath: /app/ssd-public-keys
@@ -58,6 +70,9 @@ spec:
             - mountPath: /app/secrets/ssd-opa-token/
               name: token
               readOnly: true
+            - name: service-account
+              readOnly: true
+              mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         {{- with .Values.ssdopa.probes }}
         {{- toYaml . | nindent 10 }}
         {{- else }}
@@ -149,6 +164,14 @@ spec:
         - name: otel-sidecar-volume
           configMap:
             name: otel-sidecar-config
+            defaultMode: 420
+        - name: service-account
+          projected:
+            sources:
+              - serviceAccountToken:
+                  audience: ssdopsmxadmin
+                  expirationSeconds: 3600
+                  path: token
             defaultMode: 420
       {{- with .Values.nodeSelector }}
       nodeSelector:

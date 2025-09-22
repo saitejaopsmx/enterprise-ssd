@@ -71,3 +71,5 @@ minio:
   persistence:
     storageClass: ""
     size: 10Gi
+####################################
+gkeworkload: false

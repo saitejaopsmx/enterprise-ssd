@@ -718,6 +718,10 @@ type Component {
     analysis: ComponentAnalysis @hasInverse(field: Components)
     vulnerabilities: [Vulnerability!] @hasInverse(field: affects)
     artifacts: [ArtifactScanData!] @hasInverse(field: components)
+    eolScore: Int @search
+    eolRisk: Severity @search(by: [exact,regexp])
+    eolException: Boolean @search
+    isOlderThanBaseline: Boolean @search
 }
 
 type ComponentAnalysis {
@@ -741,6 +745,7 @@ type ComponentAnalysis {
     CreatedAt: DateTime
     ScannedAt: DateTime
     LastViewed: DateTime @search
+    BaselineComponent: Component
 }
 
 type ComponentLicenses {
@@ -759,6 +764,8 @@ enum Severity {
     info
     none
     unknown
+    acceptable
+    no_risk
 }
 
 type Vulnerability {
@@ -1100,6 +1107,7 @@ type Project
     type: String @search(by: [exact,regexp])
     error: String @search(by: [exact,regexp])
     riskStatus: RiskStatus @search(by: [exact,regexp])
+    level: String @search(by: [exact,regexp])
 }
 
 type ProjectConfig

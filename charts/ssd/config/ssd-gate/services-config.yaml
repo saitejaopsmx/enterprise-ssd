@@ -23,6 +23,8 @@
   baseUrl: supplychain-preprocessor:8058
   path_prefixes:
   - "/webhook/v1/ssd"
+  - "/webhook/v1/publish/sbom"
+  - "/webhook/v1/sbom/status"
   strip_path: "/webhook"
 - name: supplychain-api-team-auth
   path_prefixes:

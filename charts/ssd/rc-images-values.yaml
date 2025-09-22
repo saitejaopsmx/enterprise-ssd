@@ -64,3 +64,8 @@ artifactscan:
   image:
     repository: artifact-scan
     tag: "596ec24-7"
+
+kubescape:
+  image:
+    repository: kubescape-service
+    tag: 5638e51-1

@@ -5,12 +5,12 @@ imageCredentials:
 
 ui:
   image:
-    tag: "4d95a96-7"
+    tag: "4c8e857-458"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 toolchain:
   image:
-    tag: "23e464e-13"
+    tag: "70c3ebb5-314"
   #securityContext:
   #  fsGroup: 1000
   #  runAsUser: 1000
@@ -18,19 +18,19 @@ toolchain:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "6304bd5-1"
+    tag: "54eb4ea-167"
 ssdopa:
   image:
-    tag: "2830769-21"
+    tag: "bbde0ef-287"
 supplychainpreprocessor:
   image:
-    tag: "2ec18a9-10"
+    tag: "9178cd2-206"
   #securityContext:
   #  readOnlyRootFilesystem: false
   #  runAsNonRoot: true
 supplychainapi:
   image:
-    tag: "033eaab-12"
+    tag: "167fbda-1388"
 tokenmachine:
   image:
     tag: "99eb752-36"
@@ -38,7 +38,7 @@ tokenmachine:
 sourcescan:
   image:
     repository: source-scan
-    tag: "085e082-11"
+    tag: "fc16fdf-92"
 
 snykmonitor:
   image:
@@ -53,7 +53,7 @@ mobsf:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "9dfadbd-5"
+    tag: "26c823a-91"
 
 ssdrescheduler:
   image:
@@ -63,7 +63,7 @@ ssdrescheduler:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "596ec24-7"
+    tag: "a21b71f-383"
 
 kubescape:
   image:

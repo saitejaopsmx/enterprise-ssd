@@ -56,6 +56,13 @@ toolchain:
   saAnnotations: {}
   #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
 ################################################################################################
+supplychainapi:
+  ## Below is the parameter to load the data in the UI
+  cachePollingInterval: 6
+  ## Below is the command used to get the IssuerID ###
+  ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
+  ssdIssuer:
+################################################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 storageClass:
 ssdgate:

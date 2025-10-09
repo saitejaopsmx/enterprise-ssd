@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: oauth-bridge-client-config
 data:
-  {{ (tpl (.Files.Glob "config/oauth-bridge/oauth-bridge-client-config.yaml").AsConfig . ) | indent 2 }}
+{{ tpl (.Files.Get "config/oauth-bridge/oauth-bridge-client-config.yaml") . | indent 2 }}

@@ -65,7 +65,7 @@ global:
   createIngress: false
 
   ##
-  gkeworkload: false
+  gkeworkload: true
 
   ## SSD-UI url configuration, defaults to http://localhost:8080
   ssdUI:
@@ -332,6 +332,10 @@ supplychainapi:
 
   ## Below is the parameter to load the data in the UI
   cachePollingInterval: 6
+  ## Update the below parameter only when the global.gkeworkload is true ###
+  ## Below is the command used to get the IssuerID ###
+  ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
+  ssdIssuer:
 ######################################################
 tokenmachine:
   ## Image specific details

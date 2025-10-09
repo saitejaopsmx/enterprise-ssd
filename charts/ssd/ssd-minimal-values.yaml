@@ -2,6 +2,7 @@
 #################This file is used to Install SSD with Nginx Ingress Controller and Login with Inbuilt Authentication#######################################################################################################################################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
+  gkeworkload: false
   # If cert-manager is installed, TLS secrets will created automatically, as an 'Issuer' will be created
   certManager:  # set to true if cert-manager is installed
     installed: true

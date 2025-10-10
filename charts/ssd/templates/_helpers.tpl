@@ -347,3 +347,13 @@ Return the proper Rabbitmq Images
 {{- $tag := .Values.rabbitmq.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper Rabbitmq Images
+*/}}
+{{- define "ssdauditservice.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.ssdauditservice.image.repository -}}
+{{- $tag := .Values.ssdauditservice.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

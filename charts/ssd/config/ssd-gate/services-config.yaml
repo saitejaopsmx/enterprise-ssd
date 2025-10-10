@@ -38,6 +38,8 @@
   path_prefixes:
   - "/ssdservice/v1/ssd-kubernetes-info"
   - "/ssdservice/v1/kubescapeIntegration"
+  - "/ssdservice/v1/sbom/scan/upload"
+  - "/ssdservice/v1/sbom/scan/status"
   - "/ssdservice/v1/opa-firewall"
   baseUrl: supplychain-api:8099
   health_endpoint: /health

@@ -3,10 +3,12 @@
     "setApplicationInterval": {{ .Values.ui.config.setApplicationRefreshInterval }},
     "cdTool": "",
     "ssd": true,
+    "dgraphNewEndPointUrl": "/v1/graphql",
     "stageSecurityThresholdMinScore": 50,
     "stageSecurityThresholdMaxScore": 70,
     "dgraphToken": "",
     "dgraphEndPointUrl": "/graphql",
     "prometheusEndPointUrl": "/api/v1/query_range",
     "adhocOrgLevelDisabled": true
+    "workloadServiceAccount": "ssd-workload-sa"
 }

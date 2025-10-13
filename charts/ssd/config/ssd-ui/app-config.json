@@ -9,6 +9,6 @@
     "dgraphToken": "",
     "dgraphEndPointUrl": "/graphql",
     "prometheusEndPointUrl": "/api/v1/query_range",
-    "adhocOrgLevelDisabled": true
+    "adhocOrgLevelDisabled": true,
     "workloadServiceAccount": "ssd-workload-sa"
 }

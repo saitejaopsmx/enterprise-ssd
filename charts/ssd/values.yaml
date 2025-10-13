@@ -591,6 +591,22 @@ ssdauditservice:
 
   securityContext: {}
 ##############################################################################
+hasura:
+  image:
+    repository: ssd-audit-service
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+##############################################################################
 kubedetector:
   image:
     repository: kubernetes-detector

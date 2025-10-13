@@ -95,7 +95,7 @@ spec:
               name: hasura-admin-secret
         envFrom:
         - configMapRef:
-          name: ssd-audit-service-config
+            name: ssd-audit-service-config
         volumeMounts:
         - mountPath: /app/secrets/ssd-audit-service-token
           name: token
@@ -129,10 +129,10 @@ spec:
           timeoutSeconds: 1
         {{- end }}
       {{- with .Values.ssdauditservice.resources }}
-          resources:
+      resources:
       {{- toYaml . | nindent 10 }}
       {{- end }}
-          securityContext:
+      securityContext:
       {{- if .Values.ssdauditservice.securityContext }}
       {{ toYaml .Values.ssdauditservice.securityContext | nindent 12 }}
       {{- end }}

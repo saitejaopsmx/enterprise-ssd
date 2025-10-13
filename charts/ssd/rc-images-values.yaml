@@ -17,7 +17,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "26c823a-91"
+    tag: "26c823a-92"
 
 snykmonitor:
   image:
@@ -29,15 +29,15 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "167fbda-1388"
+    tag: "2125e44-1400"
 
 supplychainpreprocessor:
   image:
-    tag: "9178cd2-206"
+    tag: "b3fc804-207"
 
 ssdauditservice:
   image:
-    tag: "2025-06-02"
+    tag: "9d91dde-16"
 
 ssdgate:
   image:
@@ -50,7 +50,7 @@ ssdopa:
 
 ssdrescheduler:
   image:
-    tag: "1bdf3e7-9"
+    tag: "b582237-20"
 
 tokenmachine:
   image:
@@ -62,7 +62,7 @@ toolchain:
 
 ui:
   image:
-    tag: "4c8e857-458"
+    tag: "8c07857-467"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

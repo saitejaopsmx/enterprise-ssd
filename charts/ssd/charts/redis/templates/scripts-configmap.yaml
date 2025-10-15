@@ -714,7 +714,34 @@ data:
     {{- if .Values.master.command }}
     exec {{ .Values.master.command }} "${ARGS[@]}"
     {{- else }}
-    exec redis-server "${ARGS[@]}"
+    # Start Redis server in background
+    echo "Starting Redis server..."
+    redis-server "${ARGS[@]}" &
+    REDIS_PID=$!
+    # Wait for Redis to be ready
+    echo "Waiting for Redis to be ready..."
+    until redis-cli -p ${REDIS_PORT} -a "${REDIS_PASSWORD}" ping > /dev/null 2>&1; do
+      sleep 1
+    done
+    echo "Redis is ready!"
+    # Load audit event schema if file exists
+    if [[ -f /opt/bitnami/redis/audit-schema/schema.json ]]; then
+      echo "Loading audit event schema..."
+      redis-cli -p ${REDIS_PORT} -a "${REDIS_PASSWORD}" SET "audit:event_schema" "$(cat /opt/bitnami/redis/audit-schema/schema.json)" > /dev/null 2>&1
+      if [[ $? -eq 0 ]]; then
+        echo "Audit schema loaded successfully"
+        # Verify schema was loaded
+        SCHEMA_SIZE=$(redis-cli -p ${REDIS_PORT} -a "${REDIS_PASSWORD}" STRLEN "audit:event_schema" 2>/dev/null)
+        echo "Schema size: ${SCHEMA_SIZE} bytes"
+      else
+        echo "Warning: Failed to load audit schema"
+      fi
+    else
+      echo "No audit schema found at /opt/bitnami/redis/audit-schema/schema.json - skipping schema loading"
+    fi
+    # Wait for Redis process to complete
+    echo "Redis startup complete, waiting for process..."
+    wait $REDIS_PID
     {{- end }}
   {{- if eq .Values.architecture "replication" }}
   start-replica.sh: |

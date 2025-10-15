@@ -117,6 +117,25 @@ spec:
         volumeMounts:
         - mountPath: /hasura-metadata
           name: hasura-metadata
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Waiting for Hasura to be ready..."
+                  until curl -f http://localhost:8080/healthz > /dev/null 2>&1; do
+                    echo "Waiting for Hasura..."
+                    sleep 5
+                  done
+                  echo "Hasura is ready, importing metadata..."
+                  curl -X POST \
+                    -H "Content-Type: application/json" \
+                    -H "X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET" \
+                    -d @/hasura-metadata/metadata.yaml \
+                    http://localhost:8080/v1/metadata
+                  echo "Metadata import completed"
       - name: rbac-webhook
         image: {{ template "ssdauditservice.image" . }} 
         env:

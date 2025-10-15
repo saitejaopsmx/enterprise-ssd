@@ -11,6 +11,23 @@ sources:
       using:
         foreign_key_constraint_on: user_id
     select_permissions:
+    - role: admin
+      permission:
+        columns:
+        - user_id
+        - details
+        - environment_id
+        - event_name
+        - event_type
+        - message
+        - service
+        - status
+        - team_id
+        - track_id
+        - timestamp
+        - id
+        filter: {}
+      comment: ""
     - role: read_admin
       permission:
         columns:
@@ -46,6 +63,46 @@ sources:
         filter:
           team_id:
             _in: X-Hasura-Allowed-Teams
+    insert_permissions:
+    - role: admin
+      permission:
+        columns:
+        - user_id
+        - details
+        - environment_id
+        - event_name
+        - event_type
+        - message
+        - service
+        - status
+        - team_id
+        - track_id
+        - timestamp
+        check: {}
+      comment: ""
+    update_permissions:
+    - role: admin
+      permission:
+        columns:
+        - user_id
+        - details
+        - environment_id
+        - event_name
+        - event_type
+        - message
+        - service
+        - status
+        - team_id
+        - track_id
+        - timestamp
+        filter: {}
+        check: {}
+      comment: ""
+    delete_permissions:
+    - role: admin
+      permission:
+        filter: {}
+      comment: ""
   - table:
       name: users
       schema: public
@@ -58,6 +115,16 @@ sources:
             name: audit_events
             schema: public
     select_permissions:
+    - role: admin
+      permission:
+        columns:
+        - id
+        - full_name
+        - created_at
+        - updated_at
+        - username
+        filter: {}
+      comment: ""
     - role: read_admin
       permission:
         columns:
@@ -66,6 +133,28 @@ sources:
         - created_at
         - updated_at
         - username
+        filter: {}
+      comment: ""
+    insert_permissions:
+    - role: admin
+      permission:
+        columns:
+        - full_name
+        - username
+        check: {}
+      comment: ""
+    update_permissions:
+    - role: admin
+      permission:
+        columns:
+        - full_name
+        - username
+        filter: {}
+        check: {}
+      comment: ""
+    delete_permissions:
+    - role: admin
+      permission:
         filter: {}
       comment: ""
   configuration:

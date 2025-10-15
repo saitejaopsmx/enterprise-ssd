@@ -79,6 +79,9 @@ spec:
         - configMapRef:
             name: ssd-proxy-certs
             optional: true
+        - configMapRef:
+            name: ssd-audit-emitter-config
+            optional: true
         - secretRef:
             name: ssd-initial-password
             optional: true

@@ -1,0 +1,9 @@
+{
+  "user_activity": [
+    "login",
+    "logout",
+    "profile_update",
+    "password_change",
+    "session_expired"
+  ]
+}

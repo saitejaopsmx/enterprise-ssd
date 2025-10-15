@@ -14,6 +14,8 @@ dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
 auth_type: {{.Values.ssdgate.auth_type }}
 cors_str: "http://localhost:4200"
+audit:
+  enabled: true
 admin_groups:
 {{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
 

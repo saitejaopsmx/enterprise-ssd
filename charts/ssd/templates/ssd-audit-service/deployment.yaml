@@ -69,20 +69,6 @@ spec:
           value: {{ .Release.Name }}-redis-master
         - name: REDIS_PORT
           value: "6379"
-        - name: REDIS_DB
-          value: "0"
-        - name: AUDIT_QUEUE_NAME
-          value: audit-events
-        - name: HASURA_ENDPOINT
-          value: http://hasura:8080/v1/graphql
-        - name: CONSUMER_BATCH_SIZE
-          value: "10"
-        - name: CONSUMER_POLL_TIMEOUT
-          value: 5s
-        - name: CONSUMER_RETRY_ATTEMPTS
-          value: "3"
-        - name: CONSUMER_RETRY_DELAY
-          value: 1s
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:

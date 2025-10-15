@@ -474,10 +474,16 @@ master:
   lifecycleHooks: {}
   ## @param master.extraVolumes Optionally specify extra list of additional volumes for the Redis(R) master pod(s)
   ##
-  extraVolumes: []
+  extraVolumes:
+    - configMap:
+        defaultMode: 420
+        name: ssd-audit-event-schema
+      name: audit-schema
   ## @param master.extraVolumeMounts Optionally specify extra list of additional volumeMounts for the Redis(R) master container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    - mountPath: /opt/bitnami/redis/audit-schema
+      name: audit-schema
   ## @param master.sidecars Add additional sidecar containers to the Redis(R) master pod(s)
   ## e.g:
   ## sidecars:

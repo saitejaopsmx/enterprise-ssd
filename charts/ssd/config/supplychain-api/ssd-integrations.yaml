@@ -435,6 +435,14 @@ integrationData:
             encrypt: false
           token:
             encrypt: true
+      - integratorType: dependencytracker
+        category: getsbom
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: true
+          token:
+            encrypt: true
   - stage: Others
     integrations:
       - integratorType: chatgpt
@@ -449,11 +457,17 @@ integrationData:
         featureConfigs:
           slackTriggerType:
             default: critical
+          autoTriggerSlack:
+            default: inactive
+          customAlerts:
+            default: inactive
         integratorConfigs:
           channel:
             encrypt: false
           token:
             encrypt: true
+          alertStructure:
+            encrypt: false
       - integratorType: jira
         category: communications
         multiaccount: false

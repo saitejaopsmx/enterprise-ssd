@@ -83,7 +83,7 @@ spec:
         - configMapRef:
             name: ssd-audit-service-config
         volumeMounts:
-        - mountPath: /app/secrets/ssd-audit-service-token
+        - mountPath: /app/secrets/audit-service-token
           name: token
           readOnly: true
         - mountPath: /app/ssd-public-keys

@@ -10,5 +10,6 @@
     "dgraphEndPointUrl": "/graphql",
     "prometheusEndPointUrl": "/api/v1/query_range",
     "adhocOrgLevelDisabled": true,
-    "workloadServiceAccount": "ssd-workload-sa"
+    "workloadServiceAccount": "ssd-workload-sa",
+    "userActivityDefaultTeam": "admin_team"
 }

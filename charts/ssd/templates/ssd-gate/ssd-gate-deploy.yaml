@@ -27,6 +27,39 @@ spec:
         {{ toYaml .Values.ssdgate.annotations | nindent 8 }}
 {{- end }}
     spec:
+      initContainers:
+      - name: redis-schema-check
+        image: redis:7-alpine
+        command:
+          - /bin/sh
+          - -c
+          - |
+            echo "Checking Redis connectivity and schema..."
+            until redis-cli -h $REDIS_HOST -p $REDIS_PORT -a "$REDIS_PASSWORD" ping > /dev/null 2>&1; do
+              echo "Waiting for Redis to be ready..."
+              sleep 2
+            done
+            echo "Redis is alive!"
+            echo "Checking if audit schema is loaded..."
+            SCHEMA_EXISTS=$(redis-cli -h $REDIS_HOST -p $REDIS_PORT -a "$REDIS_PASSWORD" EXISTS "audit:event_schema")
+            if [ "$SCHEMA_EXISTS" = "1" ]; then
+              SCHEMA_SIZE=$(redis-cli -h $REDIS_HOST -p $REDIS_PORT -a "$REDIS_PASSWORD" STRLEN "audit:event_schema")
+              echo "Audit schema found! Size: ${SCHEMA_SIZE} bytes"
+            else
+              echo "ERROR: Audit schema not found in Redis!"
+              exit 1
+            fi
+            echo "All preconditions met!"
+        envFrom:
+        - configMapRef:
+            name: ssd-audit-emitter-config
+            optional: true
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: password
       containers:
       - args:
         - /app/ssdgate

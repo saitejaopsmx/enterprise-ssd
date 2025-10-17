@@ -96,23 +96,21 @@ spec:
         {{- toYaml . | nindent 10 }}
         {{- else }}
         livenessProbe:
-          failureThreshold: 3
           httpGet:
             path: /healthz
-            port: 8099
+            port: 8080
             scheme: HTTP
-          periodSeconds: 20
-          successThreshold: 1
-          timeoutSeconds: 1
+          periodSeconds: 10
+          timeoutSeconds: 5
+          initialDelaySeconds: 30
         readinessProbe:
-          failureThreshold: 12
           httpGet:
             path: /healthz
-            port: 8099
+            port: 8080
             scheme: HTTP
-          periodSeconds: 20
-          successThreshold: 1
-          timeoutSeconds: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 5
         {{- end }}
         volumeMounts:
         - mountPath: /hasura-metadata

@@ -93,8 +93,13 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
       {{- end }}
-      {{- if eq .Values.ssdgate.auth_type "dex_oidc" }}
         env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: password
+      {{- if eq .Values.ssdgate.auth_type "dex_oidc" }}
         - name: DEX_CLIENT_SECRET
           valueFrom:
             secretKeyRef:

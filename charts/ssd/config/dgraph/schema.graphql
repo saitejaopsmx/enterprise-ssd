@@ -418,7 +418,7 @@ type IntegratorKeyValues {
     feat: Boolean! @search
     key: String! @search(by: [exact])
     value: String! @search(by: [exact])
-    encrypt: Boolean!
+    encrypt: Boolean! @search
 }
 
 """
@@ -782,7 +782,6 @@ type Vulnerability {
     createdAt: DateTime @search
     cvss: Float @search
     attackVector: String @search(by:[exact])
-    priority: String @search(by: [exact, regexp])
     priorityInt: Int @search
     epss: Float @search
     cisa_kev: String @search(by: [exact, regexp])

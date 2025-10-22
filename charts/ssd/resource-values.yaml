@@ -118,6 +118,16 @@ zap:
   #  limits:
   #    memory: 1500Mi
   #    cpu: 1500m
+######################################################################
+ssdauditservice:
+  replicaCount: 1
+  resources: {}
+  #  requests:
+  #    memory: 500Mi
+  #    cpu: 500m
+  #  limits:
+  #    memory: 1500Mi
+  #    cpu: 1500m
 #######################################################################
 redis:
   master:

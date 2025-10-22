@@ -149,6 +149,9 @@ spec:
             - mountPath: /app/ssd-integrations.yaml
               name: supplychain-api-cm
               subPath: ssd-integrations.yaml
+            - mountPath: /app/ssd-whitelist.yaml
+              name: supplychain-api-cm
+              subPath: ssd-whitelist.yaml
             - mountPath: /app/project.yaml
               name: adhoc-project-cm
               subPath: project.yaml
@@ -256,6 +259,8 @@ spec:
             items:
             - key: ssd-integrations.yaml
               path: ssd-integrations.yaml
+            - key: ssd-whitelist.yaml
+              path: ssd-whitelist.yaml
             name: supplychain-api-cm
           name: supplychain-api-cm
         - name: ssdsecret

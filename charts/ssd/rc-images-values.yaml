@@ -3,69 +3,70 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: opsmx11
 
-ui:
+artifactscan:
   image:
-    tag: "4d95a96-7"
-  serviceAnnotations:
-    awsAnnotationsGo: HERE
-toolchain:
-  image:
-    tag: "23e464e-13"
-  #securityContext:
-  #  fsGroup: 1000
-  #  runAsUser: 1000
-  #  runAsGroup: 1000
-ssdgate:
-  image:
-    repository: ssd-gate
-    tag: "6304bd5-1"
-ssdopa:
-  image:
-    tag: "2830769-21"
-supplychainpreprocessor:
-  image:
-    tag: "2ec18a9-10"
-  #securityContext:
-  #  readOnlyRootFilesystem: false
-  #  runAsNonRoot: true
-supplychainapi:
-  image:
-    tag: "033eaab-12"
-tokenmachine:
-  image:
-    tag: "99eb752-36"
+    tag: "a21b71f-383"
 
-sourcescan:
+kubescape:
   image:
-    repository: source-scan
-    tag: "085e082-11"
-
-snykmonitor:
-  image:
-    repository: snyk-monitor
-    tag: "67c2de3-12"
+    tag: 5638e51-1
 
 mobsf:
   image:
-    repository: mobsf
     tag: "v4.1.3"
 
 projectmonitor:
   image:
-    repository: project-monitor
-    tag: "9dfadbd-5"
+    tag: "26c823a-92"
+
+snykmonitor:
+  image:
+    tag: "67c2de3-12"
+
+sourcescan:
+  image:
+    tag: "fc16fdf-92"
+
+supplychainapi:
+  image:
+    tag: "2125e44-1400"
+
+supplychainpreprocessor:
+  image:
+    tag: "b3fc804-207"
+
+ssdauditservice:
+  image:
+    tag: "9d91dde-16"
+
+ssdgate:
+  image:
+    repository: ssd-gate
+    tag: "54eb4ea-167"
+
+ssdopa:
+  image:
+    tag: "bbde0ef-287"
 
 ssdrescheduler:
   image:
-    repository: ssd-rescheduler
-    tag: "1bdf3e7-9"
+    tag: "b582237-20"
 
-artifactscan:
+tokenmachine:
   image:
-    repository: artifact-scan
-    tag: "596ec24-7"
+    tag: "99eb752-36"
 
-kubescape:
+toolchain:
   image:
-    repository: kubescape-service
-    tag: 5638e51-1
+    tag: "70c3ebb5-314"
+
+ui:
+  image:
+    tag: "8c07857-467"
+  serviceAnnotations:
+    awsAnnotationsGo: HERE
+
+zap:
+  image:
+    repository: zap
+    tag: "2024-12-00"

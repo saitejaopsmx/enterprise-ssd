@@ -21,9 +21,9 @@ spec:
       paths:
       - backend:
           service:
-            name: ssd-ui
+            name: ssd-gate
             port:
-              number: 8080
+              number: 8084
         path: /
         pathType: {{ .Values.global.ssdUI.pathType }}
 {{- if eq .Values.global.ssdUI.protocol "https" }}

@@ -569,6 +569,40 @@ artifactscan:
 
   annotations: {}
 
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+#############################################################################
+ssdauditservice:
+  image:
+    repository: ssd-audit-service
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+##############################################################################
+hasura:
+  image:
+    repository: ssd-audit-service
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
   resources: {}
 
   securityContext: {}

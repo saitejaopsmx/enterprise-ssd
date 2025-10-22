@@ -13,6 +13,15 @@ dex_url: {{.Values.ssdgate.dex_url }}
 {{- end }}
 
 auth_type: {{.Values.ssdgate.auth_type}}
+admin_auth_disabled: false
+force_secure_cookies: true
+backend_security:
+  expose_backend_headers: false
+  relay_error_details: false
+  allowed_error_codes: false
+  generic_error_message: "Service temporarily unavailable"
+audit:
+  enabled: true
 admin_groups:
 {{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
 

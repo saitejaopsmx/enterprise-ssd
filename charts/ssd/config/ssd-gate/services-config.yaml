@@ -29,6 +29,8 @@
 - name: supplychain-api-team-auth
   path_prefixes:
   - "/ssdservice/v1/findbuildid"
+  - "/ssdservice/v1/sbom/scan/upload"
+  - "/ssdservice/v1/sbom/scan/status"
   baseUrl: supplychain-api:8099
   health_endpoint: /health
   log_traffic: true
@@ -120,10 +122,20 @@
   - "/graphql"
   log_traffic: true
   streaming: false
+- name: hasura
+  baseUrl: hasura:8080
+  health_endpoint: /
+  auth_required: true
+  path_prefixes:
+  - "/v1/graphql"
+  log_traffic: true
+  streaming: false
 - name: ssd-ui
   baseUrl: ssd-ui:8080
   health_endpoint: "/ui/index.html"
   auth_required: true
+  path_prefixes:
+  - "/ui"
 {{- if .Values.minio.enabled }}
 - name: minio
   path_prefixes:
@@ -137,15 +149,6 @@
   auth_required: false
   path_prefixes:
   - "/api/v1/query_range"
-- name: ssd-temporal-web
-  baseUrl: {{ .Release.Name }}-temporal-web:8080
-  health_endpoint: ""
-  auth_required: true
-  path_prefixes:
-  - "/namespaces/default/workflows"
-  - "/_app"
-  - "/api/v1"
-  - "/favicon.ico"
 {{- if .Values.ssdgate.installDex }}
 - name: ssd-dex
   baseUrl: ssd-dex:5558

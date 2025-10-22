@@ -5,7 +5,7 @@ imageCredentials:
 
 artifactscan:
   image:
-    tag: "a21b71f-383"
+    tag: "7ce4420-385"
 
 kubescape:
   image:
@@ -29,24 +29,24 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "2125e44-1400"
+    tag: "191e08d-1427"
 
 supplychainpreprocessor:
   image:
-    tag: "b3fc804-207"
+    tag: "b3fc804-210"
 
 ssdauditservice:
   image:
-    tag: "9d91dde-16"
+    tag: "772b1cd-19"
 
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "54eb4ea-167"
+    tag: "f91ad68-198"
 
 ssdopa:
   image:
-    tag: "bbde0ef-287"
+    tag: "0744814-292"
 
 ssdrescheduler:
   image:
@@ -58,7 +58,7 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "70c3ebb5-314"
+    tag: "d014f9d6-320"
 
 ui:
   image:

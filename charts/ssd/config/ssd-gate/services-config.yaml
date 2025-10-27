@@ -151,8 +151,13 @@
   - "/api/v1/query_range"
 {{- if .Values.ssdgate.installDex }}
 - name: ssd-dex
-  baseUrl: ssd-dex:5558
+  baseUrl: ssd-dex:5556
   health_endpoint: /healthz/ready
+  auth_required: false
+  log_traffic: true
+  no_follow_redirects: true
+  path_prefixes:
+  - "/dex"
 {{- end }}
 - name: metrics
   baseUrl: otel-gateway:9464

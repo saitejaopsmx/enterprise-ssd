@@ -29,11 +29,11 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "6adef47-1429"
+    tag: "495608b-1433"
 
 supplychainpreprocessor:
   image:
-    tag: "b3fc804-210"
+    tag: "74395d3-212"
 
 ssdauditservice:
   image:
@@ -42,7 +42,7 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "f91ad68-198"
+    tag: "1ab850f-199"
 
 ssdopa:
   image:
@@ -62,7 +62,7 @@ toolchain:
 
 ui:
   image:
-    tag: "a3d4157-492"
+    tag: "401f1cf-495"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cbomkit-backend
   labels:
-    app: cbomkit
+    app: ssd
     component: cbomkit-backend
 {{ include "ssd.standard-labels" . | indent 4 }}
 spec:
@@ -12,11 +12,10 @@ spec:
     matchLabels:
       app: cbomkit
       component: cbomkit-backend
-{{ include "ssd.standard-labels" . | indent 8 }}
   template:
     metadata:
       labels:
-        app: cbomkit
+        app: ssd
         component: cbomkit-backend
     spec:
       initContainers:
@@ -26,7 +25,7 @@ spec:
             - sh
             - "-c"
             - |
-              until nc -z postgres 5432; do
+              until nc -z ssd-db 5432; do
                 echo "Waiting for PostgreSQL to be ready..."
                 sleep 2
               done
@@ -120,4 +119,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-

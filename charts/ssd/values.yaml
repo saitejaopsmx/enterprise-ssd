@@ -79,7 +79,414 @@ global:
     ingress:
       tls:
         secretName: ssd-ui-ingress
-###############################################
+###########################################################################################################
+artifactscan:
+  image:
+    repository: artifact-scan
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+#############################################################################################################
+cbom:
+  image:
+    repository: cbom
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+##############################################################################################################
+curl:
+  image:
+    repository: curl
+    tag: 8.6.0
+customLabels: {}
+##############################################################################################################
+db:
+  ## Set it to false if any external database is to be used
+  enabled: true
+
+  ## Change the Host Value and Port if external database is used
+  host: ssd-db
+  port: 5432
+
+  ## Image specific details
+  image:
+    repository: ssd-db
+    tag: "2025-04-00"
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  ## Strategy to rollout statefulset pods
+  podManagementPolicy: OrderedReady
+
+  ## Default group to which the default user of a pod belongs and it applies only to K8S
+  securityContext:
+    fsGroup: 1000
+
+  ## storageMountSize is the size with which a PVC is to be created
+  storageMountSize: 8Gi
+
+  probes: {}
+###################################################################################################################
+initContainer:
+  image:
+    repository: pgchecker
+    tag: v1
+###################################################################################################################
+kubedetector:
+  image:
+    repository: kubernetes-detector
+    tag: v1.0.3
+###################################################################################################################
+kubescape:
+  image:
+    repository: kubescape-service
+    tag: v0.0.1
+
+###################################################################################################################
+k8sdecoder:
+  image:
+    repository: k8s-decoder
+    tag: hal
+###################################################################################################################
+projectmonitor:
+  image:
+    repository: project-monitor
+    tag: "2025-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  maxConcurrentScans: 10
+         
+  pollIntervalSeconds: 60
+         
+  loglevel: info
+###################################################################################################################
+snykmonitor:
+  image:
+    repository: snyk-monitor
+    tag: "2025-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+  annotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  interval: 120m # Format: 0h0m0s (default: 24h)
+
+  loglevel: info
+###################################################################################################################
+sourcescan:
+  image:
+    repository: source-scan
+    tag: "2025-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  maxConcurrentScans: 10
+
+  pollIntervalSeconds: 60
+
+  loglevel: info
+###################################################################################################################
+supplychainapi:
+  ## Image specific details
+  image:
+    repository: supplychain-api
+    tag: "2025-06-07"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  ## Below is the parameter to load the data in the UI
+  cachePollingInterval: 6
+  ## Update the below parameter only when the global.gkeworkload is true ###
+  ## Below is the command used to get the IssuerID ###
+  ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
+  ssdIssuer:
+###################################################################################################################
+supplychainpreprocessor:
+  ## Image specific details
+  image:
+    repository: supplychain-preprocessor
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  # Supported values are info,debug
+  loglevel: info
+###################################################################################################################
+ssdauditservice:
+  image:
+    repository: ssd-audit-service
+    tag: "2025-06-02"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+###################################################################################################################
+ssdgate:
+  image:
+    repository: ssdgate
+    tag: "2025-06-01"
+  replicaCount: 1
+  installDex: true
+  createGateDexSecret: true
+  session_timeout: 2880   # OPTIONAL login session timeout, it should match the authenticator timeout
+  #home_page: "/ui/index.html" # OPTIONAL default redirect page
+  #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
+  #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
+
+  auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
+  admin_groups:
+    - admin
+  auth2_oidc:
+    # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET
+    #client_secret: "encrypted:gate-dex-client-secret:client-secret" # Create a secret called gate-dex-client-secret with key client-secret
+    entity_map:        # DEPENDS on the provider
+      user_name: email #  Required for Dex
+    #  roles: groups
+    #well_known_url: http://my-well-known
+    #redirect_url: "https//ssd-gate:8084/oidccallbackendpoint"       # OPTIONAL
+    #userinfo_url: "https://dev-80355908.okta.com/oauth2/v1/userinfo"  # OPTIONAL
+    # We need to "which field contains the username and roles"
+    #endpoint:       # OPTIONAL Not required of well-known url is provided, else required
+    #  auth_url: "https://dev-80355908.okta.com/oauth2/v1/authorize"
+    #  token_url: "https://dev-80355908.okta.com/oauth2/v1/token"
+    #scopes:         # OPTIONAL Not required of well-known url is provided, else required
+    #  - openid      # openid MUST be specified, if used.
+    #  - offline_access # It is best to leave offline_access in
+    #  - email
+    #  - roles
+  saml:
+    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    saml_initiated_login: true
+    #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
+    #sign_request: false # DEPENDS Default is false, make it match the SAML setting
+    ## Optional files, create saml-files secret as follows, "saml-files" secret name should not be changed
+    ## k create secret generic saml-files --from-file metadata.xml --from-file certificate.crt --from-file private.key
+    #metadata_File: /app/saml/metadata.xml  # OPTIONAL One of metadata url or file required, url preferred
+    #session_crt_file: /app/saml/certificate.crt # OPTIONAL
+    #session_key_file: /app/saml/private.key #  OPTIONAL
+    #entity_map: # OPTIONAL
+    #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
+    #  roles: groups  # groups is default
+
+  annotations: {}
+  serviceAnnotations: {}
+  resources: {}
+  probes: {}
+###################################################################################################################
+ssdopa:
+  ## Image specific details
+  image:
+    repository: ssd-opa
+    tag: "2025-06-03"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  securityContext: {}
+
+  resources: {}
+
+  probes: {}
+
+  # Supported values are info,debug
+  loglevel: debug
+
+  # Below flag is for the Cspm Reschduler
+  cspmReScheduler: true
+###################################################################################################################
+ssdrescheduler:
+  image:
+    repository: ssd-rescheduler
+    tag: "2025-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  ## Default will be true. Change to false If user don't want to retry the failed deployment
+  deploymentRetry: true
+
+  ## Retry the failed deployments . Default will be 10mins
+  deploymentRetryInterval: 10
+
+  ## Number of times the Deployment to be retried
+  maxRetryOfDeployment: 100
+
+  ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
+  analysisRescheduler: false
+
+  ## Indicates the count of batches for retrying deployments
+  deploymentRetryBatchCount: 5
+
+  logLevel: info
+###################################################################################################################
+tokenmachine:
+  ## Image specific details
+  image:
+    repository: token-machine
+    tag: "2024-09-00"
+    pullPolicy: IfNotPresent
+
+  annotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  serviceAnnotations: {}
+
+  securityContext: {}
+  ## Expiry of the Auto Generated Service Tokens ######
+  regenerateInterval: 10800
+###################################################################################################################
+toolchain:
+  ## Image specific details
+  image:
+    repository: tool-chain
+    tag: "2025-06-03"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  ### Change to true if user wants IAM role to use the Kubernetes service accounts to Access S3 Buckets ##################
+  iamrole: false
+  ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
+  saAnnotations: {}
+  #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
+
+  resources: {}
+
+  probes: {}
+
+  securityContext: {}
+
+  ## During the scanning if the repo need to clone only once set to true
+  cloneRepoOnce: false
+
+  # Supported values are info,debug
+  logLevel: debug
+
+  ## Fetching the SonarQube data for while doing the scan
+  fetchsonardata: 90d
+###################################################################################################################
+opsmxcustombinaries:
+  image:
+    repository: opsmx-custom-binaries
+    tag: kubectl-spin-cli-git-bash-jq-yq
+###################################################################################################################
+## Values of SSD UI
+ui:
+  ## Image specific details
+  image:
+    repository: ssd-ui
+    tag: "2025-06-04"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  probes: {}
+
+  config:
+    ## Interval, in millsecs, at which UI refreshes application dashboard
+    setApplicationRefreshInterval: 300000
+
+  securityContext:
+    allowPrivilegeEscalation: false
+##################################################
 minio:
   enabled: true
   mode: standalone
@@ -132,229 +539,6 @@ ratel:
   image:
     repository: ratel
     tag: v21.12.0
-  resources: {}
-curl:
-  image:
-    repository: curl
-    tag: 8.6.0
-customLabels: {}
-
-initContainer:
-  image:
-    repository: pgchecker
-    tag: v1
-###############################################################################
-ssdgate:
-  image:
-    repository: ssdgate
-    tag: "2025-06-01"
-  replicaCount: 1
-  installDex: true
-  createGateDexSecret: true
-  session_timeout: 2880   # OPTIONAL login session timeout, it should match the authenticator timeout
-  #home_page: "/ui/index.html" # OPTIONAL default redirect page
-  #skipstartcheck: true # OPTIONAL If true, pre-start checks will be skipped, well-known URL for OIDC cannot be used.
-  #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
-
-  auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
-  admin_groups:
-    - admin
-  auth2_oidc:
-    # kubectl create secret generic gate-dex-client-secret --from-literal client-secret=MYSECRET
-    #client_secret: "encrypted:gate-dex-client-secret:client-secret" # Create a secret called gate-dex-client-secret with key client-secret
-    entity_map:        # DEPENDS on the provider
-      user_name: email #  Required for Dex
-    #  roles: groups
-    #well_known_url: http://my-well-known
-    #redirect_url: "https//ssd-gate:8084/oidccallbackendpoint"       # OPTIONAL
-    #userinfo_url: "https://dev-80355908.okta.com/oauth2/v1/userinfo"  # OPTIONAL
-    # We need to "which field contains the username and roles"
-    #endpoint:       # OPTIONAL Not required of well-known url is provided, else required
-    #  auth_url: "https://dev-80355908.okta.com/oauth2/v1/authorize"
-    #  token_url: "https://dev-80355908.okta.com/oauth2/v1/token"
-    #scopes:         # OPTIONAL Not required of well-known url is provided, else required
-    #  - openid      # openid MUST be specified, if used.
-    #  - offline_access # It is best to leave offline_access in
-    #  - email
-    #  - roles
-  saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
-    saml_initiated_login: true
-    #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
-    #sign_request: false # DEPENDS Default is false, make it match the SAML setting
-    ## Optional files, create saml-files secret as follows, "saml-files" secret name should not be changed
-    ## k create secret generic saml-files --from-file metadata.xml --from-file certificate.crt --from-file private.key
-    #metadata_File: /app/saml/metadata.xml  # OPTIONAL One of metadata url or file required, url preferred
-    #session_crt_file: /app/saml/certificate.crt # OPTIONAL
-    #session_key_file: /app/saml/private.key #  OPTIONAL
-    #entity_map: # OPTIONAL
-    #  user_name: email  # Default is to take from the "subject" of the assertion. Use this to get it from an attribute
-    #  roles: groups  # groups is default
-
-  annotations: {}
-  serviceAnnotations: {}
-  resources: {}
-  probes: {}
-###############################################################################
-db:
-  ## Set it to false if any external database is to be used
-  enabled: true
-
-  ## Change the default configuration when above option is set to false
-  ## Below url and credentials are used by Autopilot & Sapor
-  host: ssd-db
-  port: 5432
-
-  ## Image specific details
-  image:
-    repository: ssd-db
-    tag: "2025-04-00"
-    pullPolicy: IfNotPresent
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  ## Strategy to rollout statefulset pods
-  podManagementPolicy: OrderedReady
-
-  ## Default group to which the default user of a pod belongs and it applies only to K8S
-  securityContext:
-    fsGroup: 1000
-
-  ## storageMountSize is the size with which a PVC is to be created
-  storageMountSize: 8Gi
-
-  probes: {}
-####################################################
-toolchain:
-  ## Image specific details
-  image:
-    repository: tool-chain
-    tag: "2025-06-03"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  ### Change to true if user wants IAM role to use the Kubernetes service accounts to Access S3 Buckets ##################
-  iamrole: false
-  ### Update the Annotations so IAM role uses the Kubernetes service accounts to Access S3 Buckets ##################
-  saAnnotations: {}
-  #  eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/<iam role name>
-
-  resources: {}
-
-  probes: {}
-
-  securityContext: {}
-
-  ## During the scanning if the repo need to clone only once set to true
-  cloneRepoOnce: false
-
-  # Supported values are info,debug
-  logLevel: debug
-
-  ## Fetching the SonarQube data for while doing the scan
-  fetchsonardata: 90d
-
-####################################################
-supplychainpreprocessor:
-  ## Image specific details
-  image:
-    repository: supplychain-preprocessor
-    tag: "2025-06-02"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  probes: {}
-
-  securityContext: {}
-
-  # Supported values are info,debug
-  loglevel: info
-
-####################################################
-ssdopa:
-  ## Image specific details
-  image:
-    repository: ssd-opa
-    tag: "2025-06-03"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  securityContext: {}
-
-  resources: {}
-
-  probes: {}
-
-  # Supported values are info,debug
-  loglevel: debug
-
-  # Below flag is for the Cspm Reschduler
-  cspmReScheduler: true
-
-####################################################
-supplychainapi:
-  ## Image specific details
-  image:
-    repository: supplychain-api
-    tag: "2025-06-07"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  probes: {}
-
-  securityContext: {}
-
-  ## Below is the parameter to load the data in the UI
-  cachePollingInterval: 6
-  ## Update the below parameter only when the global.gkeworkload is true ###
-  ## Below is the command used to get the IssuerID ###
-  ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
-  ssdIssuer:
-######################################################
-tokenmachine:
-  ## Image specific details
-  image:
-    repository: token-machine
-    tag: "2024-09-00"
-    pullPolicy: IfNotPresent
-
-  annotations: {}
-
-  resources: {}
-
-  probes: {}
-
-  serviceAnnotations: {}
-
-  securityContext: {}
-  ## Expiry of the Auto Generated Service Tokens ######
-  regenerateInterval: 10800
 ###############################################################################
 ## Details of rabbitmq message bus image for SSD
 ##
@@ -380,31 +564,6 @@ rabbitmq:
   securityContext:
     fsGroup: 1000
 
-###############################################################################
-## Values of SSD UI
-ui:
-  ## Image specific details
-  image:
-    repository: ssd-ui
-    tag: "2025-06-04"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  probes: {}
-
-  config:
-    ## Interval, in millsecs, at which UI refreshes application dashboard
-    setApplicationRefreshInterval: 300000
-
-  securityContext:
-    allowPrivilegeEscalation: false
 #############################################################################
 mobsf:
   image:
@@ -462,134 +621,6 @@ otel:
   interval: 10
 
   LongInterval: 21600
-
-##############################################################################
-snykmonitor:
-  image:
-    repository: snyk-monitor
-    tag: "2025-06-00"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-  annotations: {}
-
-  resources: {}
-
-  probes: {}
-
-  securityContext: {}
-
-  interval: 120m # Format: 0h0m0s (default: 24h)
-
-  loglevel: info
-##############################################################################
-sourcescan:
-  image:
-    repository: source-scan
-    tag: "2025-06-00"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  securityContext: {}
-
-  maxConcurrentScans: 10
-
-  pollIntervalSeconds: 60
-
-  loglevel: info
-##############################################################################
-projectmonitor:
-  image:
-    repository: project-monitor
-    tag: "2025-06-00"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  serviceAnnotations: {}
-
-  resources: {}
-
-  securityContext: {}
-
-  maxConcurrentScans: 10
-         
-  pollIntervalSeconds: 60
-         
-  loglevel: info
-
-##############################################################################
-ssdrescheduler:
-  image:
-    repository: ssd-rescheduler
-    tag: "2025-06-00"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  resources: {}
-
-  securityContext: {}
-
-  ## Default will be true. Change to false If user don't want to retry the failed deployment
-  deploymentRetry: true
-
-  ## Retry the failed deployments . Default will be 10mins
-  deploymentRetryInterval: 10
-
-  ## Number of times the Deployment to be retried
-  maxRetryOfDeployment: 100
-
-  ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
-  analysisRescheduler: false
-
-  ## Indicates the count of batches for retrying deployments
-  deploymentRetryBatchCount: 5
-
-  logLevel: info
-##############################################################################
-artifactscan:
-  image:
-    repository: artifact-scan
-    tag: "2025-06-02"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  probes: {}
-
-  resources: {}
-
-  securityContext: {}
-#############################################################################
-ssdauditservice:
-  image:
-    repository: ssd-audit-service
-    tag: "2025-06-02"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  probes: {}
-
-  resources: {}
-
-  securityContext: {}
 ##############################################################################
 hasura:
   image:
@@ -606,27 +637,6 @@ hasura:
   resources: {}
 
   securityContext: {}
-##############################################################################
-kubedetector:
-  image:
-    repository: kubernetes-detector
-    tag: v1.0.3
-kubescape:
-  image:
-    repository: kubescape-service
-    tag: v0.0.1
-
-################################################
-k8sdecoder:
-  image:
-    repository: k8s-decoder
-    tag: hal
-
-################################################
-opsmxcustombinaries:
-  image:
-    repository: opsmx-custom-binaries
-    tag: kubectl-spin-cli-git-bash-jq-yq
 #################################################################################
 ### Below is the Node Selector,Tolerations,Affinity for all SSD Components ######
 #################################################################################
@@ -634,7 +644,6 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 topologySpreadConstraints: []
-
 ###############################################################################################
 #### The values below this line are best not changed except in rare situations
 ###############################################################################################

@@ -9,6 +9,7 @@
   #disabled: false     # If true, the backend is temporarily disabled, only for debugging/dev. In prod, best to remove the service altogether
   #scheme: http        # If the Backend is httpS, please set it https
   #streaming: false    # If we have a streaming backend e.g. a service that returns results of a DB-query, set this to true(there is a resource hit)
+  #no_follow_redirects: false # If true, the gateway will not follow redirects from the backend
 
 - name: supplychain-api-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:

@@ -121,6 +121,17 @@ integrationData:
         featureConfigs:
           sonarqubeFileInsertion:
             default: inactive
+      - integratorType: cbomkit
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+        featureConfigs:
+          cbomScan:
+            default: active
+          mode:
+            default: local
       - integratorType: openssf
         category: scanningtool
         multiaccount: false

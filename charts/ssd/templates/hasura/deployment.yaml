@@ -131,7 +131,7 @@ spec:
                   curl -X POST \
                     -H "Content-Type: application/json" \
                     -H "X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET" \
-                    -d @/hasura-metadata/metadata.yaml \
+                    -d @/hasura-metadata/metadata.json \
                     http://localhost:8080/v1/metadata
                   echo "Metadata import completed"
       - name: rbac-webhook

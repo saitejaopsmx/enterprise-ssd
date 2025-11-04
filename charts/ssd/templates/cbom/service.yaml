@@ -3,15 +3,20 @@ kind: Service
 metadata:
   name: cbomkit-backend
   labels:
-    app: cbomkit
+    app: ssd
     component: cbomkit-backend
 spec:
+  selector:
+    app: ssd
+    component: cbomkit-backend
+{{ include "ssd.standard-labels" . | indent 4 }}
+{{- if .Values.cbom.serviceAnnotations }}
+  annotations:
+{{ toYaml .Values.cbom.serviceAnnotations | indent 4 }}
+{{- end }}
   ports:
     - name: api
       protocol: TCP
       port: 8081
       targetPort: 8081
-  selector:
-    app: cbomkit
-    component: cbomkit-backend
   type: ClusterIP

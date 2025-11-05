@@ -5,7 +5,7 @@ imageCredentials:
 
 artifactscan:
   image:
-    tag: "7ce4420-385"
+    tag: "b4f4c26-8"
 
 kubescape:
   image:
@@ -17,7 +17,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "26c823a-92"
+    tag: "26c823a-6"
 
 snykmonitor:
   image:
@@ -25,15 +25,15 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "fc16fdf-92"
+    tag: "7225909-16"
 
 supplychainapi:
   image:
-    tag: "495608b-1433"
+    tag: "1ec2e44-18"
 
 supplychainpreprocessor:
   image:
-    tag: "74395d3-212"
+    tag: "a039567-16"
 
 ssdauditservice:
   image:
@@ -46,7 +46,7 @@ ssdgate:
 
 ssdopa:
   image:
-    tag: "0744814-292"
+    tag: "0744814-24"
 
 ssdrescheduler:
   image:
@@ -58,11 +58,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "d014f9d6-320"
+    tag: "919af9f5-17"
 
 ui:
   image:
-    tag: "401f1cf-495"
+    tag: "2e56ad1-12"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

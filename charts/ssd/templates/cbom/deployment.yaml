@@ -88,21 +88,7 @@ spec:
           resources:
       {{- toYaml . | nindent 12 }}
       {{- end }}
-          securityContext:
-      {{- if .Values.ssdopa.securityContext }}
-      {{ toYaml .Values.ssdopa.securityContext | nindent 12 }}
-      {{- else }}
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            seccompProfile:
-              type: RuntimeDefault
-      {{- end }}
+          securityContext: {}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

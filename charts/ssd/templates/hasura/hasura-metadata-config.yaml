@@ -7,4 +7,4 @@ metadata:
     component: hasura
 {{ include "ssd.standard-labels" . | indent 4 }}
 data:
-{{ (tpl (.Files.Glob "config/hasura/metadata.yaml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/hasura/metadata.json").AsConfig . ) | indent 2 }}

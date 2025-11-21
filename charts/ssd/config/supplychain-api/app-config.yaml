@@ -7,6 +7,7 @@ ssdIssuer: {{ .Values.supplychainapi.ssdIssuer }}
 #jwkPath: {{ .Values.supplychainapi.jwkPath }}
 namespace: {{ .Release.Namespace }}
 zapService: http://zap-service:8080
+ssdLicenseGenerator: http://ssd-license-generator:8080
 tokenMachine:
     host: http://token-machine
     port: 8050

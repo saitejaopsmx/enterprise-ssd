@@ -710,7 +710,9 @@ type Component {
     licenses: [String!]
     omittedLicenses: [String!]
     copyrights: [String!]
-    webURL: String @search(by: [exact, regexp])
+    srcURL: String
+    webURL: String
+    licenseFileURL: String
     purl: String @search(by: [exact, regexp])
     cpe: String @search(by: [exact])
     scannedAt: DateTime @search

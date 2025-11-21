@@ -186,6 +186,8 @@ licensegenerator:
   resources: {}
 
   securityContext: {}
+  
+  storageMountSize: 10Gi
 
 ###################################################################################################################
 projectmonitor:

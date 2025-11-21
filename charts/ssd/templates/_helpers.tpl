@@ -29,7 +29,7 @@ Return the proper UI image name
 {{- end -}}
 
 {{/*
-Return the proper sapor-db image name
+Return the proper SSD-DB image name
 */}}
 {{- define "db.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
@@ -355,5 +355,15 @@ Return the proper Rabbitmq Images
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.ssdauditservice.image.repository -}}
 {{- $tag := .Values.ssdauditservice.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper License Generator Images
+*/}}
+{{- define "licensegenerator.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.ssdauditservice.image.repository -}}
+{{- $tag := .Values.licensegenerator.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

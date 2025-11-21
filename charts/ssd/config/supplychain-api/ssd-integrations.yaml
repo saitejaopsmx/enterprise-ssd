@@ -430,6 +430,12 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: cdxgen
+        category: scanningtool
+        multiaccount: false
+        featureConfigs:
+          vulnerabilityscan:
+            default: inactive
       - integratorType: s3
         category: dockerregistry
         multiaccount: false
@@ -472,12 +478,16 @@ integrationData:
             default: inactive
           customAlerts:
             default: inactive
+          scanAlert:
+            default: inactive
         integratorConfigs:
           channel:
             encrypt: false
           token:
             encrypt: true
           alertStructure:
+            encrypt: false
+          scanAlertChannel:
             encrypt: false
       - integratorType: jira
         category: communications

@@ -20,6 +20,36 @@ type Role {
     permission: RolePermission! @search(by: [hash])
 }
 
+
+enum ApiKeyStatus {
+    active
+    inactive
+    expired
+}
+
+type ApiKey
+    @withSubscription
+    @auth(
+    query:
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    add:
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    update:
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    delete:
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    )
+{
+    id: String! @id
+    name: String! @search(by: [exact, regexp])
+    role: Role!
+    keyHash: String! @search(by: [hash])
+    createdAt: DateTime! @search
+    updatedAt: DateTime! @search
+    expiresAt: DateTime! @search
+    status: ApiKeyStatus! @search(by: [hash])
+}
+
 """
 KeyValue is a generic key/value pair, used as an attribute list or similar.
 """
@@ -162,6 +192,7 @@ type Team implements RBAC
     labels: [KeyValue!]
     policies: [PolicyDefinition!] @hasInverse(field: ownerTeam)
     policyEnforcements: [PolicyEnforcement!]
+    ruleScopes: [RuleScope!] @hasInverse(field: team)
     exceptions: [ExceptionAffects!] @hasInverse(field: affectsTeam)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: team)
     AttachedJira: [Jira] @hasInverse(field: team)
@@ -204,6 +235,7 @@ type Application implements RBAC
     team: Team! @hasInverse(field: applications)
     policies: [PolicyDefinition!] @hasInverse(field: ownerApplication)
     policyEnforcements: [PolicyEnforcement!] @hasInverse(field: enforcedApplication)
+    ruleScopes: [RuleScope!] @hasInverse(field: application)
     metadata: [KeyValue!]
 }
 
@@ -470,6 +502,26 @@ type PolicyEnforcement {
     tags: [Tag!] @hasInverse(field: policies)
     createdAt: DateTime!
     updatedAt: DateTime!
+}
+
+type Rule {
+    id: ID!
+    name: String! @search(by: [exact,regexp])
+    description: String!
+    datasourceTool: String! @search(by: [exact])
+    severity: Severity! @search(by: [exact]) #default severity of tool not to be updated
+    scopes: [RuleScope!] @hasInverse(field: rule)
+    createdAt: DateTime!
+}
+
+type RuleScope {
+  id: ID!
+  severity: Severity! @search(by: [exact])
+  status: Boolean! @search
+  rule: Rule!
+  team: Team
+  application: Application
+  environment: Environment
 }
 
 type Jira {

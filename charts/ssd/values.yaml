@@ -171,6 +171,23 @@ k8sdecoder:
     repository: k8s-decoder
     tag: hal
 ###################################################################################################################
+licensegenerator:
+  image:
+    repository: ssd-license-generator
+    tag: "2025-09-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+
+###################################################################################################################
 projectmonitor:
   image:
     repository: project-monitor

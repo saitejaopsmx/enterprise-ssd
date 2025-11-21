@@ -19,3 +19,4 @@ maxConcurrentScans: 5
 registryCallDelayMs: 1000
 pollIntervalSeconds: 120
 toolChainAddr: http://tool-chain:8100
+ssdUrl: {{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}

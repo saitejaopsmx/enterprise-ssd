@@ -1,7 +1,7 @@
 apiVersion: v2
 name: ssd
-version: "2025.06.02"
-appVersion: "2025.06.00"
+version: "2025.09.00"
+appVersion: "2025.09.00"
 description: "OpsMx Secure Software Delivery for CI/CD Pipelines"
 icon: https://raw.githubusercontent.com/OpsMx/enterprise-spinnaker/master/img/opsmx.png
 maintainers:

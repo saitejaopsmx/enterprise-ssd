@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dlvs
+  labels:
+    app: ssd
+    component: dlvs
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.dlvs.replicaCount }}
+  selector:
+    matchLabels:
+      app: ssd
+      component: dlvs
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: dlvs
+{{ include "ssd.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.dlvs.annotations -}}
+        {{ toYaml .Values.dlvs.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: dlvs
+          image: {{ template "dlvs.image" . }}
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+      {{- with .Values.dlvs.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
+          securityContext:
+      {{- if .Values.dlvs.securityContext }}
+      {{ toYaml .Values.dlvs.securityContext | nindent 12 }}
+      {{- end }}
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

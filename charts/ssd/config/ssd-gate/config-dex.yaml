@@ -16,6 +16,7 @@ auth_type: {{.Values.ssdgate.auth_type }}
 #cors_str: "http://localhost:4200"
 audit:
   enabled: true
+token_expiry_hours: 24
 admin_groups:
 {{- toYaml .Values.ssdgate.admin_groups |nindent 0 }}
 

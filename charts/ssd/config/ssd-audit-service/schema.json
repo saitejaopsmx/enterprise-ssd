@@ -5,5 +5,13 @@
     "profile_update",
     "password_change",
     "session_expired"
+  ],
+  "api_key_management":[
+    "apikey_user_created",
+    "apikey_user_updated",
+    "create",
+    "update",
+    "delete",
+    "regenerate"
   ]
 }

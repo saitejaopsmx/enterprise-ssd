@@ -367,3 +367,23 @@ Return the proper License Generator Images
 {{- $tag := .Values.licensegenerator.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper DLVS Images
+*/}}
+{{- define "dlvs.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.dlvs.image.repository -}}
+{{- $tag := .Values.dlvs.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper Aishield Images
+*/}}
+{{- define "aishield.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.aishield.image.repository -}}
+{{- $tag := .Values.aishield.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

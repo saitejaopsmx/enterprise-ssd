@@ -80,6 +80,24 @@ global:
       tls:
         secretName: ssd-ui-ingress
 ###########################################################################################################
+aishield:
+  image:
+    repository: aishield
+    tag: "2025-11-00"
+    pullPolicy: IfNotPresent
+  
+  replicaCount: 1
+  
+  annotations: {}
+   
+  probes: {}
+      
+  resources: {}
+   
+  securityContext: {}
+
+  loglevel: info
+###########################################################################################################
 artifactscan:
   image:
     repository: artifact-scan
@@ -147,6 +165,23 @@ db:
 
   ## storageMountSize is the size with which a PVC is to be created
   storageMountSize: 8Gi
+
+  probes: {}
+###################################################################################################################
+dlvs:
+  ## Image specific details
+  image:
+    repository: dlvs
+    tag: "2025-11-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
 
   probes: {}
 ###################################################################################################################

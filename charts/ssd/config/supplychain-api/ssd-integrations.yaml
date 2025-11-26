@@ -32,6 +32,14 @@ integrationData:
         featureConfigs:
           authType:
             default: token
+      - integratorType: huggingface
+        category: sourcetool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
       - integratorType: bitbucket
         category: sourcetool
         multiaccount: false

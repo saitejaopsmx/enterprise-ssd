@@ -135,7 +135,7 @@ spec:
                     http://localhost:8080/v1/metadata
                   echo "Metadata import completed"
       - name: rbac-webhook
-        image: {{ template "ssdauditservice.image" . }} 
+        image: {{ template "ssdauditservice.image" . }}
         env:
         - name: SERVICE_MODE
           value: webhook

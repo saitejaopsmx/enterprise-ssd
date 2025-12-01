@@ -3,13 +3,21 @@ imageCredentials:
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: opsmx11
 
+aishield:
+  image:
+    tag: "2025-11-00"
+
 artifactscan:
   image:
-    tag: "b4f4c26-8"
+    tag: "6682eea-401"
+
+dlvs:
+  image:
+    tag: "b5b8de1-2"
 
 kubescape:
   image:
-    tag: 5638e51-1
+    tag: "5638e51-1"
 
 mobsf:
   image:
@@ -17,7 +25,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "26c823a-6"
+    tag: "038382c-105"
 
 snykmonitor:
   image:
@@ -25,28 +33,28 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "7225909-16"
+    tag: "f47c02b-102"
 
 supplychainapi:
   image:
-    tag: "1ec2e44-18"
+    tag: "63f4e2c-1584"
 
 supplychainpreprocessor:
   image:
-    tag: "a039567-16"
+    tag: "8998b83-222"
 
 ssdauditservice:
   image:
-    tag: "772b1cd-19"
+    tag: "772b1cd-20"
 
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "1ab850f-199"
+    tag: "346124f-216"
 
 ssdopa:
   image:
-    tag: "0744814-24"
+    tag: "76cf045-341"
 
 ssdrescheduler:
   image:
@@ -58,11 +66,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "919af9f5-17"
+    tag: "4f115ce3-428"
 
 ui:
   image:
-    tag: "2e56ad1-12"
+    tag: "255ab0b-580"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

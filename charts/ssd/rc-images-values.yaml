@@ -19,6 +19,10 @@ kubescape:
   image:
     tag: "5638e51-1"
 
+licensegenerator:
+  image:
+    tag: "0b6fced-3"
+
 mobsf:
   image:
     tag: "v4.1.3"

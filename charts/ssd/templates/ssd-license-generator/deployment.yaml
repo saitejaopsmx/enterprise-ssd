@@ -93,6 +93,8 @@ spec:
       tolerations:
 {{ toYaml .Values.global.tolerations | indent 8 }}
       {{- end }}
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: config
           configMap:

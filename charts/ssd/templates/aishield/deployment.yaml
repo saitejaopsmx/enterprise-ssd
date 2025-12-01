@@ -72,7 +72,7 @@ spec:
           {{- end }}
           volumeMounts:
             - name: ssd-public-keys
-              mountPath: /app/ssd-public-keys
+              mountPath: /tools/ssd-public-keys
             - name: config
               mountPath: /config.yaml
               subPath: config.yaml
@@ -80,7 +80,7 @@ spec:
               mountPath: /usr/local/share/ca-certificates
             - name: token
               readOnly: true
-              mountPath: /app/secrets/aishield
+              mountPath: /tools/secrets/aishield
           {{- with .Values.aishield.resources }}
           resources:
           {{ toYaml . | nindent 12 }}

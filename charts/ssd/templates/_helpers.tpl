@@ -363,7 +363,7 @@ Return the proper License Generator Images
 */}}
 {{- define "licensegenerator.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.ssdauditservice.image.repository -}}
+{{- $repositoryName := .Values.licensegenerator.image.repository -}}
 {{- $tag := .Values.licensegenerator.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

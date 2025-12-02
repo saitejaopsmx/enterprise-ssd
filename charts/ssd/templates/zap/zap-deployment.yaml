@@ -47,6 +47,8 @@ spec:
           - api.addrs.addr.name=.*
           - '-config'
           - api.addrs.addr.regex=true
+          - '-config'
+          - network.localServers.aliases.alias.name=zap-service
         env:
         - name: ZAP_API_ADDRESSES
           value: '*'

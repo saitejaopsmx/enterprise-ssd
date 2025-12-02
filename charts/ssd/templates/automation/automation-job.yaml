@@ -119,6 +119,7 @@ spec:
                       frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                      kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/kubeyaml/refs/heads/ssd-v2025-11/ssd-license-generator/ssd-license-generator-templates-cm.yaml?token=GHSAT0AAAAAADF3IHHMCSSQMYFSQOMHY4ZS2JOV56Q
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                       break
@@ -132,6 +133,7 @@ spec:
                   frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                  kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/kubeyaml/refs/heads/ssd-v2025-11/ssd-license-generator/ssd-license-generator-templates-cm.yaml?token=GHSAT0AAAAAADF3IHHMCSSQMYFSQOMHY4ZS2JOV56Q
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                   break

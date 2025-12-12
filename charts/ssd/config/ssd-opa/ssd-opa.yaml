@@ -15,6 +15,7 @@ maxConcurrentActivityExecutionSize: 0 # optional field; default is 0 which means
 maxConcurrentWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 maxConcurrentActivityExecutionSizeForAdhoc: 0
 maxConcurrentWorkflowTaskExecutionSizeForAdhoc: 0
+auditEnable: true
 redis:
   address : {{ .Release.Name }}-redis-master:6379
   db: 0

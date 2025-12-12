@@ -4,7 +4,25 @@
     "logout",
     "profile_update",
     "password_change",
-    "session_expired"
+    "session_expired",
+    "project_create",
+    "project_update",
+    "project_delete",
+    "project_rescan",
+    "role_create",
+    "role_update",
+    "role_delete",
+    "cluster_create",
+    "cluster_update",
+    "organisation_create",
+    "account_create",
+    "team_create",
+    "team_update"
+  ],
+   "user_integrator_activity": [
+    "integrator_create",
+    "integrator_update",
+    "integrator_delete"
   ],
   "api_key_management":[
     "apikey_user_created",
@@ -13,5 +31,42 @@
     "update",
     "delete",
     "regenerate"
+  ],
+  "scan_now_activity" : [
+    "scan_now_project_create",
+    "scan_now_project_update",
+    "scan_now_project_delete",
+    "scan_now_project_rescan"
+  ],
+  "scan_activity":[
+    "data_collection_triggered",
+    "deploy_api_triggered",
+    "event_processing_error",
+    "build_event_recieved",
+    "deploy_event_recieved",
+    "project_analysis_started",
+    "project_completed",
+    "project_failed",
+    "project_repository_error",
+    "artifact_analysis",
+    "artifact_vulnerability_scan",
+    "sourcecode_vulnerability_scan",
+    "virustotal_mobileapp_scan",
+    "mobsf_static_scan",
+    "image_license_scan",
+    "image_secret_scan",
+    "openssf_source_scan",
+    "sourcecode_secret_scan",
+    "sourcecode_license_scan",
+    "cbom_scan",
+    "semgrep_scan",
+    "snyk_scan",
+    "helmchart_scan",
+    "codacy_scan",
+    "sonarqube_scan",
+    "virustotal_url_scan",
+    "opengrep_scan",
+    "application_analysis",
+    "firewall_analysis"
   ]
 }

@@ -52,6 +52,8 @@ spec:
           - configMapRef:
               name: oauth-bridge-client-config
               optional: true
+          - configMapRef:
+              name: ssd-audit-emitter-config
           volumeMounts:
             - mountPath: /app/ssd-public-keys
               name: ssd-public-keys

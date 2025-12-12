@@ -117,6 +117,9 @@ spec:
               name: ssd-proxy-certs
               optional: true
           - configMapRef:
+              name: ssd-audit-emitter-config
+              optional: true
+          - configMapRef:
               name: oauth-bridge-client-config
           {{- with .Values.supplychainapi.probes }}
           {{- toYaml . | nindent 10 }}

@@ -47,6 +47,10 @@ spec:
               secretKeyRef:
                 key: password
                 name: rabbitmq-secret
+          envFrom:
+            - configMapRef:
+                name: ssd-audit-emitter-config
+                optional: true
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys

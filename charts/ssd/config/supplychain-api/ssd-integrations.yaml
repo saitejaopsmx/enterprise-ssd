@@ -1,3 +1,4 @@
+browserCacheDuration: {{ .Values.supplychainapi.browserCacheDuration }}
 cachePollingInterval: {{ .Values.supplychainapi.cachePollingInterval }}
 jiraPollingInterval: 5
 integrationData:

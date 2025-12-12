@@ -309,6 +309,8 @@ supplychainapi:
 
   ## Below is the parameter to load the data in the UI
   cachePollingInterval: 6
+  ## Below is the parameter for browser Caching in the UI
+  browserCacheDuration: 100
   ## Update the below parameter only when the global.gkeworkload is true ###
   ## Below is the command used to get the IssuerID ###
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
@@ -403,6 +405,7 @@ ssdgate:
   serviceAnnotations: {}
   resources: {}
   probes: {}
+  uiteamtokenexpiry: 24
 ###################################################################################################################
 ssdopa:
   ## Image specific details

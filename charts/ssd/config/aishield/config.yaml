@@ -12,13 +12,8 @@ toolChainHostPort: "http://tool-chain:8100"
 runtime:
   workerCount: 2
 temporal:
-  hostPort: ssd-temporal-frontend:7233 ## Check with Ritik
-  namespace: ssd-opa
-  taskQueue: aishield
   maxConcurrentActivityExecutionSize: 100
   maxConcurrentWorkflowTaskExecutionSize: 100
-s3:
-  bucketName: ssd-temporal ## Check with Ritik
 dgraph:
   internalTokenPath: "/tools/secrets/aishield/token"
   {{- if .Values.dgraph.HA.enabled }}

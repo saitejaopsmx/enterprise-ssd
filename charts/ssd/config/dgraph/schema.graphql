@@ -144,6 +144,8 @@ type DeploymentTarget
     targetType: String @search(by: [exact])
     "Options are: self-hosted(default), aws"
     hosting: String @search(by: [exact])
+    "Options are: ecs,ec2,etc (Options should be based in the hosting type)"
+    hostingService: String @search(by: [exact])
     "Account name from the cloud provider integrator is expected here"
     account: String @search(by: [exact])
     "this would be something like us-east-1 etc"
@@ -565,6 +567,7 @@ type RunHistory  {
     UpdatedAt: DateTime! @search
     DeployedAt: DateTime! @search
     Hash: String
+    diffScan: Boolean! @search
     Pass: Boolean! @search
     EvalData: PolicyEvaluationData @hasInverse(field: affects)
     FileApi: String
@@ -716,6 +719,7 @@ type ArtifactScanData {
     artifactDetails: Artifact @hasInverse(field: scanData)
     lastScannedAt: DateTime
     createdAt: DateTime @search
+    vulnSource: String @search(by: [exact])
     vulnTrackingId: String
     vulnScanState: String @search(by: [exact])
     scanState: String @search(by: [exact])
@@ -759,8 +763,8 @@ type Component {
     type: String!
     name: String! @search(by: [exact, regexp])
     version: String! @search(by: [exact, regexp])
-    licenses: [String!]
-    omittedLicenses: [String!]
+    licenses: [String!] @search(by: [exact, regexp])
+    omittedLicenses: [String!] @search(by: [exact, regexp])
     copyrights: [String!]
     srcURL: String
     webURL: String
@@ -776,6 +780,8 @@ type Component {
     eolRisk: Severity @search(by: [exact,regexp])
     eolException: Boolean @search
     isOlderThanBaseline: Boolean @search
+    severity: Severity @search(by: [exact,regexp])
+    severityInt: Int @search
 }
 
 type ComponentAnalysis {
@@ -823,7 +829,8 @@ enum Severity {
 }
 
 type Vulnerability {
-    id: String! @id
+    id: String! @id @search(by: [exact, regexp])
+    source: String @search(by: [exact, regexp])
     parent: String! @search(by: [exact, regexp])
     ratings: Severity @search(by: [exact])
     ratingsInt: Int @search

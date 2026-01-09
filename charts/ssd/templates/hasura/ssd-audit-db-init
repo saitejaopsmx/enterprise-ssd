@@ -42,6 +42,72 @@ data:
         echo -e "${RED}[ERROR]${NC} $1"
     }
 
+    # =============================================================================
+    # Database Check Helper Functions
+    # =============================================================================
+    # Helper to check if a table exists
+    check_table_exists() {
+        local table=$1
+        psql -tAc "
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables
+                WHERE table_schema = 'public'
+                AND table_name = '$table'
+            );
+        " 2>/dev/null || echo "f"
+    }
+
+    # Helper to check if a column exists
+    check_column_exists() {
+        local table=$1
+        local column=$2
+        psql -tAc "
+            SELECT EXISTS (
+                SELECT FROM information_schema.columns
+                WHERE table_schema = 'public'
+                AND table_name = '$table'
+                AND column_name = '$column'
+            );
+        " 2>/dev/null || echo "f"
+    }
+
+    # Helper to check if a column is nullable
+    check_column_nullable() {
+        local table=$1
+        local column=$2
+        psql -tAc "
+            SELECT is_nullable = 'YES' FROM information_schema.columns
+            WHERE table_schema = 'public'
+            AND table_name = '$table'
+            AND column_name = '$column';
+        " 2>/dev/null || echo "f"
+    }
+
+    # Helper to check if a check constraint exists
+    check_constraint_exists() {
+        local constraint_name=$1
+        psql -tAc "
+            SELECT EXISTS (
+                SELECT FROM information_schema.check_constraints
+                WHERE constraint_name = '$constraint_name'
+                AND constraint_schema = 'public'
+            );
+        " 2>/dev/null || echo "f"
+    }
+
+    # Helper to check if a foreign key constraint exists
+    check_fk_constraint_exists() {
+        local constraint_name=$1
+        local table=$2
+        psql -tAc "
+            SELECT EXISTS (
+                SELECT FROM information_schema.table_constraints
+                WHERE constraint_name = '$constraint_name'
+                AND table_name = '$table'
+            );
+        " 2>/dev/null || echo "f"
+    }
+
     # Function to wait for PostgreSQL to be ready
     wait_for_postgres() {
         log_info "Waiting for PostgreSQL to be ready..."
@@ -65,7 +131,7 @@ data:
     # Function to check if database exists and create it if needed
     ensure_database_exists() {
         log_info "Checking if database exists..."
-
+        
         # First, connect to postgres database to check if our target database exists
         local db_exists=$(PGDATABASE=postgres psql -tAc "
             SELECT EXISTS(
@@ -109,42 +175,36 @@ data:
         log_info "Checking database initialization status..."
 
         # Check if audit_events table exists
-        local table_exists=$(psql -tAc "
-            SELECT EXISTS (
-                SELECT FROM information_schema.tables 
-                WHERE table_schema = 'public' 
-                AND table_name = 'audit_events'
-            );
-        " 2>/dev/null || echo "f")
-
-        if [ "$table_exists" = "t" ]; then
+        if [ "$(check_table_exists "audit_events")" = "t" ]; then
             log_info "audit_events table found"
 
             # Check if users table exists
-            local users_table_exists=$(psql -tAc "
-                SELECT EXISTS (
-                    SELECT FROM information_schema.tables 
-                    WHERE table_schema = 'public' 
-                    AND table_name = 'users'
-                );
-            " 2>/dev/null || echo "f")
-
-            if [ "$users_table_exists" = "t" ]; then
+            if [ "$(check_table_exists "users")" = "t" ]; then
                 log_info "users table found"
 
-                # Check if schema_migrations table exists and has our records
-                local migrations_exist=$(psql -tAc "
-                    SELECT EXISTS (
-                        SELECT FROM information_schema.tables 
-                        WHERE table_schema = 'public' 
-                        AND table_name = 'schema_migrations'
-                    );
-                " 2>/dev/null || echo "f")
+                # Check if org_id column exists in audit_events (migration 000007)
+                if [ "$(check_column_exists "audit_events" "org_id")" = "f" ]; then
+                    log_warning "Database partially initialized (missing org_id column in audit_events)"
+                    return 1
+                fi
 
-                if [ "$migrations_exist" = "t" ]; then
+                # Check if team_id is nullable (migration 000007 requirement)
+                if [ "$(check_column_nullable "audit_events" "team_id")" = "f" ]; then
+                    log_warning "Database partially initialized (team_id column is not nullable - missing migration 000007)"
+                    return 1
+                fi
+
+                # Check if check_team_or_org constraint exists (migration 000007)
+                if [ "$(check_constraint_exists "check_team_or_org")" = "f" ]; then
+                    log_warning "Database partially initialized (missing check_team_or_org constraint)"
+                    return 1
+                fi
+
+                # Check if schema_migrations table exists and has our records
+                if [ "$(check_table_exists "schema_migrations")" = "t" ]; then
                     local consolidated_applied=$(psql -tAc "
                         SELECT EXISTS (
-                            SELECT 1 FROM schema_migrations 
+                            SELECT 1 FROM schema_migrations
                             WHERE version = 'CONSOLIDATED'
                         );
                     " 2>/dev/null || echo "f")
@@ -173,39 +233,40 @@ data:
     # Function to validate schema integrity
     validate_schema_integrity() {
         log_info "Validating schema integrity..."
-        
-        # Check critical columns exist
-        local username_column=$(psql -tAc "
-            SELECT EXISTS (
-                SELECT FROM information_schema.columns 
-                WHERE table_schema = 'public' 
-                AND table_name = 'users' 
-                AND column_name = 'username'
-            );
-        " 2>/dev/null || echo "f")
 
-        if [ "$username_column" = "f" ]; then
+        # Check critical columns exist
+        if [ "$(check_column_exists "users" "username")" = "f" ]; then
             log_error "Schema validation failed: users.username column missing"
             return 1
         fi
 
-        # Check foreign key constraint exists
-        local fk_constraint=$(psql -tAc "
-            SELECT EXISTS (
-                SELECT FROM information_schema.table_constraints 
-                WHERE constraint_name = 'fk_audit_events_user_id'
-                AND table_name = 'audit_events'
-            );
-        " 2>/dev/null || echo "f")
+        # Check org_id column exists in audit_events
+        if [ "$(check_column_exists "audit_events" "org_id")" = "f" ]; then
+            log_error "Schema validation failed: audit_events.org_id column missing"
+            return 1
+        fi
 
-        if [ "$fk_constraint" = "f" ]; then
+        # Check team_id is nullable (migration 000007 requirement)
+        if [ "$(check_column_nullable "audit_events" "team_id")" = "f" ]; then
+            log_error "Schema validation failed: audit_events.team_id should be nullable"
+            return 1
+        fi
+
+        # Check foreign key constraint exists
+        if [ "$(check_fk_constraint_exists "fk_audit_events_user_id" "audit_events")" = "f" ]; then
             log_error "Schema validation failed: foreign key constraint missing"
+            return 1
+        fi
+
+        # Check check_team_or_org constraint exists
+        if [ "$(check_constraint_exists "check_team_or_org")" = "f" ]; then
+            log_error "Schema validation failed: check_team_or_org constraint missing"
             return 1
         fi
 
         # Check if partitions exist
         local partitions_count=$(psql -tAc "
-            SELECT COUNT(*) FROM pg_tables 
+            SELECT COUNT(*) FROM pg_tables
             WHERE tablename LIKE 'audit_events_%'
             AND tablename ~ '^audit_events_[0-9]{4}_[0-9]{2}$';
         " 2>/dev/null || echo "0")
@@ -228,7 +289,7 @@ data:
             log_error "Database initialization failed"
             return 1
         fi
-
+        
         log_success "Database initialization completed successfully"
         return 0
     }
@@ -237,24 +298,24 @@ data:
     display_database_status() {
         log_info "Database Status Summary:"
         echo "=================================="
-
+        
         # Count tables
         local table_count=$(psql -tAc "
-            SELECT COUNT(*) FROM information_schema.tables
+            SELECT COUNT(*) FROM information_schema.tables 
             WHERE table_schema = 'public';
         " 2>/dev/null || echo "0")
-
+        
         # Count partitions
         local partition_count=$(psql -tAc "
             SELECT COUNT(*) FROM pg_tables 
             WHERE tablename LIKE 'audit_events_%';
         " 2>/dev/null || echo "0")
-
+        
         # Count applied migrations
         local migration_count=$(psql -tAc "
             SELECT COUNT(*) FROM schema_migrations;
         " 2>/dev/null || echo "0")
-
+        
         echo "Tables: $table_count"
         echo "Partitions: $partition_count"
         echo "Applied Migrations: $migration_count"
@@ -414,6 +475,53 @@ data:
                 PRIMARY KEY (id, timestamp),
                 CONSTRAINT check_team_or_org CHECK (team_id IS NOT NULL OR org_id IS NOT NULL)
             ) PARTITION BY RANGE (timestamp);
+        END IF;
+    END $$;
+
+    -- =============================================================================
+    -- HANDLE MIGRATION FOR EXISTING TABLES
+    -- =============================================================================
+    -- If the audit_events table already exists, we need to migrate it to the new schema
+    DO $$
+    BEGIN
+        IF EXISTS (
+            SELECT 1 FROM information_schema.tables
+            WHERE table_schema = 'public'
+            AND table_name = 'audit_events'
+        ) THEN
+            -- Add org_id column if it doesn't exist
+            IF NOT EXISTS (
+                SELECT 1 FROM information_schema.columns
+                WHERE table_schema = 'public'
+                AND table_name = 'audit_events'
+                AND column_name = 'org_id'
+            ) THEN
+                ALTER TABLE audit_events ADD COLUMN org_id TEXT;
+                RAISE NOTICE 'Added org_id column to audit_events table';
+            END IF;
+
+            -- Make team_id nullable if it isn't already
+            IF EXISTS (
+                SELECT 1 FROM information_schema.columns
+                WHERE table_schema = 'public'
+                AND table_name = 'audit_events'
+                AND column_name = 'team_id'
+                AND is_nullable = 'NO'
+            ) THEN
+                ALTER TABLE audit_events ALTER COLUMN team_id DROP NOT NULL;
+                RAISE NOTICE 'Made team_id column nullable in audit_events table';
+            END IF;
+
+            -- Add check constraint if it doesn't exist
+            IF NOT EXISTS (
+                SELECT 1 FROM information_schema.check_constraints
+                WHERE constraint_schema = 'public'
+                AND constraint_name = 'check_team_or_org'
+            ) THEN
+                ALTER TABLE audit_events ADD CONSTRAINT check_team_or_org
+                    CHECK (team_id IS NOT NULL OR org_id IS NOT NULL);
+                RAISE NOTICE 'Added check_team_or_org constraint to audit_events table';
+            END IF;
         END IF;
     END $$;
 
@@ -586,11 +694,11 @@ data:
         ('000001', 'Create audit_events partitioned table')
         ON CONFLICT (version) DO NOTHING;
 
-    INSERT INTO schema_migrations (version, description) VALUES 
+    INSERT INTO schema_migrations (version, description) VALUES
         ('000002', 'Create partition management functions')
         ON CONFLICT (version) DO NOTHING;
 
-    INSERT INTO schema_migrations (version, description) VALUES 
+    INSERT INTO schema_migrations (version, description) VALUES
         ('000005', 'Create users table with normalization')
         ON CONFLICT (version) DO NOTHING;
 
@@ -617,4 +725,3 @@ data:
         RAISE NOTICE 'Functions created: create_monthly_partition, create_future_partitions, drop_old_partitions';
         RAISE NOTICE 'Initial partitions created for current and next month';
     END $$;
-

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ssd-audit-db-init
+  namespace: sep-2025-09
 data:
   init-db.sh: |
     #!/bin/bash
@@ -46,18 +47,18 @@ data:
     wait_for_postgres() {
         log_info "Waiting for PostgreSQL to be ready..."
         local elapsed=0
-        
+
         while [ $elapsed -lt $DB_CHECK_TIMEOUT ]; do
             if pg_isready -q; then
                 log_success "PostgreSQL is ready!"
                 return 0
             fi
-            
+
             log_info "PostgreSQL not ready, waiting... (${elapsed}s/${DB_CHECK_TIMEOUT}s)"
             sleep $RETRY_INTERVAL
             elapsed=$((elapsed + RETRY_INTERVAL))
         done
-        
+
         log_error "Timeout waiting for PostgreSQL to be ready"
         return 1
     }
@@ -65,7 +66,7 @@ data:
     # Function to check if database exists and create it if needed
     ensure_database_exists() {
         log_info "Checking if database exists..."
-        
+
         # First, connect to postgres database to check if our target database exists
         local db_exists=$(PGDATABASE=postgres psql -tAc "
             SELECT EXISTS(
@@ -73,12 +74,12 @@ data:
                 WHERE datname = '$PGDATABASE'
             );
         " 2>/dev/null || echo "f")
-        
+
         if [ "$db_exists" = "t" ]; then
             log_success "Database '$PGDATABASE' exists"
         else
             log_info "Database '$PGDATABASE' does not exist, creating it..."
-            
+
             # Create the database
             if PGDATABASE=postgres psql -c "CREATE DATABASE \"$PGDATABASE\";" > /dev/null 2>&1; then
                 log_success "Database '$PGDATABASE' created successfully"
@@ -87,19 +88,19 @@ data:
                 return 1
             fi
         fi
-        
+
         return 0
     }
 
     # Function to check if database is accessible
     check_database_connection() {
         log_info "Checking database connection..."
-        
+
         if ! psql -c "SELECT 1;" > /dev/null 2>&1; then
             log_error "Cannot connect to database. Check credentials and database configuration."
             return 1
         fi
-        
+
         log_success "Database connection successful"
         return 0
     }
@@ -107,7 +108,7 @@ data:
     # Function to check if the database is already initialized
     check_database_initialized() {
         log_info "Checking database initialization status..."
-        
+
         # Check if audit_events table exists
         local table_exists=$(psql -tAc "
             SELECT EXISTS (
@@ -116,10 +117,10 @@ data:
                 AND table_name = 'audit_events'
             );
         " 2>/dev/null || echo "f")
-        
+
         if [ "$table_exists" = "t" ]; then
             log_info "audit_events table found"
-            
+
             # Check if users table exists
             local users_table_exists=$(psql -tAc "
                 SELECT EXISTS (
@@ -128,10 +129,10 @@ data:
                     AND table_name = 'users'
                 );
             " 2>/dev/null || echo "f")
-            
+
             if [ "$users_table_exists" = "t" ]; then
                 log_info "users table found"
-                
+
                 # Check if schema_migrations table exists and has our records
                 local migrations_exist=$(psql -tAc "
                     SELECT EXISTS (
@@ -140,7 +141,7 @@ data:
                         AND table_name = 'schema_migrations'
                     );
                 " 2>/dev/null || echo "f")
-                
+
                 if [ "$migrations_exist" = "t" ]; then
                     local consolidated_applied=$(psql -tAc "
                         SELECT EXISTS (
@@ -148,7 +149,7 @@ data:
                             WHERE version = 'CONSOLIDATED'
                         );
                     " 2>/dev/null || echo "f")
-                    
+
                     if [ "$consolidated_applied" = "t" ]; then
                         log_success "Database is fully initialized (consolidated script applied)"
                         return 0
@@ -183,12 +184,12 @@ data:
                 AND column_name = 'username'
             );
         " 2>/dev/null || echo "f")
-        
+
         if [ "$username_column" = "f" ]; then
             log_error "Schema validation failed: users.username column missing"
             return 1
         fi
-        
+
         # Check foreign key constraint exists
         local fk_constraint=$(psql -tAc "
             SELECT EXISTS (
@@ -197,24 +198,24 @@ data:
                 AND table_name = 'audit_events'
             );
         " 2>/dev/null || echo "f")
-        
+
         if [ "$fk_constraint" = "f" ]; then
             log_error "Schema validation failed: foreign key constraint missing"
             return 1
         fi
-        
+
         # Check if partitions exist
         local partitions_count=$(psql -tAc "
             SELECT COUNT(*) FROM pg_tables 
             WHERE tablename LIKE 'audit_events_%'
             AND tablename ~ '^audit_events_[0-9]{4}_[0-9]{2}$';
         " 2>/dev/null || echo "0")
-        
+
         if [ "$partitions_count" -lt 1 ]; then
             log_error "Schema validation failed: no audit_events partitions found"
             return 1
         fi
-        
+
         log_success "Schema integrity validation passed"
         log_info "Found $partitions_count audit_events partitions"
         return 0
@@ -228,7 +229,7 @@ data:
             log_error "Database initialization failed"
             return 1
         fi
-        
+
         log_success "Database initialization completed successfully"
         return 0
     }
@@ -237,24 +238,24 @@ data:
     display_database_status() {
         log_info "Database Status Summary:"
         echo "=================================="
-        
+
         # Count tables
         local table_count=$(psql -tAc "
-            SELECT COUNT(*) FROM information_schema.tables 
+            SELECT COUNT(*) FROM information_schema.tables
             WHERE table_schema = 'public';
         " 2>/dev/null || echo "0")
-        
+
         # Count partitions
         local partition_count=$(psql -tAc "
             SELECT COUNT(*) FROM pg_tables 
             WHERE tablename LIKE 'audit_events_%';
         " 2>/dev/null || echo "0")
-        
+
         # Count applied migrations
         local migration_count=$(psql -tAc "
             SELECT COUNT(*) FROM schema_migrations;
         " 2>/dev/null || echo "0")
-        
+
         echo "Tables: $table_count"
         echo "Partitions: $partition_count"
         echo "Applied Migrations: $migration_count"
@@ -264,29 +265,29 @@ data:
     # Main execution flow
     main() {
         log_info "Starting SSD Audit Service database initialization check..."
-        
+
         # Step 1: Wait for PostgreSQL to be ready
         if ! wait_for_postgres; then
             log_error "Failed to connect to PostgreSQL"
             exit 1
         fi
-        
+
         # Step 2: Ensure database exists (create if needed)
         if ! ensure_database_exists; then
             log_error "Database creation/verification failed"
             exit 1
         fi
-        
+
         # Step 3: Check database connection
         if ! check_database_connection; then
             log_error "Database connection check failed"
             exit 1
         fi
-        
+
         # Step 4: Check if database is already initialized
         if check_database_initialized; then
             log_success "Database already initialized, skipping initialization"
-            
+
             # Validate schema integrity
             if validate_schema_integrity; then
                 display_database_status
@@ -298,19 +299,19 @@ data:
         else
             log_info "Database not initialized or incomplete, proceeding with initialization"
         fi
-        
+
         # Step 5: Run initialization
         if ! initialize_database; then
             log_error "Database initialization failed"
             exit 1
         fi
-        
+
         # Step 6: Validate the initialization
         if ! validate_schema_integrity; then
             log_error "Post-initialization validation failed"
             exit 1
         fi
-        
+
         # Step 7: Display final status
         display_database_status
         log_success "Database initialization completed successfully!"
@@ -373,12 +374,12 @@ data:
     DO $$
     BEGIN
         IF NOT EXISTS (
-            SELECT 1 FROM pg_trigger 
+            SELECT 1 FROM pg_trigger
             WHERE tgname = 'update_users_updated_at'
         ) THEN
-            CREATE TRIGGER update_users_updated_at 
-                BEFORE UPDATE ON users 
-                FOR EACH ROW 
+            CREATE TRIGGER update_users_updated_at
+                BEFORE UPDATE ON users
+                FOR EACH ROW
                 EXECUTE FUNCTION update_updated_at_column();
         END IF;
     END $$;
@@ -405,12 +406,14 @@ data:
                 event_name TEXT NOT NULL,
                 service TEXT NOT NULL,
                 user_id INTEGER,
-                team_id TEXT NOT NULL,
+                team_id TEXT,
+                org_id TEXT,
                 environment_id TEXT,
                 message TEXT,
                 details JSONB,
                 status TEXT NOT NULL,
-                PRIMARY KEY (id, timestamp)
+                PRIMARY KEY (id, timestamp),
+                CONSTRAINT check_team_or_org CHECK (team_id IS NOT NULL OR org_id IS NOT NULL)
             ) PARTITION BY RANGE (timestamp);
         END IF;
     END $$;
@@ -419,11 +422,11 @@ data:
     DO $$
     BEGIN
         IF NOT EXISTS (
-            SELECT 1 FROM information_schema.table_constraints 
+            SELECT 1 FROM information_schema.table_constraints
             WHERE constraint_name = 'fk_audit_events_user_id'
         ) THEN
-            ALTER TABLE audit_events 
-            ADD CONSTRAINT fk_audit_events_user_id 
+            ALTER TABLE audit_events
+            ADD CONSTRAINT fk_audit_events_user_id
             FOREIGN KEY (user_id) REFERENCES users(id);
         END IF;
     END $$;
@@ -435,32 +438,41 @@ data:
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_timestamp') THEN
             CREATE INDEX idx_audit_events_timestamp ON audit_events (timestamp);
         END IF;
-        
+
         -- Team ID index
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_team_id') THEN
             CREATE INDEX idx_audit_events_team_id ON audit_events (team_id);
         END IF;
-        
+
+        -- Org ID index (for RLS performance)
+        IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_org_id') THEN
+            CREATE INDEX idx_audit_events_org_id ON audit_events (org_id);
+        END IF;
+
         -- Service index
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_service') THEN
             CREATE INDEX idx_audit_events_service ON audit_events (service);
         END IF;
-        
+
         -- Event type index
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_event_type') THEN
             CREATE INDEX idx_audit_events_event_type ON audit_events (event_type);
         END IF;
-        
+
         -- User ID foreign key index
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_user_id_fk') THEN
             CREATE INDEX idx_audit_events_user_id_fk ON audit_events (user_id) WHERE user_id IS NOT NULL;
         END IF;
-        
+
         -- Status index
         IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_audit_events_status') THEN
             CREATE INDEX idx_audit_events_status ON audit_events (status);
         END IF;
     END $$;
+
+    -- Add comments explaining the columns
+    COMMENT ON COLUMN audit_events.team_id IS 'Team identifier for team-level events. Used for RLS when present.';
+    COMMENT ON COLUMN audit_events.org_id IS 'Organization identifier. Used for RLS when team_id is not present (org-level events).';
 
     -- =============================================================================
     -- PARTITION MANAGEMENT FUNCTIONS
@@ -476,15 +488,15 @@ data:
         start_date := DATE_TRUNC('month', table_date);
         end_date := start_date + INTERVAL '1 month';
         partition_name := 'audit_events_' || TO_CHAR(start_date, 'YYYY_MM');
-        
+
         -- Check if partition already exists
         IF NOT EXISTS (
-            SELECT 1 FROM pg_tables 
+            SELECT 1 FROM pg_tables
             WHERE tablename = partition_name
         ) THEN
             EXECUTE format('CREATE TABLE %I PARTITION OF audit_events FOR VALUES FROM (%L) TO (%L)',
                            partition_name, start_date, end_date);
-            
+
             RETURN 'Created partition: ' || partition_name;
         ELSE
             RETURN 'Partition already exists: ' || partition_name;
@@ -501,11 +513,11 @@ data:
         i INTEGER;
     BEGIN
         current_month := DATE_TRUNC('month', CURRENT_DATE);
-        
+
         FOR i IN 1..months_ahead LOOP
             result := result || create_monthly_partition(current_month + (i || ' months')::INTERVAL);
         END LOOP;
-        
+
         RETURN result;
     END;
     $$ LANGUAGE plpgsql;
@@ -519,7 +531,7 @@ data:
         cutoff_date DATE;
     BEGIN
         cutoff_date := DATE_TRUNC('month', CURRENT_DATE) - (months_to_keep || ' months')::INTERVAL;
-        
+
         FOR partition_record IN
             SELECT tablename 
             FROM pg_tables 
@@ -529,7 +541,7 @@ data:
             EXECUTE 'DROP TABLE IF EXISTS ' || partition_record.tablename || ' CASCADE';
             result := result || ('Dropped partition: ' || partition_record.tablename);
         END LOOP;
-        
+
         RETURN result;
     END;
     $$ LANGUAGE plpgsql;
@@ -548,18 +560,18 @@ data:
         start_date := DATE_TRUNC('month', CURRENT_DATE);
         end_date := start_date + INTERVAL '1 month';
         partition_name := 'audit_events_' || TO_CHAR(start_date, 'YYYY_MM');
-        
+
         -- Only create if not exists
         IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = partition_name) THEN
             EXECUTE format('CREATE TABLE %I PARTITION OF audit_events FOR VALUES FROM (%L) TO (%L)',
                            partition_name, start_date, end_date);
         END IF;
-        
+
         -- Next month
         start_date := end_date;
         end_date := start_date + INTERVAL '1 month';
         partition_name := 'audit_events_' || TO_CHAR(start_date, 'YYYY_MM');
-        
+
         -- Only create if not exists
         IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = partition_name) THEN
             EXECUTE format('CREATE TABLE %I PARTITION OF audit_events FOR VALUES FROM (%L) TO (%L)',
@@ -583,11 +595,15 @@ data:
         ('000005', 'Create users table with normalization')
         ON CONFLICT (version) DO NOTHING;
 
-    INSERT INTO schema_migrations (version, description) VALUES 
+    INSERT INTO schema_migrations (version, description) VALUES
         ('000006', 'Rename email to username column')
         ON CONFLICT (version) DO NOTHING;
 
-    INSERT INTO schema_migrations (version, description) VALUES 
+    INSERT INTO schema_migrations (version, description) VALUES
+        ('000007', 'Add org_id column and make team_id nullable')
+        ON CONFLICT (version) DO NOTHING;
+
+    INSERT INTO schema_migrations (version, description) VALUES
         ('CONSOLIDATED', 'Consolidated initialization script applied')
         ON CONFLICT (version) DO NOTHING;
 
@@ -602,3 +618,4 @@ data:
         RAISE NOTICE 'Functions created: create_monthly_partition, create_future_partitions, drop_old_partitions';
         RAISE NOTICE 'Initial partitions created for current and next month';
     END $$;
+

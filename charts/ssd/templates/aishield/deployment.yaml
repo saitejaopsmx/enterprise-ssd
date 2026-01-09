@@ -36,8 +36,8 @@ spec:
               containerPort: 8090
               protocol: TCP
           env:
-          - name: GRAPHQL_URL
-            value: http://dgraph-public:8080/graphql
+          - name: TEMPORAL_HOSTPORT
+            value: {{ .Release.Name }}-temporal-frontend:7233
           {{- if .Values.minio.enabled }}
           - name: S3_ENDPOINT_URL
             value: http://{{ .Release.Name }}-minio:9000

@@ -498,6 +498,33 @@ integrationData:
             encrypt: false
           scanAlertChannel:
             encrypt: false
+      - integratorType: email
+        category: communications
+        multiaccount: false
+        featureConfigs:
+          authMode:
+            default: password
+          scanCompletionAlert:
+            default: inactive
+          scanFailureAlert:
+            default: inactive
+        integratorConfigs:
+          url:
+            encrypt: false
+          fromEmail:
+            encrypt: false
+          toEmail:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+          tenantId:
+            encrypt: false
+          clientId:
+            encrypt: false
+          clientSecret:
+            encrypt: true 
       - integratorType: jira
         category: communications
         multiaccount: false
@@ -547,6 +574,37 @@ integrationData:
             default: inactive
           dynamicScan:
             default: inactive
+      - integratorType: apirunner
+        category: testingtool
+        multiaccount: false
+        integratorConfigs:
+          http:
+            encrypt: false
+          url:
+            encrypt: false
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+          token:
+            encrypt: true
+          param:
+            encrypt: false
+          header:
+            encrypt: false
+          variable:
+            encrypt: false
+          tool:
+            encrypt: false
+          body:
+            encrypt: false
+          fileformat:
+            encrypt: false
+        featureConfigs:
+          http:
+            default: get
+          authMode:
+            default: bearer
       - integratorType: tfsec
         category: communications
         multiaccount: false

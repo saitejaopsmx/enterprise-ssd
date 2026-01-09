@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "6682eea-401"
+    tag: "461b7b3-9"
 
 dlvs:
   image:
@@ -37,19 +37,19 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "f47c02b-102"
+    tag: "46f9c43-27"
 
 supplychainapi:
   image:
-    tag: "0456df8-1629"
+    tag: "3f2400f-1713"
 
 supplychainpreprocessor:
   image:
-    tag: "8998b83-222"
+    tag: "3315e25-22"
 
 ssdauditservice:
   image:
-    tag: "772b1cd-20"
+    tag: "bf146a7-23"
 
 ssdgate:
   image:
@@ -58,7 +58,7 @@ ssdgate:
 
 ssdopa:
   image:
-    tag: "76cf045-341"
+    tag: "6375e1b-32"
 
 ssdrescheduler:
   image:
@@ -70,11 +70,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "4f115ce3-428"
+    tag: "9fd68f6d-23"
 
 ui:
   image:
-    tag: "8938771-589"
+    tag: "4f904e4d-645"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

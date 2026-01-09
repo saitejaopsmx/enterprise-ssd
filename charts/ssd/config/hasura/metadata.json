@@ -36,6 +36,7 @@
                       "service",
                       "status",
                       "team_id",
+                      "org_id",
                       "track_id",
                       "timestamp",
                       "id"
@@ -56,15 +57,34 @@
                       "service",
                       "user_id",
                       "team_id",
+                      "org_id",
                       "environment_id",
                       "message",
                       "details",
                       "status"
                     ],
                     "filter": {
-                      "team_id": {
-                        "_in": "X-Hasura-Allowed-Teams"
-                      }
+                      "_or": [
+                        {
+                          "team_id": {
+                            "_in": "X-Hasura-Allowed-Teams"
+                          }
+                        },
+                        {
+                          "_and": [
+                            {
+                              "team_id": {
+                                "_is_null": true
+                              }
+                            },
+                            {
+                              "org_id": {
+                                "_eq": "X-Hasura-Org-Id"
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 }

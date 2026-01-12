@@ -5,7 +5,7 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "2025-11-00"
+    tag: "745dc0f-20"
 
 artifactscan:
   image:
@@ -13,7 +13,7 @@ artifactscan:
 
 dlvs:
   image:
-    tag: "b5b8de1-2"
+    tag: "b5b8de1-4"
 
 kubescape:
   image:

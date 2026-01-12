@@ -45,6 +45,11 @@ spec:
               secretKeyRef:
                 key: password
                 name: rabbitmq-secret
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis-secret
+                key: password
           - name: OAUTH_BRIDGE_PRIVATE_KEY
             valueFrom:
               secretKeyRef:

@@ -1,3 +1,4 @@
+{{- if .Values.installAimlSvcs }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -19,3 +20,4 @@ spec:
   selector:
     app: ssd
     component: dlvs
+{{- end }}

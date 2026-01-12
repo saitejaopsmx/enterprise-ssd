@@ -11,5 +11,6 @@
     "prometheusEndPointUrl": "/api/v1/query_range",
     "adhocOrgLevelDisabled": true,
     "workloadServiceAccount": "ssd-workload-sa",
-    "userActivityDefaultTeam": "admin_team"
+    "userActivityDefaultTeam": "admin_team",
+    "aimlScan": "{{ .Values.installAimlSvcs }}"
 }

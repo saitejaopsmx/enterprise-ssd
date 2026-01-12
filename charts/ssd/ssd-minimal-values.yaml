@@ -35,6 +35,7 @@ prometheusUrl: Promethues.ingress.url.com
 #### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
 #######################################################################################################################
 dgraph:
+  storageMountSize: 5Gi
   HA:
     enabled: false
     replicas: 3

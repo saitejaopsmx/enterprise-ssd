@@ -31,11 +31,6 @@ admingroups: admin
 
 ############ Update the Prometheus Ingress Url ###############################
 prometheusUrl: Promethues.ingress.url.com
-##############################################################################
-### Update the below parameters only if global.minio.enabled is false ########
-### Update the S3 Bucket REGION in AWS #######################################
-s3region: UPDATE.S3BUCKETREGION
-s3bucketurl: https://S3BUCKETNAME.s3.S3BUCKETREGION.amazonaws.com
 #######################################################################################################################
 #### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
 #######################################################################################################################
@@ -63,6 +58,24 @@ supplychainapi:
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
   ssdIssuer:
 ################################################################################################
+## Change this true if user need to enable the AIModel Scan ####################################
+## If true AI Shield and DLVS Services will be installed #######################################
+installAimlSvcs: false
+
+################################################################################################
+#### Change to false if user want to Use AWS S3 bucket to store the scan data ##################
+minio:
+  enabled: true
+  persistence:
+    storageClass: ""
+    size: 10Gi
+
+################################################################################################
+### Update the below parameters only if global.minio.enabled is false ########
+### Update the S3 Bucket REGION in AWS #######################################
+s3region: UPDATE.S3BUCKETREGION
+s3bucketurl: https://S3BUCKETNAME.s3.S3BUCKETREGION.amazonaws.com
+################################################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 storageClass:
 ssdgate:
@@ -72,10 +85,3 @@ ssdgate:
   - admin
   saml:
     saml_initiated_login: false
-
-#### Change to false if user want to Use AWS S3 bucket to store the scan data ##################
-minio:
-  enabled: true
-  persistence:
-    storageClass: ""
-    size: 10Gi

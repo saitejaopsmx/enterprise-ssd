@@ -71,6 +71,10 @@ supplychainapi:
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
   ssdIssuer:
 ################################################################################################
+## Change this true if user need to enable the AIModel Scan ####################################
+## If true AI Shield and DLVS Services will be installed #######################################
+installAimlSvcs: false
+################################################################################################
 #####User doesn't need to change the below flags let it be the default one######################
 storageClass:
 #### Change to false if user want to Use AWS S3 bucket to store the scan data ##################

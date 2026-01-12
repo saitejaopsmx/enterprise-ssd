@@ -42,6 +42,10 @@ prometheusUrl: Promethues.ingress.url.com
 s3region: awsregion
 s3bucketurl: https://s3bucketname.s3.awsregion.amazonaws.com
 ####################################################
+## Change this true if user need to enable the AIModel Scan ###################
+## If it is true AI Shield and DLVS Services will be installed ###############
+installAimlSvcs: false
+####################################################
 # Global variables can be accessed across all the charts including sub-charts
 global:
   #imageRegistry: quay.io

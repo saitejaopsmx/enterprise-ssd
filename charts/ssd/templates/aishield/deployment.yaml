@@ -71,6 +71,11 @@ spec:
                 key: secretkey
                 name: ssd-storage-secret
           {{- end }}
+          - name: Cypher_Key
+            valueFrom:
+              secretKeyRef:
+                key: AESEncryptionKey
+                name: ssdsecret
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /tools/ssd-public-keys

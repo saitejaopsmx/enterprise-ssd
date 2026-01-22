@@ -5,7 +5,7 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "745dc0f-20"
+    tag: "0b0e652-4"
 
 artifactscan:
   image:
@@ -45,7 +45,7 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "3f2400f-1713"
+    tag: "778e652-1738"
 
 supplychainpreprocessor:
   image:
@@ -62,11 +62,11 @@ ssdgate:
 
 ssdopa:
   image:
-    tag: "6375e1b-32"
+    tag: "10ca6e9-36"
 
 ssdrescheduler:
   image:
-    tag: "b582237-20"
+    tag: "d773026-21"
 
 tokenmachine:
   image:
@@ -74,11 +74,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "9fd68f6d-23"
+    tag: "b5c0d4f4-29"
 
 ui:
   image:
-    tag: "4f904e4d-645"
+    tag: "3af721cf-678"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

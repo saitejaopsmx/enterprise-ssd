@@ -37,7 +37,7 @@ spec:
               echo "PostgreSQL is ready!"
       containers:
         - name: backend
-          image: ghcr.io/pqca/cbomkit:2.1.10
+          image: {{ template "cbom.image" . }}
           imagePullPolicy: Always
           ports:
             - name: api

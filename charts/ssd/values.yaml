@@ -121,7 +121,7 @@ artifactscan:
 cbom:
   image:
     repository: cbom
-    tag: "2.1.10"
+    tag: "2.1.12"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -517,6 +517,9 @@ toolchain:
 
   ## Fetching the SonarQube data for while doing the scan
   fetchsonardata: 90d
+
+  ## Number of requests per second a worker is allowed to hit the aws for the ScoutSuite
+  maxRate: 10
 ###################################################################################################################
 opsmxcustombinaries:
   image:

@@ -13,3 +13,7 @@ otelAddr: localhost:4317
 otelInterval: {{ .Values.otel.interval }}
 sonarQubeCreated: {{ .Values.toolchain.fetchsonardata }}
 licenseGenSvc: http://ssd-license-generator:8080
+scoutSuite:
+  maxWorkers: 10
+  maxRate: {{ .Values.toolchain.maxRate }}
+

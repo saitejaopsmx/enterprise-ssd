@@ -11,6 +11,10 @@ artifactscan:
   image:
     tag: "461b7b3-9"
 
+cbom:
+  image:
+    tag: "2.1.12"
+
 dlvs:
   image:
     tag: "b5b8de1-4"

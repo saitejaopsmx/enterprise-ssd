@@ -541,6 +541,10 @@ integrationData:
             encrypt: false
           value:
             encrypt: false
+          assignee:
+            encrypt: false
+          component:
+            encrypt: false
           assignJiraToOwner:
             encrypt: false
           todo:

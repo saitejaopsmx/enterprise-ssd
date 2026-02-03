@@ -439,12 +439,14 @@ type IntegratorConfigs
     name: String! @search(by: [exact])
     configs: [IntegratorKeyValues!]
     status: String! @search(by: [exact])
+    services: [String!] @search(by: [exact, regexp])
     integrator: Integrator! @hasInverse(field: integratorConfigs)
     organization: Organization@hasInverse(field: integratorConfigs)
     team: Team @hasInverse(field: integratorConfigs)
     environment: Environment @hasInverse(field: integratorConfigs)
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
     project: [Project] @hasInverse(field: integratorConfigs)
+    projectConfig: [ProjectConfig] @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues {
@@ -1163,7 +1165,7 @@ type Project
     createdAt: DateTime! @search
     updatedAt: DateTime! @search
     projectConfigs: [ProjectConfig!] @hasInverse(field: project)
-    integratorConfigs: IntegratorConfigs @hasInverse(field: project)
+    integratorConfigs: [IntegratorConfigs!] @hasInverse(field: project)
     scans: [ScanTarget!] @hasInverse(field: projects)
     type: String @search(by: [exact,regexp])
     error: String @search(by: [exact,regexp])
@@ -1212,6 +1214,7 @@ type ProjectConfig
     createdAt: DateTime! @search
     updatedAt: DateTime! @search
     project: Project! @hasInverse(field: projectConfigs)
+    integratorConfigs: [IntegratorConfigs!] @hasInverse(field: projectConfig)
     artifactTag: [String!] @search(by:[exact,regexp])
     artifactTagPattern: String @search(by: [exact,regexp])
     scanUpto: Int @search

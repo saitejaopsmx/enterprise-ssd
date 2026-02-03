@@ -451,7 +451,7 @@ type IntegratorKeyValues {
     id: ID!
     feat: Boolean! @search
     key: String! @search(by: [exact])
-    value: String! @search(by: [exact])
+    value: String! @search(by: [exact, regexp])
     encrypt: Boolean! @search
 }
 
@@ -748,6 +748,7 @@ type ArtifactRisk {
     buildAlertsScore: Int
     artifactAlertsScore: Int
     deploymentAlertsScore: Int
+    postdeployAlertsScore: Int
     artifactRiskStatus: RiskStatus @search(by: [exact,regexp])
     artifactScanResult: ArtifactScanData! @hasInverse(field: artifactRisk)
 }

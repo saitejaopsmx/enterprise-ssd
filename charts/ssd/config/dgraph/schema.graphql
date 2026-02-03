@@ -451,7 +451,7 @@ type IntegratorKeyValues {
     id: ID!
     feat: Boolean! @search
     key: String! @search(by: [exact])
-    value: String! @search(by: [exact])
+    value: String! @search(by: [exact, regexp])
     encrypt: Boolean! @search
 }
 
@@ -748,6 +748,7 @@ type ArtifactRisk {
     buildAlertsScore: Int
     artifactAlertsScore: Int
     deploymentAlertsScore: Int
+    postdeployAlertsScore: Int
     artifactRiskStatus: RiskStatus @search(by: [exact,regexp])
     artifactScanResult: ArtifactScanData! @hasInverse(field: artifactRisk)
 }
@@ -1214,6 +1215,7 @@ type ProjectConfig
     artifactTag: [String!] @search(by:[exact,regexp])
     artifactTagPattern: String @search(by: [exact,regexp])
     scanUpto: Int @search
+    codePath: String @search(by:[exact,regexp])
 }
 
 type ScanTarget
@@ -1261,6 +1263,7 @@ type ScanTarget
     artifact: Artifact @hasInverse(field: scanTarget)
     error: String @search(by: [exact,regexp])
     riskStatus: RiskStatus @search(by: [exact,regexp])
+    codePath: String @search(by:[exact,regexp])
 }
 
 type ScanResult

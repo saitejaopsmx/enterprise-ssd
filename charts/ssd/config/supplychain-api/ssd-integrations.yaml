@@ -524,7 +524,7 @@ integrationData:
           clientId:
             encrypt: false
           clientSecret:
-            encrypt: true 
+            encrypt: true
       - integratorType: jira
         category: communications
         multiaccount: false

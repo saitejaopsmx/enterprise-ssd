@@ -87,7 +87,7 @@ global:
 aishield:
   image:
     repository: aishield
-    tag: "2025-11-00"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
   
   replicaCount: 1
@@ -105,7 +105,7 @@ aishield:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -120,7 +120,7 @@ artifactscan:
 #############################################################################################################
 cbom:
   image:
-    repository: cbom
+    repository: cbomkit
     tag: "2.1.12"
     pullPolicy: IfNotPresent
 
@@ -232,7 +232,7 @@ licensegenerator:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -273,7 +273,7 @@ snykmonitor:
 sourcescan:
   image:
     repository: source-scan
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -296,7 +296,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -415,7 +415,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -437,7 +437,7 @@ ssdopa:
 ssdrescheduler:
   image:
     repository: ssd-rescheduler
-    tag: "2025-09-00"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -488,7 +488,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -531,7 +531,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2025-11-01"
+    tag: "2025-12-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

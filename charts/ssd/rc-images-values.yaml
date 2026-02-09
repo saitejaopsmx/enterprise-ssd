@@ -5,11 +5,11 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "0b0e652-4"
+    tag: "7803b3d-6"
 
 artifactscan:
   image:
-    tag: "461b7b3-9"
+    tag: "2fcf341-15"
 
 cbom:
   image:
@@ -33,7 +33,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "038382c-105"
+    tag: "6f213d3-16"
 
 snykmonitor:
   image:
@@ -41,11 +41,11 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "46f9c43-27"
+    tag: "e2c8e9d-28"
 
 supplychainapi:
   image:
-    tag: "778e652-1738"
+    tag: "72e43ce-1833"
 
 supplychainpreprocessor:
   image:
@@ -74,11 +74,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "b5c0d4f4-29"
+    tag: "d52f460f-34"
 
 ui:
   image:
-    tag: "3af721cf-678"
+    tag: "81b34662-742"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

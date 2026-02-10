@@ -105,13 +105,11 @@ spec:
             secretKeyRef:
               name: gate-dex-client-secret
               key: client-secret
-            optional: true
         - name: DEX_CLIENT_ID
           valueFrom:
             secretKeyRef:
               name: dex-client-id
               key: client-id
-            optional: true
       {{- end }}
         envFrom:
         - configMapRef:

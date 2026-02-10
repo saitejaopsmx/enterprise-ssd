@@ -726,6 +726,27 @@ dex:
   - mountPath: /google
     name: google-json
     readOnly: true
+  - mountPath: /srv/dex/web/templates/header.html
+    name: dex-templates
+    readOnly: true
+    subPath: header.html
+  - mountPath: /srv/dex/web/templates/footer.html
+    name: dex-templates
+    readOnly: true
+    subPath: footer.html
+  - mountPath: /srv/dex/web/templates/login.html
+    name: dex-templates
+    readOnly: true
+    subPath: login.html
+  - mountPath: /srv/dex/web/templates/password.html
+    name: dex-templates
+    readOnly: true
+    subPath: password.html
+  - mountPath: /srv/dex/web/templates/error.html
+    name: dex-templates
+    readOnly: true
+    subPath: error.html
+
   volumes:
     - name: gate-dex-client-secret
       secret:
@@ -745,6 +766,21 @@ dex:
           path: googleAuth.json
         secretName: dex-google-groups-auth
         optional: true
+    - name: dex-templates
+      configMap:
+        defaultMode: 420
+        items:
+        - key: header.html
+          path: header.html
+        - key: footer.html
+          path: footer.html
+        - key: login.html
+          path: login.html
+        - key: password.html
+          path: password.html
+        - key: error.html
+          path: error.html
+        name: dex-templates
   env:
     - name: GATE_CLIENT_SECRET
       valueFrom:

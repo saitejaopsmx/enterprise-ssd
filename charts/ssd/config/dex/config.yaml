@@ -15,6 +15,13 @@ storage:
 oauth2:
   skipApprovalScreen: true
 
+# Frontend configuration for custom templates
+frontend:
+  dir: /srv/dex/web
+  issuer: "OpsMx SSD"
+  extra:
+    ssd_base_url: "{{.Values.global.ssdUI.protocol}}://{{.Values.global.ssdUI.host}}"
+
 # Static clients registered in Dex by default.
 staticClients:
   - id: ssd-gate

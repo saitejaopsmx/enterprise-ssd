@@ -393,7 +393,7 @@ ssdgate:
     #  - email
     #  - roles
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    #metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
     #sign_request: false # DEPENDS Default is false, make it match the SAML setting

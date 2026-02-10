@@ -392,6 +392,7 @@ ssdgate:
     #  - email
     #  - roles
   saml:
+    display_name: Okta Saml Login
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org

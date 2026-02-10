@@ -39,10 +39,10 @@ ssdgate:
   installDex: false   # set to true if dex need to be installed
   createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
+  display_name: Saml Login
   admin_groups:
   - admin
   saml:
-    display_name: Saml Login
     metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
     # If the metadata Url is not passed uncomment and update the below parameters

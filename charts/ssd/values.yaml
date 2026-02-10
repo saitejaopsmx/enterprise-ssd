@@ -371,6 +371,7 @@ ssdgate:
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
   auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
+  display_name: Saml Login
   admin_groups:
     - admin
   auth2_oidc:
@@ -392,7 +393,6 @@ ssdgate:
     #  - email
     #  - roles
   saml:
-    display_name: Okta Saml Login
     metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org

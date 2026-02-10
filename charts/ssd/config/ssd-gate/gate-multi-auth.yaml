@@ -28,7 +28,7 @@ auth_configs:
 {{- if eq .Values.ssdgate.auth_type "saml"}}
   - type: "saml"
     name: "Saml-login"
-    display_name: {{ .Values.ssdgate.saml.display_name | quote }}
+    display_name: {{ .Values.ssdgate.display_name | quote }}
     saml:
       {{- if .Values.ssdgate.saml.metadata_url }}
       metadata_url: {{ .Values.ssdgate.saml.metadata_url }}
@@ -62,7 +62,7 @@ auth_configs:
 {{- if eq .Values.ssdgate.auth_type "dex_oidc" }}
   - type: "dex_oidc"
     name: "Dex Login"
-    display_name: {{ .Values.ssdgate.saml.display_name | quote }}
+    display_name: {{ .Values.ssdgate.display_name | quote }}
     oidc:
       {{- if .Values.ssdgate.auth2_oidc.client_id }}
       client_id: {{.Values.ssdgate.auth2_oidc.client_id }}

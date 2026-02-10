@@ -72,7 +72,8 @@ minio:
 ssdgate:
   installDex: true
   createGateDexSecret: true
-  auth_type: dex_oidc 
+  auth_type: dex_oidc
+  display_name: Sign In Dex
   admin_groups:
   - admin
   - admin@example.com

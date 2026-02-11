@@ -61,7 +61,7 @@ auth_configs:
 {{- else }}
 {{- if eq .Values.ssdgate.auth_type "dex_oidc" }}
   - type: "dex_oidc"
-    name: "Dex Login"
+    name: "Dex-Login"
     display_name: {{ .Values.ssdgate.display_name | quote }}
     oidc:
       {{- if .Values.ssdgate.auth2_oidc.client_id }}
@@ -84,7 +84,7 @@ auth_configs:
       {{- end }}
       {{- with .Values.ssdgate.auth2_oidc.entity_map }}
       entity_map:
-      {{- toYaml . | nindent 4 }}
+      {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.ssdgate.auth2_oidc.scopes }}
       scopes:

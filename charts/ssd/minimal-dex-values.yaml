@@ -114,18 +114,32 @@ ssdgate:
     #      filter: ""
     #      userAttr: distinguishedName
     #      groupAttr: memberOf
-    #      nameAttr: name 
-    - type: google
-      id: google
-      name: Google
+    #      nameAttr: name
+    - type: saml
+      id: Google
+      name: Google-Saml
       config:
-        clientID: xxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
-        clientSecret: XXXXXXXXXXXXXXXXXXXXX
+    #    # After the Application creation in Google Workspace Click on "DOWNLOAD METADATA", Copy the  SSO URL
+        ssoURL: https://accounts.google.com/x/xxxxx/xxx?xxxx=xxxxxx
+    #    # Download this from "Sign on" tab (next to general), "SAML Signing Certificates", Actions->Download
+    #    # kubectl create secret generic dex-okta-pem --from-file=google.pem -n NAMESPACE
+        ca: /okta/google.pem
         redirectURI: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/dex/callback
-        groups:
-          - admins@example.com
-        hostedDomains:
-          - example.com
-        serviceAccountFilePath: /google/googleAuth.json
-        domainToAdminEmail:
-          #my-domain.com: super-user@my-domain.com
+        entityIssuer: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/dex/callback
+        usernameAttr: email
+        emailAttr: email
+        groupsAttr: groups
+    #- type: google
+    #  id: google
+    #  name: Google
+    #  config:
+    #    clientID: xxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+    #    clientSecret: XXXXXXXXXXXXXXXXXXXXX
+    #    redirectURI: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/dex/callback
+    #    groups:
+    #      - admins@example.com
+    #    hostedDomains:
+    #      - example.com
+    #    serviceAccountFilePath: /google/googleAuth.json
+    #    domainToAdminEmail:
+    #       my-domain.com: super-user@my-domain.com

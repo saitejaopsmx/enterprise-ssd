@@ -371,6 +371,7 @@ ssdgate:
   #dex_url: "http://ssd-dex:5556" # OPTIONAL, Default is correct with OpsMx installed Dex
 
   auth_type: poclogin  # saml, dex_oidc and poclogin are other valid values
+  display_name: Saml Login
   admin_groups:
     - admin
   auth2_oidc:
@@ -392,7 +393,7 @@ ssdgate:
     #  - email
     #  - roles
   saml:
-    metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
+    #metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
     #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
     #sign_request: false # DEPENDS Default is false, make it match the SAML setting
@@ -725,6 +726,27 @@ dex:
   - mountPath: /google
     name: google-json
     readOnly: true
+  - mountPath: /srv/dex/web/templates/header.html
+    name: dex-templates
+    readOnly: true
+    subPath: header.html
+  - mountPath: /srv/dex/web/templates/footer.html
+    name: dex-templates
+    readOnly: true
+    subPath: footer.html
+  - mountPath: /srv/dex/web/templates/login.html
+    name: dex-templates
+    readOnly: true
+    subPath: login.html
+  - mountPath: /srv/dex/web/templates/password.html
+    name: dex-templates
+    readOnly: true
+    subPath: password.html
+  - mountPath: /srv/dex/web/templates/error.html
+    name: dex-templates
+    readOnly: true
+    subPath: error.html
+
   volumes:
     - name: gate-dex-client-secret
       secret:
@@ -744,6 +766,21 @@ dex:
           path: googleAuth.json
         secretName: dex-google-groups-auth
         optional: true
+    - name: dex-templates
+      configMap:
+        defaultMode: 420
+        items:
+        - key: header.html
+          path: header.html
+        - key: footer.html
+          path: footer.html
+        - key: login.html
+          path: login.html
+        - key: password.html
+          path: password.html
+        - key: error.html
+          path: error.html
+        name: dex-templates
   env:
     - name: GATE_CLIENT_SECRET
       valueFrom:

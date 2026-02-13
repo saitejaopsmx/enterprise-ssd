@@ -5,11 +5,11 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "0b0e652-4"
+    tag: "e7e845b-10"
 
 artifactscan:
   image:
-    tag: "461b7b3-9"
+    tag: "da96957-19"
 
 cbom:
   image:
@@ -33,7 +33,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "038382c-105"
+    tag: "6f213d3-113"
 
 snykmonitor:
   image:
@@ -41,11 +41,11 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "46f9c43-27"
+    tag: "51de2e7-33"
 
 supplychainapi:
   image:
-    tag: "778e652-1738"
+    tag: "92b933e-1830"
 
 supplychainpreprocessor:
   image:
@@ -58,11 +58,11 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "346124f-216"
+    tag: "25139f6-248"
 
 ssdopa:
   image:
-    tag: "10ca6e9-36"
+    tag: "8eeefa7-412"
 
 ssdrescheduler:
   image:
@@ -74,11 +74,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "b5c0d4f4-29"
+    tag: "d2060378-535"
 
 ui:
   image:
-    tag: "3af721cf-678"
+    tag: "6ab3097e-741"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

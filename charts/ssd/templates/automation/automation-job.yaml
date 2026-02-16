@@ -101,7 +101,10 @@ spec:
                      echo "##############***Failed to Updated the Dgraph Schema***#########################"
                      exit 1
                   fi
-                  sleep 30
+                  until curl -f http://localhost:8099/healthz > /dev/null 2>&1; do
+                    echo "Waiting for Supplychain API to become healthy state ..."
+                    sleep 5
+                  done
                   echo "#################*****Executing the Setup API Schema****##########################"
                   RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
                   sleep 10
@@ -115,7 +118,7 @@ spec:
                     count=$(grep -Ei "PostgreSQL Database directory appears to contain a database|PostgreSQL init process complete" logs.txt | wc -l)
                     if [ "$count" == "1" ]; then
                       kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
-                      sleep 30
+                      sleep 60
                       frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"

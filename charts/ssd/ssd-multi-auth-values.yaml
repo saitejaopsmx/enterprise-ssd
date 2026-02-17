@@ -94,3 +94,5 @@ minio:
 ### Update the S3 Bucket REGION in AWS #######################################
 s3region: UPDATE.S3BUCKETREGION
 s3bucketurl: https://S3BUCKETNAME.s3.S3BUCKETREGION.amazonaws.com
+
+RabbitServiceType: ClusterIP

@@ -35,7 +35,10 @@ spec:
                     echo "##############***Failed to Updated the Dgraph Schema***#########################"
                     exit 1
                  fi
-                 sleep 30
+                 until curl -f http://supplychain-api:8099/healthz > /dev/null 2>&1; do
+                    echo "Waiting for Supplychain API to become healthy state ..."
+                    sleep 5
+                 done
                  echo "#################*****Executing the Setup API Schema****##########################"
                  RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
                  sleep 10
@@ -49,10 +52,15 @@ spec:
                    count=$(grep -Ei "PostgreSQL Database directory appears to contain a database|PostgreSQL init process complete" logs.txt | wc -l)
                    if [ "$count" == "1" ]; then
                       kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
-                      sleep 30
-                      frontendpod=$(kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
-                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
-                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                      echo "Waiting for frontend pod to be up and running"
+                      kubectl -n {{ .Release.Namespace }} wait --for=condition=ready pod -l app.kubernetes.io/component=frontend --timeout=300s
+                      frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend -o jsonpath='{.items[0].metadata.name}')
+                      echo "Waiting for Temporal cluster"
+                      until kubectl -n {{ .Release.Namespace }} exec $frontendpod -- tctl cluster health > /dev/null 2>&1; do
+                        sleep 5
+                      done
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                       break
@@ -63,9 +71,15 @@ spec:
                  fi
                  {{- else }}
                  kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
-                 frontendpod=$(kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
-                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
-                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                 echo "Waiting for frontend pod to be up and running"
+                 kubectl -n {{ .Release.Namespace }} wait --for=condition=ready pod -l app.kubernetes.io/component=frontend --timeout=300s
+                 frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend -o jsonpath='{.items[0].metadata.name}')
+                 echo "Waiting for Temporal cluster"
+                 until kubectl -n {{ .Release.Namespace }} exec $frontendpod -- tctl cluster health > /dev/null 2>&1; do
+                  sleep 5
+                 done
+                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
+                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                  break
@@ -101,11 +115,11 @@ spec:
                      echo "##############***Failed to Updated the Dgraph Schema***#########################"
                      exit 1
                   fi
-                  until curl -f http://localhost:8099/healthz > /dev/null 2>&1; do
+                  until curl -f http://supplychain-api:8099/healthz > /dev/null 2>&1; do
                     echo "Waiting for Supplychain API to become healthy state ..."
                     sleep 5
                   done
-                  echo "#################*****Executing the Setup API Schema****##########################"
+                  echo "#################*****Executing the Setup API Schema for Providing the Team Permissions****##########################"
                   RESP=`curl -X POST -H "Content-Type: application/json" --data-binary "$(cat /tmp/setup.json)" $setup_endpoint`
                   sleep 10
                   {{- if .Values.db.enabled }}
@@ -118,10 +132,15 @@ spec:
                     count=$(grep -Ei "PostgreSQL Database directory appears to contain a database|PostgreSQL init process complete" logs.txt | wc -l)
                     if [ "$count" == "1" ]; then
                       kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
-                      sleep 60
-                      frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
-                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
-                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                      echo "Waiting for frontend pod to be up and running"
+                      kubectl -n {{ .Release.Namespace }} wait --for=condition=ready pod -l app.kubernetes.io/component=frontend --timeout=300s
+                      frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend -o jsonpath='{.items[0].metadata.name}')
+                      echo "Waiting for Temporal cluster"
+                      until kubectl -n {{ .Release.Namespace }} exec $frontendpod -- tctl cluster health > /dev/null 2>&1; do
+                        sleep 5
+                      done
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/argocd-ssd/refs/heads/main/license-template.yaml
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
@@ -133,9 +152,15 @@ spec:
                   fi
                   {{- else }}
                   kubectl -n {{ .Release.Namespace }} delete pods -l app.kubernetes.io/name=temporal
-                  frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend --field-selector=status.phase=Running --no-headers=true | awk '{print $1}')
-                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3"
-                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3"
+                  echo "Waiting for frontend pod to be up and running"
+                  kubectl -n {{ .Release.Namespace }} wait --for=condition=ready pod -l app.kubernetes.io/component=frontend --timeout=300s
+                  frontendpod=$(kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/component=frontend -o jsonpath='{.items[0].metadata.name}')
+                  echo "Waiting for Temporal cluster"
+                  until kubectl -n {{ .Release.Namespace }} exec $frontendpod -- tctl cluster health > /dev/null 2>&1; do
+                    sleep 5
+                  done
+                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
+                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
                   kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/argocd-ssd/refs/heads/main/license-template.yaml
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa

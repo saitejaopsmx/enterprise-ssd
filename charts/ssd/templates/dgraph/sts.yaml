@@ -385,6 +385,8 @@ spec:
           timeoutSeconds: 1
       {{- end }}
         env:
+          - name: ENABLE_IMPORT
+            value: "{{ .Values.dgraph.migrateexistingdata }}"
           - name: POD_NAMESPACE
             valueFrom:
               fieldRef:
@@ -394,6 +396,13 @@ spec:
           - "-c"
           - |
             set -ex
+            sleep 10
+            if [ "${ENABLE_IMPORT}" == "true" ]; then
+              dgraph bulk -f {{ .Values.dgraph.datapath }}/g01.rdf.gz -g {{ .Values.dgraph.datapath }}/g01.gql_schema.gz --format=rdf --zero=localhost:5080
+              cp -r out/0/p .
+            else
+              echo "Skipping dgraph data import due to ENABLE_IMPORT variable set to \"false\""
+            fi
             dgraph alpha --my=$(hostname -f):7080 --zero dgraph-0.dgraph.${POD_NAMESPACE}.svc.cluster.local:5080 --security "whitelist=0.0.0.0/0"
       terminationGracePeriodSeconds: 60
       volumes:

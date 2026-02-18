@@ -597,6 +597,10 @@ dgraph:
     repository: dgraph
     tag: v23.1.0
   storageMountSize: 5Gi
+  ## Default is set to false; Change to true if you need to migrate the data from Old Instance to New one #############
+  migrateexistingdata: false
+  ## If the above flag is set to true provide the correct path where the data is pushed ###############################
+  datapath: /dgraph/
   probes: {}
   resources: {}
 

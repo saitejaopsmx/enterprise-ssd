@@ -64,3 +64,9 @@ READINESS_CHECK_INTERVAL: 5s
 # Resource Management
 MAX_CONCURRENT_PROCESSES: "10"
 GRACEFUL_SHUTDOWN_TIMEOUT: 30s
+
+# =============================================================================
+# GRPC CONFIGURATION
+# =============================================================================
+GRPC_ENABLED: "true"
+GRPC_PORT: "50051"

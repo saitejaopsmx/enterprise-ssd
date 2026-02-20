@@ -25,6 +25,9 @@ graphqlsvc:
 toolchain:
     host: http://tool-chain
     port: 8100
+ssdNotificationService:
+    host: http://ssd-notification
+    port: 9091
 spinnaker:
     rabbitmq:
       queue: preview-saas-ssd

@@ -210,6 +210,9 @@ Adding the New container to all Services
   volumeMounts:
     - name: otel-sidecar-volume
       mountPath: /etc/otel
+    - name: logs
+      readOnly: true
+      mountPath: /app/logs
   {{- if .Values.otel.securityContext }}
   securityContext:
   {{ toYaml .Values.otel.securityContext | nindent 12 }}
@@ -395,5 +398,15 @@ Return the proper CBOM Images
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.cbom.image.repository -}}
 {{- $tag := .Values.cbom.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper SSD Notification Service Image
+*/}}
+{{- define "ssdnotificationservice.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.ssdnotificationservice.image.repository -}}
+{{- $tag := .Values.ssdnotificationservice.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

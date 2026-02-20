@@ -412,6 +412,27 @@ ssdgate:
   probes: {}
   uiteamtokenexpiry: 24
 ###################################################################################################################
+ssdnotificationservice:
+  ## Image specific details
+  image:
+    repository: ssd-notification-service
+    tag: "2026-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  securityContext: {}
+
+  resources: {}
+
+  probes: {}
+
+  serviceAnnotations: {}
+  # Supported values are info,debug
+  logLevel: debug
+###################################################################################################################
 ssdopa:
   ## Image specific details
   image:

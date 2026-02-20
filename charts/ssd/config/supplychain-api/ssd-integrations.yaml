@@ -383,9 +383,7 @@ integrationData:
             encrypt: false
           repo:
             encrypt: false
-          username:
-            encrypt: false
-          password:
+          token:
             encrypt: true
       - integratorType: jfrog
         category: dockerregistry
@@ -487,6 +485,8 @@ integrationData:
             default: inactive
           customAlerts:
             default: inactive
+          auditNotification:
+            default: inactive
           scanAlert:
             default: inactive
         integratorConfigs:
@@ -505,6 +505,8 @@ integrationData:
           authMode:
             default: password
           scanCompletionAlert:
+            default: inactive
+          auditNotification:
             default: inactive
           scanFailureAlert:
             default: inactive

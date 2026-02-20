@@ -135,10 +135,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       {{- end }}
-
-
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
+{{ include "otel.sidecar.container" . | indent 6 }}
       volumes:
       - configMap:
           defaultMode: 420
@@ -150,6 +147,8 @@ spec:
         name: scanresult
       - emptyDir: {}
         name: grypedb
+      - name: logs
+        emptyDir: {}
       - name: preprocessor-volume
         secret:
           secretName: supplychain-preprocessor
@@ -177,6 +176,10 @@ spec:
             path: ca.crt
           optional: true
           name: customer-custon-ca
+      - name: otel-sidecar-volume
+        configMap:
+          name: otel-sidecar-config
+          defaultMode: 420
       - name: service-account
         projected:
           sources:

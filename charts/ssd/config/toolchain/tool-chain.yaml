@@ -16,4 +16,8 @@ licenseGenSvc: http://ssd-license-generator:8080
 scoutSuite:
   maxWorkers: 10
   maxRate: {{ .Values.toolchain.maxRate }}
-
+  scanTimeout: 7h # to defind the max timeout for a single cloud account scan
+  #skip:  # this can be left empty at most cases to allow scanning of all services
+  #  aws: ["ec2"]
+  #  azure: []
+  #  gcp: []

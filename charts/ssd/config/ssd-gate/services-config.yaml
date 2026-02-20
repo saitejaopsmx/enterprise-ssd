@@ -142,8 +142,8 @@
   path_prefixes:
   - "/minio"
   baseUrl: {{ .Release.Name }}-minio:9000
-{{- end }}
   health_endpoint: ""
+{{- end }}
 - name: prometheus
   baseUrl: {{ .Values.prometheusUrl }} #this is dependent on the localtion of the prometheus server
   health_endpoint: ""

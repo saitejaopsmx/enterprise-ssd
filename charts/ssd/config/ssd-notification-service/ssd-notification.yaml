@@ -1,0 +1,6 @@
+httpListenPort: 9091
+logLevel: {{ .Values.ssdnotificationservice.logLevel }}
+ssdPublicKeysPath: /app/ssd-public-keys
+graphQLAddr: http://dgraph-public:8080/graphql
+internalTokenPath: /app/secrets/ssd-notification-token/token
+encryptionKeyPath: /app/secrets/ssdsecret/AESEncryptionKey

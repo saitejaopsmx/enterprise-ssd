@@ -88,6 +88,7 @@ spec:
       {{- if .Values.artifactscan.securityContext }}
       {{ toYaml .Values.artifactscan.securityContext | nindent 12 }}
       {{- end }}
+{{ include "otel.sidecar.container" . | indent 8 }}
       volumes:
         - name: ssdsecret
           secret:
@@ -121,6 +122,8 @@ spec:
           emptyDir: {}
         - name: tempdir
           emptyDir: {}
+        - name: logs
+          emptyDir: {}
         - name: artifact-scan
           configMap:
             name: artifact-scan-config
@@ -135,6 +138,10 @@ spec:
             - key: app-config.yaml
               path: app-config.yaml
             secretName: project-monitor
+        - name: otel-sidecar-volume
+          configMap:
+            name: otel-sidecar-config
+            defaultMode: 420
         - name: service-account
           projected:
             sources:

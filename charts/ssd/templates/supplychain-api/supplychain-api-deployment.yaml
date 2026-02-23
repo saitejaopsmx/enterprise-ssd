@@ -220,6 +220,7 @@ spec:
             periodSeconds: 30
             successThreshold: 1
             failureThreshold: 3
+{{ include "otel.sidecar.container" . | indent 8 }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
@@ -246,6 +247,8 @@ spec:
           name: zap-openapi-spec
         - emptyDir: {}
           name: policy
+        - emptyDir: {}
+          name: logs
         - configMap:
             defaultMode: 420
             name: ssd-public-keys
@@ -306,3 +309,7 @@ spec:
               path: project.yaml
             optional: true
             name: adhoc-project-cm
+        - name: otel-sidecar-volume
+          configMap:
+            name: otel-sidecar-config
+            defaultMode: 420

@@ -6,6 +6,7 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 processors:
+  batch:
   batch/raw:
   batch/aggregate:
   metricstransform/rename:
@@ -80,8 +81,23 @@ exporters:
     metric_expiration: 5m
     resource_to_telemetry_conversion:
       enabled: true
+  elasticsearch:
+    endpoints: [{{ .Values.elasticsearchUrl | quote }}]
+    logs_index: "{{ .Release.Namespace }}" # replace it withh namespace value, should be done during helm install setup
+    tls:
+      insecure: true
+    auth:
+      authenticator: basicauth/es   
+    mapping:
+      mode: ecs
+extensions:
+  basicauth/es:
+    client_auth:
+      username:
+      password:
 
 service:
+  extensions: [basicauth/es]
   pipelines:
     traces:
       receivers: [otlp]
@@ -95,3 +111,7 @@ service:
       receivers: [otlp]
       processors: [k8sattributes/aggregate,metricstransform/aggregate,metricstransform/rename,resource/remove_label,filter/aggregate,batch/aggregate]
       exporters: [debug, prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [k8sattributes/aggregate,batch]
+      exporters: [elasticsearch]

@@ -319,6 +319,9 @@ supplychainapi:
   ## Below is the command used to get the IssuerID ###
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
   ssdIssuer:
+  whitelist_Urls:
+    - https://api.github.com
+    - https://api.gitlab.com
 ###################################################################################################################
 supplychainpreprocessor:
   ## Image specific details
@@ -395,7 +398,7 @@ ssdgate:
   saml:
     #metadata_url: https://dev-14704582.okta.com/app/exkdnjuo0wxJsOtua5d7/sso/saml/metadata
     saml_initiated_login: true
-    #entity_id: http://test-ssd.ryzon7-isd40.opsmx.org
+    #entity_id: https://update.ssd.url
     #sign_request: false # DEPENDS Default is false, make it match the SAML setting
     ## Optional files, create saml-files secret as follows, "saml-files" secret name should not be changed
     ## k create secret generic saml-files --from-file metadata.xml --from-file certificate.crt --from-file private.key
@@ -579,6 +582,8 @@ minio:
     size: 10Gi
   networkPolicy:
     enabled: false
+  service:
+    type: ClusterIP
 #######################################################################################################################
 #### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
 #######################################################################################################################

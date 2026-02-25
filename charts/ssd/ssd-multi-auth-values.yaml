@@ -45,10 +45,10 @@ ssdgate:
   saml:
     metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
-    # If the metadata Url is not passed uncomment and update the below parameters
-    #entity_id: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/saml/acs
+    # If the metadata Url is not passed then comment the section
+    entity_id: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/saml/acs
     #kubectl create secret generic saml-files --from-file metadata.xml -n NAMESPACE (Do not change the Secret name)
-    #metadata_File: /app/saml/metadata.xml
+    metadata_File: /app/saml/metadata.xml
 #######################################################################################################################
 #### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
 #######################################################################################################################
@@ -89,6 +89,8 @@ minio:
   persistence:
     storageClass: ""
     size: 10Gi
+  service:
+    type: ClusterIP
 ################################################################################################
 ### Update the below parameters only if minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################

@@ -53,7 +53,7 @@ spec:
           echo "All preconditions met!"
         env:
         - name: REDIS_HOST
-          value: ssd-redis-master
+          value: {{ .Release.Name }}-redis-master
         - name: REDIS_PORT
           value: "6379"
         - name: REDIS_PASSWORD

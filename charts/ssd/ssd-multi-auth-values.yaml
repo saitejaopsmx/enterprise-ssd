@@ -45,7 +45,7 @@ ssdgate:
   saml:
     metadata_url: UPDATE.SAML.METADATA.URL
     saml_initiated_login: true
-    # If the metadata Url is not passed uncomment and update the below parameters
+    # If the metadata Url is not passed then comment the section
     entity_id: https://SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM/saml/acs
     #kubectl create secret generic saml-files --from-file metadata.xml -n NAMESPACE (Do not change the Secret name)
     metadata_File: /app/saml/metadata.xml

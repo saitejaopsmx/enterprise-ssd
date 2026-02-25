@@ -319,6 +319,9 @@ supplychainapi:
   ## Below is the command used to get the IssuerID ###
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
   ssdIssuer:
+  whitelist_Urls:
+    - https://api.github.com
+    - https://api.gitlab.com
 ###################################################################################################################
 supplychainpreprocessor:
   ## Image specific details

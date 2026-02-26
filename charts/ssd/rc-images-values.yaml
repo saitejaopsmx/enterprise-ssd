@@ -60,6 +60,10 @@ ssdgate:
     repository: ssd-gate
     tag: "9861410-251"
 
+ssdnotificationservice:
+  image:
+    tag: "dcd2f05-1"
+
 ssdopa:
   image:
     tag: "7599396-455"

@@ -95,5 +95,9 @@
     "opengrep_scan",
     "application_analysis",
     "firewall_analysis"
+  ],
+  "policy_execution_activity": [
+    "policy_exception",
+    "policy_prevent"
   ]
 }

@@ -64,6 +64,11 @@ spec:
       containers:
       - name: ssd-audit-service
         image: {{ template "ssdauditservice.image" . }}
+        ports:
+          - containerPort: 50051
+            protocol: TCP
+          - containerPort: 8080
+            protocol: TCP
         env:
         - name: REDIS_HOST
           value: {{ .Release.Name }}-redis-master

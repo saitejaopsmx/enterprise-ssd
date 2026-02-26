@@ -87,7 +87,7 @@ exporters:
     tls:
       insecure: true
     auth:
-      authenticator: basicauth/es   
+      authenticator: basicauth/es
     mapping:
       mode: ecs
 extensions:

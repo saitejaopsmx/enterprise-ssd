@@ -161,6 +161,8 @@ spec:
       volumes:
         - name: scanresult
           emptyDir: {}
+        - name: logs
+          emptyDir: {}
         - name: tool-chain-volume
           configMap:
             name: tool-chain

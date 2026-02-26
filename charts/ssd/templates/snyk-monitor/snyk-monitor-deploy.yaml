@@ -56,6 +56,8 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
       volumes:
+        - name: logs
+          emptyDir: {}
         - configMap:
             defaultMode: 420
             name: otel-sidecar-config

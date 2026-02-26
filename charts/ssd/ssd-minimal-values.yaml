@@ -70,7 +70,8 @@ minio:
   persistence:
     storageClass: ""
     size: 10Gi
-
+  service:
+    type: ClusterIP
 ################################################################################################
 ### Update the below parameters only if global.minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################

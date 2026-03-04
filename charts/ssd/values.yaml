@@ -39,7 +39,7 @@ prometheusUrl: Promethues.ingress.url.com
 
 #############################################################################
 # Update the ElasticSearch Ingress Url ########################################
-elasticsearchUrl: ElasticSearch.ingress.url.com
+elasticsearchUrl: https://ElasticSearch.ingress.url.com
 ###############################################################################
 ### Update the below parameters only if minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################

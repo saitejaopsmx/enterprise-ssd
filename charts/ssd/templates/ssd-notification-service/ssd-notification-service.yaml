@@ -5,15 +5,12 @@ metadata:
   labels:
     app: ssd
     component: ssd-notification
-spec:
-  selector:
-    app: ssd
-    component: ssd-notification
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.ssdnotificationservice.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdnotificationservice.serviceAnnotations | indent 4 }}
 {{- end }}
+spec:
   ports:
     - name: http
       protocol: TCP
@@ -22,3 +19,6 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 9091
       {{- end }}
+  selector:
+    app: ssd
+    component: ssd-notification

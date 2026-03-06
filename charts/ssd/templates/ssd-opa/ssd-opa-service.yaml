@@ -5,15 +5,12 @@ metadata:
   labels:
     app: ssd
     component: ssd-opa
-spec:
-  selector:
-    app: ssd
-    component: ssd-opa
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.ssdopa.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdopa.serviceAnnotations | indent 4 }}
 {{- end }}
+spec:
   ports:
     - name: ssd-opa
       protocol: TCP
@@ -22,3 +19,6 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 8200
       {{- end }}
+  selector:
+    app: ssd
+    component: ssd-opa

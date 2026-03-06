@@ -5,15 +5,12 @@ metadata:
   labels:
     app: ssd
     component: ssd-audit-service
-spec:
-  selector:
-    app: ssd
-    component: ssd-audit-service
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.ssdauditservice.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdauditservice.serviceAnnotations | indent 4 }}
 {{- end }}
+spec:
   ports:
     - name: grpc
       protocol: TCP
@@ -22,3 +19,6 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 50051
       {{- end }}
+  selector:
+    app: ssd
+    component: ssd-audit-service

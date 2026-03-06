@@ -5,15 +5,12 @@ metadata:
   labels:
     app: ssd
     component: ssd-rescheduler
-spec:
-  selector:
-    app: ssd
-    component: ssd-rescheduler
 {{ include "ssd.standard-labels" . | indent 4 }}
 {{- if .Values.ssdrescheduler.serviceAnnotations }}
   annotations:
 {{ toYaml .Values.ssdrescheduler.serviceAnnotations | indent 4 }}
 {{- end }}
+spec:
   ports:
     - name: ssd-rescheduler
       protocol: TCP
@@ -22,3 +19,6 @@ spec:
       {{- if eq .Values.k8sServiceType "NodePort" }}
       nodePort: 8010
       {{- end }}
+  selector:
+    app: ssd
+    component: ssd-rescheduler

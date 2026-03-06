@@ -703,7 +703,7 @@ zap:
 otel:
   image:
     repository: otel/opentelemetry-collector-contrib
-    tag: "latest"
+    tag: "0.146.1"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

@@ -485,7 +485,7 @@ integrationData:
             default: inactive
           customAlerts:
             default: inactive
-          auditNotification:
+          slackAuditNotification:
             default: inactive
           scanAlert:
             default: inactive
@@ -506,7 +506,7 @@ integrationData:
             default: password
           scanCompletionAlert:
             default: inactive
-          auditNotification:
+          emailAuditNotification:
             default: inactive
           scanFailureAlert:
             default: inactive

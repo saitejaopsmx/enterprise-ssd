@@ -58,6 +58,9 @@ supplychainapi:
   ## Below is the command used to get the IssuerID ###
   ## kubectl get --raw /.well-known/openid-configuration | jq -r .issuer ###
   ssdIssuer:
+  whitelist_Urls:
+    - https://api.github.com
+    - docker.io
 ################################################################################################
 ## Change this true if user need to enable the AIModel Scan ####################################
 ## If true AI Shield and DLVS Services will be installed #######################################
@@ -70,7 +73,8 @@ minio:
   persistence:
     storageClass: ""
     size: 10Gi
-
+  service:
+    type: ClusterIP
 ################################################################################################
 ### Update the below parameters only if global.minio.enabled is false ########
 ### Update the S3 Bucket REGION in AWS #######################################

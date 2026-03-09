@@ -41,6 +41,12 @@ spec:
           - -addonupdate
           - -addoninstall
           - openapi
+          - '-addoninstall'
+          - oast
+          - '-addoninstall'
+          - ascanrulesBeta
+          - '-addoninstall'
+          - ascanrules
           - '-config'
           - api.disablekey=true
           - '-config'
@@ -77,6 +83,7 @@ spec:
                   done
                   load_session_url='http://localhost:8080/JSON/script/action/load/?scriptName=Zap-Api-Session-Script.js&scriptType=session&scriptEngine=Graal.js&fileName=/tmp/Zap-Api-Session-Script.js&charset=UTF-8'
                   load_api_url='http://localhost:8080/JSON/script/action/load/?scriptName=Zap-Api-Auth-Script.js&scriptType=authentication&scriptEngine=Graal.js&fileName=/tmp/Zap-Api-Auth-Script.js&charset=UTF-8'
+                  load_oast_config='http://localhost:8080/JSON/oast/action/setActiveScanService/?name=BOAST'
                   retry() {
                     local url=$1
                     local tries=0
@@ -92,6 +99,8 @@ spec:
                   retry "$load_session_url"
                   echo "Loading Api Auth script..."
                   retry "$load_api_url"
+                  echo "Loading OAST config..."
+                  retry "$load_oast_config"
                   echo "Api Auth and Session script loaded ."
                   }  >> /zap/poststart.log 2>&1
         volumeMounts:

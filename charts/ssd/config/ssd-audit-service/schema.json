@@ -29,7 +29,8 @@
   "user_integrator_activity": [
     "integrator_created",
     "integrator_updated",
-    "integrator_deleted"
+    "integrator_deleted",
+    "integrator_status_updated"
   ],
   "api_key_management": [
     "apikey_user_created",
@@ -95,5 +96,9 @@
     "opengrep_scan",
     "application_analysis",
     "firewall_analysis"
+  ],
+  "policy_execution_activity": [
+    "policy_exception",
+    "policy_prevent"
   ]
 }

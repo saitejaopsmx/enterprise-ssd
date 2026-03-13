@@ -422,7 +422,7 @@ ssdgate:
 ssdnotificationservice:
   ## Image specific details
   image:
-    repository: ssd-notification-service
+    repository: ssd-notification
     tag: "2026-02-00"
     pullPolicy: IfNotPresent
 

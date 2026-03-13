@@ -74,12 +74,12 @@ type Organization implements RBAC
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryOrganization @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
     ]},
     delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -124,12 +124,12 @@ type DeploymentTarget
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTarget @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" }
@@ -171,14 +171,14 @@ type Team implements RBAC
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryTeam @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     delete:
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -214,16 +214,16 @@ type Application implements RBAC
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryApplication @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
     ]},
     delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -273,6 +273,7 @@ enum RiskStatus {
     completed
     fail
     pending
+    paused
 }
 
 """
@@ -383,12 +384,12 @@ type Integrator
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegrator @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" }
@@ -416,22 +417,22 @@ type IntegratorConfigs
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     },
     delete: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { integrator { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryIntegratorConfigs @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     })
 {
@@ -476,6 +477,7 @@ type PolicyDefinition {
     ownerOrg: Organization!
     ownerTeam: Team
     ownerApplication: Application
+    ownerProject: Project
     createdAt: DateTime!
     updatedAt: DateTime!
     policyName: String! @search(by: [exact,regexp])
@@ -496,6 +498,7 @@ type PolicyEnforcement {
     enforcedOrg: Organization @hasInverse(field: policyEnforcements)
     enforcedTeam: Team @hasInverse(field: policyEnforcements)
     enforcedApplication: Application @hasInverse(field: policyEnforcements)
+    enforcedProject: Project @hasInverse(field: policyEnforcements)
     status: Boolean! @search
     forceApply: Boolean @search
     severity: Severity! @search(by: [exact,regexp])
@@ -961,12 +964,12 @@ type CSPMResourceScanGroup implements AbstractResource @auth(
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryCSPMResourceScanGroup @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryCSPMResourceScanGroup @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryCSPMResourceScanGroup @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryCSPMResourceScanGroup @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
      delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -998,12 +1001,12 @@ type NetworkResource implements AbstractResource @auth(
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryNetworkResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
      delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -1070,12 +1073,12 @@ type Resource implements AbstractResource @auth(
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryResource @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
     ]},
      delete:
         { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -1136,22 +1139,22 @@ type Project
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     },
     delete: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryProject @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}"},
         ]
     })
  {
@@ -1166,6 +1169,8 @@ type Project
     updatedAt: DateTime! @search
     projectConfigs: [ProjectConfig!] @hasInverse(field: project)
     integratorConfigs: [IntegratorConfigs!] @hasInverse(field: project)
+    policies: [PolicyDefinition!] @hasInverse(field: ownerProject)
+    policyEnforcements: [PolicyEnforcement!] @hasInverse(field: enforcedProject)
     scans: [ScanTarget!] @hasInverse(field: projects)
     type: String @search(by: [exact,regexp])
     error: String @search(by: [exact,regexp])
@@ -1185,22 +1190,22 @@ type ProjectConfig
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     },
     delete: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryProjectConfig @cascade { project { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     })
 {
@@ -1233,22 +1238,22 @@ type ScanTarget
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     },
     delete: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
-{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryScanTarget @cascade { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}"},
         ]
     })
 {
@@ -1281,22 +1286,22 @@ type ScanResult
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
         ]
     },
     delete: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
-{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write,read]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
+{ rule: "query($groups: [String!]) { queryScanResult @cascade { scanTarget { projects { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,write]}}) { __typename }}}}}}"},
         ]
     })
 {

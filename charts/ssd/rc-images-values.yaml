@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "66030f9-26"
+    tag: "v2026.02.02"
 
 cbom:
   image:
@@ -41,7 +41,7 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "33b174f-40"
+    tag: "v2026.02.02"
 
 supplychainapi:
   image:
@@ -66,7 +66,7 @@ ssdnotificationservice:
 
 ssdopa:
   image:
-    tag: "9e6124b-44"
+    tag: "v2026.02.02"
 
 ssdrescheduler:
   image:

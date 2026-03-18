@@ -44,7 +44,11 @@
     "scan_now_project_created",
     "scan_now_project_updated",
     "scan_now_project_deleted",
-    "scan_now_project_rescanned"
+    "scan_now_project_rescanned",
+    "project_analysis_started",
+    "project_completed",
+    "project_failed",
+    "project_repository_error"
   ],
   "scan_activity": [
     "artifact_analysis",
@@ -72,10 +76,6 @@
     "event_processing_error",
     "build_event_recieved",
     "deploy_event_recieved",
-    "project_analysis_started",
-    "project_completed",
-    "project_failed",
-    "project_repository_error",
     "artifact_analysis",
     "artifact_vulnerability_scan",
     "sourcecode_vulnerability_scan",
@@ -99,6 +99,10 @@
   ],
   "policy_execution_activity": [
     "policy_exception",
-    "policy_prevent"
+    "policy_prevent",
+    "firewall_analysis",
+    "model_scan",
+    "garak_scan",
+    "nbdf_scan"
   ]
 }

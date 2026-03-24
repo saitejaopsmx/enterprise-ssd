@@ -88,6 +88,22 @@ global:
       tls:
         secretName: ssd-ui-ingress
 ###########################################################################################################
+airemediation:
+  image:
+    repository: ai-guardian-remediation
+    tag: "2026-02-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+############################################################################################################
 aishield:
   image:
     repository: aishield

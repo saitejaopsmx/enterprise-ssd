@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "66030f9-26"
+    tag: "v2026.02.02"
 
 cbom:
   image:
@@ -33,7 +33,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "197848f-18"
+    tag: "v2026.02.02"
 
 snykmonitor:
   image:
@@ -41,7 +41,7 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "33b174f-40"
+    tag: "v2026.02.02"
 
 supplychainapi:
   image:
@@ -58,7 +58,7 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "e81f332-4"
+    tag: "vSSD-2026.02.02"
 
 ssdnotificationservice:
   image:
@@ -66,7 +66,7 @@ ssdnotificationservice:
 
 ssdopa:
   image:
-    tag: "9e6124b-44"
+    tag: "v2026.02.02"
 
 ssdrescheduler:
   image:
@@ -78,11 +78,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "d1e05a35-37"
+    tag: "v2026.02.03"
 
 ui:
   image:
-    tag: "b559d8e3-848"
+    tag: "fa8ebebf-855"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

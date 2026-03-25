@@ -84,15 +84,15 @@ spec:
             value: http://tool-chain:8100
           - name: DLVS_HOSTPORT
             value: http://dlvs:5000
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis-secret
-                  key: password
-            - name: AUDIT_ENABLE
-              value: enable
-            - name: REDIS_HOST
-              value: {{ .Release.Name }}-redis-master
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis-secret
+                key: password
+          - name: AUDIT_ENABLE
+            value: enable
+          - name: REDIS_HOST
+            value: {{ .Release.Name }}-redis-master
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /tools/ssd-public-keys

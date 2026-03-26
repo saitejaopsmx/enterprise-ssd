@@ -235,7 +235,7 @@ integrationData:
         multiaccount: false
         featureConfigs:
           vulnerabilityscan:
-            default: active
+            default: inactive
           helmscan:
             default: active
           secretscanforsource:
@@ -436,7 +436,7 @@ integrationData:
         multiaccount: false
         featureConfigs:
           vulnerabilityscan:
-            default: inactive
+            default: active
       - integratorType: cdxgen
         category: scanningtool
         multiaccount: false

@@ -11,6 +11,10 @@ artifactscan:
   image:
     tag: "v2026.02.02"
 
+airemediation:
+  image:
+    tag: "3f70ebf-4"
+
 cbom:
   image:
     tag: "2.1.12"
@@ -89,4 +93,4 @@ ui:
 zap:
   image:
     repository: zap
-    tag: "2024-12-00"
+    tag: "2026-02-00"

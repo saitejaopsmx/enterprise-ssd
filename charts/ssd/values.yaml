@@ -702,7 +702,7 @@ mobsf:
 zap:
   image:
     repository: zap
-    tag: "2024-12-00"
+    tag: "2026-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

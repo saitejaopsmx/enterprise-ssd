@@ -12,5 +12,6 @@
     "adhocOrgLevelDisabled": true,
     "workloadServiceAccount": "ssd-workload-sa",
     "userActivityDefaultTeam": "admin_team",
-    "aimlScan": "{{ .Values.installAimlSvcs }}"
+    "aimlScan": "{{ .Values.installAimlSvcs }}",
+    "airemediation": true
 }

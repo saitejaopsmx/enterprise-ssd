@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "v2026.02.02"
+    tag: "v2026.02.04"
 
 airemediation:
   image:
@@ -49,7 +49,7 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "c0807cb-1937"
+    tag: "a811de0-1986"
 
 supplychainpreprocessor:
   image:
@@ -66,11 +66,11 @@ ssdgate:
 
 ssdnotificationservice:
   image:
-    tag: "v2026.02.01"
+    tag: "v2026.02.02"
 
 ssdopa:
   image:
-    tag: "v2026.02.02"
+    tag: "v2026.02.03"
 
 ssdrescheduler:
   image:
@@ -86,7 +86,7 @@ toolchain:
 
 ui:
   image:
-    tag: "fa8ebebf-855"
+    tag: "663a625a-869"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

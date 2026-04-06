@@ -41,7 +41,8 @@
                       "timestamp",
                       "id"
                     ],
-                    "filter": {}
+                    "filter": {},
+                    "allow_aggregations": true
                   },
                   "comment": ""
                 },
@@ -63,6 +64,7 @@
                       "details",
                       "status"
                     ],
+                    "allow_aggregations": true,
                     "filter": {
                       "_or": [
                         {
@@ -120,7 +122,8 @@
                       "updated_at",
                       "username"
                     ],
-                    "filter": {}
+                    "filter": {},
+                    "allow_aggregations": true
                   },
                   "comment": ""
                 }

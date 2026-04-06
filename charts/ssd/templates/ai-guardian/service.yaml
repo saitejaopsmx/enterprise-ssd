@@ -9,7 +9,7 @@ metadata:
   annotations:
 {{ toYaml .Values.airemediation.serviceAnnotations | indent 4 }}
 {{- end }}
-  name: airemediation
+  name: ai-guardian-remediation
 spec:
   ports:
   - name: ai-guardian-remediation

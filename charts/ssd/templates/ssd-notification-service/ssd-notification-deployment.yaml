@@ -25,6 +25,26 @@ spec:
       containers:
         - name: ssd-notification
           image: {{ template "ssdnotificationservice.image" . }}
+          env:
+            - name: RABBITMQ_HOST
+              value: rabbitmq-service
+            - name: RABBITMQ_PORT
+              value: '5672'
+            - name: RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
+            - name: WEBHOOK_SECRET_WEBHOOK_TESTER
+              valueFrom:
+                secretKeyRef:
+                  name: webhooksecret
+                  key: WebhookHmac
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys

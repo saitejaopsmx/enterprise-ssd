@@ -1224,6 +1224,7 @@ type ProjectConfig
     artifactTagPattern: String @search(by: [exact,regexp])
     scanUpto: Int @search
     codePath: String @search(by:[exact,regexp])
+    triggeredBy: String @search(by:[exact,regexp])
 }
 
 type ScanTarget

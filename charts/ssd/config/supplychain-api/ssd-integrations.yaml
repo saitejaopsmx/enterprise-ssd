@@ -614,6 +614,9 @@ integrationData:
       - integratorType: tfsec
         category: communications
         multiaccount: false
+        featureConfigs:
+          iactfsecscan:
+            default: Project Mode
         integratorConfigs:
           name:
             encrypt: false

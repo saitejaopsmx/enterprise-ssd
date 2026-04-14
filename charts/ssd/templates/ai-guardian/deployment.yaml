@@ -31,19 +31,19 @@ spec:
           valueFrom:
             secretKeyRef:
               name: ai-guardian-remediation-secret
-              key: claude-code-model
+              key: CLAUDE_CODE_MODEL
               optional: true
         - name: CLAUDE_CODE_OAUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: ai-guardian-remediation-secret
-              key: claude-code-token
+              key: CLAUDE_CODE_OAUTH_TOKEN
               optional: true
         - name: REMEDIATION_AGENT
           valueFrom:
             secretKeyRef:
               name: ai-guardian-remediation-secret
-              key: agent
+              key: REMEDIATION_AGENT
               optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}

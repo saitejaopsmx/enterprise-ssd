@@ -83,7 +83,6 @@ spec:
         - name: ssd-notification
           configMap:
             name: ssd-notification-config
-            defaultMode: 420
             items:
               - key: ssd-notification.yaml
                 path: ssd-notification.yaml

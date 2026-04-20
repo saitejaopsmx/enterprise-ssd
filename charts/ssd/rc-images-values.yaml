@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "v2026.02.04"
+    tag: "v2026.02.05"
 
 airemediation:
   image:
@@ -39,6 +39,10 @@ projectmonitor:
   image:
     tag: "v2026.02.02"
 
+prismiac:
+  image:
+    tag: "2026-03-00"
+
 snykmonitor:
   image:
     tag: "67c2de3-12"
@@ -49,7 +53,7 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "a811de0-1986"
+    tag: "ab62e69-2007"
 
 supplychainpreprocessor:
   image:
@@ -86,7 +90,7 @@ toolchain:
 
 ui:
   image:
-    tag: "663a625a-869"
+    tag: "beced276-892"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

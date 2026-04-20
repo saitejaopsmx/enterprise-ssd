@@ -61,6 +61,7 @@ spec:
                       done
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns prism-iac namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                       break
@@ -80,6 +81,7 @@ spec:
                  done
                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
+                 kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns prism-iac namespace register -rd 3 || true"
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                  kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
                  break
@@ -141,6 +143,7 @@ spec:
                       done
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
+                      kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns prism-iac namespace register -rd 3 || true"
                       kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/argocd-ssd/refs/heads/main/license-template.yaml
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                       kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa
@@ -161,6 +164,7 @@ spec:
                   done
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns default namespace register -rd 3 || true"
                   kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns ssd-opa namespace register -rd 3 || true"
+                  kubectl -n {{ .Release.Namespace }} exec -it $frontendpod -- /bin/bash -c "tctl --ns prism-iac namespace register -rd 3 || true"
                   kubectl -n {{ .Release.Namespace }} apply -f https://raw.githubusercontent.com/OpsMx/argocd-ssd/refs/heads/main/license-template.yaml
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy tool-chain
                   kubectl -n {{ .Release.Namespace }} rollout restart deploy ssd-opa

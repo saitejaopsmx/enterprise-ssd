@@ -1332,6 +1332,7 @@ type ProjectConfig
     scanUpto: Int @search
     codePath: String @search(by:[exact,regexp])
     triggeredBy: String @search(by:[exact,regexp])
+    scans: [ScanTarget] @hasInverse(field: projectConfig)
 }
 
 type ScanTarget
@@ -1366,6 +1367,7 @@ type ScanTarget
     })
 {
     id: ID!
+    "make this singular"
     projects: [Project!] @hasInverse(field: scans)
     organization: String @search(by:[exact,regexp])
     repository: String @search(by:[exact,regexp])
@@ -1380,6 +1382,8 @@ type ScanTarget
     error: String @search(by: [exact,regexp])
     riskStatus: RiskStatus @search(by: [exact,regexp])
     codePath: String @search(by:[exact,regexp])
+    "do not use below param"
+    projectConfig: ProjectConfig @hasInverse(field: scans)
 }
 
 type ScanResult

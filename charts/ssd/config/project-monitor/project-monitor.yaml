@@ -14,3 +14,4 @@ graphQLAddr: http://dgraph-public:8080
 {{- end }}
 # Scan Configurations
 pollIntervalSeconds: 30
+prismIacUrl: http://prism-iac:8400

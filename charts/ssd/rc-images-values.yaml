@@ -39,6 +39,10 @@ projectmonitor:
   image:
     tag: "v2026.02.02"
 
+prismiac:
+  image:
+    tag: "2026-03-00"
+
 snykmonitor:
   image:
     tag: "67c2de3-12"

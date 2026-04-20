@@ -414,6 +414,16 @@ Return the proper SSD Notification Service Image
 {{/*
 Return the proper AI Remediation Image
 */}}
+{{- define "airemediation.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.airemediation.image.repository -}}
+{{- $tag := .Values.airemediation.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper PRISM IAC Image
+*/}}
 {{- define "prismiac.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.prismiac.image.repository -}}

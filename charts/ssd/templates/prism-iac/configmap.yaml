@@ -7,4 +7,4 @@ metadata:
 {{ include "ssd.standard-labels" . | indent 4 }}
     component: prism-iac
 data:
-{{ (tpl (.Files.Glob "config/prismiac/prism-iac.yaml").AsConfig . ) | indent 2 }}
+{{ (tpl (.Files.Glob "config/prism-iac/prism-iac.yaml").AsConfig . ) | indent 2 }}

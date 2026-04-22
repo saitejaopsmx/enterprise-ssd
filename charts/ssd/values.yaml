@@ -316,7 +316,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2026-01-00"
+    tag: "2026-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -576,7 +576,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2026-01-00"
+    tag: "2026-02-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

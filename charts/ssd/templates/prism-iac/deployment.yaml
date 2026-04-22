@@ -45,37 +45,16 @@ spec:
           mountPath: /app/secrets/prism-iac-token/
         {{- with .Values.prismiac.probes }}
         {{- toYaml . | nindent 8 }}
-        {{- else }}
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -c
-            - ps aux | grep consumer | grep -v grep
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        readinessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -c
-            - ps aux | grep consumer | grep -v grep
-          failureThreshold: 3
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
         {{- end }}
       {{- with .Values.prismiac.resources }}
       resources:
       {{- toYaml . | nindent 10 }}
       {{- end }}
-      securityContext:
       {{- if .Values.prismiac.securityContext }}
+          securityContext:
       {{ toYaml .Values.prismiac.securityContext | nindent 12 }}
+      {{- else }}
+          securityContext: {{ default "{}" }}
       {{- end }}
       volumes:
         - name: prism-iac-volume

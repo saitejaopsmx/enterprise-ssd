@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ai-guardian-remediation
   labels:
     app: ssd
     component: ai-guardian-remediation
 {{ include "ssd.standard-labels" . | indent 4 }}
-  name: ai-guardian-remediation
 spec:
   replicas: {{ .Values.ui.replicaCount }}
   selector:
@@ -21,9 +21,7 @@ spec:
       labels:
         app: ssd
         component: ai-guardian-remediation
-{{- if .Values.customLabels }}
-{{ toYaml .Values.customLabels | indent 8}}
-{{- end }}
+{{ include "ssd.standard-labels" . | indent 8 }}
     spec:
       containers:
       - image: {{ template "airemediation.image" . }}

@@ -120,6 +120,7 @@ type Organization implements RBAC
     resources: [AbstractResource!] @hasInverse(field: organization)
     projects: [Project!] @hasInverse(field: organization)
     licenses: [ComponentLicenses!] @hasInverse(field: organization)
+    exceptions: [ExceptionAffects!] @hasInverse(field: affectsOrg)
 }
 
 """
@@ -881,6 +882,18 @@ type Component {
     eolRisk: Severity @search(by: [exact,regexp])
     eolException: Boolean @search
     isOlderThanBaseline: Boolean @search
+    description: String @search(by: [exact, regexp])
+    supplier: String @search(by: [exact, regexp])
+    origin: String @search(by: [exact, regexp])
+    releaseDate: DateTime @search
+    eolDate: DateTime @search
+    supportStatus: String @search(by: [exact, regexp])
+    criticality: String @search(by: [exact, regexp])
+    executable: Boolean @search
+    archive: Boolean @search
+    structured: Boolean @search
+    checksums: [String!] @search(by: [exact, regexp])
+    comments: String @search(by: [exact, regexp])
     severity: Severity @search(by: [exact,regexp])
     severityInt: Int @search
 }
@@ -983,16 +996,19 @@ type Exception implements RBAC
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryException @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}"},
 { rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add]}}) { __typename }}}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryException @cascade { affects { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryException @cascade { affects { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}}"},
     ]},
     delete:{ rule: "{$type: {eq: \"internal-account/v1\"}}" }
     )
@@ -1012,27 +1028,32 @@ type ExceptionAffects implements RBAC
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}"},
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update,read]}}) { __typename }}}}"},
     ]},
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}"},
     ]},
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,exception_add,exception_update]}}) { __typename }}}}"},
     ]},
     delete:{
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryExceptionAffects @cascade { affectsOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
     ]}
             )
 {
     id: ID!
     createdBy: String! @search(by: [exact, regexp])
-    affectsTeam: Team! @hasInverse(field: exceptions)
+    affectsOrg: Organization @hasInverse(field: exceptions)
+    affectsTeam: Team @hasInverse(field: exceptions)
     affectsApplication: Application
     affectsServices: [String!] @search(by: [exact, regexp])
     validUpTo: DateTime! @search

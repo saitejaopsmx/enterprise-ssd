@@ -149,12 +149,8 @@ spec:
             - name: supplychain-api-volume
               mountPath: /app/app-config.yaml
               subPath: app-config.yaml
-            - mountPath: /app/ssd-integrations.yaml
+            - mountPath: /app/config
               name: supplychain-api-cm
-              subPath: ssd-integrations.yaml
-            - mountPath: /app/ssd-whitelist.yaml
-              name: supplychain-api-cm
-              subPath: ssd-whitelist.yaml
             - mountPath: /app/project.yaml
               name: adhoc-project-cm
               subPath: project.yaml

@@ -564,15 +564,29 @@ type PolicyEnforcement
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,read]}}) { __typename }}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
         ]
     },
-    add: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
+        ]
+    },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
         ]
     },
     delete: { rule: "{$type: {eq: \"internal-account/v1\"}}"}
@@ -981,6 +995,8 @@ type Vulnerability {
     technicalImpact: String @search(by: [exact, regexp])
     affects: [Component!] @hasInverse(field: vulnerabilities)
     policyEvaluation: [PolicyEvaluationData!] @hasInverse(field: vulnNode)
+    status: String @search(by:[exact])
+    justification: String @search(by:[exact])
 }
 
 type CWE {

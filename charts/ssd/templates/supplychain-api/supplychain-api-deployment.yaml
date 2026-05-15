@@ -164,6 +164,8 @@ spec:
               readOnly: true
             - mountPath: /app/zapOpenApiSpec
               name: zap-openapi-spec
+            - mountPath: /app/zapPostmanCollection
+              name: zap-postman-collection
             - mountPath: /app/policy
               name: policy
             - name: service-account
@@ -245,6 +247,8 @@ spec:
           name: policy
         - emptyDir: {}
           name: logs
+        - emptyDir: {}
+          name: zap-postman-collection
         - configMap:
             defaultMode: 420
             name: ssd-public-keys

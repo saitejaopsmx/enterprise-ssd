@@ -776,12 +776,35 @@ type SourceCodeTool {
     buildTool: BuildTool
     sourceCodePath: String
     sonarqubeProjectKey: String
+    "primaryLanguage is the dominant programming-typed language (e.g., Go, Python, Java)"
+    primaryLanguage: String @search(by: [exact, regexp])
+    "languageBreakdown is the per-language stats (name, percentage, bytes, files, linguist type) ranked by bytes"
+    languageBreakdown: [Language!]
     "artifactNode links a Source node to an artifact"
     artifactNode: Artifact @hasInverse(field: sourceDetails)
     "digest is the sha of the artifact"
     digest: String! @search(by: [exact])
     "buildDigest is the sha of the artifact as sent from the build tool"
     buildDigest: String @search(by: [exact])
+}
+
+"""
+Language represents a single programming (or markup / data / prose) language detected
+in a source repo, with its share of the source by byte count.
+"""
+type Language {
+    "id is deterministic: <SourceCodeTool.digest>-<language name> so re-runs upsert in place"
+    id: String! @id
+    "name is the language name (e.g. Go, Python, C++)"
+    name: String! @search(by: [exact, regexp])
+    "type is the linguist classification: programming, markup, data, prose, unknown"
+    type: String @search(by: [exact])
+    "percentage by bytes within the source repo (0-100)"
+    percentage: Float @search
+    "bytes counted toward this language across all source files"
+    bytes: Int
+    "files counted toward this language"
+    files: Int
 }
 
 """

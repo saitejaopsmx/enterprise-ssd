@@ -580,6 +580,17 @@ integrationData:
             default: inactive
           dynamicScan:
             default: inactive
+      - integratorType: jiraxray
+        category: scanningtool
+        multiaccount: false
+        integratorConfigs:
+          clientId:
+            encrypt: false
+          clientSecret:
+            encrypt: true
+        featureConfigs:
+          mode:
+            default: cloud
       - integratorType: apirunner
         category: testingtool
         multiaccount: false
@@ -636,12 +647,18 @@ integrationData:
         category: scanningtool
         multiaccount: true
         featureConfigs:
+          zapIntegrationType:
+            default: zapDastScan
           openApiAuthType:
           openApiAuthHttpScheme:
           openApiAuthApikeyIn:
           isAuthenticated:
             default: inactive
         integratorConfigs:
+          postmanCollectionFile:
+            encrypt: false
+          postmanCollectionVariables:
+            encrypt: false
           serviceUrl:
             encrypt: false
           scanPolicy:

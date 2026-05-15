@@ -5,15 +5,15 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "e7e845b-29"
+    tag: "v2026.03.01"
 
 artifactscan:
   image:
-    tag: "v2026.02.05"
+    tag: "v2026.03.04"
 
 airemediation:
   image:
-    tag: "3f70ebf-4"
+    tag: "dev-accf7bc-12"
 
 cbom:
   image:
@@ -29,7 +29,7 @@ kubescape:
 
 licensegenerator:
   image:
-    tag: "0b6fced-3"
+    tag: "dev-b37164b-8"
 
 mobsf:
   image:
@@ -37,11 +37,11 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "v2026.02.02"
+    tag: "v2026.03.01"
 
 prismiac:
   image:
-    tag: "2026-03-00"
+    tag: "v2026.03.01"
 
 snykmonitor:
   image:
@@ -49,15 +49,15 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "v2026.02.02"
+    tag: "v2026.03.01"
 
 supplychainapi:
   image:
-    tag: "ab62e69-2007"
+    tag: "82fba46-2161"
 
 supplychainpreprocessor:
   image:
-    tag: "6358896-24"
+    tag: "dev-6daf1c4-271"
 
 ssdauditservice:
   image:
@@ -66,15 +66,15 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "vSSD-2026.02.02"
+    tag: "vSSD-2026.03.01"
 
 ssdnotificationservice:
   image:
-    tag: "v2026.02.02"
+    tag: "v2026.03.01"
 
 ssdopa:
   image:
-    tag: "v2026.02.03"
+    tag: "v2026.03.04"
 
 ssdrescheduler:
   image:
@@ -86,11 +86,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "v2026.02.03"
+    tag: "v2026.03.04"
 
 ui:
   image:
-    tag: "beced276-892"
+    tag: "32932580-978"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

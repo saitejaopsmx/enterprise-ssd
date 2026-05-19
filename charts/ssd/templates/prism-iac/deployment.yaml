@@ -51,10 +51,10 @@ spec:
       {{- toYaml . | nindent 10 }}
       {{- end }}
       {{- if .Values.prismiac.securityContext }}
-          securityContext:
-      {{ toYaml .Values.prismiac.securityContext | nindent 12 }}
+      securityContext:
+      {{ toYaml .Values.prismiac.securityContext | nindent 10 }}
       {{- else }}
-          securityContext: {{ default "{}" }}
+      securityContext: {{ default "{}" }}
       {{- end }}
       volumes:
         - name: prism-iac-volume

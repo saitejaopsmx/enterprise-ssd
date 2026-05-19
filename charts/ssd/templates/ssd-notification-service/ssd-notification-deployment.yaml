@@ -45,6 +45,7 @@ spec:
                 secretKeyRef:
                   name: webhooksecret
                   key: WebhookHmac
+                  optional: true
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys

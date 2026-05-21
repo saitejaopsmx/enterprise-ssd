@@ -8,7 +8,7 @@ database:
   path: "/app/data/badger"     # BadgerDB database directory path
   # Note: BadgerDB is an embedded key-value store (no connection pooling needed)
 cache:
-  central_repo_url: "http://34.42.118.231:9000/fetch"  # Central license server URL
+  central_repo_url: "http://35.255.7.45:9000/fetch"  # Central license server URL
   license_dir: "/app/data/licenses"                   # Directory for cached license files
   template_dir: "/app/templates"                      # Directory for template files
   max_age: 24h                                        # Maximum age before license is considered stale

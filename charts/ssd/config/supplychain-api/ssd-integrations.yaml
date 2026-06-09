@@ -1,6 +1,7 @@
 browserCacheDuration: {{ .Values.supplychainapi.browserCacheDuration }}
 cachePollingInterval: {{ .Values.supplychainapi.cachePollingInterval }}
 jiraPollingInterval: 5
+reportHourAndMinute: 00:00
 integrationData:
   - stage: Source
     integrations:
@@ -557,6 +558,10 @@ integrationData:
             encrypt: false
           wontdo:
             encrypt: false
+          autoTriggerJira:
+            encrypt: false
+          grouped:
+            encrypt: false
         featureConfigs:
           mode:
             default: cloud
@@ -588,6 +593,8 @@ integrationData:
             encrypt: false
           clientSecret:
             encrypt: true
+          region:
+            encrypt: false
         featureConfigs:
           mode:
             default: cloud

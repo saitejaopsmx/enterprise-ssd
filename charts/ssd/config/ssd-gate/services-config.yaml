@@ -27,6 +27,7 @@
   - "/webhook/v1/publish/sbom"
   - "/webhook/v1/sbom/status"
   strip_path: "/webhook"
+  response_header_timeout: 6h
 - name: supplychain-api-team-auth
   path_prefixes:
   - "/ssdservice/v1/findbuildid"

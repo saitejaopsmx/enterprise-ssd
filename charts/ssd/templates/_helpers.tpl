@@ -392,16 +392,6 @@ Return the proper Aishield Images
 {{- end -}}
 
 {{/*
-Return the proper CBOM Images
-*/}}
-{{- define "cbom.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.cbom.image.repository -}}
-{{- $tag := .Values.cbom.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
 Return the proper SSD Notification Service Image
 */}}
 {{- define "ssdnotificationservice.image" -}}

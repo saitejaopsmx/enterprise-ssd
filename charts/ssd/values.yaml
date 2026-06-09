@@ -138,22 +138,6 @@ artifactscan:
 
   securityContext: {}
 #############################################################################################################
-cbom:
-  image:
-    repository: cbomkit
-    tag: "2.1.12"
-    pullPolicy: IfNotPresent
-
-  replicaCount: 1
-
-  annotations: {}
-
-  probes: {}
-
-  resources: {}
-
-  securityContext: {}
-##############################################################################################################
 curl:
   image:
     repository: curl

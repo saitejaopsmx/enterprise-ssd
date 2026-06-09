@@ -9,6 +9,7 @@ namespace: {{ .Release.Namespace }}
 zapService: http://zap-service:8080
 ssdLicenseGenerator: http://ssd-license-generator:8080
 aiRemediation: http://ai-guardian-remediation:8588
+ssdVuln: http://34.28.37.172:8070
 audit:
   enabled: true
 tokenMachine:

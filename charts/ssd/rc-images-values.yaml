@@ -53,7 +53,7 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "3c09792-2305"
+    tag: "ff0d4ce-2315"
 
 supplychainpreprocessor:
   image:
@@ -90,7 +90,7 @@ toolchain:
 
 ui:
   image:
-    tag: "b19902b8-1107"
+    tag: "4b8a3d29-1126"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

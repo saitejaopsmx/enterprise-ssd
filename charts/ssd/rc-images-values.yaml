@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "v2026.03.04"
+    tag: "v2026.04.03"
 
 airemediation:
   image:
@@ -37,7 +37,7 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "v2026.03.01"
+    tag: "v2026.04.01"
 
 prismiac:
   image:
@@ -49,11 +49,11 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "v2026.03.01"
+    tag: "v2026.04.01"
 
 supplychainapi:
   image:
-    tag: "82fba46-2161"
+    tag: "ff0d4ce-2315"
 
 supplychainpreprocessor:
   image:
@@ -74,11 +74,11 @@ ssdnotificationservice:
 
 ssdopa:
   image:
-    tag: "v2026.03.04"
+    tag: "v2026.04.02"
 
 ssdrescheduler:
   image:
-    tag: "d784b8a-5"
+    tag: "v2026.02.02"
 
 tokenmachine:
   image:
@@ -86,15 +86,15 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "v2026.03.04"
+    tag: "v2026.04.01"
 
 ui:
   image:
-    tag: "32932580-978"
+    tag: "4b8a3d29-1126"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 
 zap:
   image:
     repository: zap
-    tag: "2026-02-00"
+    tag: "2026-03-00"

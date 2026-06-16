@@ -420,3 +420,13 @@ Return the proper PRISM IAC Image
 {{- $tag := .Values.prismiac.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper PENTESTGPT WRAPPER Image
+*/}}
+{{- define "pentestgpt.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.pentestgpt.image.repository -}}
+{{- $tag := .Values.pentestgpt.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

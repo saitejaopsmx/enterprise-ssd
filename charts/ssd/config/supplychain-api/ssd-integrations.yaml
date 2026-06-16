@@ -1,7 +1,12 @@
 browserCacheDuration: {{ .Values.supplychainapi.browserCacheDuration }}
 cachePollingInterval: {{ .Values.supplychainapi.cachePollingInterval }}
 jiraPollingInterval: 5
-reportHourAndMinute: 00:00
+reportHourAndMinute: {{ .Values.supplychainapi.reportHourAndMinute }}
+vulnerabilityBatchSize: {{ .Values.supplychainapi.vulnerabilityBatchSize }}
+ossBatchSize: {{ .Values.supplychainapi.ossBatchSize }}
+deploymentBatchSize: {{ .Values.supplychainapi.deploymentBatchSize }}
+artifactBatchSize: {{ .Values.supplychainapi.artifactBatchSize }}
+alertsBatchSize: {{ .Values.supplychainapi.alertsBatchSize }}
 integrationData:
   - stage: Source
     integrations:

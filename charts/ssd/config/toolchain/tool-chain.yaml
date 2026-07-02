@@ -15,7 +15,7 @@ otelInterval: {{ .Values.otel.interval }}
 sonarQubeCreated: {{ .Values.toolchain.fetchsonardata }}
 licenseGenSvc: http://ssd-license-generator:8080
 pentestGPTServiceURL: http://pentestgpt-wrapper.may-dev.svc.cluster.local:8080
-maxConcurrentArtifactWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum 
+maxConcurrentArtifactWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 maxConcurrentSourceWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 scoutSuite:
   maxWorkers: 10

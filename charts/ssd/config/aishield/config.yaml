@@ -23,4 +23,5 @@ dgraph:
   {{- end }}
 dlvs:
   addr: "http://dlvs:5000"
-activityTimeout: "1h"
+garakMaxModelSizeB: 13
+activityTimeout: "8h"

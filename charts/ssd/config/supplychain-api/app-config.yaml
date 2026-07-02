@@ -10,6 +10,7 @@ zapService: http://zap-service:8080
 ssdLicenseGenerator: http://ssd-license-generator:8080
 aiRemediation: http://ai-guardian-remediation:8588
 ssdVuln: http://212.2.240.29:8900
+aibomService: http://aibom-service:8082
 audit:
   enabled: true
 tokenMachine:

@@ -13,5 +13,10 @@
     "workloadServiceAccount": "ssd-workload-sa",
     "userActivityDefaultTeam": "admin_team",
     "aimlScan": "{{ .Values.installAimlSvcs }}",
-    "airemediation": true
+    "airemediation": true,
+    "enableNLI": true,
+    "CHAT_NATURAL_LANGUAGE": "ssdservice/v1/nli",
+    "GET_NLI_CHAT_HISTORY": "ssdservice/v1/nli/chats/user",
+    "GET_NLI_CHAT_MESSAGES": "ssdservice/v1/nli/chat/",
+    "chatMfeUrl": "/ui/assistant"
 }

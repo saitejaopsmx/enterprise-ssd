@@ -41,6 +41,7 @@
 - name: supplychain-api-auth # Authenticated service apis for supplychain-api
   path_prefixes:
   - "/ssdservice/v1/ssd-kubernetes-info"
+  - "/ssdservice/v1/ssd-kubernetes-cluster-info"
   - "/ssdservice/v1/kubescapeIntegration"
   - "/ssdservice/v1/opa-firewall"
   baseUrl: supplychain-api:8099

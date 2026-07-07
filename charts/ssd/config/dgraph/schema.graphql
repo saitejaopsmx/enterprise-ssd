@@ -183,6 +183,39 @@ type DeploymentTarget
     isFirewall: Boolean
     organization: Organization! @hasInverse(field: environments)
     defaultEnvironment: Environment!
+    nodes: [DeploymentTargetNode!] @hasInverse(field: deploymentTarget)
+}
+
+"""
+DeploymentTargetNode is an individual node within a DeploymentTarget (cluster).
+Node details are captured during the event call from the kube detector to the
+preprocessor and enrich the cluster information.
+"""
+type DeploymentTargetNode
+    @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryDeploymentTargetNode @cascade { deploymentTarget { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,cluster_add,cluster_update,read]}}) { __typename }}}}}"},
+    ]},
+    add:    { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    update: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    delete: { rule: "{$type: {eq: \"internal-account/v1\"}}" }
+    )
+{
+    "id is randomly assigned"
+    id: String! @id
+    "node name as reported by the cluster"
+    name: String! @search(by: [exact, regexp])
+    "the cluster this node belongs to"
+    deploymentTarget: DeploymentTarget! @hasInverse(field: nodes)
+    "node machine id (node.Status.NodeInfo.MachineID)"
+    machineID: String @search(by: [exact])
+    kubeletVersion: String
+    "node labels captured from the detector"
+    labels: [KeyValue!]
+    "node annotations captured from the detector"
+    annotations: [KeyValue!]
 }
 
 
@@ -228,7 +261,61 @@ type Team implements RBAC
     AttachedJira: [Jira] @hasInverse(field: team)
     projects: [Project!] @hasInverse(field: team)
     reportSubscriptions: [ReportSubscriptionAffects!] @hasInverse(field: affectsTeam)
+    shieldAgents: [ShieldAgent!] @hasInverse(field: team)
+}
 
+enum ShieldAgentState {
+    registered
+    connected
+    disconnected
+    unhealthy
+}
+
+type ShieldAgent
+    @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+        ]
+    },
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+        ]
+    },
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+        ]
+    },
+    delete:
+        { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    )
+{
+    id: ID!
+    agentId: String! @id @search(by: [exact])
+    clusterName: String! @search(by: [exact, term])
+    namespace: String @search(by: [exact])
+    version: String
+    state: ShieldAgentState! @search(by: [exact])
+    capabilities: [String]
+    labels: [KeyValue]
+    activeScanCount: Int
+    completedScanCount: Int
+    failedScanCount: Int
+    lastHeartbeat: DateTime @search
+    connectedAt: DateTime @search
+    disconnectedAt: DateTime
+    team: Team! @hasInverse(field: shieldAgents)
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    roles: [Role]
 }
 
 type Application implements RBAC
@@ -496,7 +583,7 @@ type IntegratorConfigs
     applicationEnvironment: ApplicationEnvironment @hasInverse(field: integratorConfigs)
     project: [Project] @hasInverse(field: integratorConfigs)
     projectConfig: [ProjectConfig] @hasInverse(field: integratorConfigs)
-    reportSubscription: ReportSubscription @hasInverse(field: integratorConfigs)
+    reportSubscription: [ReportSubscription] @hasInverse(field: integratorConfigs)
 }
 
 type IntegratorKeyValues
@@ -851,7 +938,6 @@ type Artifact {
     artifactDeployment: [ApplicationDeployment!] @hasInverse(field: artifact)
     sourceDetails: SourceCodeTool @hasInverse(field: artifactNode)
     plugins: [BuildTool!] @hasInverse(field: buildPlugins)
-    scanTarget: [ScanTarget!] @hasInverse(field: artifact)
 }
 
 
@@ -894,6 +980,7 @@ type ArtifactScanData {
     artifactRunHistory: [RunHistory!] @hasInverse(field: artifactScan)
     artifactTags: [KeyValue!]
     team: Team
+    scanTarget: [ScanTarget!] @hasInverse(field: artifactScanData)
 }
 
 type ArtifactRisk {
@@ -1519,6 +1606,10 @@ type ProjectConfig
     codePath: String @search(by:[exact,regexp])
     triggeredBy: String @search(by:[exact,regexp])
     scans: [ScanTarget] @hasInverse(field: projectConfig)
+    scmType: String @search(by: [exact,regexp])
+    scmOrganization: String @search(by: [exact,regexp])
+    model: String
+    provider: String
 }
 
 type ScanTarget
@@ -1564,7 +1655,7 @@ type ScanTarget
     createdAt: DateTime! @search
     updatedAt: DateTime! @search
     scanResults: [ScanResult!] @hasInverse(field: scanTarget)
-    artifact: Artifact @hasInverse(field: scanTarget)
+    artifactScanData: ArtifactScanData @hasInverse(field: scanTarget)
     error: String @search(by: [exact,regexp])
     riskStatus: RiskStatus @search(by: [exact,regexp])
     codePath: String @search(by:[exact,regexp])
@@ -1617,6 +1708,7 @@ type ScanResult
     scanTarget: ScanTarget! @hasInverse(field: scanResults)
     error: String @search(by: [exact,regexp])
 }
+
 
 # Dgraph.Allow-Origin "http://localhost:4200"
 # Dgraph.Authorization {"VerificationKey":"","Header":"X-OpsMx-Auth","jwkurl":"http://token-machine:8050/jwk","Namespace":"ssd.opsmx.io","Algo":"","Audience":["ssd.opsmx.io"],"ClosedByDefault":false}

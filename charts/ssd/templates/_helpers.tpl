@@ -432,11 +432,31 @@ Return the proper PENTESTGPT WRAPPER Image
 {{- end -}}
 
 {{/*
-Return the proper PENTESTGPT WRAPPER Image
+Return the proper CHECKMARX WRAPPER Image
 */}}
 {{- define "checkmarx.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.checkmarx.image.repository -}}
 {{- $tag := .Values.checkmarx.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper AIBOM WRAPPER Image
+*/}}
+{{- define "aibom.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.aibom.image.repository -}}
+{{- $tag := .Values.aibom.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper AIBOM WRAPPER Image
+*/}}
+{{- define "opsmxassistant.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.opsmxassistant.image.repository -}}
+{{- $tag := .Values.opsmxassistant.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

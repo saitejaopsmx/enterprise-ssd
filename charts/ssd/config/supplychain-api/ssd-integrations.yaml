@@ -449,6 +449,18 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: checkmarx
+        category: scanningtool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          tenantAccountName:
+            encrypt: false
+          clientId:
+            encrypt: false
+          clientSecret:
+            encrypt: true
       - integratorType: s3
         category: dockerregistry
         multiaccount: false

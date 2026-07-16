@@ -122,6 +122,24 @@ aishield:
 
   loglevel: info
 ###########################################################################################################
+aibom:
+  image:
+    repository: ssd-aibom
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  loglevel: info
+###########################################################################################################
 artifactscan:
   image:
     repository: artifact-scan
@@ -241,6 +259,22 @@ licensegenerator:
   securityContext: {}
   
   storageMountSize: 10Gi
+###################################################################################################################
+opsmxassistant:
+  image:
+    repository: ssd-license-generator
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
 ###################################################################################################################
 pentestgpt:
   image:

@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-aibom
+  labels:
+    app: ssd
+    component: ssd-aibom
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.aibom.replicaCount }}
+  selector:
+    matchLabels:
+      app: ssd
+      component: ssd-aibom
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: ssd-aibom
+{{ include "ssd.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.aibom.annotations -}}
+        {{ toYaml .Values.aibom.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: ssd-aibom
+          image: {{ template "aibom.image" . }}
+          env:
+            - name: CONFIG_PATH
+              value: /app/config.aibom.yaml
+            - name: POSTGRES_HOST
+              value: {{ .Values.db.host }}
+            - name: POSTGRES_PORT
+              value: '5432'
+            - name: DATABASE_NAME
+              value: ssd-licensedb
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+            {{- if .Values.minio.enabled }}
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: minio-secret
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: minio-secret
+            {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.minio.enabled) }}
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: accesskey
+                  name: ssd-storage-secret
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: ssd-storage-secret
+            {{- end }}
+          volumeMounts:
+            - name: config
+              readOnly: true
+              mountPath: /app/config.aibom.yaml
+              subPath: config.aibom.yaml
+            - name: data
+              mountPath: /app/data
+      {{- with .Values.aibom.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
+
+      {{- if .Values.aibom.securityContext }}
+          securityContext:
+      {{ toYaml .Values.aibom.securityContext | nindent 12 }}
+      {{- else }}
+          securityContext: {{ default "{}" }}
+      {{- end }}
+
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      volumes:
+        - name: ssd-aibom
+          configMap:
+            name: ssd-aibom-config
+            items:
+              - key: ssd-aibom.yaml
+                path: ssd-aibom.yaml
+            defaultMode: 420
+      restartPolicy: Always
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

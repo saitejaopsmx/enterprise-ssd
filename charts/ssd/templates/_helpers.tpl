@@ -430,3 +430,13 @@ Return the proper PENTESTGPT WRAPPER Image
 {{- $tag := .Values.pentestgpt.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+{{/*
+Return the proper CHECKMARX Image
+*/}}
+{{- define "checkmarx.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.checkmarx.image.repository -}}
+{{- $tag := .Values.checkmarx.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

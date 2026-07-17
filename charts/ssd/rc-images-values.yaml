@@ -19,6 +19,10 @@ cbom:
   image:
     tag: "2.1.12"
 
+checkmarx:
+  image:
+    tag: "6018f49-1"
+
 dlvs:
   image:
     tag: "b5b8de1-4"
@@ -57,7 +61,7 @@ sourcescan:
 
 supplychainapi:
   image:
-    tag: "9ed93e0-2384"
+    tag: "befec0e-2629"
 
 supplychainpreprocessor:
   image:
@@ -94,7 +98,7 @@ toolchain:
 
 ui:
   image:
-    tag: "c3676b59-1168"
+    tag: "f6a74833-1292"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

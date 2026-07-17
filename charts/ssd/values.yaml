@@ -138,6 +138,14 @@ artifactscan:
 
   securityContext: {}
 #############################################################################################################
+checkmarx:
+  image:
+    repository: checkmarx-poller
+    tag: "2026-05-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+#############################################################################################################
 curl:
   image:
     repository: curl

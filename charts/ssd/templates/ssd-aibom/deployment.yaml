@@ -99,6 +99,8 @@ spec:
               - key: config.aibom.yaml
                 path: config.aibom.yaml
             defaultMode: 420
+        - name: data
+          emptyDir: {}
       restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:

@@ -92,12 +92,12 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
       volumes:
-        - name: ssd-aibom
+        - name: config
           configMap:
-            name: ssd-aibom-config
+            name: aibom-config
             items:
-              - key: ssd-aibom.yaml
-                path: ssd-aibom.yaml
+              - key: config.aibom.yaml
+                path: config.aibom.yaml
             defaultMode: 420
       restartPolicy: Always
       {{- with .Values.nodeSelector }}

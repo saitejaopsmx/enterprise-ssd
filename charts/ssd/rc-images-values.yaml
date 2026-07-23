@@ -9,7 +9,7 @@ aishield:
 
 artifactscan:
   image:
-    tag: "v2026.06.02"
+    tag: "v2026.06.04"
 
 airemediation:
   image:

@@ -23,6 +23,29 @@ spec:
         {{ toYaml .Values.aibom.annotations | nindent 8 }}
 {{- end }}
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15-alpine
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Waiting for PostgreSQL to be ready..."
+              until pg_isready -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER; do
+                echo "PostgreSQL is unavailable - sleeping"
+                sleep 2
+              done
+              echo "PostgreSQL is up and running!"
+
+              echo "Checking if database '$DATABASE_NAME' exists..."
+              export PGPASSWORD=$POSTGRES_PASSWORD
+              if psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d postgres -lqt | cut -d \| -f 1 | grep -qw $DATABASE_NAME; then
+                echo "Database '$DATABASE_NAME' already exists"
+              else
+                echo "Creating database '$DATABASE_NAME'..."
+                psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d postgres -c "CREATE DATABASE \"$DATABASE_NAME\";"
+                echo "Database '$DATABASE_NAME' created successfully!"
+              fi
       containers:
         - name: ssd-aibom
           image: {{ template "aibom.image" . }}

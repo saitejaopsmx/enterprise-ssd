@@ -219,7 +219,7 @@ dlvs:
 
   probes: {}
 
-  storageMountSize: 10Gi
+  storageMountSize: 100Gi
 ###################################################################################################################
 initContainer:
   image:

@@ -5,15 +5,15 @@ imageCredentials:
 
 aishield:
   image:
-    tag: "v2026.06.02"
+    tag: "v2026.03.01"
 
 artifactscan:
   image:
-    tag: "v2026.06.04"
+    tag: "v2026.05.01"
 
 airemediation:
   image:
-    tag: "dev-fdb7696-27"
+    tag: "dev-accf7bc-12"
 
 cbom:
   image:
@@ -29,7 +29,7 @@ kubescape:
 
 licensegenerator:
   image:
-    tag: "dev-4b423d1-12"
+    tag: "dev-b37164b-8"
 
 mobsf:
   image:
@@ -37,15 +37,15 @@ mobsf:
 
 projectmonitor:
   image:
-    tag: "dev-cec7941-136"
+    tag: "v2026.05.01"
 
 prismiac:
   image:
-    tag: "26f0bfa-main"
+    tag: "v2026.03.01"
 
 pentestgpt:
   image:
-    tag: "dev-03680cc-3"
+    tag: "2026-04-00"
 
 snykmonitor:
   image:
@@ -53,11 +53,11 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "dev-a8adce4-181"
+    tag: "v2026.05.01"
 
 supplychainapi:
   image:
-    tag: "8032164-2595"
+    tag: "9ed93e0-2384"
 
 supplychainpreprocessor:
   image:
@@ -65,12 +65,12 @@ supplychainpreprocessor:
 
 ssdauditservice:
   image:
-    tag: "dev-66d5a32-39"
+    tag: "v2026.02.01"
 
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "dev-e09c40c-269"
+    tag: "vSSD-2026.05.01"
 
 ssdnotificationservice:
   image:
@@ -78,11 +78,11 @@ ssdnotificationservice:
 
 ssdopa:
   image:
-    tag: "dev-c0bec24-608"
+    tag: "v2026.05.01"
 
 ssdrescheduler:
   image:
-    tag: "dev-d784b8a-29"
+    tag: "v2026.02.02"
 
 tokenmachine:
   image:
@@ -90,43 +90,15 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "dev-cc0e9e87-739"
+    tag: "v2026.05.01"
 
 ui:
   image:
-    tag: "fbafb4d8-1321"
+    tag: "c3676b59-1168"
   serviceAnnotations:
     awsAnnotationsGo: HERE
-
-aws-poller:
-  image:
-    tag: "6d29b38-22"
-
-checkmarx-poller:
-  image:
-    repository: priyanshishikha/checkmarx-poller    
-    tag: "v2026.07.01.1755"
-
-kubernetes-detector:
-  image:
-    tag: "4476f21-10"
-
-opsmx-assistant:
-  image:
-    repository: sahititarigoppula/opsmx-assistant
-    tag: "v9"
-
-ssd-license-aibom:
-  image:
-    repository: rishabhopsmx/ssd-license-aibom
-    tag: "lp-0.5"
-
-ssd-api-mcp:
-  image:
-    tag: "dev-cc0ad95-3"
 
 zap:
   image:
     repository: zap
     tag: "2026-03-00"
-

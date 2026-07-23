@@ -17,7 +17,7 @@ licenseGenSvc: http://ssd-license-generator:8080
 pentestGPTServiceURL: http://pentestgpt-wrapper.may-dev.svc.cluster.local:8080
 maxConcurrentArtifactWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
 maxConcurrentSourceWorkflowTaskExecutionSize: 0 # optional field; default is 0 which means maximum
-aibomServiceAddr: "http://ai-service:8082"
+aibomServiceAddr: "http://aibom-service:8082"
 aifpSvc: "http://ai-guardian-remediation:8588"
 aiEnabled: true
 scoutSuite:

@@ -98,6 +98,18 @@ ui:
   serviceAnnotations:
     awsAnnotationsGo: HERE
 
+aws-poller:
+  image:
+    tag: "6d29b38-22"
+
+kubernetes-detector:
+  image:
+    tag: "4476f21-10"
+
+ssd-api-mcp:
+  image:
+    tag: "dev-cc0ad95-3"
+
 zap:
   image:
     repository: zap

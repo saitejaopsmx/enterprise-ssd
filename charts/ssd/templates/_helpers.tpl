@@ -452,11 +452,20 @@ Return the proper AIBOM WRAPPER Image
 {{- end -}}
 
 {{/*
-Return the proper AIBOM WRAPPER Image
+Return the proper OPSMX ASSISTANT Image
 */}}
 {{- define "opsmxassistant.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.opsmxassistant.image.repository -}}
 {{- $tag := .Values.opsmxassistant.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+Return the proper MCP SERVER Image
+*/}}
+{{- define "mcpserver.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.mcpserver.image.repository -}}
+{{- $tag := .Values.mcpserver.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

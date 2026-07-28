@@ -26,9 +26,10 @@ spec:
       containers:
       - image: {{ template "airemediation.image" . }}
         name: ai-guardian-remediation
-      - envFrom:
-        - secretRef:
-            name: ai-guardian-remediation-secret
+        envFrom:
+          - secretRef:
+              name: ai-guardian-remediation-secret
+              optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}
       {{- end }}

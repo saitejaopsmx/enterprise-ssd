@@ -111,8 +111,8 @@ spec:
       volumes:
         - configMap:
             defaultMode: 420
-            name: config
-          name: ssd-api-mcp-config
+            name: ssd-api-mcp-config
+          name: config
         - name: dgraph-token
           secret:
             defaultMode: 420

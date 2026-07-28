@@ -29,7 +29,6 @@ spec:
       - envFrom:
         - secretRef:
             name: ai-guardian-remediation-secret
-            optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}
       {{- end }}

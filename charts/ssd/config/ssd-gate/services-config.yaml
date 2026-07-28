@@ -10,6 +10,7 @@
   #scheme: http        # If the Backend is httpS, please set it https
   #streaming: false    # If we have a streaming backend e.g. a service that returns results of a DB-query, set this to true(there is a resource hit)
   #no_follow_redirects: false # If true, the gateway will not follow redirects from the backend
+  #allow_api_key: false # Default FALSE. If true, ApiKeyMiddleware accepts the X-OpsMx-ApiKey header and exchanges it for a userToken. Use with token_type: userToken
 
 - name: supplychain-api-unauth   # Unauthenticated end-point for web-hook posts, we could add JWT to make it authenticated
   path_prefixes:
@@ -168,3 +169,27 @@
   auth_required: false
   path_prefixes:
   - "/metrics"
+# Placed last on purpose: routes are matched first-registered-wins (gorilla/mux,
+# not longest-prefix). The broad "/api/v1" prefix must come AFTER prometheus's
+# more specific "/api/v1/query_range" above, or it would shadow it.
+- name: ssd-api-mcp
+  path_prefixes:
+  - "/mcp"                  # MCP endpoint, served natively at /mcp — do not strip
+  - "/api/v1"               # REST API, served natively at /api/v1 (OpenAPI servers: /api/v1) — do not strip
+  baseUrl: ssd-api-mcp:8080
+  health_endpoint: /healthz
+  auth_required: true
+  allow_api_key: true       # ApiKeyMiddleware accepts X-OpsMx-ApiKey and exchanges it for a userToken
+  token_type: userToken     # required pairing for allow_api_key (ApiKeyMiddleware generates a userToken)
+  log_traffic: true
+# OpenAPI spec, served unauthenticated at root /openapi.yaml by the app
+# (embedded via go:embed). Kept public to match the app; its relative
+# `servers: /api/v1` means clients fetch the spec here and then hit /api/v1
+# (the authed route above) for actual calls.
+- name: ssd-api-mcp-spec
+  path_prefixes:
+  - "/openapi.yaml"
+  baseUrl: ssd-api-mcp:8080
+  health_endpoint: /healthz
+  auth_required: false
+  log_traffic: true

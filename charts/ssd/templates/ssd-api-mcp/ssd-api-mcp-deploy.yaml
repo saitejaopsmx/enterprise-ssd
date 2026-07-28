@@ -1,12 +1,11 @@
-# Deployment YAML for ssd-ssd-api-mcp
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ssd-api-mcp
   labels:
     app: ssd
     component: ssd-api-mcp
 {{ include "ssd.standard-labels" . | indent 4 }}
-  name: ssd-ssd-api-mcp
 spec:
   replicas: {{ .Values.mcpserver.replicaCount }}
   selector:
@@ -18,11 +17,8 @@ spec:
       labels:
         app: ssd
         component: ssd-api-mcp
-{{- if .Values.customLabels }}
-{{ toYaml .Values.customLabels | indent 8}}
-{{- end }}
+{{ include "ssd.standard-labels" . | indent 8 }}
       annotations:
-        checksum/configmap: {{ include (print $.Template.BasePath "/ssd-ssd-api-mcp/ssd-ssd-api-mcp-config.yaml") . | sha256sum }}
 {{- if .Values.mcpserver.annotations -}}
         {{ toYaml .Values.mcpserver.annotations | nindent 8 }}
 {{- end }}
@@ -34,103 +30,94 @@ spec:
           - /bin/sh
           - -c
         args:
-          -|
-           set -e
-           END=$(( $(date +%s) + WAIT_TIMEOUT_SECONDS ))
-           echo "[wait-for-dgraph] target=$DGRAPH_URL timeout=${WAIT_TIMEOUT_SECONDS}s"
-           # Health only — no auth needed. Schema presence is handled
-           # resiliently by the main container (non-fatal lazy load), so we
-           # don't probe /admin (which requires auth) here.
-           until curl -sf "$DGRAPH_URL/health" > /dev/null 2>&1; do
-             if [ "$(date +%s)" -gt "$END" ]; then
-               echo "[wait-for-dgraph] FAIL: alpha not healthy"
-               exit 1
-             fi
-             sleep "$POLL_INTERVAL_SECONDS"
-           done
-           echo "[wait-for-dgraph]   alpha healthy — proceeding"
-        resources:
-          requests:
-            cpu: 10m
-            memory: 16Mi
-          limits:
-            cpu: 100m
-            memory: 32Mi
-        env:
-        {{- if .Values.dgraph.HA.enabled }}
-        - name: GRAPHQL_URL
-          value: http://dgraph-alpha-public:8080/graphql
-        {{- else }}
-        - name: GRAPHQL_URL
-          value: http://dgraph-public:8080
-        {{- end }}
-        - name: WAIT_TIMEOUT_SECONDS
-          value: "300"
-        - name: POLL_INTERVAL_SECONDS
-          value: "5"
+          - |
+            set -e
+            END=$(( $(date +%s) + WAIT_TIMEOUT_SECONDS ))
+            echo "[wait-for-dgraph] target=$DGRAPH_URL timeout=${WAIT_TIMEOUT_SECONDS}s"
+            # Health only — no auth needed. Schema presence is handled
+            # resiliently by the main container (non-fatal lazy load), so we
+            # don't probe /admin (which requires auth) here.
+            until curl -sf "$DGRAPH_URL/health" > /dev/null 2>&1; do
+              if [ "$(date +%s)" -gt "$END" ]; then
+                echo "[wait-for-dgraph] FAIL: alpha not healthy"
+                exit 1
+              fi
+              sleep "$POLL_INTERVAL_SECONDS"
+            done
+            echo "[wait-for-dgraph]   alpha healthy — proceeding"
       containers:
-      - name: ssd-ssd-api-mcp
-        image: {{ template "mcpserver.image" . }}
-        name: ssd-ssd-api-mcp
-      {{- with .Values.mcpserver.probes }}
-      {{- toYaml . | nindent 8 }}
-      {{- else }}
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: http
-          periodSeconds: 10
-          initialDelaySeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: http
-            scheme: HTTP
-          periodSeconds: 5
-          initialDelaySeconds: 3
-      {{- end }}
-        env:
-        # Internal service token for SCHEMA EXPLORATION ONLY (SDL + introspection).
-        # Per-request data queries still use the caller's X-OpsMx-Auth.
-        - name: DGRAPH_TOKEN_PATH
-          value: /etc/ssd-api-mcp-token/token
-       # --- Static-key auth (optional) ---------------------------------
-       # This deployment uses header-driven auth by default: callers send
-       # X-OpsMx-ApiKey or X-OpsMx-Auth. To fall back to a configured key
-       # instead, uncomment the block below AND set `ssd.authMode: static`
-       # in ssd-api-mcp-config.yaml. Requires a Secret `ssd-api-mcp-secret`
-       # with key `ssd-api-key`.
-        - name: SSD_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: ssd-api-mcp-secret
-              key: ssd-api-key
-              optional: true
+        - name: ssd-api-mcp
+          image: {{ template "mcpserver.image" . }}
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+          - name: DGRAPH_TOKEN_PATH
+            value: /etc/ssd-api-mcp-token/token
+          - name: SSD_API_KEY
+            valueFrom:
+              secretKeyRef:
+                key: ssd-api-key
+                name: ssd-api-mcp-secret
+                optional: true
+          volumeMounts:
+            - mountPath: config
+              mountPath: /etc/ssd-api-mcp                                                    
+              readOnly: true                                                                 
+            - name: dgraph-token                                                             
+              mountPath: /etc/ssd-api-mcp-token                                              
+        {{- with .Values.mcpserver.probes }}
+        {{- toYaml . | nindent 10 }}
+        {{- else }}
+          livenessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 15
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 15
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+        {{- end }}
       {{- with .Values.mcpserver.resources }}
-        resources:
-      {{ toYaml . | nindent 10 }}
+          resources:
+      {{- toYaml . | nindent 12 }}
       {{- end }}
+          securityContext:
       {{- if .Values.mcpserver.securityContext }}
-      securityContext:
-      {{ toYaml .Values.mcpserver.securityContext | nindent 10 }}
+      {{ toYaml .Values.mcpserver.securityContext | nindent 12 }}
       {{- else }}
-      securityContext: {{ default "{}" }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
       {{- end }}
-        volumeMounts:
-        - name: config
-          mountPath: /etc/ssd-api-mcp
-          readOnly: true
-        - name: dgraph-token
-          mountPath: /etc/ssd-api-mcp-token
-          readOnly: true
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       volumes:
-      - name: config
-        configMap:
+        - configMap:
+            defaultMode: 420
+            name: config
           name: ssd-api-mcp-config
-      - name: dgraph-token
-        secret:
-          secretName: ssd-api-mcp-token
-          optional: true
+        - name: dgraph-token
+          secret:
+            defaultMode: 420
+            secretName: ssd-api-mcp-token
+            optional: true
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -147,4 +134,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-

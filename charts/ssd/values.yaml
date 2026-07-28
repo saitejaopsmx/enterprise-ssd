@@ -260,6 +260,22 @@ licensegenerator:
   
   storageMountSize: 10Gi
 ###################################################################################################################
+mcpserver:
+  image:
+    repository: ssd-api-mcp
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+###################################################################################################################
 opsmxassistant:
   image:
     repository: ssd-license-generator

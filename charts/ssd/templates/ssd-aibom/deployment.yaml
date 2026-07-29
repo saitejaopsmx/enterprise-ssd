@@ -46,6 +46,23 @@ spec:
                 psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d postgres -c "CREATE DATABASE \"$DATABASE_NAME\";"
                 echo "Database '$DATABASE_NAME' created successfully!"
               fi
+          env:
+            - name: POSTGRES_HOST
+              value: {{ .Values.db.host }}
+            - name: POSTGRES_PORT
+              value: '5432'
+            - name: DATABASE_NAME
+              value: ssd-licensedb
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
       containers:
         - name: ssd-aibom
           image: {{ template "aibom.image" . }}

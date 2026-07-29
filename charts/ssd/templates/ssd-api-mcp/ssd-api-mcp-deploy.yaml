@@ -26,6 +26,18 @@ spec:
       initContainers:
       - name: wait-for-dgraph
         image: curlimages/curl:8.5.0
+        env:
+          {{- if .Values.dgraph.HA.enabled }}
+          - name: DGRAPH_URL
+            value: http://dgraph-alpha-public:8080
+          {{- else }}
+          - name: DGRAPH_URL
+            value: http://dgraph-public:8080
+          {{- end }}
+          - name: WAIT_TIMEOUT_SECONDS
+            value: "300"
+          - name: POLL_INTERVAL_SECONDS
+            value: "5"
         command:
           - /bin/sh
           - -c
@@ -61,7 +73,7 @@ spec:
                 name: ssd-api-mcp-secret
                 optional: true
           volumeMounts:
-            - mountPath: config
+            - name: config
               mountPath: /etc/ssd-api-mcp                                                    
               readOnly: true                                                                 
             - name: dgraph-token                                                             

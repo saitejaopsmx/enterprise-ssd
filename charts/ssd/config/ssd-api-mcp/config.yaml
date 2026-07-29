@@ -7,6 +7,10 @@ ssd:
   # SSD_API_KEY env block in ssd-api-mcp-deployment.yaml.
   # authMode: static
 graphql:
+{{- if .Values.dgraph.HA.enabled }}
+  endpoint: http://dgraph-alpha-public:8080/graphql
+{{- else }}
   endpoint: http://dgraph-public:8080/graphql
+{{- end }}
 toolchain:
   baseUrl: http://tool-chain:8100

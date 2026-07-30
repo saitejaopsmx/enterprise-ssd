@@ -19,6 +19,10 @@ cbom:
   image:
     tag: "2.1.12"
 
+checkmarx:
+  image:
+    tag: "v2026.05.00"
+
 dlvs:
   image:
     tag: "b5b8de1-4"

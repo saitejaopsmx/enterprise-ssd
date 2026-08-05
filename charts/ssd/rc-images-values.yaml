@@ -105,7 +105,7 @@ toolchain:
 
 ui:
   image:
-    tag: "52d39465-1359"
+    tag: "19c01cdc-1361"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 

@@ -81,7 +81,7 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "dev-e09c40c-269"
+    tag: "vSSD-2026.06.01"
 
 ssdnotificationservice:
   image:

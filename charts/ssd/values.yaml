@@ -124,7 +124,7 @@ aishield:
 ###########################################################################################################
 aibom:
   image:
-    repository: ssd-aibom
+    repository: aibom-service
     tag: "2026-06-00"
     pullPolicy: IfNotPresent
 
@@ -278,7 +278,7 @@ mcpserver:
 ###################################################################################################################
 opsmxassistant:
   image:
-    repository: ssd-license-generator
+    repository: opsmx-assistant 
     tag: "2026-06-00"
     pullPolicy: IfNotPresent
 

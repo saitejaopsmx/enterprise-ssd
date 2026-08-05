@@ -85,7 +85,7 @@ spec:
             failureThreshold: 20
             httpGet:
               path: /healthz
-              port: http
+              port: 8080 
             periodSeconds: 15
             initialDelaySeconds: 30
             successThreshold: 1
@@ -94,7 +94,7 @@ spec:
             failureThreshold: 20
             httpGet:
               path: /healthz
-              port: http
+              port: 8080
             periodSeconds: 15
             initialDelaySeconds: 30
             successThreshold: 1

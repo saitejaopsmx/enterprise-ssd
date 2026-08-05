@@ -2,14 +2,17 @@ imageCredentials:
   repoUrl: docker.io
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
   registry: opsmx11
-
+aibom:
+  image:
+    tag: "9491667-4"
+    
 aishield:
   image:
     tag: "v2026.06.02"
 
 artifactscan:
   image:
-    tag: "v2026.06.04"
+    tag: "v2026.06.08"
 
 airemediation:
   image:
@@ -18,6 +21,10 @@ airemediation:
 cbom:
   image:
     tag: "2.1.12"
+
+checkmarx:
+  image:
+    tag: "v2026.05.00"
 
 dlvs:
   image:
@@ -34,6 +41,10 @@ licensegenerator:
 mobsf:
   image:
     tag: "v4.1.3"
+
+opsmxassistant:
+  image:
+    tag: "dev-6bd4ce0-13"
 
 projectmonitor:
   image:
@@ -53,11 +64,11 @@ snykmonitor:
 
 sourcescan:
   image:
-    tag: "dev-a8adce4-181"
+    tag: "v2026.06.03"
 
 supplychainapi:
   image:
-    tag: "8032164-2595"
+    tag: "802fb2f-2737"
 
 supplychainpreprocessor:
   image:
@@ -78,7 +89,7 @@ ssdnotificationservice:
 
 ssdopa:
   image:
-    tag: "dev-c0bec24-608"
+    tag: "v2026.06.01"
 
 ssdrescheduler:
   image:
@@ -90,11 +101,11 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "dev-cc0e9e87-739"
+    tag: "v2026.06.01"
 
 ui:
   image:
-    tag: "fbafb4d8-1321"
+    tag: "52d39465-1359"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 
@@ -106,7 +117,7 @@ kubernetes-detector:
   image:
     tag: "4476f21-10"
 
-ssd-api-mcp:
+mcpserver:      
   image:
     tag: "dev-cc0ad95-3"
 

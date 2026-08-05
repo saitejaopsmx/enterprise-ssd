@@ -13,7 +13,7 @@ global:
     protocol: https
     ingressClass: nginx
     ## Update the host value with proper dns entry to access the SSD UI
-    host: SSD.REPLACE.THIS.WITH.YOURCOMPANY.COM
+    host: test.ssd-qa.opsmx.org 
     ingress:
       annotations:
         nginx.ingress.kubernetes.io/client-header-buffer-size: 100m
@@ -35,7 +35,7 @@ prometheusUrl: Promethues.ingress.url.com
 #### Update the below paramerts only if the user want the Migrate the Existing Data to HA Setup for DGraph ############
 #######################################################################################################################
 dgraph:
-  storageMountSize: 5Gi
+  storageMountSize: 15Gi
   HA:
     enabled: false
     replicas: 3
@@ -64,7 +64,7 @@ supplychainapi:
 ################################################################################################
 ## Change this true if user need to enable the AIModel Scan ####################################
 ## If true AI Shield and DLVS Services will be installed #######################################
-installAimlSvcs: false
+installAimlSvcs: true
 
 ################################################################################################
 #### Change to false if user want to Use AWS S3 bucket to store the scan data ##################

@@ -26,10 +26,24 @@ spec:
       containers:
       - image: {{ template "airemediation.image" . }}
         name: ai-guardian-remediation
+        env:
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317"
+        - name: DB_ENABLED
+          value: "true"
+        - name: TELEMETRY_ENABLED
+          value: "true"
+        - name: OTEL_METRIC_EXPORT_INTERVAL
+          value: 15000
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: password
         envFrom:
-          - secretRef:
-              name: ai-guardian-remediation-secret
-              optional: true
+        - secretRef:
+            name: ai-guardian-remediation-secret
+            optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}
       {{- end }}

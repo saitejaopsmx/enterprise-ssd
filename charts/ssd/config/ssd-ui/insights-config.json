@@ -47,6 +47,34 @@
             "metricName": "CI/Build Events Received count",
             "query": "sum by (k8s_namespace_name,k8s_deployment_name) (ssd_ci_events_triggered_total{k8s_namespace_name=\"{{ .Release.Namespace }}\"})",
             "plotAxisName": "Received Count"
+        },
+        {
+            "chartType": "bar",
+            "metricName": "SAST Agent - Remediation Events",
+            "query": "round(sum by (event) (increase(remediation_events_total{agent_type='SAST_agent'}[__RANGE__])))",
+            "plotAxisName": "event",
+            "agentType": "SAST_agent"
+        },
+        {
+            "chartType": "bar",
+            "metricName": "CSPM Agent - Remediation Events",
+            "query": "round(sum by (event)  (increase(remediation_events_total{agent_type='CSPM_agent'}[__RANGE__])))",
+            "plotAxisName": "event",
+            "agentType": "CSPM_agent"
+        },
+        {
+            "chartType": "bar",
+            "metricName": "CVE Agent - Remediation Events",
+            "query": "round(sum by (event)  (increase(remediation_events_total{agent_type='CVE_agent'}[__RANGE__])))",
+            "plotAxisName": "event",
+            "agentType": "CVE_agent"
+        },
+        {
+            "chartType": "bar",
+            "metricName": "Binary Agent - Remediation Events",
+            "query": "round(sum by (event)  (increase(remediation_events_total{agent_type='BIR_agent'}[__RANGE__])))",
+            "plotAxisName": "event",
+            "agentType": "BIR_agent"
         }
     ]
 }

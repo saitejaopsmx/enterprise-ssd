@@ -197,6 +197,7 @@ type DeploymentTargetNode
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryDeploymentTargetNode @cascade { deploymentTarget { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,cluster_add,cluster_update,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryDeploymentTargetNode @cascade { deploymentTarget { organization { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,cluster_add,cluster_update,read]}}) { __typename }}}}}}"},
     ]},
     add:    { rule: "{$type: {eq: \"internal-account/v1\"}}" },
     update: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
@@ -666,6 +667,7 @@ type PolicyEnforcement
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,read]}}) { __typename }}}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,read]}}) { __typename }}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
@@ -676,6 +678,7 @@ type PolicyEnforcement
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedOrg { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedApplication { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update]}}) { __typename }}}}}"},
 { rule: "query($groups: [String!]) { queryPolicyEnforcement @cascade { enforcedProject { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,policy_update,adhoc_create_delete,adhoc_update]}}) { __typename }}}}}"},
@@ -807,6 +810,7 @@ type SecurityIssue
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
 { rule: "query($groups: [String!]) { querySecurityIssue @cascade { policyEnforcements { enforcedOrg { roles(filter: {group: {in: $groups}, permission: {in: [admin,alert_update]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { querySecurityIssue @cascade { policyEnforcements { enforcedOrg { teams { roles(filter: {group: {in: $groups}, permission: {in: [admin,alert_update]}}) { __typename }}}}}}"},
 { rule: "query($groups: [String!]) { querySecurityIssue @cascade { policyEnforcements { enforcedTeam { roles(filter: {group: {in: $groups}, permission: {in: [admin,alert_update]}}) { __typename }}}}}"},
 { rule: "query($groups: [String!]) { querySecurityIssue @cascade { policyEnforcements { enforcedApplication { roles(filter: {group: {in: $groups}, permission: {in: [admin,alert_update]}}) { __typename }}}}}"},
         ]
@@ -981,6 +985,9 @@ type ArtifactScanData {
     artifactTags: [KeyValue!]
     team: Team
     scanTarget: [ScanTarget!] @hasInverse(field: artifactScanData)
+    osComponents: [Component!]
+    libraryComponents: [Component!]
+    binaryComponents: [Component!]
 }
 
 type ArtifactRisk {
@@ -1231,6 +1238,7 @@ enum ReportSubscriptionSchedule {
     daily
     weekly
     monthly
+    auto
 }
 
 type ReportSubscription implements RBAC
@@ -1551,10 +1559,10 @@ type Project
     policyEnforcements: [PolicyEnforcement!] @hasInverse(field: enforcedProject)
     scans: [ScanTarget!] @hasInverse(field: projects)
     type: String @search(by: [exact,regexp])
-    error: String @search(by: [exact,regexp])
     riskStatus: RiskStatus @search(by: [exact,regexp])
     level: String @search(by: [exact,regexp])
     reportSubscriptions: [ReportSubscriptionAffects!] @hasInverse(field: project)
+    error: String
 }
 
 type ProjectConfig
@@ -1610,6 +1618,7 @@ type ProjectConfig
     scmOrganization: String @search(by: [exact,regexp])
     model: String
     provider: String
+    error: String @search(by:[exact])
 }
 
 type ScanTarget
@@ -1649,6 +1658,9 @@ type ScanTarget
     organization: String @search(by:[exact,regexp])
     repository: String @search(by:[exact,regexp])
     branch: String @search(by:[exact,regexp])
+    artifactName: String @search(by:[exact,regexp])
+    artifactTag: String @search(by:[exact,regexp])
+    artifactSha: String @search(by:[exact,regexp])
     lastTriggeredBy: String! @search(by:[exact,regexp])
     lastScannedTime: DateTime! @search
     lastAttemptedTime: DateTime! @search

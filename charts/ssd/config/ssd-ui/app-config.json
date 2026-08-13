@@ -21,5 +21,6 @@
     "GET_NLI_CHAT_HISTORY": "ssdservice/v1/nli/chats/user",
     "GET_NLI_CHAT_MESSAGES": "ssdservice/v1/nli/chat/",
     "chatMfeUrl": "/ui/assistant",
-    "showChatHistory": "true"
+    "showChatHistory": "true",
+    "toolTransformationEnabled": true
 }

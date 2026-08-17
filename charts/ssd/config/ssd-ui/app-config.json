@@ -4,6 +4,8 @@
     "cdTool": "",
     "ssd": true,
     "dgraphNewEndPointUrl": "/v1/graphql",
+    "prometheusEndPointUrl": "/api/v1/query_range",
+    "prometheusInstantEndPointUrl": "/api/v1/query",
     "stageSecurityThresholdMinScore": 50,
     "stageSecurityThresholdMaxScore": 70,
     "dgraphToken": "",
@@ -21,5 +23,6 @@
     "GET_NLI_CHAT_HISTORY": "ssdservice/v1/nli/chats/user",
     "GET_NLI_CHAT_MESSAGES": "ssdservice/v1/nli/chat/",
     "chatMfeUrl": "/ui/assistant",
-    "showChatHistory": "true"
+    "showChatHistory": "true",
+    "toolTransformationEnabled": true
 }

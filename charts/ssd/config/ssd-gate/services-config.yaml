@@ -153,6 +153,7 @@
   auth_required: false
   path_prefixes:
   - "/api/v1/query_range"
+  - "/api/v1/query"
 {{- if .Values.ssdgate.installDex }}
 - name: ssd-dex
   baseUrl: ssd-dex:5556

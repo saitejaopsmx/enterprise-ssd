@@ -104,5 +104,13 @@
     "model_scan",
     "garak_scan",
     "nbdf_scan"
+  ],
+  "remediation_activity": [
+    "remediation_requested",
+    "remediation_started",
+    "remediation_completed",
+    "remediation_failed",
+    "pr_created",
+    "pr_creation_failed"
   ]
 }

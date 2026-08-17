@@ -133,6 +133,16 @@ redis:
   master:
     resources: {}
   #  requests:
+  #    memory: 16Gi
+  #    cpu: 4
+  #  limits:
+  #    memory: 24Gi
+  #    cpu: 8
+  #    ephemeral-storage: 20Gi
+#######################################################################
+dlvs:
+  resources: {}
+  #  requests:
   #    memory: 500Mi
   #    cpu: 500m
   #  limits:

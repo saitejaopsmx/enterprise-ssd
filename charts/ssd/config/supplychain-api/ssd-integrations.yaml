@@ -1,6 +1,12 @@
 browserCacheDuration: {{ .Values.supplychainapi.browserCacheDuration }}
 cachePollingInterval: {{ .Values.supplychainapi.cachePollingInterval }}
 jiraPollingInterval: 5
+reportHourAndMinute: {{ .Values.supplychainapi.reportHourAndMinute }}
+vulnerabilityBatchSize: {{ .Values.supplychainapi.vulnerabilityBatchSize }}
+ossBatchSize: {{ .Values.supplychainapi.ossBatchSize }}
+deploymentBatchSize: {{ .Values.supplychainapi.deploymentBatchSize }}
+artifactBatchSize: {{ .Values.supplychainapi.artifactBatchSize }}
+alertsBatchSize: {{ .Values.supplychainapi.alertsBatchSize }}
 integrationData:
   - stage: Source
     integrations:
@@ -190,6 +196,12 @@ integrationData:
         featureConfigs:
           sastopengrepscan:
             default: active
+      - integratorType: aibom
+        category: sourcetool
+        multiaccount: false
+        featureConfigs:
+          aibomScan:
+            default: inactive
       - integratorType: codacy
         category: sourcetool
         multiaccount: false
@@ -443,6 +455,18 @@ integrationData:
         featureConfigs:
           vulnerabilityscan:
             default: inactive
+      - integratorType: checkmarx
+        category: scanningtool
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          tenantAccountName:
+            encrypt: false
+          clientId:
+            encrypt: false
+          clientSecret:
+            encrypt: true
       - integratorType: s3
         category: dockerregistry
         multiaccount: false
@@ -557,6 +581,10 @@ integrationData:
             encrypt: false
           wontdo:
             encrypt: false
+          autoTriggerJira:
+            encrypt: false
+          grouped:
+            encrypt: false
         featureConfigs:
           mode:
             default: cloud
@@ -588,6 +616,8 @@ integrationData:
             encrypt: false
           clientSecret:
             encrypt: true
+          region:
+            encrypt: false
         featureConfigs:
           mode:
             default: cloud
@@ -654,6 +684,8 @@ integrationData:
           openApiAuthApikeyIn:
           isAuthenticated:
             default: inactive
+          successCondition:
+            default: urlcontains
         integratorConfigs:
           postmanCollectionFile:
             encrypt: false
@@ -703,6 +735,8 @@ integrationData:
             encrypt: false
           openApiAuthApikey:
             encrypt: true
+          successConditionValue:
+            encrypt: false
   - stage: Cloud Security Provider
     integrations:
       - integratorType: aws
@@ -721,3 +755,20 @@ integrationData:
         featureConfigs:
           cspmscan:
             default: inactive
+  - stage: Configuration Management Database
+    integrations:
+      - integratorType: servicenow
+        category: databasemanagement
+        multiaccount: false
+        integratorConfigs:
+          url:
+            encrypt: false
+          token:
+            encrypt: true
+          username:
+            encrypt: false
+          password:
+            encrypt: true
+        featureConfigs:
+          authType:
+            default: basic

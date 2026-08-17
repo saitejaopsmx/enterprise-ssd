@@ -122,6 +122,24 @@ aishield:
 
   loglevel: info
 ###########################################################################################################
+aibom:
+  image:
+    repository: aibom-service
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+
+  loglevel: info
+###########################################################################################################
 artifactscan:
   image:
     repository: artifact-scan
@@ -138,22 +156,14 @@ artifactscan:
 
   securityContext: {}
 #############################################################################################################
-cbom:
+checkmarx:
   image:
-    repository: cbomkit
-    tag: "2.1.12"
+    repository: checkmarx-poller
+    tag: "2026-06-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
-
-  annotations: {}
-
-  probes: {}
-
-  resources: {}
-
-  securityContext: {}
-##############################################################################################################
+############################################################################################################    
 curl:
   image:
     repository: curl
@@ -208,6 +218,8 @@ dlvs:
   resources: {}
 
   probes: {}
+
+  storageMountSize: 10Gi
 ###################################################################################################################
 initContainer:
   image:
@@ -247,7 +259,54 @@ licensegenerator:
   securityContext: {}
   
   storageMountSize: 10Gi
+###################################################################################################################
+mcpserver:
+  image:
+    repository: ssd-api-mcp
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
 
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+###################################################################################################################
+opsmxassistant:
+  image:
+    repository: opsmx-assistant 
+    tag: "2026-06-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+###################################################################################################################
+pentestgpt:
+  image:
+    repository: pentestgpt-wrapper
+    tag: "2026-04-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
 ###################################################################################################################
 projectmonitor:
   image:
@@ -333,6 +392,20 @@ supplychainapi:
 
   ## Below is the parameter to load the data in the UI
   cachePollingInterval: 6
+  ## Below is the parameter to send the schedule report over email
+  ## Format is 24hrs
+  reportHourAndMinute: 10:00
+  ## Number of vulnerabilities to fetch per batch, if there are 20,000 vulnerabilities and the batch size is set to 5,000,
+  ## the vulnerabilities will be retrieved in 4 batches of 5,000 each.
+  vulnerabilityBatchSize: 5000
+  ## Number of OSS to fetch per batch.
+  ossBatchSize: 500
+  ## Number of deployments fetch per batch.
+  deploymentBatchSize: 500
+  ## Number of Artifacts to fetch per batch.
+  artifactBatchSize: 100
+  ## Number of Alerts to fetch per batch.
+  alertsBatchSize: 1000
   ## Below is the parameter for browser Caching in the UI
   browserCacheDuration: 100
   ## Update the below parameter only when the global.gkeworkload is true ###

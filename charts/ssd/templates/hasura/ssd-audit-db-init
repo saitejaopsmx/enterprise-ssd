@@ -131,11 +131,11 @@ data:
     # Function to check if database exists and create it if needed
     ensure_database_exists() {
         log_info "Checking if database exists..."
-        
+
         # First, connect to postgres database to check if our target database exists
         local db_exists=$(PGDATABASE=postgres psql -tAc "
             SELECT EXISTS(
-                SELECT datname FROM pg_catalog.pg_database 
+                SELECT datname FROM pg_catalog.pg_database
                 WHERE datname = '$PGDATABASE'
             );
         " 2>/dev/null || echo "f")
@@ -276,21 +276,51 @@ data:
             return 1
         fi
 
+        # Check that the CURRENT month's partition specifically exists (a mere count >= 1
+        # can pass on stale partitions while the current month is missing)
+        local current_partition="audit_events_$(date -u +%Y_%m)"
+        if [ "$(check_table_exists "${current_partition}")" != "t" ]; then
+            log_error "Schema validation failed: current-month partition ${current_partition} missing"
+            return 1
+        fi
+
         log_success "Schema integrity validation passed"
-        log_info "Found $partitions_count audit_events partitions"
+        log_info "Found $partitions_count audit_events partitions (current: ${current_partition})"
         return 0
     }
 
     # Function to run database initialization
     initialize_database() {
         log_info "Running database initialization..."
-        
+
         if ! psql -f /scripts/init-database.sql; then
             log_error "Database initialization failed"
             return 1
         fi
-        
+
         log_success "Database initialization completed successfully"
+        return 0
+    }
+
+    # Function to ensure the current month + a buffer of upcoming month partitions exist.
+    # Runs on every init-container start (even when the DB is already initialized), so a
+    # missing current-month partition self-heals on the next Hasura pod restart/deploy.
+    # Uses the DB's own idempotent create_monthly_partition() helper; generate_series avoids
+    # dollar-quoted DO blocks that would collide with the shell's $$ (PID) inside psql -c.
+    ensure_current_partitions() {
+        local months_ahead="${PARTITION_ENSURE_MONTHS:-3}"
+        log_info "Ensuring current + next ${months_ahead} month partitions exist..."
+
+        if ! psql -v ON_ERROR_STOP=1 -c "
+            SELECT create_monthly_partition(
+                (DATE_TRUNC('month', CURRENT_DATE) + (g || ' months')::INTERVAL)::DATE
+            )
+            FROM generate_series(0, ${months_ahead}) AS g;"; then
+            log_error "Failed to ensure current partitions"
+            return 1
+        fi
+
+        log_success "Current and upcoming partitions ensured"
         return 0
     }
 
@@ -298,24 +328,24 @@ data:
     display_database_status() {
         log_info "Database Status Summary:"
         echo "=================================="
-        
+
         # Count tables
         local table_count=$(psql -tAc "
-            SELECT COUNT(*) FROM information_schema.tables 
+            SELECT COUNT(*) FROM information_schema.tables
             WHERE table_schema = 'public';
         " 2>/dev/null || echo "0")
-        
+
         # Count partitions
         local partition_count=$(psql -tAc "
-            SELECT COUNT(*) FROM pg_tables 
+            SELECT COUNT(*) FROM pg_tables
             WHERE tablename LIKE 'audit_events_%';
         " 2>/dev/null || echo "0")
-        
+
         # Count applied migrations
         local migration_count=$(psql -tAc "
             SELECT COUNT(*) FROM schema_migrations;
         " 2>/dev/null || echo "0")
-        
+
         echo "Tables: $table_count"
         echo "Partitions: $partition_count"
         echo "Applied Migrations: $migration_count"
@@ -348,10 +378,16 @@ data:
         if check_database_initialized; then
             log_success "Database already initialized, skipping initialization"
 
+            # Always ensure current + upcoming partitions, even when already initialized
+            if ! ensure_current_partitions; then
+                log_error "Failed to ensure current partitions"
+                exit 1
+            fi
+
             # Validate schema integrity
             if validate_schema_integrity; then
                 display_database_status
-                log_success "Database initialization check completed - no action needed"
+                log_success "Database initialization check completed - partitions ensured"
                 exit 0
             else
                 log_warning "Schema validation failed, re-running initialization"
@@ -366,13 +402,19 @@ data:
             exit 1
         fi
 
-        # Step 6: Validate the initialization
+        # Step 6: Ensure current + upcoming partitions exist
+        if ! ensure_current_partitions; then
+            log_error "Failed to ensure current partitions"
+            exit 1
+        fi
+
+        # Step 7: Validate the initialization
         if ! validate_schema_integrity; then
             log_error "Post-initialization validation failed"
             exit 1
         fi
 
-        # Step 7: Display final status
+        # Step 8: Display final status
         display_database_status
         log_success "Database initialization completed successfully!"
     }
@@ -454,8 +496,8 @@ data:
     DO $$
     BEGIN
         IF NOT EXISTS (
-            SELECT 1 FROM information_schema.tables 
-            WHERE table_schema = 'public' 
+            SELECT 1 FROM information_schema.tables
+            WHERE table_schema = 'public'
             AND table_name = 'audit_events'
         ) THEN
             CREATE TABLE audit_events (
@@ -640,8 +682,8 @@ data:
         cutoff_date := DATE_TRUNC('month', CURRENT_DATE) - (months_to_keep || ' months')::INTERVAL;
 
         FOR partition_record IN
-            SELECT tablename 
-            FROM pg_tables 
+            SELECT tablename
+            FROM pg_tables
             WHERE tablename LIKE 'audit_events_____%%'
             AND tablename < 'audit_events_' || TO_CHAR(cutoff_date, 'YYYY_MM')
         LOOP
@@ -656,41 +698,24 @@ data:
     -- =============================================================================
     -- INITIAL PARTITIONS CREATION
     -- =============================================================================
-    -- Create initial partitions for current and next month
+    -- Create initial partitions for the current month + a buffer of upcoming months
+    -- (offset 0 = current month, which create_future_partitions() intentionally skips)
     DO $$
     DECLARE
-        start_date DATE;
-        end_date DATE;
-        partition_name TEXT;
+        m INTEGER;
     BEGIN
-        -- Current month
-        start_date := DATE_TRUNC('month', CURRENT_DATE);
-        end_date := start_date + INTERVAL '1 month';
-        partition_name := 'audit_events_' || TO_CHAR(start_date, 'YYYY_MM');
-
-        -- Only create if not exists
-        IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = partition_name) THEN
-            EXECUTE format('CREATE TABLE %I PARTITION OF audit_events FOR VALUES FROM (%L) TO (%L)',
-                           partition_name, start_date, end_date);
-        END IF;
-
-        -- Next month
-        start_date := end_date;
-        end_date := start_date + INTERVAL '1 month';
-        partition_name := 'audit_events_' || TO_CHAR(start_date, 'YYYY_MM');
-
-        -- Only create if not exists
-        IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = partition_name) THEN
-            EXECUTE format('CREATE TABLE %I PARTITION OF audit_events FOR VALUES FROM (%L) TO (%L)',
-                           partition_name, start_date, end_date);
-        END IF;
+        FOR m IN 0..3 LOOP
+            PERFORM create_monthly_partition(
+                (DATE_TRUNC('month', CURRENT_DATE) + (m || ' months')::INTERVAL)::DATE
+            );
+        END LOOP;
     END $$;
 
     -- =============================================================================
     -- RECORD SUCCESSFUL INITIALIZATION
     -- =============================================================================
     -- Insert migration records to track what has been applied
-    INSERT INTO schema_migrations (version, description) VALUES 
+    INSERT INTO schema_migrations (version, description) VALUES
         ('000001', 'Create audit_events partitioned table')
         ON CONFLICT (version) DO NOTHING;
 
@@ -723,5 +748,5 @@ data:
         RAISE NOTICE 'SSD Audit Service database initialization completed successfully!';
         RAISE NOTICE 'Tables created: users, audit_events (partitioned)';
         RAISE NOTICE 'Functions created: create_monthly_partition, create_future_partitions, drop_old_partitions';
-        RAISE NOTICE 'Initial partitions created for current and next month';
+        RAISE NOTICE 'Initial partitions created for current month + buffer of upcoming months';
     END $$;

@@ -22,6 +22,7 @@ spec:
 {{- end }}
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/toolchain/toolchain-configmap.yaml") . | sha256sum }}
+        checksum/shannon-stub-configmap: {{ include (print $.Template.BasePath "/toolchain/toolchain-shannon-stub-configmap.yaml") . | sha256sum }}
 {{- if .Values.toolchain.annotations -}}
         {{ toYaml .Values.toolchain.annotations | nindent 8 }}
 {{- end }}
@@ -111,6 +112,9 @@ spec:
               subPath: tool-chain.yaml
             - mountPath: /tools/ssd-public-keys
               name: ssd-public-keys
+            # Shannon stub deliverables (remove when issue #07 replaces stub with real invocation)
+            - mountPath: /tools/shannon-stub-deliverables
+              name: shannon-stub-deliverables
             - mountPath: /tools/secrets/tool-chain
               name: token
               readOnly: true
@@ -192,6 +196,10 @@ spec:
           configMap:
             defaultMode: 420
             name: ssd-public-keys
+        - name: shannon-stub-deliverables
+          configMap:
+            defaultMode: 420
+            name: tool-chain-shannon-stub-deliverables
         - name: otel-sidecar-volume
           configMap:
             name: otel-sidecar-config

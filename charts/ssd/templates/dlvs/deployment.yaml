@@ -30,14 +30,19 @@ spec:
           ports:
             - containerPort: 5000
               protocol: TCP
+      volumes:
+        - name: hf-cache
+          persistentVolumeClaim:
+            claimName: dlvs-hf-cache
+          volumeMounts:
+            - name: hf-cache
+              mountPath: /home/dlvs/.cache
       {{- with .Values.dlvs.resources }}
           resources:
       {{- toYaml . | nindent 12 }}
       {{- end }}
           securityContext:
-      {{- if .Values.dlvs.securityContext }}
-      {{ toYaml .Values.dlvs.securityContext | nindent 12 }}
-      {{- end }}
+{{ toYaml (default (dict "fsGroup" 10111) .Values.dlvs.securityContext) | indent 12 }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}

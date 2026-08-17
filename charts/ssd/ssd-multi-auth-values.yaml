@@ -39,7 +39,7 @@ ssdgate:
   installDex: false   # set to true if dex need to be installed
   createGateDexSecret: false
   auth_type: saml  # saml, dex-oidc and poclogin are other valid values
-  display_name: Saml Login
+  display_name: SAML Login
   admin_groups:
   - admin
   saml:

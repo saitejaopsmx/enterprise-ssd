@@ -26,24 +26,9 @@ spec:
       containers:
       - image: {{ template "airemediation.image" . }}
         name: ai-guardian-remediation
-        env:
-        - name: CLAUDE_CODE_MODEL
-          valueFrom:
-            secretKeyRef:
+        envFrom:
+          - secretRef:
               name: ai-guardian-remediation-secret
-              key: CLAUDE_CODE_MODEL
-              optional: true
-        - name: CLAUDE_CODE_OAUTH_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: ai-guardian-remediation-secret
-              key: CLAUDE_CODE_OAUTH_TOKEN
-              optional: true
-        - name: REMEDIATION_AGENT
-          valueFrom:
-            secretKeyRef:
-              name: ai-guardian-remediation-secret
-              key: REMEDIATION_AGENT
               optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}

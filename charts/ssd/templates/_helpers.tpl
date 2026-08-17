@@ -392,16 +392,6 @@ Return the proper Aishield Images
 {{- end -}}
 
 {{/*
-Return the proper CBOM Images
-*/}}
-{{- define "cbom.image" -}}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.cbom.image.repository -}}
-{{- $tag := .Values.cbom.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end -}}
-
-{{/*
 Return the proper SSD Notification Service Image
 */}}
 {{- define "ssdnotificationservice.image" -}}
@@ -428,5 +418,54 @@ Return the proper PRISM IAC Image
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.prismiac.image.repository -}}
 {{- $tag := .Values.prismiac.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper PENTESTGPT WRAPPER Image
+*/}}
+{{- define "pentestgpt.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.pentestgpt.image.repository -}}
+{{- $tag := .Values.pentestgpt.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper CHECKMARX WRAPPER Image
+*/}}
+{{- define "checkmarx.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.checkmarx.image.repository -}}
+{{- $tag := .Values.checkmarx.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper AIBOM WRAPPER Image
+*/}}
+{{- define "aibom.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.aibom.image.repository -}}
+{{- $tag := .Values.aibom.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+{{/*
+Return the proper OPSMX ASSISTANT Image
+*/}}
+{{- define "opsmxassistant.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.opsmxassistant.image.repository -}}
+{{- $tag := .Values.opsmxassistant.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+Return the proper MCP SERVER Image
+*/}}
+{{- define "mcpserver.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.mcpserver.image.repository -}}
+{{- $tag := .Values.mcpserver.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}

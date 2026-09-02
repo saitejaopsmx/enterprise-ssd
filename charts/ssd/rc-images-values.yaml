@@ -4,19 +4,19 @@ imageCredentials:
   registry: opsmx11
 aibom:
   image:
-    tag: "9491667-4"
+    tag: "2026-07-00"
     
 aishield:
   image:
-    tag: "v2026.06.02"
+    tag: "2026-07-00"
 
 artifactscan:
   image:
-    tag: "v2026.06.08"
+    tag: "2026-07-00"
 
 airemediation:
   image:
-    tag: "dev-fdb7696-27"
+    tag: "2026-07-00"
 
 cbom:
   image:
@@ -24,7 +24,7 @@ cbom:
 
 checkmarx:
   image:
-    tag: "v2026.05.00"
+    tag: "2026-07-00"
 
 dlvs:
   image:
@@ -32,11 +32,11 @@ dlvs:
 
 kubescape:
   image:
-    tag: "5638e51-1"
+    tag: "2026-07-00"
 
 licensegenerator:
   image:
-    tag: "dev-4b423d1-12"
+    tag: "2026-07-00"
 
 mobsf:
   image:
@@ -44,56 +44,56 @@ mobsf:
 
 opsmxassistant:
   image:
-    tag: "dev-6bd4ce0-13"
+    tag: "2026-07-00"
 
 projectmonitor:
   image:
-    tag: "dev-cec7941-136"
+    tag: "2026-07-00"
 
 prismiac:
   image:
-    tag: "26f0bfa-main"
+    tag: "2026-07-00"
 
 pentestgpt:
   image:
-    tag: "dev-03680cc-3"
+    tag: "2026-07-00"
 
 snykmonitor:
   image:
-    tag: "67c2de3-12"
+    tag: "2026-07-00"
 
 sourcescan:
   image:
-    tag: "v2026.06.03"
+    tag: "2026-07-00"
 
 supplychainapi:
   image:
-    tag: "802fb2f-2737"
+    tag: "2026-07-00"
 
 supplychainpreprocessor:
   image:
-    tag: "v2026.05.02"
+    tag: "2026-07-00"
 
 ssdauditservice:
   image:
-    tag: "dev-66d5a32-39"
+    tag: "2026-07-00"
 
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "vSSD-2026.06.01"
+    tag: "2026-07-00"
 
 ssdnotificationservice:
   image:
-    tag: "v2026.03.01"
+    tag: "2026-07-00"
 
 ssdopa:
   image:
-    tag: "v2026.06.01"
+    tag: "2026-07-00"
 
 ssdrescheduler:
   image:
-    tag: "dev-d784b8a-29"
+    tag: "2026-07-00"
 
 tokenmachine:
   image:
@@ -101,25 +101,25 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "v2026.06.01"
+    tag: "2026-07-00"
 
 ui:
   image:
-    tag: "52d39465-1359"
+    tag: "2026-07-00"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 
 aws-poller:
   image:
-    tag: "6d29b38-22"
+    tag: "2026-07-00"
 
 kubernetes-detector:
   image:
-    tag: "4476f21-10"
+    tag: "2026-07-00"
 
 mcpserver:      
   image:
-    tag: "dev-cc0ad95-3"
+    tag: "2026-07-00"
 
 zap:
   image:

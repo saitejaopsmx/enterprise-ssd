@@ -792,7 +792,7 @@ zap:
 otel:
   image:
     repository: otel/opentelemetry-collector-contrib
-    tag: "0.146.1"
+    tag: "0.159.0"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

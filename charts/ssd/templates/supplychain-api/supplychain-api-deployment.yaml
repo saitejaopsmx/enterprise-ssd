@@ -192,7 +192,7 @@ spec:
       {{- end }}
 
         - name: gotenberg
-          image: gotenberg/gotenberg:8.22.0
+          image: gotenberg/gotenberg:8.36.0-chromium
           command: ["gotenberg"]
           args: ["--api-port=3000"]
           ports:

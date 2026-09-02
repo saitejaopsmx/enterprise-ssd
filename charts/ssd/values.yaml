@@ -91,7 +91,7 @@ global:
 airemediation:
   image:
     repository: ai-guardian-remediation
-    tag: "2026-02-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -125,7 +125,7 @@ aishield:
 artifactscan:
   image:
     repository: artifact-scan
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -259,7 +259,7 @@ pentestgpt:
 projectmonitor:
   image:
     repository: project-monitor
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -300,7 +300,7 @@ snykmonitor:
 sourcescan:
   image:
     repository: source-scan
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -323,7 +323,7 @@ supplychainapi:
   ## Image specific details
   image:
     repository: supplychain-api
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -368,7 +368,7 @@ supplychainpreprocessor:
   ## Image specific details
   image:
     repository: supplychain-preprocessor
-    tag: "2026-02-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -405,7 +405,7 @@ ssdauditservice:
 ssdgate:
   image:
     repository: ssdgate
-    tag: "2026-04-00"
+    tag: "2026-05-00"
   replicaCount: 1
   installDex: true
   createGateDexSecret: true
@@ -481,7 +481,7 @@ ssdopa:
   ## Image specific details
   image:
     repository: ssd-opa
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -554,7 +554,7 @@ toolchain:
   ## Image specific details
   image:
     repository: tool-chain
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -597,7 +597,7 @@ ui:
   ## Image specific details
   image:
     repository: ssd-ui
-    tag: "2026-04-00"
+    tag: "2026-05-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

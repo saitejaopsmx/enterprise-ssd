@@ -5,7 +5,7 @@ imageCredentials:
 aibom:
   image:
     tag: "9491667-4"
-    
+
 aishield:
   image:
     tag: "v2026.06.02"
@@ -117,7 +117,7 @@ kubernetes-detector:
   image:
     tag: "4476f21-10"
 
-mcpserver:      
+mcpserver:
   image:
     tag: "dev-cc0ad95-3"
 

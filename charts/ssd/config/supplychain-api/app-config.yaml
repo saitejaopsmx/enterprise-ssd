@@ -43,4 +43,4 @@ policy:
     repoURL: "https://github.com/OpsMx/ssd-policies.git"
     pullReferenceName: "release/2026.07"
     pullReferenceType: "tag"
-    pollingTime: 1
+    pollingTime: 240

@@ -581,6 +581,9 @@ ssdrescheduler:
   ## Indicates the count of batches for retrying deployments
   deploymentRetryBatchCount: 5
 
+  ## Rescheduler to trigger the OSS Scan for Each Interval
+  ossSchedulerInterval: 240
+
   logLevel: info
 ###################################################################################################################
 tokenmachine:

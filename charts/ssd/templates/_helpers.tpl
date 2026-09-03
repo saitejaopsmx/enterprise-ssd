@@ -469,3 +469,12 @@ Return the proper MCP SERVER Image
 {{- $tag := .Values.mcpserver.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+Return the proper MCP SERVER Image
+*/}}
+{{- define "hbom.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.hbom.image.repository -}}
+{{- $tag := .Values.hbom.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}

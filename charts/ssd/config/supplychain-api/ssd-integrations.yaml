@@ -686,6 +686,10 @@ integrationData:
             default: inactive
           successCondition:
             default: urlcontains
+          requestType:
+            default: form
+          sessionMode:
+            default: cookie
         integratorConfigs:
           postmanCollectionFile:
             encrypt: false
@@ -737,6 +741,12 @@ integrationData:
             encrypt: true
           successConditionValue:
             encrypt: false
+          tokenJsonPath:
+            encrypt: false
+          targetHeader:
+            encrypt: false
+          tokenPrefix:
+            encrypt: false
   - stage: Cloud Security Provider
     integrations:
       - integratorType: aws
@@ -772,3 +782,31 @@ integrationData:
         featureConfigs:
           authType:
             default: basic
+  - stage: Hardware
+    integrations:
+      - integratorType: snmp
+        category: hardware
+        multiaccount: true
+        integratorConfigs:
+          agentId:
+            encrypt: false
+          # "ssd" (default) keeps the credentials here; "agent" means the
+          # appliance holds them and they are never sent over the wire.
+          credentialSource:
+            encrypt: false
+          version:
+            encrypt: false
+          community:
+            encrypt: true
+          username:
+            encrypt: false
+          authPass:
+            encrypt: true
+          privPass:
+            encrypt: true
+          target:
+            encrypt: false
+          subnet:
+            encrypt: false
+          port:
+            encrypt: false

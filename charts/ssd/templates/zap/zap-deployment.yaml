@@ -113,6 +113,12 @@ spec:
         - mountPath: /tmp/Zap-Api-Auth-Script.js
           name: api-auth-script
           subPath: Zap-Api-Auth-Script.js
+        - mountPath: /tmp/generic_context_session.js
+          name: generic-session-script
+          subPath: generic_context_session.js
+        - mountPath: /tmp/generic_authentication.js
+          name: generic-authentication-script
+          subPath: generic_authentication.js
       {{- with .Values.zap.probes }}
       {{- toYaml . | nindent 8 }}
       {{- else }}
@@ -181,6 +187,14 @@ spec:
           defaultMode: 420
           name: zap-api-auth-script
         name: api-auth-script
+      - configMap:
+          defaultMode: 420
+          name: zap-generic-authentication-script
+        name: generic-authentication-script
+      - configMap:
+          defaultMode: 420
+          name: zap-generic-session-script
+        name: generic-session-script
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

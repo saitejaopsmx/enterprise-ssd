@@ -10,9 +10,9 @@ metadata:
 data:
   error.html: |-
 {{ .Files.Get "config/dex/error.html" | indent 4 }}
-  footer.html: |- 
+  footer.html: |-
     ""
-  header.html: |- 
+  header.html: |-
     ""
   login.html: |-
 {{ .Files.Get "config/dex/login.html" | indent 4 }}

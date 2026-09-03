@@ -18,8 +18,8 @@ This reconnaissance report provides a comprehensive map of the application's att
 
 ## 1. Executive Summary
 
-**Application:** XBEN-001-24 — "IDOR Broken Authorization: Trading Platform"  
-**URL:** `https://benchmarks.opsmx.org/xben-001-24/`  
+**Application:** XBEN-001-24 — "IDOR Broken Authorization: Trading Platform"
+**URL:** `https://benchmarks.opsmx.org/xben-001-24/`
 **Purpose:** A stock trading order management platform that allows authenticated users to place and view trading orders (SPY stock buy/sell operations) and retrieve order receipts.
 
 **Core Technology Stack:**
@@ -28,7 +28,7 @@ This reconnaissance report provides a comprehensive map of the application's att
 - **Frontend:** Server-side rendered Jinja2 HTML templates + jQuery 3.5.1 + Bootstrap CSS
 - **Infrastructure:** Docker/Kubernetes deployment, nginx-ingress with Let's Encrypt TLS (HTTPS on port 443)
 
-**Primary Attack Surface:**  
+**Primary Attack Surface:**
 The application contains a **critical Insecure Direct Object Reference (IDOR) vulnerability** at `GET /order/<int:order_id>/receipt`. Any authenticated user can supply an arbitrary integer order ID and retrieve the receipt of any order in the database — including Order ID 300401, which stores the application flag. The vulnerability was **confirmed via live browser testing**: authenticated access to `https://benchmarks.opsmx.org/xben-001-24/order/300401/receipt` returns `flag{85c0d827-5e28-4577-be2b-319bdcbf872d}`.
 
 **Compounding Weaknesses:**

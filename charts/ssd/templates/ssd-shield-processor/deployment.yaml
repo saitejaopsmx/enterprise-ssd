@@ -1,0 +1,139 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-shield-processor
+  labels:
+    app: ssd
+    component: ssd-shield-processor
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: ssd
+      component: ssd-shield-processor
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: ssd-shield-processor
+{{ include "ssd.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.ssdnotificationservice.annotations -}}
+        {{ toYaml .Values.ssdnotificationservice.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: ssd-shield-processor
+          image: {{ template "shieldprocessor.image" . }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: PROCESSOR_HTTP_PORT
+              value: "8080"
+            - name: PROCESSOR_LOG_LEVEL
+              value: info
+            - name: PROCESSOR_LOG_FORMAT
+              value: json
+          {{- if .Values.dgraph.HA.enabled }}
+          - name: DGRAPH_ENDPOINT
+            value: http://dgraph-alpha-public:8080/graphql
+          {{- else }}
+          - name: DGRAPH_ENDPOINT
+            value: http://dgraph-public:8080/graphql
+          {{- end }}
+            - name: DGRAPH_TOKEN_PATH
+              value: /var/run/secrets/ssd/token
+          {{- if .Values.minio.enabled }}
+          - name: MINIO_ENDPOINT
+            value: http://{{ .Release.Name }}-minio:9000
+          - name: MINIO_REGION
+            value: us-east-1
+          - name: MINIO_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: username
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: password
+          {{- else }}
+          - name: MINIO_ENDPOINT
+            value: {{ .Values.s3bucketurl }}
+          - name: MINIO_REGION
+            value: {{ .Values.s3region }}
+          - name: MINIO_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: ssd-storage-secret
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: ssd-storage-secret
+          {{- end }}
+          - name: MINIO_BUCKET
+            value: ssd-temporal
+          - name: MINIO_KEY_PREFIX
+            value: cloud-inventory
+          - name: REVIEW_QUEUE_STALE_AFTER
+            value: 2m
+          - name: POSTGRES_HOST
+            value: ssd-db
+          - name: POSTGRES_PORT
+            value: "5432"
+          - name: POSTGRES_DATABASE
+            value: ssd
+          - name: POSTGRES_SSL_MODE
+            value: disable
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: password
+          volumeMounts:
+            - name: token
+              readOnly: true
+              mountPath: /var/run/secrets/ssd
+      {{- with .Values.ssdnotificationservice.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
+          securityContext:
+      {{- if .Values.ssdnotificationservice.securityContext }}
+      {{ toYaml .Values.ssdnotificationservice.securityContext | nindent 12 }}
+      {{- end }}
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      volumes:
+        - name: token
+          secret:
+            defaultMode: 420
+            secretName: aishield-token
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

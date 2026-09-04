@@ -1,0 +1,173 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssd-shield-gateway
+  labels:
+    app: ssd
+    component: ssd-shield-gateway
+{{ include "ssd.standard-labels" . | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: ssd
+      component: ssd-shield-gateway
+  template:
+    metadata:
+      labels:
+        app: ssd
+        component: ssd-shield-gateway
+{{ include "ssd.standard-labels" . | indent 8 }}
+      annotations:
+{{- if .Values.shieldgateway.annotations -}}
+        {{ toYaml .Values.shieldgateway.annotations | nindent 8 }}
+{{- end }}
+    spec:
+      containers:
+        - name: ssd-shield-gateway
+          image: {{ template "shieldgateway.image" . }}
+          ports:
+            - name: grpc
+              containerPort: 9443
+              protocol: TCP
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: GATEWAY_TLS_ENABLED
+              value: "true"
+            - name: GATEWAY_TLS_CA_CERT
+              value: /etc/gateway/certs/ca.crt
+            - name: GATEWAY_TLS_CA_KEY
+              value: /etc/gateway/certs/ca.key
+            - name: GATEWAY_TLS_SERVER_CERT
+              value: /etc/gateway/certs/server.crt
+            - name: GATEWAY_TLS_SERVER_KEY
+              value: /etc/gateway/certs/server.key
+            - name: GATEWAY_TLS_CLIENT_CERT_VALIDITY_DAYS
+              value: "365"
+
+            # --- DGraph / GraphQL ---
+            - name: GRAPHQL_ENABLED
+              value: "true"
+            {{- if .Values.dgraph.HA.enabled }}
+            - name: GRAPHQL_ADDRESS
+              value: http://dgraph-alpha-public:8080/graphql
+            {{- else }}
+            - name: GRAPHQL_ADDRESS
+              value: http://dgraph-public:8080/graphql
+            {{- end }}
+            - name: GRAPHQL_TOKEN_PATH
+              value: /var/run/secrets/ssd/token
+            # Per-environment: must match seeded DGraph team/org UUIDs
+            - name: GRAPHQL_DEFAULT_TEAM_ID
+              value: "CHANGE_ME"
+            - name: GRAPHQL_DEFAULT_ORG_ID
+              value: "CHANGE_ME"
+
+            # --- External endpoint (agents connect here) ---
+            # Per-environment: must match external DNS/ingress for agent gRPC connectivity
+            - name: GATEWAY_EXTERNAL_GRPC_ENDPOINT
+              value: "CHANGE_ME"
+
+            - name: GATEWAY_STORAGE_TYPE
+              value: s3
+          {{- if .Values.minio.enabled }}
+          - name: S3_ENDPOINT_URL
+            value: http://{{ .Release.Name }}-minio:9000
+          - name: S3_BUCKET
+            value: ssd-temporal
+          - name: S3_REGION
+            value: us-east-1
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: username
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: password
+          {{- else }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_BUCKET
+            value: {{ template "s3.bucketname" . }}
+          - name: S3_REGION
+            value: {{ .Values.s3region }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: accesskey
+                name: ssd-storage-secret
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: ssd-storage-secret
+          {{- end }}
+
+
+            # --- ssd-opa integration ---
+            - name: OPA_ENABLED
+              value: "true"
+            - name: OPA_URL
+              value: http://ssd-opa:8200
+            - name: OPA_ORGANIZATION_NAME
+              value: OpsMx
+
+            # --- ToolChain integration ---
+            - name: TOOLCHAIN_ENABLED
+              value: "true"
+            - name: TOOLCHAIN_URL
+              value: http://tool-chain:8100
+
+            # --- Agent image tags (used in onboarding YAML generation) ---
+            # Update these when new agent versions are released
+            - name: GATEWAY_AGENT_CONTROLLER_IMAGE
+              value: docker.io/opsmx11/ssd-shield-controller:a33a2f9-10
+            - name: GATEWAY_AGENT_COLLECTOR_IMAGE
+              value: opsmx11/ssd-shield-collector:a33a2f9-10
+            - name: GATEWAY_AGENT_DASHBOARD_IMAGE
+              value: opsmx11/ssd-shield-dashboard:a33a2f9-10
+
+            - name: LOG_LEVEL
+              value: debug
+
+          volumeMounts:
+            - name: token
+              readOnly: true
+              mountPath: /var/run/secrets/ssd
+      {{- with .Values.shieldgateway.resources }}
+          resources:
+      {{- toYaml . | nindent 12 }}
+      {{- end }}
+          securityContext:
+      {{- if .Values.shieldgateway.securityContext }}
+      {{ toYaml .Values.shieldgateway.securityContext | nindent 12 }}
+      {{- end }}
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      {{- end }}
+      volumes:
+        - name: token
+          secret:
+            defaultMode: 420
+            secretName: aishield-token
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

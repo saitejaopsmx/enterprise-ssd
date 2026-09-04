@@ -470,7 +470,7 @@ Return the proper MCP SERVER Image
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 
-Return the proper MCP SERVER Image
+Return the proper HBOM Image
 */}}
 {{- define "hbom.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
@@ -478,3 +478,22 @@ Return the proper MCP SERVER Image
 {{- $tag := .Values.hbom.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
+
+Return the proper SHEID PROCESSOR Image
+*/}}
+{{- define "hbom.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.shieldprocessor.image.repository -}}
+{{- $tag := .Values.shieldprocessor.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+
+Return the proper SHIELD GATEWAY Image
+*/}}
+{{- define "hbom.image" -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
+{{- $repositoryName := .Values.shieldgateway.image.repository -}}
+{{- $tag := .Values.shieldgateway.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+

@@ -30,6 +30,8 @@ spec:
           image: {{ template "hbom.image" . }}
           env:
           {{- if .Values.minio.enabled }}
+          - name: S3_ENDPOINT_URL
+            value: "http://{{ .Release.Name }}-minio:9000"
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -41,6 +43,10 @@ spec:
                 key: password
                 name: minio-secret
           {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.minio.enabled) }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:

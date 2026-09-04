@@ -38,8 +38,8 @@ spec:
           - 0.0.0.0
           - '-port'
           - '8080'
-          - -addonupdate
-          - -addoninstall
+          - '-addonupdate'
+          - '-addoninstall'
           - openapi
           - '-addoninstall'
           - oast
@@ -55,6 +55,8 @@ spec:
           - api.addrs.addr.regex=true
           - '-config'
           - network.localServers.aliases.alias.name=zap-service
+          - '-addonuninstall'
+          - insights
         env:
         - name: ZAP_API_ADDRESSES
           value: '*'

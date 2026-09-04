@@ -1,0 +1,27 @@
+{{- if .Values.dgraph.HA.enabled }}
+GRAPHQL_URL: "http://dgraph-alpha-public:8080/graphql"
+{{- else }}
+GRAPHQL_URL: "http://dgraph-public:8080/graphql"
+{{- end }}
+
+
+# hbom-generator's own reachable base URL, given to the cloud-provider-scan service as its
+# async callback target (the on-prem SSD Shield Gateway doesn't use a callback — it reports
+# completion by writing HbomScanRequest directly in the shared Dgraph). Must resolve to this
+# Service from wherever cloud-provider-scan runs.
+SELF_BASE_URL: "http://hbom-generator:8090"
+
+# Internal microservice endpoints — leave unset (omit the key) to disable a feature entirely
+# rather than pointing it at an empty string; see the WARNING logs in cmd/main.go for what each
+# one gates.
+CLOUD_PROVIDER_URL: ""
+CMDB_SERVICE_URL: ""
+GATEWAY_URL: "https://ssd-shield-gateway:8080"
+
+S3_ENDPOINT_URL: "http://{{ .Release.Name }}-minio:9000"
+HBOM_SCANS_BUCKET: "ssd-temporal"
+HBOM_OUTPUTS_BUCKET: "ssd-temporal"
+
+SCAN_POLL_INTERVAL_SECONDS: "10"
+TOOLCHAIN_URL: "http://tool-chain:8100"
+SSD_OPA_URL: "http://ssd-opa:8200"

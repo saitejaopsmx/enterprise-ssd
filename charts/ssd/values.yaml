@@ -570,18 +570,21 @@ ssdrescheduler:
   deploymentRetry: true
 
   ## Retry the failed deployments . Default will be 10mins
-  deploymentRetryInterval: 10
+  deploymentRetryInterval: 5
 
   ## Number of times the Deployment to be retried
-  maxRetryOfDeployment: 100
+  maxRetryOfDeployment: 6
 
   ## SSD Rescheduler to Reanalyze images in current deployment. Default is true
   rescheduler: false
 
   ## Indicates the count of batches for retrying deployments
-  deploymentRetryBatchCount: 5
+  deploymentRetryBatchCount: 3
 
   logLevel: info
+
+  ## Rescheduler to trigger the OSS Scan for Each Interval
+  ossSchedulerInterval: 240
 ###################################################################################################################
 tokenmachine:
   ## Image specific details
@@ -792,7 +795,7 @@ zap:
 otel:
   image:
     repository: otel/opentelemetry-collector-contrib
-    tag: "0.146.1"
+    tag: "0.159.0"
     pullPolicy: IfNotPresent
 
   replicaCount: 1
@@ -814,6 +817,22 @@ hasura:
   image:
     repository: ssd-audit-service
     tag: "2025-11-01"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  probes: {}
+
+  resources: {}
+
+  securityContext: {}
+#################################################################################
+hbom:
+  image:
+    repository: hbom-generator
+    tag: "2026-08-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

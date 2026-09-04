@@ -30,6 +30,10 @@ dlvs:
   image:
     tag: "b5b8de1-4"
 
+hbom:
+  image:
+    tag: "1234"
+
 kubescape:
   image:
     tag: "2026-07-00"

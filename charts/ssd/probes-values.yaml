@@ -267,3 +267,25 @@ zap:
         port: 8080
       timeoutSeconds: 2
 #########################################################################
+hbom:
+  probes:
+    livenessProbe:
+      failureThreshold: 20
+      httpGet:
+        path: /health
+        port: 8090
+        scheme: HTTP
+      periodSeconds: 15
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      failureThreshold: 20
+      httpGet:
+        path: /health
+        port: 8090
+        scheme: HTTP
+      periodSeconds: 15
+      initialDelaySeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 1

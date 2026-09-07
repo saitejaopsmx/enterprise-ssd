@@ -33,8 +33,14 @@ enum RolePermission {
     component_license_update
     "team perms"
     team_manage
+    "shield agent perms"
+    shield_manage
     "read perms"
     read
+    "hbom config perms"
+    hbom_config_create_delete
+    hbom_config_update
+    hbom_trigger_scan
 }
 
 type Role {
@@ -277,22 +283,22 @@ type ShieldAgent
     query: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,read]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage,read]}}) { __typename }}}}"},
         ]
     },
     add: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage]}}) { __typename }}}}"},
         ]
     },
     update: {
         or: [
             { rule: "{$type: {eq: \"internal-account/v1\"}}" },
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}"},
-{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin]}}) { __typename }}}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryShieldAgent @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,shield_manage]}}) { __typename }}}}"},
         ]
     },
     delete:
@@ -313,10 +319,10 @@ type ShieldAgent
     lastHeartbeat: DateTime @search
     connectedAt: DateTime @search
     disconnectedAt: DateTime
-    team: Team! @hasInverse(field: shieldAgents)
+    team: Team @hasInverse(field: shieldAgents)
+    organization: Organization!
     createdAt: DateTime!
     updatedAt: DateTime!
-    roles: [Role]
 }
 
 type Application implements RBAC
@@ -585,6 +591,10 @@ type IntegratorConfigs
     project: [Project] @hasInverse(field: integratorConfigs)
     projectConfig: [ProjectConfig] @hasInverse(field: integratorConfigs)
     reportSubscription: [ReportSubscription] @hasInverse(field: integratorConfigs)
+    hbomHardwareIntegrators: [HbomScanConfiguration!] @hasInverse(field: hardwareIntegrators)
+    hbomOnPremCmdbIntegrators: [HbomScanConfiguration!] @hasInverse(field: onPremCmdbIntegrators)
+    hbomCloudIntegrators: [HbomScanConfiguration!] @hasInverse(field: cloudIntegrators)
+    hbomCloudCmdbIntegrators: [HbomScanConfiguration!] @hasInverse(field: cloudCmdbIntegrators)
 }
 
 type IntegratorKeyValues
@@ -988,6 +998,7 @@ type ArtifactScanData {
     osComponents: [Component!]
     libraryComponents: [Component!]
     binaryComponents: [Component!]
+    hbomScanConfig: HbomScanConfiguration @hasInverse(field: artifactScan)
 }
 
 type ArtifactRisk {
@@ -1044,6 +1055,8 @@ type Component {
     severity: Severity @search(by: [exact,regexp])
     severityInt: Int @search
     civns: [CIVN!]
+    properties: [KeyValue!]
+    subComponentRef: Component
 }
 
 type ComponentAnalysis {
@@ -1721,6 +1734,115 @@ type ScanResult
     error: String @search(by: [exact,regexp])
 }
 
+enum HbomScanRequestStatus {
+    pending
+    inprogress
+    completed
+    failed
+}
+
+"""
+Tracks one async hardware-scan request dispatched by hbom-generator.
+Internal bookkeeping only, no team/org RBAC.
+"""
+type HbomScanRequest
+    @auth(
+    query: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    add: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    update: { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+    delete: { rule: "{$type: {eq: \"internal-account/v1\"}}" })
+{
+    id: ID!
+    requestId: String! @id
+    hbomGeneratorId: String! @search(by: [exact])
+    scanType: String!
+    integratorId: String @search(by: [exact])
+    status: HbomScanRequestStatus! @search(by: [exact])
+    dataSource: String
+    errorMessage: String
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+enum HbomScheduleFrequency {
+    once
+    daily
+    weekly
+    monthly
+}
+
+"""
+A saved HBOM scan configuration: what to scan, how to enrich it, and when.
+Referenced by HbomScanRequest.hbomGeneratorId when a scan is dispatched.
+"""
+type HbomScanConfiguration
+    @auth(
+    query: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete,hbom_config_update,hbom_trigger_scan,read]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete,hbom_config_update,hbom_trigger_scan,read]}}) { __typename }}}}"},
+    ]},
+    add: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete]}}) { __typename }}}}"},
+    ]},
+    update: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete,hbom_config_update,hbom_trigger_scan]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete,hbom_config_update,hbom_trigger_scan]}}) { __typename }}}}"},
+    ]},
+    delete: {
+        or: [
+            { rule: "{$type: {eq: \"internal-account/v1\"}}" },
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { organization { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete]}}) { __typename }}}}"},
+{ rule: "query($groups: [String!]) { queryHbomScanConfiguration @cascade { team { roles(filter: {group: {in: $groups}, permission: {in: [admin,hbom_config_create_delete]}}) { __typename }}}}"},
+    ]})
+{
+    id: ID!
+    name: String! @search(by: [exact])
+    organization: Organization!
+    team: Team
+
+    "on-premise hardware discovered over the network"
+    onPremiseEnabled: Boolean!
+    "discovery mechanism; snmp today, redfish/ipmi later"
+    hardwareSource: String @search(by: [exact])
+    hardwareIntegrators: [IntegratorConfigs!] @hasInverse(field: hbomHardwareIntegrators)
+    hardwareCmdb: String @search(by: [exact])
+    onPremCmdbIntegrators: [IntegratorConfigs!] @hasInverse(field: hbomOnPremCmdbIntegrators)
+    hardwareCmdbFile: String
+    hardwareCmdbFilePath: String
+
+    "hardware inventory pulled from cloud provider APIs"
+    cloudEnabled: Boolean!
+    "discovery mechanism; snmp today, redfish/ipmi later"
+    cloudSource: String @search(by: [exact])
+    cloudIntegrators: [IntegratorConfigs!] @hasInverse(field: hbomCloudIntegrators)
+    cloudCmdb: String @search(by: [exact])
+    cloudCmdbIntegrators: [IntegratorConfigs!] @hasInverse(field: hbomCloudCmdbIntegrators)
+    cloudCmdbFile: String
+    cloudCmdbFilePath: String
+
+    frequency: HbomScheduleFrequency
+    "HH:MM in scheduleTimezone; ignored when frequency is once"
+    scheduleTime: String
+    "day of week (weekly) or day of month (monthly)"
+    scheduleDay: Int
+
+    status: String! @search(by: [exact])
+    scanStatus: HbomScanRequestStatus! @search(by: [exact])
+    scanError: String
+    createdBy: String
+    lastScanAt: DateTime
+    createdAt: DateTime!
+    updatedAt: DateTime!
+
+    artifactScan: [ArtifactScanData!] @hasInverse(field: hbomScanConfig)
+}
 
 # Dgraph.Allow-Origin "http://localhost:4200"
 # Dgraph.Authorization {"VerificationKey":"","Header":"X-OpsMx-Auth","jwkurl":"http://token-machine:8050/jwk","Namespace":"ssd.opsmx.io","Algo":"","Audience":["ssd.opsmx.io"],"ClosedByDefault":false}

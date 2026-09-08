@@ -481,7 +481,7 @@ Return the proper HBOM Image
 
 Return the proper SHEID PROCESSOR Image
 */}}
-{{- define "hbom.image" -}}
+{{- define "shieldprocessor.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.shieldprocessor.image.repository -}}
 {{- $tag := .Values.shieldprocessor.image.tag | toString -}}

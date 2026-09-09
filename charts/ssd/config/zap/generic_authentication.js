@@ -41,7 +41,7 @@ function authenticate(helper, paramsValues, credentials) {
                 var extraMap = JSON.parse(extraData);
                 for (var k in extraMap) { jsonObj[k] = extraMap[k]; }
             } catch(e) {
-                print("[AuthScript] [WARN] Extra_Post_Data is not a valid JSON object: " + e);
+                print("[AuthScript] [WARN] Extra_Post_Data is not a valid JSON object");
             }
         }
         requestBody = JSON.stringify(jsonObj);
@@ -50,8 +50,6 @@ function authenticate(helper, paramsValues, credentials) {
         print("[AuthScript] [ERROR] Unsupported TYPE: " + type);
         throw "Unsupported TYPE: " + type;
     }
-
-    print("[AuthScript] Constructed Request Body: " + requestBody);
 
     var uri = new URI(loginUrl, false);
     var msg = helper.prepareMessage();

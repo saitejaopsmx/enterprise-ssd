@@ -96,7 +96,8 @@ function extractWebSession(sessionWrapper) {
             print("[SessionScript] Token NOT found at JSONPath: " + tokenPath);
         }
     } catch (err) {
-        print("[SessionScript] Error parsing response body JSON: " + err);
+	// Parser errors can include sensitive response body content.
+        print("[SessionScript] Failed to parse response JSON or store session token");
     }
 }
 

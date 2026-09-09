@@ -490,7 +490,7 @@ Return the proper SHEID PROCESSOR Image
 
 Return the proper SHIELD GATEWAY Image
 */}}
-{{- define "hbom.image" -}}
+{{- define "shieldgateway.image" -}}
 {{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.shieldgateway.image.repository -}}
 {{- $tag := .Values.shieldgateway.image.tag | toString -}}

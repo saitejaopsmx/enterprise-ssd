@@ -30,6 +30,8 @@ spec:
           image: {{ template "hbom.image" . }}
           env:
           {{- if .Values.minio.enabled }}
+          - name: S3_ENDPOINT_URL
+            value: "http://{{ .Release.Name }}-minio:9000"
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -41,6 +43,10 @@ spec:
                 key: password
                 name: minio-secret
           {{- else if and (eq .Values.toolchain.iamrole false) (not .Values.minio.enabled) }}
+          - name: S3_ENDPOINT_URL
+            value: {{ .Values.s3bucketurl }}
+          - name: S3_Region
+            value: {{ .Values.s3region }}
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
@@ -62,7 +68,7 @@ spec:
           volumeMounts:
             - name: ssd-public-keys
               mountPath: /app/ssd-public-keys
-            - name: hbom-generator-token
+            - name: token
               mountPath: /app/secrets/hbom-generator
               readOnly: true
             - name: gateway-ca-cert
@@ -100,14 +106,13 @@ spec:
           secret:
             defaultMode: 420
             secretName: hbom-generator-token
-        - name: custom-certs  # Optional: In case we are using any customer-specific custom CAs
-          configMap:
+        - name: gateway-ca-cert
+          secret:
             defaultMode: 420
             items:
             - key: ca.crt
               path: ca.crt
-            optional: true
-            name: customer-custom-ca
+            secretName: ssd-shield-gateway-certs
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

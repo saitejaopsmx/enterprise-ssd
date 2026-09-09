@@ -329,6 +329,38 @@ projectmonitor:
   pollIntervalSeconds: 60
          
   loglevel: info
+##################################################################################################################
+shieldgateway:
+  image:
+    repository: ssd-shield-gateway
+    tag: "2026-08-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
+###################################################################################################################
+shieldprocessor:
+  image:
+    repository: ssd-shield-processor
+    tag: "2026-08-00"
+    pullPolicy: IfNotPresent
+
+  replicaCount: 1
+
+  annotations: {}
+
+  serviceAnnotations: {}
+
+  resources: {}
+
+  securityContext: {}
 ###################################################################################################################
 snykmonitor:
   image:

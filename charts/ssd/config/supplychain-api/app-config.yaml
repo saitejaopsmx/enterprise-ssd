@@ -45,3 +45,6 @@ policy:
     pullReferenceName: "release/2026.07"
     pullReferenceType: "tag"
     pollingTime: 120
+shieldGateway:
+    host: ssd-shield-gateway
+    port: 8080

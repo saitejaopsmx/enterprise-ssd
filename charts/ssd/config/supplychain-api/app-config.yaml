@@ -46,5 +46,5 @@ policy:
     pullReferenceType: "tag"
     pollingTime: 120
 shieldGateway:
-    host: ssd-shield-gateway
+    host: http://ssd-shield-gateway
     port: 8080

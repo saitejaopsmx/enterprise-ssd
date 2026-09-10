@@ -1,0 +1,32 @@
+GATEWAY_TLS_ENABLED: "true"
+GATEWAY_TLS_CA_CERT: /etc/gateway/certs/ca.crt
+GATEWAY_TLS_CA_KEY: /etc/gateway/certs/ca.key
+GATEWAY_TLS_SERVER_CERT: /etc/gateway/certs/server.crt
+GATEWAY_TLS_SERVER_KEY: /etc/gateway/certs/server.key
+GATEWAY_TLS_CLIENT_CERT_VALIDITY_DAYS: "365"
+
+# --- DGraph / GraphQL
+GRAPHQL_ENABLED: "true"
+
+GRAPHQL_ADDRESS: http://dgraph-public:8080
+GRAPHQL_TOKEN_PATH: /var/run/secrets/ssd/token
+
+GRAPHQL_DEFAULT_ORG: "{{ .Values.organisationname }}"
+GRAPHQL_DEFAULT_TEAM: "{{ .Values.defaultteam }}"
+# --- Per-environment: the hostname agents dial. Needs DNS + a gRPC ingress
+# with ssl-passthrough.
+GATEWAY_EXTERNAL_GRPC_ENDPOINT: "{{ .Values.global.ssdUI.ingress }}:443"
+
+# --- ssd-opa
+OPA_ENABLED: "true"
+OPA_URL: http://ssd-opa:8200
+OPA_ORGANIZATION_NAME: {{ .Values.organisationname }}
+
+# --- ToolChain
+TOOLCHAIN_ENABLED: "true"
+TOOLCHAIN_URL: http://tool-chain:8100
+
+# --- Agent images for onboarding YAML generation
+GATEWAY_AGENT_CONTROLLER_IMAGE: docker.io/opsmx11/ssd-shield-controller:a33a2f9-10
+GATEWAY_AGENT_COLLECTOR_IMAGE: opsmx11/ssd-shield-collector:a33a2f9-10
+GATEWAY_AGENT_DASHBOARD_IMAGE: opsmx11/ssd-shield-dashboard:a33a2f9-10

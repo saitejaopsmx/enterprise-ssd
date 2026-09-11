@@ -30,6 +30,11 @@ RabbitServiceType: LoadBalancer
 ## Change the Organisation name if user wants a different name in the UI
 organisationname: default
 
+
+#################################################
+## Change the Team name if user wants a different name in the UI
+defaultteam: default
+
 ## Admin Groups for Rbac #######################
 admingroups: admin
 

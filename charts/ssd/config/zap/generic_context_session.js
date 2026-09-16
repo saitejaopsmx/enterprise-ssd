@@ -72,7 +72,7 @@ function getValueByJsonPath(jsonObj, jsonPath) {
  * Called by ZAP when extracting session tokens from authenticated messages.
  */
 function extractWebSession(sessionWrapper) {
-    print("[SessionScript] extractWebSession invoked by ZAP");
+    // print("[SessionScript] extractWebSession invoked by ZAP");
     var msg = sessionWrapper.getHttpMessage();
     if (!msg) return;
     var responseBody = msg.getResponseBody().toString();
@@ -90,14 +90,13 @@ function extractWebSession(sessionWrapper) {
             var session = sessionWrapper.getSession();
             // ZAP's ScriptBasedSession uses setValue / getValue
             session.setValue("AUTH_TOKEN", tokenStr);
-            print("[SessionScript] Successfully extracted and stored AUTH_TOKEN: " +
-                  (tokenStr.length > 25 ? tokenStr.substring(0, 25) + "..." : tokenStr));
+            // print("[SessionScript] Successfully extracted and stored AUTH_TOKEN: " + (tokenStr.length > 25 ? tokenStr.substring(0, 25) + "..." : tokenStr));
         } else {
             print("[SessionScript] Token NOT found at JSONPath: " + tokenPath);
         }
     } catch (err) {
 	// Parser errors can include sensitive response body content.
-        print("[SessionScript] Failed to parse response JSON or store session token");
+        print("[SessionScript] Failed to parse response JSON or store session token, error: " + err);
     }
 }
 
@@ -125,7 +124,7 @@ function processMessageToMatchSession(sessionWrapper) {
  * Called by ZAP when clearing or resetting session state.
  */
 function clearWebSessionIdentifiers(sessionWrapper) {
-    print("[SessionScript] Clearing session identifiers");
+    // print("[SessionScript] Clearing session identifiers");
     var session = sessionWrapper.getSession();
     session.setValue("AUTH_TOKEN", null);
 }

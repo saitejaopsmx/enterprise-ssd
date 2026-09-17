@@ -4,7 +4,7 @@
  * -------------------------------------------------------------- */
 
 function authenticate(helper, paramsValues, credentials) {
-    print("[AuthScript] authenticate() invoked by ZAP");
+    // print("[AuthScript] authenticate() invoked by ZAP");
 
     var HttpRequestHeader = Java.type("org.parosproxy.paros.network.HttpRequestHeader");
     var HttpHeader        = Java.type("org.parosproxy.paros.network.HttpHeader");
@@ -19,8 +19,8 @@ function authenticate(helper, paramsValues, credentials) {
     var username = credentials.getParam("Username");
     var password = credentials.getParam("Password");
 
-    print("[AuthScript] Config - TYPE: " + type + ", Login_URL: " + loginUrl);
-    print("[AuthScript] UserField: " + userField + ", PassField: " + passField + ", User: " + username);
+    /* print("[AuthScript] Config - TYPE: " + type + ", Login_URL: " + loginUrl);
+    print("[AuthScript] UserField: " + userField + ", PassField: " + passField + ", User: " + username); */
 
     var requestBody = "";
     var contentType = "";
@@ -41,7 +41,7 @@ function authenticate(helper, paramsValues, credentials) {
                 var extraMap = JSON.parse(extraData);
                 for (var k in extraMap) { jsonObj[k] = extraMap[k]; }
             } catch(e) {
-                print("[AuthScript] [WARN] Extra_Post_Data is not a valid JSON object");
+                print("[AuthScript] [WARN] Extra_Post_Data is not a valid JSON object. error: " + e);
             }
         }
         requestBody = JSON.stringify(jsonObj);
@@ -60,19 +60,19 @@ function authenticate(helper, paramsValues, credentials) {
     }
     msg.getRequestHeader().setContentLength(msg.getRequestBody().length());
 
-    print("[AuthScript] Sending authentication POST request to: " + loginUrl);
+    // print("[AuthScript] Sending authentication POST request to: " + loginUrl);
     helper.sendAndReceive(msg);
 
     var statusCode = msg.getResponseHeader().getStatusCode();
-    print("[AuthScript] Received Auth Response Code: " + statusCode);
-    print("[AuthScript] Response Body Snippet: " + (msg.getResponseBody().toString().substring(0, 100) + "..."));
+    /*print("[AuthScript] Received Auth Response Code: " + statusCode);
+    print("[AuthScript] Response Body Snippet: " + (msg.getResponseBody().toString().substring(0, 100) + "...")); */
 
     return msg;
 }
 
 
 function logout(helper, paramsValues, credentials) {
-    print("[AuthScript] logout() invoked by ZAP");
+    /* print("[AuthScript] logout() invoked by ZAP"); */
     return null;
 }
 

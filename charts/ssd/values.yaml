@@ -370,7 +370,7 @@ shieldprocessor:
 snykmonitor:
   image:
     repository: snyk-monitor
-    tag: "2025-07-00"
+    tag: "2026-07-00"
     pullPolicy: IfNotPresent
 
   replicaCount: 1

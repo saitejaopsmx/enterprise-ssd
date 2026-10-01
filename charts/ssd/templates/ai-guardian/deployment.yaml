@@ -15,6 +15,7 @@ spec:
   template:
     metadata:
       annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/ai-guardian/secret.yaml") . | sha256sum }}        
 {{- if .Values.airemediation.annotations -}}
         {{ toYaml .Values.airemediation.annotations | nindent 8 }}
 {{- end }}
@@ -30,19 +31,29 @@ spec:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: "http://otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317"
         - name: DB_ENABLED
-          value: "true"
+          value: {{ .Values.db.enabled | quote }}
         - name: TELEMETRY_ENABLED
-          value: "true"
+          value: {{ .Values.telemetry.enabled | quote }}           
         - name: OTEL_METRIC_EXPORT_INTERVAL
           value: "15000"
+        - name: CSPM_ENABLED
+          value: {{ .Values.cspm.enabled | quote }}
+        - name: CSPM_MCP_BASE_URL
+          value: {{ .Values.cspm.mcpBaseUrl | quote }}
+        - name: CSPM_RAG_ENABLED
+          value: {{ .Values.cspm.ragEnabled | quote }}
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis-secret
               key: password
+        - name: REDIS_HOST
+          value: ssd-redis-master
+        - name: REDIS_PORT
+          value: "6379"
         envFrom:
         - secretRef:
-            name: ai-guardian-remediation-secret
+            name: {{ default "ai-guardian-remediation-secret" .Values.aiSecrets.airemediation.existingSecret }}            
             optional: true
       {{- with .Values.airemediation.probes }}
       {{- toYaml . | nindent 8 }}

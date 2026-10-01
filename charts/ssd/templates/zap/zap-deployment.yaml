@@ -38,7 +38,6 @@ spec:
           - 0.0.0.0
           - '-port'
           - '8080'
-          - '-addonupdate'
           - '-addoninstall'
           - openapi
           - '-addoninstall'
@@ -57,6 +56,8 @@ spec:
           - network.localServers.aliases.alias.name=zap-service
           - '-addonuninstall'
           - insights
+          - '-addonuninstall'
+          - domxss            
         env:
         - name: ZAP_API_ADDRESSES
           value: '*'

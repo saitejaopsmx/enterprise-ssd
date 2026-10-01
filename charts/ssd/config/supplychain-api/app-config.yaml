@@ -12,6 +12,7 @@ aiRemediation: http://ai-guardian-remediation:8588
 ssdVuln: http://212.2.240.29:8900
 aibomService: http://aibom-service:8082
 hbomGenerator: http://hbom-generator:8090
+ssdApiMcp: http://localhost:9010
 audit:
   enabled: true
 tokenMachine:

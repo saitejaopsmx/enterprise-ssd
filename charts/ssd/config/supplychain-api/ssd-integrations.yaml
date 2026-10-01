@@ -787,6 +787,13 @@ integrationData:
       - integratorType: snmp
         category: hardware
         multiaccount: true
+        featureConfigs:
+          version:
+            default: v2c
+          credentialSource:
+            default: ssd
+          targetipNetwork:
+            default: targetip          
         integratorConfigs:
           agentId:
             encrypt: false

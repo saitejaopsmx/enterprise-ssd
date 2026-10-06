@@ -118,50 +118,6 @@ helm upgrade --install ssd . -n <namespace> \
 When `existingSecret` is set, the chart creates nothing for that secret and the
 deployment uses the name you give.
 
-## supplychain-api endpoints (`aigAddress`, `ssdApiMcp`, `ssdVuln`)
-
-These are written into the `supplychain-api` secret (`app-config.yaml`).
-
-| Key | Values key | Default |
-|---|---|---|
-| `ssdVuln` | `supplychainapi.ssdVuln` (URL only) | `https://ssd.oss.opsmx.net` |
-| `aigAddress` | `supplychainapi.aigAddress` | `http://ai-guardian-api.<release namespace>.svc.cluster.local:8080` |
-| `ssdApiMcp` | `supplychainapi.ssdApiMcp` | `http://ssd-api-mcp:8080` |
-
-The final `ssdVuln` value is `https://<user>:<password>@ssd.oss.opsmx.net`.
-**Never put the credentials in the URL in a values file.** The chart rejects a URL
-containing `user:pass@`. Put them in `ai-secrets.local.yaml`:
-
-```yaml
-aiSecrets:
-  supplychainApi:
-    ssdVulnUsername: "opsmxuser"
-    ssdVulnPassword: "<password>"
-```
-
-The chart URL-encodes both values, adds them to the URL and quotes the result, so
-special characters (`@ : # "`) cannot break the config. Set both or neither.
-The result lives only in the `supplychain-api` Secret, and pods restart on change
-through the existing `checksum/secret` annotation. This key cannot use
-`existingSecret`, because it is one entry in the generated `app-config.yaml`.
-
-## toolchain `ossSvc`
-
-The final value is `https://<user>:<password>@ssd.oss.opsmx.net`. Because it holds a
-password, the `tool-chain` config is now rendered as a **Secret** (it was a
-ConfigMap) and mounted at the same path, `/tools/config/tool-chain.yaml`.
-The URL is `toolchain.ossSvc` (default `https://ssd.oss.opsmx.net`, credentials
-are rejected there). The credentials go in `ai-secrets.local.yaml`:
-
-```yaml
-aiSecrets:
-  toolchain:
-    ossSvcUsername: "opsmxuser"
-    ossSvcPassword: "<password>"
-```
-
-They are URL-encoded and quoted like `ssdVuln`. Set both or neither.
-
 ## Rotating a secret
 
 1. Update the value in `ai-secrets.local.yaml` (or your own secret).

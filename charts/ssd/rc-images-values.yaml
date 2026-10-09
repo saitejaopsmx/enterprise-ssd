@@ -1,22 +1,22 @@
 imageCredentials:
-  repoUrl: docker.io
+  repoUrl: quay.io
   # Update this is using a private repo such as ACR, ECR, GCR, JFrog, etc.
-  registry: opsmx11
+  registry: opsmxpublic
 aibom:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 aishield:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 artifactscan:
   image:
-    tag: "2026-08-00-rc5"
+    tag: "2026-08-00"
 
 airemediation:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 cbom:
   image:
@@ -24,7 +24,7 @@ cbom:
 
 checkmarx:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 dlvs:
   image:
@@ -32,15 +32,15 @@ dlvs:
 
 hbom:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 kubescape:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 licensegenerator:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 mobsf:
   image:
@@ -48,64 +48,64 @@ mobsf:
 
 opsmxassistant:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 projectmonitor:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 prismiac:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 pentestgpt:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 shieldgateway:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 shieldprocessor:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 snykmonitor:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 sourcescan:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 supplychainapi:
   image:
-    tag: "2026-08-00-rc8"
+    tag: "2026-08-00"
 
 supplychainpreprocessor:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 ssdauditservice:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 ssdgate:
   image:
     repository: ssd-gate
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 ssdnotificationservice:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 ssdopa:
   image:
-    tag: "2026-08-00-rc7"
+    tag: "2026-08-00"
 
 ssdrescheduler:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 tokenmachine:
   image:
@@ -113,25 +113,25 @@ tokenmachine:
 
 toolchain:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 ui:
   image:
-    tag: "2026-08-00-rc8"
+    tag: "2026-08-00"
   serviceAnnotations:
     awsAnnotationsGo: HERE
 
 aws-poller:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
-kubernetes-detector:
+kubedetector:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 mcpserver:
   image:
-    tag: "2026-08-00-rc4"
+    tag: "2026-08-00"
 
 zap:
   image:

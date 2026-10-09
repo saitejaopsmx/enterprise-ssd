@@ -74,7 +74,7 @@ spec:
             items:
               - key: AESEncryptionKey
                 path: ssdsecret/AESEncryptionKey
-            defaultMode: 420  
+            defaultMode: 420
         - name: token
           secret:
             secretName: prism-iac-token

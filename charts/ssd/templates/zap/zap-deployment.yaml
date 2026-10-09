@@ -57,7 +57,7 @@ spec:
           - '-addonuninstall'
           - insights
           - '-addonuninstall'
-          - domxss            
+          - domxss
         env:
         - name: ZAP_API_ADDRESSES
           value: '*'

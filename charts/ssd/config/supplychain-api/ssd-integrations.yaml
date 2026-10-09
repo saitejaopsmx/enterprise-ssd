@@ -793,7 +793,7 @@ integrationData:
           credentialSource:
             default: ssd
           targetipNetwork:
-            default: targetip          
+            default: targetip
         integratorConfigs:
           agentId:
             encrypt: false

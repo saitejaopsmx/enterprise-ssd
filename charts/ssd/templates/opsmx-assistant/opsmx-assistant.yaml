@@ -33,7 +33,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: ui-config
-          mountPath: /usr/share/nginx/html/app.config.json 
+          mountPath: /usr/share/nginx/html/app.config.json
           subPath: app.config.json
       {{- with .Values.opsmxassistant.resources }}
         resources:

@@ -74,10 +74,10 @@ spec:
                 optional: true
           volumeMounts:
             - name: config
-              mountPath: /etc/ssd-api-mcp                                                    
-              readOnly: true                                                                 
-            - name: dgraph-token                                                             
-              mountPath: /etc/ssd-api-mcp-token                                              
+              mountPath: /etc/ssd-api-mcp
+              readOnly: true
+            - name: dgraph-token
+              mountPath: /etc/ssd-api-mcp-token
         {{- with .Values.mcpserver.probes }}
         {{- toYaml . | nindent 10 }}
         {{- else }}
@@ -85,7 +85,7 @@ spec:
             failureThreshold: 20
             httpGet:
               path: /healthz
-              port: 8080 
+              port: 8080
             periodSeconds: 15
             initialDelaySeconds: 30
             successThreshold: 1
